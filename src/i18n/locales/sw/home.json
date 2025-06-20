@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Changua Mihojiano ya Coding Bila Kupata Mafadhaiko",
+    "subtitle": "Tambua mifumo, sio matatizo. Funza ubongo wako, sio bahati yako.",
+    "startFreeTrial": "Anza Jaribio la Bure",
+    "watchDemo": "Tazama Demo"
+  },
+  "feedback": {
+    "aiAssistant": "Msaidizi wa AI",
+    "aiIntro": "Hapa ni jinsi ya kuboresha suluhisho lako:",
+    "testCasesFailed": " Mtihani umefaulu",
+    "input": "Ingizo",
+    "expected": "Inayotarajiwa",
+    "received": "Imepokelewa",
+    "aisuggestion": "🧠 Kuboresha Two Sum\n\nSuluhisho lako linaweza kuwa linaangalia kila jozi — hiyo ni O(n²).\n\nHivi ndivyo unaweza kuboresha:\n\n1. **Fikiria kuhifadhi vipengele ulivyoviona tayari** — unaweza kukumbuka nafasi zao?\n2. **Vipi kama ungeweza kutafuta mara moja jumla inayokosekana (target - nambari ya sasa)?** Hii ingeondoa mzunguko wa ndani.\n3. **Jaribu kutumia hash map** kuhifadhi faharasa za vigezo. Kutafuta ni haraka — O(1).\n4. Pitia safu mara moja na uamue unachohitaji kuhifadhi au kukagua katika kila hatua.\n5. Usisahau kushughulikia visa maalum kama maadili yanayojirudia au hakuna jozi halali.\n\nUnaweza kujenga mantiki hii hatua kwa hatua?"
+  },
+  "editor": {
+    "runCode": {
+      "default": "Endesha Msimbo",
+      "running": "Inaendesha...",
+      "typing": "Inaandika..."
+    },
+    "fileName": "{{question}}.py",
+    "testCases": "Majaribio",
+    "passedCount": "{{passed}}/{{total}} Imepitisha",
+    "loadingEditor": "Inapakia mhariri..."
+  }
+}

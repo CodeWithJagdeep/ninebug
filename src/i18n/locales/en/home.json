@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Crack Coding Interviews Without Burning Out",
+    "subtitle": "Recognize patterns, not problems. Train your brain, not your luck.",
+    "startFreeTrial": "Start Free Trial",
+    "watchDemo": "Watch Demo"
+  },
+  "feedback": {
+    "aiAssistant": "AI Assistant",
+    "aiIntro": "Here's how to improve your solution:",
+    "testCasesFailed": "Test Case(s) Failed",
+    "input": "Input",
+    "expected": "Expected",
+    "received": "Received",
+    "aisuggestion": "🧠 Optimizing Two Sum\n\nYour current solution might be checking every pair — that’s O(n²) time.\n\nHere’s how you can improve it:\n\n1. **Think about storing elements you've already seen** — is there a way to remember their positions?\n2. **What if you could look up the complement (target - current number) instantly?** That could avoid the inner loop entirely.\n3. **Try using a hash map** to keep track of indices. Lookups are fast — O(1).\n4. Loop through the array once and decide what you need to store or check at each step.\n5. Don't forget to handle edge cases, like duplicate values or no valid pair.\n\nCan you build this logic step by step?"
+  },
+  "editor": {
+    "runCode": {
+      "default": "Run Code",
+      "running": "Running...",
+      "typing": "Typing..."
+    },
+    "fileName": "{{question}}.py",
+    "testCases": "Test Cases",
+    "passedCount": "{{passed}}/{{total}} Passed",
+    "loadingEditor": "Loading editor..."
+  }
+}

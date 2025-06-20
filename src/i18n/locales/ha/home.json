@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Warware Tattaunawar Coding Ba Tare da Gajiya ba",
+    "subtitle": "Gano samfura, ba matsaloli ba. Horar da kwakwalwarka, ba sa'a ba.",
+    "startFreeTrial": "Fara Gwaji Kyauta",
+    "watchDemo": "Kalli Demo"
+  },
+  "feedback": {
+    "aiAssistant": "Mataimakin AI",
+    "aiIntro": "Ga yadda za ka inganta amsarka:",
+    "testCasesFailed": " Gwajin ya gaza",
+    "input": "Shigarwa",
+    "expected": "Abin da ake tsammani",
+    "received": "An karɓa",
+    "aisuggestion": "🧠 Inganta Two Sum\n\nƘila maganin yanzu yana bincika kowace haɗi — hakan na O(n²).\n\nGa yadda zaka inganta:\n\n1. **Yi tunanin ajiye abubuwan da ka riga ka gani** — zaka iya tuna matsayinsu?\n2. **Ta yaya idan zaka iya duba complement (target - adadin yanzu) nan take?** Wannan zai guje wa zagaye na ciki.\n3. **Gwada amfani da hash map** don adana indices. Bincike yana da sauri — O(1).\n4. Yi looping sau ɗaya ta cikin array ka yanke shawara abin da za ka ajiye ko duba a kowane mataki.\n5. Kada ka manta da maganin lokuta na musamman, kamar ƙimomi masu maimaituwa ko babu ingantaccen jufa.\n\nZa ka iya gina wannan manufa mataki‑mataki?"
+  },
+  "editor": {
+    "runCode": {
+      "default": "Gudu Lambobin",
+      "running": "Ana gudu...",
+      "typing": "Ana rubutu..."
+    },
+    "fileName": "{{question}}.py",
+    "testCases": "Gwaje-gwaje",
+    "passedCount": "{{passed}}/{{total}} Ya wuce",
+    "loadingEditor": "Ana loda edita..."
+  }
+}

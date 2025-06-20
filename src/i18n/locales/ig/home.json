@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Merie Ajụjụ Nyocha Coding Enweghị Ọkụkụ",
+    "subtitle": "Mata usoro, ọ bụghị nsogbu. Zụ ụbụrụ gị, ọ bụghị chioma gị.",
+    "startFreeTrial": "Malite Nnwale N'efu",
+    "watchDemo": "Lelee Nkọwa"
+  },
+  "feedback": {
+    "aiAssistant": "Onyinye AI",
+    "aiIntro": "Nke a bụ otu ị ga - esi mee ka azịza gị sie ike:",
+    "testCasesFailed": " Nnwale dara",
+    "input": "Ngwa",
+    "expected": "Echere ya",
+    "received": "Natara",
+    "aisuggestion": "🧠 Melite Two Sum\n\nOtu ihe ngwọta gị nwere ike ime bụ ịlele ngụkọta ngwurita — ọ bụ O(n²).\n\nLee otú ị ga - esi melite ya:\n\n1. **Chee echiche banyere ịchekwa ihe ndị ị hụrụ mbụ** — ọ nwere ụzọ iji cheta ọnọdụ ha?\n2. **Kedu ma ọ bụrụ na ị nwere ike ịchọta complement (target - ọnụọgụ ugbu a) ozugbo?** Nke a ga-ewepụ ụzọ ị na-eme madoopụ ime.\n3. **Gbalịa iji hash map** iji chekwaa etiti ndebanye. Ịchọta ihe dị ngwa — O(1).\n4. Gaa site na list otu ugboro ma kpebie ihe ịchọrọ ịchekwa ma ọ bụ lelee na nzọụkwụ ọ bụla.\n5. Echefula ịrụ ọrụ na ọnọdụ pụrụ iche, dịka ihe ndị na-apụtakwa ugboro ma ọ bụ adịghị nwere nke dị mma.\n\nỊ nwere ike iwulite uche a nzọụkwụ‑nzọụkwụ?"
+  },
+  "editor": {
+    "runCode": {
+      "default": "Gbaa Koodu",
+      "running": "Na-agba ọsọ...",
+      "typing": "Na-ede..."
+    },
+    "fileName": "{{question}}.py",
+    "testCases": "Nnwale",
+    "passedCount": "{{passed}}/{{total}} Gara aga",
+    "loadingEditor": "Na-ebu onye ede akwụkwọ..."
+  }
+}

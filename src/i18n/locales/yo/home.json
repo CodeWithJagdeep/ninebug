@@ -1,0 +1,28 @@
+{
+  "hero": {
+    "title": "Ṣí ìfòròyínbà Coding Láì Ròyìn Iná",
+    "subtitle": "Mọ́ àwòkọ́, kì í ṣe ìṣòro. Kọ ọpọlọ rẹ̀, kì í ṣe orí aṣeyọrí.",
+    "startFreeTrial": "Bẹrẹ Àdánwò Ọfẹ",
+    "watchDemo": "Wo Demo"
+  },
+  "feedback": {
+    "aiAssistant": "Iranlọwọ AI",
+    "aiIntro": "Bí o ṣe le mu ìpinnu rẹ pọ si:",
+    "testCasesFailed": " Ìdánwò kọjá",
+    "input": "Ìfikún",
+    "expected": "Tí a retí",
+    "received": "Ti gba",
+    "aisuggestion": "🧠 Ṣíṣe Two Sum Nísọ́nà Tó Dáa\n\nOjútùú rẹ̀ lè ń ṣàyẹ̀wò gbogbo tọ́ọ̀yẹn — èyí jẹ́ O(n²).\n\nBáwo ni o ṣe lè mu un dara:\n\n1. **Ronú nipa fífi pamọ́ àwọn ohun tí o ti rí tẹlẹ** — ṣé o lè rántí ipo wọn?\n2. **Kí ni tó bá jẹ́ pé o lè wo complement (target - nọmba lónìí) lẹsẹkẹsẹ?** Èyí yóò yọ ìtòpọ́ inú kuro lánàá.\n3. **Gbìmọ̀ fún lílo hash map** láti tọ́pa ipo awọn ìsọ̀kan. Ìṣàwárí máa yara — O(1).\n4. Lọ ní ẹgbẹ̀kan kọ́kọ́ kọ́kọ́ toroojẹ́ kí o sì pinnu ohun tó fẹ́ fi pamọ́ tàbí ṣàyẹ̀wò ní gbogbo ìgbésẹ̀.\n5. Má ṣe gbàgbé láti mu àwọn ọ̀rọ̀ pataki ṣiṣẹ́, bíi iye ẹ̀kọ́ tó tún ṣeé rí tàbí pé kò sí tọ́ọ̀yẹn tó péye.\n\nṢe o lè kọ́ ẹ̀kọ́ yìí lẹ́sẹ̀kẹsẹ́?"
+  },
+  "editor": {
+    "runCode": {
+      "default": "Ṣe Ẹ̀rọ Kóòdù",
+      "running": "Níṣiṣẹ̀...",
+      "typing": "Nkọ́wé..."
+    },
+    "fileName": "{{question}}.py",
+    "testCases": "Ìdánwò",
+    "passedCount": "{{passed}}/{{total}} Gbéja",
+    "loadingEditor": "Nṣiṣẹ́ olootu..."
+  }
+}
