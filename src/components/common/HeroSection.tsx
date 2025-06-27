@@ -115,52 +115,47 @@ function HeroSection() {
   };
 
   return (
-    <section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8">
-      <div className="">
+    <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1
-            style={{
-              fontFamily: `"Oswald", sans-serif`,
-            }}
-            className="text-7xl  font-bold mb-6 text-center  px-36"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center"
           >
-            <span className="">
+            <h1 className="text-[80px] text-white/90 mb-6 text-center leading-21">
               {t("hero.title")}
-              {/* Crack Coding Interviews Without Burning Out */}
-            </span>
+            </h1>
 
-            <span className="text-gray-100"></span>
-          </h1>
+            <p className="text-lg md:text-xl lg:text-2xl text-center text-white/80 font-normal mb-10 max-w-3xl mx-auto leading-relaxed">
+              {t("hero.subtitle")}
+            </p>
 
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
-            {t("hero.subtitle")}
-            {/* Recognize patterns, not problems. Train your brain, not your luck. */}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-20">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-[#6d53d0] text-white text-lg font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/25 transition-all"
-            >
-              {t("hero.startFreeTrial")}
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border border-gray-700 text-gray-100 text-lg font-semibold rounded-full cursor-pointer hover:bg-gray-800 transition-colors"
-            >
-              {t("hero.watchDemo")}
-            </motion.button>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center w-full max-w-md sm:max-w-none">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 h-12 text-black bg-white text-sm font-semibold hover:shadow-lg hover:shadow-primary-500/20 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              >
+                {t("hero.startFreeTrial")}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 h-12 bg-[#e46219] text-black text-base font-semibold hover:bg-gray-50 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              >
+                {t("hero.watchDemo")}
+              </motion.button>
+            </div>
+          </motion.div>
 
           {/* Animated Code Preview */}
-          <div className="max-w-8xl flex items-center px-20 mt-10">
-            {/* Left Side - Question Panel */}
+          {/* <div className="max-w-8xl flex items-center px-20 mt-10">
             <div className="lg:col-span-1  border bg-[#6d53d0] p-6 border-gray-700 rounded overflow-hidden h-[650px] bg-white/5 p-6 h-full w-1/2 overflow-hidden flex flex-col">
               <AnimatePresence mode="wait">
                 {showAIFeedback ? (
@@ -172,7 +167,6 @@ function HeroSection() {
                     transition={{ duration: 0.3 }}
                     className="flex flex-col"
                   >
-                    {/* Failed Test Cases Section */}
                     <div className="mb-6">
                       <h3 className="text-lg font-semibold text-red-400 mb-3 flex items-center">
                         <XCircle className="mr-2" />
@@ -218,8 +212,6 @@ function HeroSection() {
                           ))}
                       </div>
                     </div>
-
-                    {/* AI Suggestion Section */}
                     <div className="flex-1 flex flex-col border-t border-gray-700 pt-4">
                       <div className="flex items-start mb-4">
                         <div className="p-2 bg-purple-500/20 rounded-lg mr-3">
@@ -235,7 +227,6 @@ function HeroSection() {
                         </div>
                       </div>
 
-                      {/* Streaming AI Suggestion */}
                       <div className="flex-1 text-white rounded-lg overflow-auto">
                         <div className="text-lg">
                           <Markdown remarkPlugins={[remarkGfm]}>
@@ -259,7 +250,6 @@ function HeroSection() {
               </AnimatePresence>
             </div>
 
-            {/* Right Side - Editor and Output */}
             <div className="lg:col-span-2 space-y-6 w-1/2 h-[650px] relative">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -267,7 +257,6 @@ function HeroSection() {
                 transition={{ delay: 0.3 }}
                 className="bg-white/10 border-l border-white/40 overflow-hidden relative h-full"
               >
-                {/* Editor Header */}
                 <div className="flex items-center justify-between px-4 py-3 border-b border-b-white/60">
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -284,7 +273,7 @@ function HeroSection() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-colors"
-                    //   onClick={runTestCases}
+    
                     disabled={isRunning || isTyping}
                   >
                     {isRunning
@@ -295,7 +284,6 @@ function HeroSection() {
                   </motion.button>
                 </div>
 
-                {/* Code Editor */}
                 <div className="font-mono text-sm relative h-[100%]">
                   <AnimatePresence>
                     {(isRunning || isTyping) && (
@@ -343,7 +331,6 @@ function HeroSection() {
                   />
                 </div>
 
-                {/* Test Case Output */}
                 <div className="border-t border-gray-700 h-[40%] overflow-hidden">
                   <div className="px-4 py-3 bg-gray-800 flex items-center justify-between">
                     <span className="text-sm font-medium">Test Cases</span>
@@ -362,13 +349,10 @@ function HeroSection() {
                   </div>
                 </div>
               </motion.div>
-
-              {/* Floating Test Case Toasts */}
               <div className="absolute bottom-4 right-4 space-y-2 z-10"></div>
-
-              {/* AI Feedback Panel */}
             </div>
           </div>
+        </motion.div> */}
         </motion.div>
       </div>
     </section>

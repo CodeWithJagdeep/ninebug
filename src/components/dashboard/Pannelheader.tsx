@@ -47,8 +47,8 @@ import {
   UserIcon,
   MenuIcon,
   XIcon,
+  Crown,
 } from "lucide-react";
-import LanguageSelect from "./LanguageSelect";
 import authServices from "@/Services/authService";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -173,7 +173,7 @@ const resources = [
   },
 ];
 
-function Header() {
+function PanelHeader() {
   const user = useSelector(selectCurrentUser);
   console.log(user);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -316,7 +316,6 @@ function Header() {
       ],
     },
   ];
-
   return (
     <header
       className={`border-b border-white/20 backdrop-blur-md bg-white sticky top-0 z-50 transition-all duration-300`}
@@ -335,178 +334,49 @@ function Header() {
           </Link>
 
           {/* Desktop Navigation - Hidden on mobile */}
-          <NavigationMenu className="hidden lg:block">
-            <NavigationMenuList>
+          <div className="hidden lg:block">
+            <div className="flex items-center space-x-8">
               {/* Learning Paths Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-black/70 data-[state=open]:bg-white/10">
+              <div>
+                <div className="bg-transparent text-sm hover:bg-white/10 text-black data-[state=open]:bg-white/10">
                   <div className="flex items-center gap-2 font-normal">
-                    {/* <BookOpen className="w-4 h-4 text-purple-400" /> */}
-                    Learning Paths
+                    Problems
                   </div>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-[.75fr_1fr]">
-                    {learningPaths.map((path) => (
-                      <ListItem
-                        key={path.title}
-                        title={path.title}
-                        href={path.href}
-                        icon={path.icon}
-                      >
-                        {path.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
+                </div>
+              </div>
 
               {/* Courses Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-black/90 data-[state=open]:bg-white/10">
+              <div>
+                <div className="bg-transparent text-sm hover:bg-white/10 text-black data-[state=open]:bg-white/10">
                   <div className="flex items-center gap-2 font-normal">
                     {/* <GraduationCap className="w-4 h-4 text-blue-400" /> */}
-                    Courses
+                    Companies
                   </div>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {courses.map((course) => (
-                      <ListItem
-                        key={course.title}
-                        title={course.title}
-                        href={course.href}
-                        icon={course.icon}
-                        color={course.iconBg}
-                      >
-                        {course.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {/* Resources Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-black/70 data-[state=open]:bg-white/10">
-                  <div className="flex items-center gap-2 font-normal">
-                    {/* <LifeBuoy className="w-4 h-4 text-green-400" /> */}
-                    Resources
-                  </div>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-black">
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                    {resources.map((resource) => (
-                      <ListItem
-                        key={resource.title}
-                        title={resource.title}
-                        href={resource.href}
-                        color={resource.color}
-                        icon={resource.icon}
-                      >
-                        {resource.description}
-                      </ListItem>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              {/* Simple Nav Items */}
-              <NavigationMenuItem>
-                <Link to="/pricing">
-                  <NavigationMenuLink
-                    className={cn(
-                      navigationMenuTriggerStyle(),
-                      "bg-transparent hover:bg-white/10 text-black/70 flex items-center gap-2"
-                    )}
-                  >
-                    Pricing
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right side - Desktop */}
-        <div className="hidden lg:flex items-center gap-4">
-          <LanguageSelect />
-          {user?._id ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger className="focus:outline-none">
-                <Avatar className="h-9 w-9 bg-[#615fff] flex items-center justify-center">
-                  <AvatarImage src={user?.profilePicture as string} />
-                  <AvatarFallback>
-                    {user.name?.charAt(0).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-72 py-2">
-                <DropdownMenuItem asChild className="px-4 py-3 cursor-pointer">
-                  <Link to="/profile" className="flex items-center gap-3">
-                    <UserIcon className="h-5 w-5" />
-                    <span className="text-lg">Profile</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
-                  <Link
-                    to="/account/billing"
-                    className="flex items-center gap-3"
-                  >
-                    <CreditCardIcon className="h-5 w-5" />
-                    <span className="text-base">Account & Billing</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
-                  <Link to="/home" className="flex items-center gap-3">
-                    <HomeIcon className="h-5 w-5" />
-                    <span className="text-base">My Home</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="my-1" />
-                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
-                  <Link to="/help" className="flex items-center gap-3">
-                    <LifeBuoyIcon className="h-5 w-5" />
-                    <span className="text-base">Help Center</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
-                  <Link to="/feedback" className="flex items-center gap-3">
-                    <MessageSquareIcon size={40} />
-                    <span className="text-base">Give Feedback</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="my-1" />
-                <DropdownMenuItem
-                  className="px-4 py-2.5 text-destructive focus:bg-destructive/10 cursor-pointer"
-                  onClick={async () => {
-                    new authServices().logout();
-                  }}
-                >
-                  <LogOutIcon className="h-5 w-5 mr-3" />
-                  <span className="text-base">Log Out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <div className="flex items-center space-x-3">
-              <Link to="/in/auth">
-                <button className="py-2 px-4 text-sm relative overflow-hidden border border-black bg-transparent cursor-pointer text-black hover:bg-white/10 rounded transition-all">
-                  <span className="relative z-10">Login</span>
-                </button>
-              </Link>
-              <Link to="/in/auth">
-                <button className="py-2 px-4 text-sm relative overflow-hidden text-white bg-black cursor-pointer from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded transition-all shadow-lg hover:shadow-purple-500/20">
-                  <span className="relative z-10">Create a free account</span>
-                </button>
-              </Link>
-            </div>
-          )}
+        <div className="hidden lg:flex items-center gap-8">
+          <div>
+            <img
+              src="https://assets.leetcode.com/users/Jagdeep__singh/avatar_1725206361.png"
+              alt=""
+              className="w-8 h-8 rounded-full object-cover"
+            />
+          </div>
+          <div className="flex items-center space-x-4">
+            <button className="bg-blue-500 text-white px-4 py-2 text-xs font-medium hover:from-yellow-500 hover:to-orange-600 transition-all">
+              <Crown className="w-4 h-4 inline mr-2" />
+              Upgrade to Premium
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu button - visible only on mobile */}
         <div className="lg:hidden flex items-center gap-4">
-          <LanguageSelect />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 text-white focus:outline-none"
@@ -520,72 +390,8 @@ function Header() {
           </button>
         </div>
       </div>
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden overflow-hidden"
-          >
-            <div className="px-4 pb-4 space-y-2 bg-black/95">
-              {mobileNavItems.map((item) => (
-                <MobileNavItem key={item.title} item={item} />
-              ))}
-
-              {user ? (
-                <div className="pt-4 border-t border-white/10">
-                  <Link
-                    to="/profile"
-                    className="flex items-center gap-3 py-3 px-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <Avatar className="h-8 w-8 bg-[#615fff]">
-                      <AvatarImage src={user.profilePicture as string} />
-                      <AvatarFallback>
-                        {user.name?.charAt(0).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <span className="font-medium">My Account</span>
-                  </Link>
-                  <button
-                    onClick={async () => {
-                      await new authServices().logout();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full flex items-center gap-3 py-3 px-2 text-red-400"
-                  >
-                    <LogOutIcon className="h-5 w-5" />
-                    <span>Log Out</span>
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
-                  <Link
-                    to="/in/auth"
-                    className="w-full py-2 px-4 text-center bg-transparent border border-white/20 rounded hover:bg-white/10 transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/in/auth"
-                    className="w-full py-2 px-4 text-center bg-gradient-to-r from-purple-500 to-pink-500 rounded hover:from-purple-600 hover:to-pink-600 transition-all"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Create Account
-                  </Link>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 }
 
-export default Header;
+export { PanelHeader as default };

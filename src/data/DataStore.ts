@@ -137,3 +137,61 @@ export const lesson = {
   completionRate: 0,
   id: "6845ca582b6f8c417c56cd9a",
 };
+
+export const sampleSolutions = `function riverSizes(matrix: number[][]): number[] {
+  const sizes: number[] = [];
+  const visited = matrix.map(row => row.map(_ => false));
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (visited[i][j]) continue;
+      traverseNode(i, j, matrix, visited, sizes);
+    }
+  }
+
+  return sizes;
+}
+
+function traverseNode(
+  i: number,
+  j: number,
+  matrix: number[][],
+  visited: boolean[][],
+  sizes: number[]
+) {
+  let currentRiverSize = 0;
+  const stack = [[i, j]];
+
+  while (stack.length) {
+    const [currI, currJ] = stack.pop()!;
+    if (visited[currI][currJ]) continue;
+    visited[currI][currJ] = true;
+
+    if (matrix[currI][currJ] === 0) continue;
+    currentRiverSize++;
+
+    const neighbors = getUnvisitedNeighbors(currI, currJ, matrix, visited);
+    for (const neighbor of neighbors) {
+      stack.push(neighbor);
+    }
+  }
+
+  if (currentRiverSize > 0) sizes.push(currentRiverSize);
+}
+
+function getUnvisitedNeighbors(
+  i: number,
+  j: number,
+  matrix: number[][],
+  visited: boolean[][]
+): [number, number][] {
+  const neighbors: [number, number][] = [];
+
+  if (i > 0 && !visited[i - 1][j]) neighbors.push([i - 1, j]);
+  if (i < matrix.length - 1 && !visited[i + 1][j]) neighbors.push([i + 1, j]);
+  if (j > 0 && !visited[i][j - 1]) neighbors.push([i, j - 1]);
+  if (j < matrix[0].length - 1 && !visited[i][j + 1]) neighbors.push([i, j + 1]);
+
+  return neighbors;
+}
+`;

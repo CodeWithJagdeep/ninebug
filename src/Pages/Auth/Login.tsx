@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "@/App.css";
-import Logo from "@/assets/logo.png";
+import Logo from "@/assets/logo4.png";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Terminal } from "lucide-react";
@@ -48,7 +48,7 @@ function Login() {
         emailVerified: user.emailVerified || false,
       };
 
-      const response = await new _ApiServices(
+      const response: any = await new _ApiServices(
         "/auth/login",
         userData
       )._handlePostRequest();
@@ -113,13 +113,13 @@ function Login() {
           <AlertTitle>{error.errorMessage}</AlertTitle>
         </Alert>
       )}
-      <div className=" backdrop-blur-md sticky top-0 z-50 bg-black/80 px-10">
+      <div className=" backdrop-blur-md sticky top-0 z-50 bg-white min-h-screen px-6">
         <div className=" mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img
               src={Logo}
-              width={160}
-              height={40}
+              width={120}
+              height={20}
               alt="Mentorsland Logo"
               className="object-contain"
             />
@@ -129,15 +129,15 @@ function Login() {
           <div className="w-full flex flex-col items-center">
             <div className="flex items-center justify-center w-full">
               <div className="w-[500px]">
-                <div className={`text-white text-center  text-3xl font-bold`}>
+                <div className={`text-black text-center  text-5xl`}>
                   Code. Learn. Excel.
                 </div>
-                <div className="text-white/90 text-base mt-1 text-center">
+                <div className="text-black/90 text-xl mt-2 text-center">
                   Your journey to coding mastery starts here.
                 </div>
-                <div className="mt-9">
+                <div className="mt-12">
                   {isLoading ? (
-                    <div className="py-3 px-7 cursor-pointer border border-white/70 rounded-lg flex items-center justify-center h-12 text-white/80">
+                    <div className="py-3 px-7 cursor-pointer border border-black/70 rounded-lg flex items-center justify-center h-12 text-white/80">
                       <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1"></div>
                       <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1 delay-150"></div>
                       <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1 delay-300"></div>
@@ -145,12 +145,10 @@ function Login() {
                   ) : (
                     <div
                       onClick={() => handleSignIn("google")}
-                      className="py-3 px-7 cursor-pointer border border-white/70 rounded-lg flex items-center justify-between text-white/80"
+                      className="py-3 px-7 cursor-pointer border border-black/70 rounded-lg flex items-center justify-between text-black"
                     >
                       <FcGoogle size={23} />
-                      <span className="ml-3 text-base">
-                        Continue with Google
-                      </span>
+                      <span className="ml-3 text-lg">Continue with Google</span>
                       <div></div>
                     </div>
                   )}
@@ -164,7 +162,7 @@ function Login() {
                     ) : (
                       <div
                         onClick={() => handleSignIn("github")}
-                        className="py-3 px-7 cursor-pointer border border-white/70 rounded-lg flex items-center justify-between text-white/80"
+                        className="py-3 px-7 cursor-pointer border border-black/70 rounded-lg flex items-center justify-between text-black"
                       >
                         <FaGithub size={23} />
                         <span className="ml-3 text-base">
@@ -176,13 +174,13 @@ function Login() {
                   </div>
                   {/* <div className="my-5 w-full h-[1px] bg-white/10"></div> */}
                 </div>
-                <div className="text-white/60 mt-14 text-sm text-center">
+                <div className="text-black/60 mt-14 text-sm text-center">
                   By continuing, you agree to MentorsLand&apos;s
-                  <Link to="/terms" className="text-white underline ml-1">
+                  <Link to="/terms" className="text-black underline ml-1">
                     Terms of Service
                   </Link>{" "}
                   and
-                  <Link to="/privacy" className="text-white underline ml-1">
+                  <Link to="/privacy" className="text-black        underline ml-1">
                     Privacy Policy
                   </Link>
                   .

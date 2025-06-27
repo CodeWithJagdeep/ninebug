@@ -1,15 +1,15 @@
 export const PremiumTestimonials = () => {
   return (
-    <section className="bg-black text-white py-20 px-4 sm:px-8">
+    <section className="bg-black text-white py-10 px-20">
       <div className=" mx-auto">
-        <div className="text-center mb-16">
-          <span className="inline-block bg-emerald-500/10 text-emerald-400 text-sm font-medium px-4 py-1.5 rounded-full mb-4">
+        <div className="text-center mb-16 px-20">
+          <span className="inline-block bg-emerald-500/10 text-white border-white border text-sm font-medium px-4 py-1.5 rounded-full mb-4">
             Trusted by Developers Worldwide
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">
+          <h2 className="text-7xl mt-6 text-white">
             Building the Future of Tech Education
           </h2>
-          <p className="text-slate-300 text-lg max-w-3xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-xl max-w-7xl mx-auto mt-6">
             Join hundreds of developers who are accelerating their learning with
             our platform. We're shaping the next generation of tech education -
             be part of the journey.
@@ -41,7 +41,7 @@ export const PremiumTestimonials = () => {
               key={index}
               className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 hover:border-emerald-400/30 transition-all duration-300"
             >
-              <div className="text-emerald-400 text-xl font-medium mb-4 leading-snug">
+              <div className="text-[#f48a1c] text-xl font-medium mb-4 leading-snug">
                 "{testimonial.quote}"
               </div>
               <p className="text-slate-300 mb-6">{testimonial.text}</p>
@@ -53,19 +53,6 @@ export const PremiumTestimonials = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-20 text-center">
-          <p className="text-slate-300 mb-6 text-lg">
-            Ready to elevate your development skills?
-          </p>
-          <button className="px-8 py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/20">
-            Join Beta Waitlist
-            <span className="ml-2">→</span>
-          </button>
-          <p className="text-slate-400 text-sm mt-4">
-            Limited spots available for our next cohort
-          </p>
         </div>
       </div>
     </section>

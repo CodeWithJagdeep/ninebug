@@ -32,8 +32,8 @@ const LanguageSelect = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="w-[150px] justify-between flex items-center border border-white/40 py-1.5 px-3 mr-5">
-          <div className="flex items-center gap-2">
+        <button className="w-[150px] justify-between flex items-center border border-black/40 py-1.5 px-3 mr-5">
+          <div className="flex items-center gap-2 text-black">
             <img
               src={currentLanguage.flag}
               width={20}
@@ -41,7 +41,9 @@ const LanguageSelect = () => {
               alt={currentLanguage.name}
               className="h-4 w-6 object-cover"
             />
-            <span>{currentLanguage.name}</span>
+            <span className="ml-2 text-sm text-black">
+              {currentLanguage.name}
+            </span>
           </div>
           <ChevronDown className="h-4 w-4 opacity-50" />
         </button>

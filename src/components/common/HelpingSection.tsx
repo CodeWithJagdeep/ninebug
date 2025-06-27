@@ -291,7 +291,7 @@ const HowWeHelpSection = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent"></div>
       <div className="absolute top-0 left-0 w-full h-full opacity-20"></div>
 
-      <div className="max-w-7xl mx-auto relative">
+      <div className="px-10 mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -305,14 +305,14 @@ const HowWeHelpSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full text-sm text-blue-300 font-medium">
+            <span className="px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full text-sm text-white ">
               How We Accelerate Your Success
             </span>
           </motion.div>
 
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent leading-tight">
+          <h2 className="text-7xl md:text-7xl mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent leading-tight">
             Transform Your
-            <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="block bg-[#f48a1c] bg-clip-text text-transparent">
               Coding Journey
             </span>
           </h2>
@@ -344,7 +344,7 @@ const HowWeHelpSection = () => {
           >
             {steps.map((step, index) => (
               <motion.div key={index} className="relative">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
                   {/* Content */}
                   <motion.div
                     className={`${
@@ -383,7 +383,7 @@ const HowWeHelpSection = () => {
                       <motion.button
                         whileHover={{ x: 8, scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className={`group flex items-center text-transparent bg-gradient-to-r ${step.accent} bg-clip-text font-semibold text-lg`}
+                        className={`group flex cursor-pointer items-center text-transparent bg-gradient-to-r ${step.accent} bg-clip-text font-semibold text-lg`}
                       >
                         Explore Feature
                         <ArrowRight className="ml-3 h-5 w-5 text-blue-400 group-hover:text-purple-400 transition-colors duration-300" />

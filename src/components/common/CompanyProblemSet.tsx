@@ -1,13 +1,12 @@
 import { useRef } from "react";
 import { useInView, motion } from "framer-motion";
-import type { ProblemSet } from "@/Types/types";
 
 export const CompanyProblemSet = ({
   title,
   count,
   difficulty,
   companies,
-}: ProblemSet) => {
+}: any) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -49,7 +48,7 @@ export const CompanyProblemSet = ({
       <div className="mt-6">
         <h4 className="text-sm text-gray-400 mb-3">Asked by:</h4>
         <div className="flex space-x-3">
-          {companies.map((company, index) => (
+          {companies.map((company: any, index: number) => (
             <motion.div
               key={company.name}
               initial={{ opacity: 0, scale: 0.8 }}

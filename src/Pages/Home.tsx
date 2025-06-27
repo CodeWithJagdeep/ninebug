@@ -1,16 +1,4 @@
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  LayoutTemplate,
-  Terminal,
-  Timer,
-  Trophy,
-  BarChart2,
-  Binary,
-  Braces,
-  Sparkles,
-  Target,
-} from "lucide-react";
 import Header from "@/components/common/Header";
 import HeroSection from "@/components/common/HeroSection";
 import { InfiniteScrollLogos } from "@/components/common/InfiniteScrollLogos";
@@ -19,46 +7,12 @@ import { CompanyProblemSet } from "@/components/common/CompanyProblemSet";
 import HowWeHelpSection from "@/components/common/HelpingSection";
 import ChallengeSection from "@/components/common/ChallegeUser";
 import PremiumTestimonials from "@/components/common/Testimonial";
-
-type Feature = {
-  title: string;
-  icon: React.ComponentType<{ className?: string }>;
-  description: string;
-};
-
-const features: Feature[] = [
-  {
-    title: "Pattern Explorer",
-    icon: Braces,
-    description: "Learn problem-solving patterns instead of memorizing",
-  },
-  {
-    title: "Time/Space Analysis",
-    icon: Timer,
-    description: "Auto-calculated for every solution you submit",
-  },
-  {
-    title: "Company Tagged",
-    icon: Target,
-    description: "Top problems asked by FAANG+ companies",
-  },
-  {
-    title: "Visual Debugger",
-    icon: Binary,
-    description: "Step-through execution with visualization",
-  },
-  {
-    title: "Progress Tracking",
-    icon: BarChart2,
-    description: "Track weak areas with detailed analytics",
-  },
-  {
-    title: "AI Hints",
-    icon: Sparkles,
-    description: "Get unstuck with smart hints (no spoilers!)",
-  },
-];
-
+import CodingProblem from "@/components/common/CodePreview";
+import CodingJourney from "@/components/common/Journey";
+import ProblemPreview from "@/components/common/Preview";
+import { FaDiscord, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import Logo from "@/assets/logo4.png";
+import Footer from "@/components/common/Footer";
 export default function Home() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -73,94 +27,148 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-gray-100 ">
+      {/* <div className="bg-black h-10"></div> */}
       {/* Navigation */}
       <Header />
 
       <HeroSection />
-
-      <section id="companies" className="py-16 px-4 sm:px-6 lg:px-8 bg-black">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold mb-4">
-              Master <span className="text-blue-400">Company-Specific</span>{" "}
-              Questions
-            </h2>
-            <p className="text-xl text-gray-400">
-              Practice problems frequently asked by top tech companies
-            </p>
-          </motion.div>
-
-          <InfiniteScrollLogos />
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
-          >
-            {problemSets.map((set, index) => (
-              <CompanyProblemSet key={index} {...set} />
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      <div>
+        <InfiniteScrollLogos />
+      </div>
+      <ProblemPreview />
+      <CodingJourney />
 
       <HowWeHelpSection />
-      <ChallengeSection />
+      {/* <ChallengeSection /> */}
       <PremiumTestimonials />
 
-      {/* Footer */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-800"
-      >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold text-blue-400 mb-4 md:mb-0"
+      <div className="px-20 py-20">
+        <div className="relative  bg-black rounded-xl overflow-hidden shadow-lg">
+          {/* Background SVG pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
             >
-              &lt;Ninebug/&gt;
-            </motion.div>
-            <motion.div
-              className="flex space-x-6"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {["Privacy", "Terms", "Contact"].map((item, index: number) => (
-                <motion.a
-                  key={index}
-                  whileHover={{ y: -3 }}
-                  href="#"
-                  className="text-gray-400 hover:text-blue-400"
-                >
-                  {item}
-                </motion.a>
-              ))}
-            </motion.div>
+              <path
+                d="M0,0 L100,0 L100,100 L0,100 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeDasharray="5,5"
+              />
+              <path
+                d="M30,30 L70,30 L70,70 L30,70 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeDasharray="3,3"
+              />
+              <path
+                d="M10,10 L20,10 L20,20 L10,20 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.3"
+              />
+              <path
+                d="M80,80 L90,80 L90,90 L80,90 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.3"
+              />
+            </svg>
           </div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-8 text-center text-gray-500 text-sm"
-          >
-            © {new Date().getFullYear()} Ninebug DSA. All rights reserved.
-          </motion.div>
+
+          {/* Content */}
+          <div className="relative z-10 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between">
+            <div className="mb-6 md:mb-0 md:mr-8">
+              <h2 className="text-5xl md:text-5xl text-white mb-3">
+                Ready to Elevate Your{" "}
+                <span className="text-orange-500">DSA</span> Journey?
+              </h2>
+              <p className="text-slate-300 mb-5 ">
+                Master data structures and algorithms with our comprehensive
+                learning path. Track progress, solve challenges, and prepare for
+                technical interviews.
+              </p>
+              <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-6 py-3 rounded-md shadow-md transition-colors">
+                Start Learning Now
+              </button>
+            </div>
+
+            {/* DSA Illustration SVG */}
+            <div className="w-full md:w-auto">
+              <svg
+                width="240"
+                height="180"
+                viewBox="0 0 240 180"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Binary Tree */}
+                <path
+                  d="M120 20V60M90 60L120 60M120 60L150 60M90 60V100M150 60V100M60 100L90 100M90 100L120 100M150 100L180 100"
+                  stroke="#EC661B"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <circle cx="120" cy="20" r="8" fill="#3B82F6" />
+                <circle cx="90" cy="60" r="8" fill="#10B981" />
+                <circle cx="150" cy="60" r="8" fill="#10B981" />
+                <circle cx="60" cy="100" r="8" fill="#F59E0B" />
+                <circle cx="90" cy="100" r="8" fill="#F59E0B" />
+                <circle cx="120" cy="100" r="8" fill="#F59E0B" />
+                <circle cx="150" cy="100" r="8" fill="#F59E0B" />
+                <circle cx="180" cy="100" r="8" fill="#F59E0B" />
+
+                {/* Array */}
+                <rect
+                  x="30"
+                  y="130"
+                  width="180"
+                  height="40"
+                  rx="2"
+                  stroke="#64748B"
+                  strokeWidth="1.5"
+                  fill="#1E293B"
+                />
+                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <g key={i}>
+                    <rect
+                      x={40 + i * 20}
+                      y="135"
+                      width="15"
+                      height="30"
+                      rx="1"
+                      fill="#334155"
+                    />
+                    <text
+                      x={47.5 + i * 20}
+                      y="155"
+                      fontSize="10"
+                      fill="#F8FAFC"
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                    >
+                      {i}
+                    </text>
+                  </g>
+                ))}
+
+                {/* Graph nodes */}
+                <circle cx="200" cy="40" r="6" fill="#EC661B" />
+                <circle cx="220" cy="30" r="6" fill="#3B82F6" />
+                <circle cx="220" cy="50" r="6" fill="#10B981" />
+                <path d="M206 40L214 30" stroke="#EC661B" strokeWidth="1.5" />
+                <path d="M206 40L214 50" stroke="#EC661B" strokeWidth="1.5" />
+              </svg>
+            </div>
+          </div>
         </div>
-      </motion.footer>
+      </div>
+
+      <Footer />
     </div>
   );
 }
