@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "@/assets/logo4.png";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -178,7 +179,7 @@ function Header() {
   console.log(user);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -289,28 +290,24 @@ function Header() {
 
   const mobileNavItems = [
     {
-      title: "Learning Paths",
-      // icon: <BookOpen className="w-5 h-5 text-purple-400" />,
+      title: t("header.navigation.learningPaths"),
       items: learningPaths,
     },
     {
-      title: "Courses",
-      // icon: <GraduationCap className="w-5 h-5 text-blue-400" />,
+      title: t("header.navigation.courses"),
       items: courses,
     },
     {
-      title: "Resources",
-      // icon: <LifeBuoy className="w-5 h-5 text-green-400" />,
+      title: t("header.navigation.resources"),
       items: resources,
     },
     {
-      title: "Pricing",
-      // icon: <CreditCardIcon className="w-5 h-5 text-yellow-400" />,
+      title: t("header.navigation.pricing"),
       items: [
         {
-          title: "Pricing Plans",
+          title: t("header.navigation.pricingPlans"),
           href: "/pricing",
-          description: "View our subscription options",
+          description: t("header.navigation.viewSubscriptionOptions"),
           icon: <CreditCardIcon className="w-5 h-5" />,
         },
       ],
@@ -321,7 +318,7 @@ function Header() {
     <header
       className={`border-b border-white/20 backdrop-blur-md bg-white sticky top-0 z-50 transition-all duration-300`}
     >
-      <div className="mx-auto px-4 sm:px-6 lg:px-12 py-3.5 flex items-center justify-between">
+      <div className="mx-auto px-3 sm:px-4 md:px-6 lg:px-12 py-3.5 flex items-center justify-between">
         {/* Logo and Desktop Navigation */}
         <div className="flex items-center space-x-4 lg:space-x-10">
           <Link to="/" className="flex items-center">
@@ -342,7 +339,7 @@ function Header() {
                 <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-black/70 data-[state=open]:bg-white/10">
                   <div className="flex items-center gap-2 font-normal">
                     {/* <BookOpen className="w-4 h-4 text-purple-400" /> */}
-                    Learning Paths
+                    {t("header.navigation.learningPaths")}
                   </div>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -366,7 +363,7 @@ function Header() {
                 <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-black/90 data-[state=open]:bg-white/10">
                   <div className="flex items-center gap-2 font-normal">
                     {/* <GraduationCap className="w-4 h-4 text-blue-400" /> */}
-                    Courses
+                    {t("header.navigation.courses")}
                   </div>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -391,7 +388,7 @@ function Header() {
                 <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 text-black/70 data-[state=open]:bg-white/10">
                   <div className="flex items-center gap-2 font-normal">
                     {/* <LifeBuoy className="w-4 h-4 text-green-400" /> */}
-                    Resources
+                    {t("header.navigation.resources")}
                   </div>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-black">
@@ -420,7 +417,7 @@ function Header() {
                       "bg-transparent hover:bg-white/10 text-black/70 flex items-center gap-2"
                     )}
                   >
-                    Pricing
+                    {t("header.navigation.pricing")}
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
@@ -445,7 +442,9 @@ function Header() {
                 <DropdownMenuItem asChild className="px-4 py-3 cursor-pointer">
                   <Link to="/profile" className="flex items-center gap-3">
                     <UserIcon className="h-5 w-5" />
-                    <span className="text-lg">Profile</span>
+                    <span className="text-lg">
+                      {t("header.userMenu.profile")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
@@ -454,26 +453,34 @@ function Header() {
                     className="flex items-center gap-3"
                   >
                     <CreditCardIcon className="h-5 w-5" />
-                    <span className="text-base">Account & Billing</span>
+                    <span className="text-base">
+                      {t("header.userMenu.accountBilling")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
                   <Link to="/home" className="flex items-center gap-3">
                     <HomeIcon className="h-5 w-5" />
-                    <span className="text-base">My Home</span>
+                    <span className="text-base">
+                      {t("header.userMenu.myHome")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1" />
                 <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
                   <Link to="/help" className="flex items-center gap-3">
                     <LifeBuoyIcon className="h-5 w-5" />
-                    <span className="text-base">Help Center</span>
+                    <span className="text-base">
+                      {t("header.userMenu.helpCenter")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
                   <Link to="/feedback" className="flex items-center gap-3">
                     <MessageSquareIcon size={40} />
-                    <span className="text-base">Give Feedback</span>
+                    <span className="text-base">
+                      {t("header.userMenu.giveFeedback")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1" />
@@ -492,12 +499,16 @@ function Header() {
             <div className="flex items-center space-x-3">
               <Link to="/in/auth">
                 <button className="py-2 px-4 text-sm relative overflow-hidden border border-black bg-transparent cursor-pointer text-black hover:bg-white/10 rounded transition-all">
-                  <span className="relative z-10">Login</span>
+                  <span className="relative z-10">
+                    {t("header.auth.login")}
+                  </span>
                 </button>
               </Link>
               <Link to="/in/auth">
                 <button className="py-2 px-4 text-sm relative overflow-hidden text-white bg-black cursor-pointer from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded transition-all shadow-lg hover:shadow-purple-500/20">
-                  <span className="relative z-10">Create a free account</span>
+                  <span className="relative z-10">
+                    {t("header.auth.createAccount")}
+                  </span>
                 </button>
               </Link>
             </div>
@@ -513,9 +524,9 @@ function Header() {
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <XIcon className="h-6 w-6" />
+              <XIcon className="h-6 w-6 text-orange-500" />
             ) : (
-              <MenuIcon className="h-6 w-6" />
+              <MenuIcon className="h-6 w-6 text-orange-500" />
             )}
           </button>
         </div>
@@ -531,7 +542,7 @@ function Header() {
             transition={{ duration: 0.3 }}
             className="lg:hidden overflow-hidden"
           >
-            <div className="px-4 pb-4 space-y-2 bg-black/95">
+            <div className="px-4 pb-6 pt-2 space-y-2 bg-black/95 min-h-[100vh]">
               {mobileNavItems.map((item) => (
                 <MobileNavItem key={item.title} item={item} />
               ))}
@@ -559,7 +570,7 @@ function Header() {
                     className="w-full flex items-center gap-3 py-3 px-2 text-red-400"
                   >
                     <LogOutIcon className="h-5 w-5" />
-                    <span>Log Out</span>
+                    <span>{t("header.userMenu.logOut")}</span>
                   </button>
                 </div>
               ) : (
@@ -569,14 +580,14 @@ function Header() {
                     className="w-full py-2 px-4 text-center bg-transparent border border-white/20 rounded hover:bg-white/10 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Login
+                    {t("header.auth.login")}
                   </Link>
                   <Link
                     to="/in/auth"
                     className="w-full py-2 px-4 text-center bg-gradient-to-r from-purple-500 to-pink-500 rounded hover:from-purple-600 hover:to-pink-600 transition-all"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Create Account
+                    {t("header.auth.createAccount")}
                   </Link>
                 </div>
               )}

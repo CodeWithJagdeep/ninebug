@@ -21,13 +21,13 @@ const Sidebar = () => (
     {/* Main Navigation */}
     <nav className="mt-2 p-3 border border-white/30 rounded-md">
       <div className="space-y-1 px-2 py-3">
-        <a
-          href="#"
+        <Link
+          to="/in/dashboard"
           className="flex items-center px-3 py-2 rounded-lg hover:bg-gray-800 transition-colors"
         >
           <LayoutDashboard className="w-5 h-5 mr-3 text-gray-400" />
           <span>Dashboard</span>
-        </a>
+        </Link>
         <Link
           to="/in/problems"
           className="flex items-center px-3 py-2 rounded-lg transition-colors"

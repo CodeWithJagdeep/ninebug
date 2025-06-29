@@ -1,4 +1,14 @@
 {
+  "home": {
+    "cta": {
+      "title": {
+        "line1": "Dị Njikere Ibulie Gị",
+        "line2": "Njem DSA"
+      },
+      "subtitle": "Mụta nhazi data na algọridim na ụzọ mmụta anyị zuru oke. Soro ọganihu, dozie ihe ịma aka, ma kwadebe maka ajụjụ ọnụ teknụzụ.",
+      "button": "Malite Ịmụzi Ugbu a"
+    }
+  },
   "hero": {
     "title": "Merie Ajụjụ Nyocha Coding Enweghị Ọkụkụ",
     "subtitle": "Mata usoro, ọ bụghị nsogbu. Zụ ụbụrụ gị, ọ bụghị chioma gị.",
@@ -24,5 +34,162 @@
     "testCases": "Nnwale",
     "passedCount": "{{passed}}/{{total}} Gara aga",
     "loadingEditor": "Na-ebu onye ede akwụkwọ..."
-  }
+  },
+
+  "header": {
+    "navigation": {
+      "learningPaths": "Ụzọ Mmụta",
+      "courses": "Nkuzi",
+      "resources": "Akụrụngwa",
+      "pricing": "Ọnụ ahịa"
+    },
+    "userMenu": {
+      "profile": "Profaịlụ",
+      "accountBilling": "Akaụntụ & Ịgụ ụgwọ",
+      "myHome": "Ụlọ m",
+      "helpCenter": "Ebe Enyemaka",
+      "giveFeedback": "Nye nzaghachi",
+      "logOut": "Pụọ",
+      "myAccount": "Akaụntụ m"
+    },
+    "auth": {
+      "login": "Banye",
+      "createAccount": "Mepụta akaụntụ efu",
+      "createAccountShort": "Mepụta akaụntụ"
+    }
+  },
+  "infiniteScroll": {
+    "getHiredText": "Nweta ọrụ n'ụlọ ọrụ kacha elu"
+  },
+    "preview": {
+      "practicePlatform": "Ebe Mmega Ahụ",
+      "master": "Mụta",
+      "codingInterviews": "Ajụjụ Ọnụ Coding",
+      "practiceDescription": "Mee nsogbu sitere na ụlọ ọrụ teknụzụ kachasị elu na ụzọ mmụta anyị ahaziri na usoro ajụjụ ụlọ ọrụ",
+      "developersCount": "Ndị mmepe 50k+",
+      "successRate": "95% Ọganihu",
+      "industryApproved": "Akwadoro nke ụlọ ọrụ",
+      "learningRoadmap": "Ụzọ Mmụta",
+      "companyQuestions": "Ajụjụ Ụlọ Ọrụ",
+      "randomPractice": "Omume Na-enweghị Usoro",
+      "exploreMoreCompanies": "Chọpụta ụlọ ọrụ ndị ọzọ",
+      "dailyChallenge": "Ihe ịma aka Kwa Ụbọchị",
+      "dailyChallengeDescription": "Otu nsogbu ọhụrụ kwa ụbọchị",
+      "randomMix": "Ngwakọta Na-enweghị Usoro",
+      "randomMixDescription": "Nhọrọ nsogbu ahaziri",
+      "minuteSprint": "Mgbapụ nkeji 15",
+      "sprintDescription": "Nsogbu dị mfe maka mgbake",
+      "startTodaysChallenge": "Malite Ihe ịma aka Taa",
+      "shuffleNow": "Gbanwee ugbu a",
+      "startSprint": "Malite Mgbapụ",
+      "signInRequired": "Achọrọ Ịbanye",
+      "signInMessage": "Biko banye iji nweta nsogbu ndị mbụ wee malite ime ajụjụ ọnụ coding.",
+      "continueWithGoogle": "Gaa n'ihu na Google"
+    },
+      "journey": {
+        "header": {
+          "title": "Njem Coding",
+          "journey": "Gị",
+          "subtitle": "Site na nsogbu ruo na ngwọta, na nduzi AI n'ụzọ ọ bụla"
+        },
+        "section1": {
+          "title": "Malite Njem Coding Gị",
+          "description": "Malite site n'ịghọta nsogbu ahụ. Gụọ nke ọma, nyochaa ihe achọrọ, ma hazie atụmatụ gị. Ngwọta ọ bụla dị mma na-amalite site na nghọta doro anya."
+        },
+        "section2": {
+          "title": "Dee Koodu Gị",
+          "description": "Gbanwee echiche gị ka ọ bụrụ koodu. Jiri onye editọ mejuputa ngwọta gị n'usoro. Echegbula onwe gị maka izu oke - lekwasị anya na ịnweta echiche gị ziri ezi na mbụ."
+        },
+        "section3": {
+          "title": "Mgbe Ihe Adịghị Arụ Ọrụ",
+          "description": "Ị rapaara? Nnwale dara? Echegbula! Nke a bụ akụkụ nke usoro mmụta. Onye nrụpụta ọ bụla na-eche ihe ịma aka ihu - ọ bụ otú anyị si eto ma kwalite nkà anyị."
+        },
+        "section4": {
+          "title": "Enyemaka AI",
+          "description": "Nweta enyemaka ahaziri onwe gị mgbe ịchọrọ. AI anyị na-enyocha koodu gị, ghọta mmejọ gị, ma nye ndụmọdụ ahaziri ka ọ na-eduzi gị."
+        },
+        "editor": {
+          "ready": "Dị njikere ịmalite coding?"
+        },
+        "testFailed": "Nnwale Dara",
+        "dontWorry": "Echegbula! Nke a bụ akụkụ nke mmụta.",
+        "ai": {
+          "title": "Onye Enyemaka AI",
+          "suggestion1": "💡 Achọpụtara m na ị naghị eweghachi okwu na ọrụ gị.",
+          "suggestion2": "🔍 Gbalịa ịgbakwunye njikwa mperi maka ọnọdụ ọnụ.",
+          "suggestion3": "⚡ Tụlee iji map hash maka oge O(n).",
+          "applyButton": "Tinye Ndụmọdụ"
+        }
+      },
+        "helping": {
+          "header": {
+            "tagline": "Otu Anyị Si Eme Ka Ịga Nke Ọma",
+            "title": {
+              "line1": "Gbanwee Njem Gị nke",
+              "line2": "Coding"
+            },
+            "subtitle": "Usoro anyị nwere ọgụgụ isi na-ejikọta AI dị elu na usoro a nwapụtara iji nye ahụmịhe mmụta ahaziri onwe gị nke na-emegharị maka ọsọ gị na ebumnuche gị pụrụ iche."
+          },
+          "steps": {
+            "step1": {
+              "title": "Nchọpụta Ụkpụrụ AI",
+              "description": "Algorithms dị elu na-enyocha usoro coding gị wee chọpụta oghere ihe ọmụma na nkenke, na-emepụta roadmap mmụta ahaziri onwe gị dabere na ike gị na ebe ị ga-emeziwanye."
+            },
+            "step2": {
+              "title": "Igwe Mmụta Na-agbanwe agbanwe",
+              "description": "Sistemụ anyị nwere ọgụgụ isi na-aga n'ihu na-emegharị maka ọganihu gị, na-ewepụta nsogbu ndị ahaziri onwe gị dabara na ọkwa nka gị na ihe achọrọ ụlọ ọrụ, na-ahụ na arụmọrụ mmụta kacha mma."
+            },
+            "step3": {
+              "title": "Nṅomi Ajụjụ Ọnụ Ọnụ n'Ezie",
+              "description": "Nwee ahụmịhe nke ajụjụ ọnụ sitere na ụlọ ọrụ teknụzụ na-eduga na nzaghachi ozugbo, nyocha arụmọrụ, na nkwadebe zuru oke maka ajụjụ ọnụ teknụzụ."
+            }
+          },
+          "cta": {
+            "explore": "Chọpụta Atụmatụ"
+          }
+        },
+          "testimonials": {
+            "trusted": "Ndị Mmepụta n'ụwa niile tụkwasịrị obi",
+            "title": "Ịwulite Ọdịnihu nke Mmụta Teknụzụ",
+            "subtitle": "Sonye na narị otu narị ndị mmepe na-eme ngwa ngwa mmụta ha na ikpo okwu anyị. Anyị na-akpụzi ọgbọ na-esote nke agụmakwụkwọ teknụzụ - bụrụ akụkụ nke njem ahụ.",
+            "items": [
+              {
+                "quote": "Ọ dị ka inwe onye mmepe dị elu na-eduzi m 24/7.",
+                "text": "Ana m edozi nsogbu ndị dị mgbagwoju anya na ọkara oge. Nzaghachi ahaziri onwe gị na-agbanwe egwuregwu.",
+                "author": "Onye Ọrụ Beta Mbụ",
+                "role": "Onye Nrụpụta Full-stack"
+              },
+              {
+                "quote": "Ụzọ mmụta ahụ nwere nhazi nke ọma",
+                "text": "N'ikpeazụ chọtara ikpo okwu na-agbasa echiche ndị dị elu na-enweghị ime ka ha dị mfe.",
+                "author": "Onye Otu Obodo Discord",
+                "role": "Onye Injinia Frontend"
+              },
+              {
+                "quote": "Nzaghachi ozugbo gbanwere usoro ọrụ m",
+                "text": "Nyefee koodu na ịnweta nyocha nke AI na-enye n'ime sekọnd emeela ka nkà m dịkwuo mma.",
+                "author": "Onye Nnwale Alpha nkeonwe",
+                "role": "Onye Nrụpụta Backend"
+              }
+            ]
+          },
+            "footer": {
+              "description": "Mụta Nhazi Data na Algọridim site na nduzi AI na nsogbu ụlọ ọrụ n'ezie.",
+              "sections": {
+                "platform": "Ikpo Okwu",
+                "resources": "Akụrụngwa",
+                "legal": "Iwu"
+              },
+              "links": {
+                "platform": ["Omume", "Ọnụ ego", "Ihe Ịma Aka Kwa Ubochi", "Nkwadebe Ajụjụ"],
+                "resources": ["Akwụkwọ", "Blọọgụ", "Obodo", "Nzukọ Ịntanetị"],
+                "legal": ["Nzuzo", "Usoro", "Nchekwa", "Kuki"],
+                "privacy": "Iwu Nzuzo",
+                "terms": "Usoro Ọrụ",
+                "cookies": "Iwu Kuki"
+              },
+              "copyright": "© {{year}} Ninebug DSA. Ikike niile echekwara."
+            }
+          
+  
 }

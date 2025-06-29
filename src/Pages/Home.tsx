@@ -13,6 +13,7 @@ import ProblemPreview from "@/components/common/Preview";
 import { FaDiscord, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import Logo from "@/assets/logo4.png";
 import Footer from "@/components/common/Footer";
+import { useTranslation } from "react-i18next";
 export default function Home() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -24,6 +25,7 @@ export default function Home() {
       },
     },
   };
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-black text-gray-100 ">
@@ -84,16 +86,14 @@ export default function Home() {
           <div className="relative z-10 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0 md:mr-8">
               <h2 className="text-5xl md:text-5xl text-white mb-3">
-                Ready to Elevate Your{" "}
-                <span className="text-orange-500">DSA</span> Journey?
+                {t("home.cta.title.line1")}{" "}
+                <span className="text-orange-500">
+                  {t("home.cta.title.line2")}
+                </span>
               </h2>
-              <p className="text-slate-300 mb-5 ">
-                Master data structures and algorithms with our comprehensive
-                learning path. Track progress, solve challenges, and prepare for
-                technical interviews.
-              </p>
+              <p className="text-slate-300 mb-5">{t("home.cta.subtitle")}</p>
               <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-6 py-3 rounded-md shadow-md transition-colors">
-                Start Learning Now
+                {t("home.cta.button")}
               </button>
             </div>
 

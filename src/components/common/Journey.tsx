@@ -9,6 +9,7 @@ import {
   Terminal,
 } from "lucide-react";
 import { sampleSolutions } from "@/data/DataStore";
+import { useTranslation } from "react-i18next";
 
 interface CodingJourneyProps {
   onComplete?: () => void;
@@ -38,42 +39,11 @@ const CODE_EXAMPLE = `function twoSum(nums: number[], target: number): number[] 
   return [];
 }`;
 
-const SECTIONS: JourneySection[] = [
-  {
-    id: 1,
-    title: "Start Your Coding Journey",
-    description:
-      "Begin with understanding the problem. Read carefully, analyze the requirements, and plan your approach. Every great solution starts with a clear understanding.",
-    visual: "editor",
-    alignment: "left",
-  },
-  {
-    id: 2,
-    title: "Write Your Code",
-    description:
-      "Transform your ideas into code. Use the editor to implement your solution step by step. Don't worry about perfection - focus on getting your logic right first.",
-    visual: "code",
-    alignment: "right",
-  },
-  {
-    id: 3,
-    title: "When Things Don't Work",
-    description:
-      "Stuck? Failed tests? No worries! This is part of the learning process. Every developer faces challenges - it's how we grow and improve our skills.",
-    visual: "error",
-    alignment: "left",
-  },
-  {
-    id: 4,
-    title: "AI-Powered Assistance",
-    description:
-      "Get personalized help when you need it. Our AI analyzes your code, understands your mistakes, and provides tailored suggestions to guide you forward.",
-    visual: "ai",
-    alignment: "right",
-  },
-];
 
-const EditorVisual = () => (
+
+const EditorVisual = () => {
+  const { t } = useTranslation();
+  return (
   <motion.div
     initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -94,13 +64,14 @@ const EditorVisual = () => (
         className="text-center"
       >
         <Code className="w-16 h-16 text-purple-400 mx-auto mb-4" />
-        <p className="text-gray-400">Ready to start coding?</p>
+        <p className="text-gray-400">{t("journey.editor.ready")}</p>
       </motion.div>
     </div>
   </motion.div>
-);
+)};
 
 const CodeVisual = ({ code }: { code: string; isTyping: boolean }) => {
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -135,6 +106,7 @@ const CodeVisual = ({ code }: { code: string; isTyping: boolean }) => {
 };
 
 const ErrorVisual = () => {
+  const { t } = useTranslation();
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -176,7 +148,9 @@ const ErrorVisual = () => {
         className="text-center"
       >
         <AlertCircle className="w-20 h-20 text-red-400 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-red-300 mb-2">Test Failed</h3>
+        <h3 className="text-xl font-semibold text-red-300 mb-2">
+          {t("journey.testFailed")}
+        </h3>
         <div className="bg-red-900/20 rounded p-4 text-left">
           <p className="text-red-200 text-sm font-mono">
             ❌ Expected: [0, 1]
@@ -191,7 +165,7 @@ const ErrorVisual = () => {
           transition={{ delay: 0.8 }}
           className="text-gray-300 mt-4 text-sm"
         >
-          Don't worry! This is part of learning.
+          {t("journey.dontWorry")}
         </motion.p>
       </motion.div>
     </motion.div>
@@ -199,6 +173,7 @@ const ErrorVisual = () => {
 };
 
 const AIVisual = () => {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -216,18 +191,18 @@ const AIVisual = () => {
           <Bot className="w-6 h-6 text-white" />
         </div>
         <div className="flex-1">
-          <h4 className="text-purple-300 font-semibold mb-2">AI Assistant</h4>
+          <h4 className="text-purple-300 font-semibold mb-2">
+            {t("journey.ai.title")}
+          </h4>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
             className="text-gray-300 text-sm space-y-2"
           >
-            <p>
-              💡 I noticed you're missing a return statement in your function.
-            </p>
-            <p>🔍 Try adding proper error handling for edge cases.</p>
-            <p>⚡ Consider using a hash map for O(n) time complexity.</p>
+            <p>{t("journey.ai.suggestion1")}</p>
+            <p>{t("journey.ai.suggestion2")}</p>
+            <p>{t("journey.ai.suggestion3")}</p>
           </motion.div>
           <motion.button
             initial={{ opacity: 0 }}
@@ -237,7 +212,7 @@ const AIVisual = () => {
             whileTap={{ scale: 0.95 }}
             className="mt-4 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-white text-sm transition-colors"
           >
-            Apply Suggestions
+            {t("journey.ai.applyButton")}
           </motion.button>
         </div>
       </motion.div>
@@ -332,18 +307,18 @@ const CodingJourneySection = ({
           <span className="bg-[#f0721a] text-white w-8 h-8 rounded-full flex items-center justify-center font-semibold">
             {section.id}
           </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-white">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
             {section.title}
           </h2>
         </div>
-        <p className="text-gray-300 text-lg leading-relaxed">
+        <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
           {section.description}
         </p>
       </motion.div>
 
       {/* Visual Content */}
       <motion.div
-        className="lg:w-1/2 h-80 w-full"
+        className="w-full lg:w-1/2 h-80"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{
           opacity: 1,
@@ -372,25 +347,53 @@ const CodingJourneySection = ({
 };
 
 const CodingJourney: React.FC<CodingJourneyProps> = ({ onComplete }) => {
+  const { t } = useTranslation();
   const [currentSection, setCurrentSection] = useState(0);
   const [typewriterText, setTypewriterText] = useState(sampleSolutions);
   const [isTyping, setIsTyping] = useState(true);
-
+  const SECTIONS: JourneySection[] = [
+    {
+      id: 1,
+      title: t("journey.section1.title"),
+      description: t("journey.section1.description"),
+      visual: "editor",
+      alignment: "left",
+    },
+    {
+      id: 2,
+      title: t("journey.section2.title"),
+      description: t("journey.section2.description"),
+      visual: "code",
+      alignment: "right",
+    },
+    {
+      id: 3,
+      title: t("journey.section3.title"),
+      description: t("journey.section3.description"),
+      visual: "error",
+      alignment: "left",
+    },
+    {
+      id: 4,
+      title: t("journey.section4.title"),
+      description: t("journey.section4.description"),
+      visual: "ai",
+      alignment: "right",
+    },
+  ];
   return (
     <div className="px-4 py-0 bg-black">
-      <div className="px-20 mx-auto py-8">
+      <div className="px-4 sm:px-6 md:px-10 lg:px-20 mx-auto py-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-10"
         >
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-            Your Coding <span className="text-[#e46219]">Journey</span>
-          </h1>
-          <p className="text-gray-300 text-lg">
-            From problem to solution, with AI-powered guidance every step of the
-            way
+          {t("journey.header.title")}{" "}
+          <span className="text-[#e46219]">{t("journey.header.journey")}</span>
+          <p className="text-gray-300 text-base sm:text-lg">
+            {t("journey.header.subtitle")}
           </p>
         </motion.div>
 

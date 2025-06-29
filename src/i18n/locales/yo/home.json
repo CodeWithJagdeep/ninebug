@@ -1,4 +1,14 @@
 {
+  "home": {
+    "cta": {
+      "title": {
+        "line1": "Ṣetan lati Gbe Ẹ",
+        "line2": "Irìn-àjò DSA"
+      },
+      "subtitle": "Jẹ ọjọgbọn nipa awọn ilana data ati algọridimu pẹlu apẹrẹ ẹkọ wa. Ṣe iṣiro ilọsiwaju, yanju awọn ijakadi, ki o si mura silẹ fun awọn ibeere imọ-ẹrọ.",
+      "button": "Bẹrẹ Ẹkọ Ni Bayi"
+    }
+  },
   "hero": {
     "title": "Ṣí ìfòròyínbà Coding Láì Ròyìn Iná",
     "subtitle": "Mọ́ àwòkọ́, kì í ṣe ìṣòro. Kọ ọpọlọ rẹ̀, kì í ṣe orí aṣeyọrí.",
@@ -24,5 +34,159 @@
     "testCases": "Ìdánwò",
     "passedCount": "{{passed}}/{{total}} Gbéja",
     "loadingEditor": "Nṣiṣẹ́ olootu..."
-  }
+  },
+  "header": {
+    "navigation": {
+      "learningPaths": "Ọnà Ẹkọ",
+      "courses": "Ẹ̀kọ́",
+      "resources": "Ohun èlò",
+      "pricing": "Iye owo"
+    },
+    "userMenu": {
+      "profile": "Profaili",
+      "accountBilling": "Iroyin & Iṣanwo",
+      "myHome": "Ilé mi",
+      "helpCenter": "Ile-Irànlọwọ",
+      "giveFeedback": "Fun ni esi",
+      "logOut": "Jade",
+      "myAccount": "Akáǹtì mi"
+    },
+    "auth": {
+      "login": "Wo ile",
+      "createAccount": "Ṣẹ̀dá àkàǹtì ọfẹ́",
+      "createAccountShort": "Ṣẹ̀dá àkàǹtì"
+    }
+  },
+  "infiniteScroll": {
+    "getHiredText": "Gba iṣẹ ni awọn ile-iṣẹ olokiki"
+  },
+    "preview": {
+      "practicePlatform": "Pẹpẹ Idaraya",
+      "master": "Mọ",
+      "codingInterviews": "Ìbéèrè Coding",
+      "practiceDescription": "Ṣe iṣẹ-ṣiṣe lati awọn ile-iṣẹ teknoloji ti o ga julọ pẹlu awọn ọna ẹkọ ti a ṣeto ati awọn iṣeto ibeere ti ile-iṣẹ",
+      "developersCount": "Awọn oludagbasoke 50k+",
+      "successRate": "95% Iye Aṣeyọri",
+      "industryApproved": "Ti fọwọsi nipasẹ Ile-iṣẹ",
+      "learningRoadmap": "Ọna Ẹkọ",
+      "companyQuestions": "Ìbéèrè Ile-iṣẹ",
+      "randomPractice": "Iṣẹ-ṣiṣe Laisi Itọsọna",
+      "exploreMoreCompanies": "Ṣàwárí diẹ sii ile-iṣẹ",
+      "dailyChallenge": "Ìjàǹba Ojoojumọ",
+      "dailyChallengeDescription": "Ọkan tuntun iṣoro lojoojumọ",
+      "randomMix": "Àdàpọ Laisi Itọsọna",
+      "randomMixDescription": "Àṣàyàn iṣoro ti a ṣakoso",
+      "minuteSprint": "Sprint iṣẹju 15",
+      "sprintDescription": "Awọn iṣoro rọrun fun iṣan-anra",
+      "startTodaysChallenge": "Bẹrẹ Ìjàǹba Loni",
+      "shuffleNow": "Dàpọ bayi",
+      "startSprint": "Bẹrẹ Sprint",
+      "signInRequired": "A nilo lati Wọle",
+      "signInMessage": "Jọwọ wọle lati wọle si awọn iṣoro ati bẹrẹ ṣiṣe awọn ibeere coding.",
+      "continueWithGoogle": "Tẹsiwaju pẹlu Google"
+    } ,
+      "journey": {
+        "header": {
+          "title": "Irìn-àjò Coding",
+          "journey": "Rẹ",
+          "subtitle": "Lati isoro titi de ojutu, pẹlu itọsọna AI ni gbogbo igbẹ"
+        },
+        "section1": {
+          "title": "Bẹrẹ Irìn-àjò Coding Rẹ",
+          "description": "Bẹrẹ pẹlu oye isoro. Ka daradara, ṣe atupale awọn ibeere, ki o si ṣe iṣiro ọna rẹ. Gbogbo ojutu nla bẹrẹ pẹlu oye kedere."
+        },
+        "section2": {
+          "title": "Kọ Koodu Rẹ",
+          "description": "Yi awọn ero rẹ pada si koodu. Lo onise-atunto lati ṣe ojutu rẹ lẹsẹkẹsẹ. Maṣe yọ ara rẹ lẹnu nipa pipe - gbọdọ kọkọ rí iṣiro rẹ tọ."
+        },
+        "section3": {
+          "title": "Nigbati Awọn Nkan Ko Ṣiṣẹ",
+          "description": "Dina? Awọn iṣẹdẹdẹ ti kuna? Maṣe yọ ara rẹ lẹnu! Eyi jẹ apakan ilana ikẹkọ. Gbogbo onise-agbese ni awọn ijakadi - ni bawo ni a ṣe n dagba ati mu awọn ijinlẹ wa lọwọ."
+        },
+        "section4": {
+          "title": "Iranlọwọ AI",
+          "description": "Gba iranlọwọ ti o yẹra fun ọ nigbati o ba nilo. AI wa n ṣe atupale koodu rẹ, oye awọn aṣiṣe rẹ, ki o si pese awọn imọran ti o yẹra fun ọ lati tọ ọ lọna."
+        },
+        "editor": {
+          "ready": "Ṣetan lati bẹrẹ coding?"
+        },
+        "testFailed": "Idanwo Kuna",
+        "dontWorry": "Maṣe yọ ara rẹ lẹnu! Eyi jẹ apakan ikẹkọ.",
+        "ai": {
+          "title": "Alabara AI",
+          "suggestion1": "💡 Mo ri i pe o ko ni alaye ipada ninu iṣẹ rẹ.",
+          "suggestion2": "🔍 Gbiyanju lati ṣafikun iṣakoso aṣiṣe fun awọn ọran ẹgbẹ.",
+          "suggestion3": "⚡ Ṣe akiyesi lilo map hash fun akoko O(n).",
+          "applyButton": "Waye Awọn Imọran"
+        }
+      },
+        "helping": {
+          "header": {
+            "tagline": "Bawo A Ṣe Nṣe Iṣẹ́ Rẹ Yára",
+            "title": {
+              "line1": "Yi Irìn-àjò Rẹ",
+              "line2": "Coding Pada"
+            },
+            "subtitle": "Pẹpẹ alagbara wa ni a ṣe pọ pẹlu AI ti o ga julọ ati awọn ọna iṣẹ ti a ti ṣe iwadi lati pese awọn iriri ẹkọ ti o yẹra fun ọ ti o ṣe atunṣe si iyara rẹ ati awọn ebun pataki rẹ."
+          },
+          "steps": {
+            "step1": {
+              "title": "Ìdámọ Àwòrán pẹlu AI",
+              "description": "Awọn algofiti ilọsiwaju ṣe atupale awọn ilana coding rẹ ki o si ṣe idanimọ awọn aafo imọ pẹlu deede, ṣiṣẹda apẹrẹ ẹkọ ti o yẹra fun ọ ti o ṣe atunṣe si awọn agbara rẹ ati awọn agbegbe fun ilọsiwaju."
+            },
+            "step2": {
+              "title": "Ẹrọ Ẹkọ Ti o Ṣe Atunṣe",
+              "description": "Ẹrọ alagbara wa n ṣe atunṣe ni igbesoke si ilọsiwaju rẹ, n fi awọn iṣẹṣiro ti o yẹra fun ọ jade ti o baamu ipele iṣẹ-ogbin rẹ ati awọn ibeere ile-iṣẹ, ni rii daju pe o gba ẹkọ ti o dara julọ."
+            },
+            "step3": {
+              "title": "Ìṣàfihàn Ìbéèrè Ojú-ọ̀nà Gidi",
+              "description": "Ni iriri awọn isele ibeere gidi lati awọn ile-iṣẹ teknoloji ti o ni ihamọ pẹlu esi ni akoko, iṣiro iṣẹ, ati imurasilẹ kikun fun awọn ibeere imọ-ẹrọ."
+            }
+          },
+          "cta": {
+            "explore": "Ṣàwárí Ẹya ara"
+          }
+        },
+          "testimonials": {
+            "trusted": "Awọn Oniṣẹ Agbẹjọro Gbogbo Agbaye Gbẹkẹle",
+            "title": "Kikọ Ọjọ iwaju ti Ẹkọ Ẹrọ",
+            "subtitle": "Darapọ pẹlu ọpọlọpọ awọn oniṣẹ agbẹjọro ti o n dara lilo ẹkọ wọn pẹlu pẹpẹ wa. A n ṣe akọọlẹ ọgbọ ti o tẹle ti ẹkọ ẹrọ - jẹ apakan irin ajo naa.",
+            "items": [
+              {
+                "quote": "Inú ń dùn bí pé olùgbéejáde alágbà ń tọ́ mí lọ 24/7.",
+                "text": "Mo n yanjú àwọn ìṣòro tó ṣòro ní ìdajì àkókò. Èsì tí a ṣe tí ẹni pàtó ń yí èrè ṣíṣe padà.",
+                "author": "Olùlo Beta Tẹ́lẹ̀",
+                "role": "Olùgbéejáde Full-stack"
+              },
+              {
+                "quote": "Àwọn ọ̀nà ẹ̀kó rọ̀ pọ̀ dáradára",
+                "text": "Nígbẹ̀yìn rí pẹpẹ kan tó ń ṣàlàyé àwọn èrò gíga láìṣe fífẹ́ wọn mọ́lẹ̀.",
+                "author": "Ẹlẹ́gbẹ́ Àwùjọ Discord",
+                "role": "Injinia Frontend"
+              },
+              {
+                "quote": "Èsì lẹ́sẹkẹsẹ yí àwọn iṣẹ́ mi padà",
+                "text": "Gbé koodu sílẹ̀ kí o sì rí ìṣirò AI láàárín àwọn ìṣẹ́jú ti mú kí ìmọ̀ mi pọ̀ sí i lọ́nà tó yẹ.",
+                "author": "Olùdánwò Alpha Ti ara ẹni",
+                "role": "Olùgbéejáde Backend"
+              }
+            ]
+          },
+            "footer": {
+              "description": "Jẹ ọjọgbọn nipa Awọn Ipilẹ Data ati Algọridimu pẹlu itọsọna AI ati awọn iṣoro ile-iṣẹ gidi.",
+              "sections": {
+                "platform": "Pẹpẹ",
+                "resources": "Ohun èlò",
+                "legal": "Ofin"
+              },
+              "links": {
+                "platform": ["Ṣiṣẹ", "Ifowoleri", "Ìjàǹba Ojoojumọ", "Mura Silẹ Fún Ìbéèrè"],
+                "resources": ["Ìwé ìṣirò", "Bulọọgi", "Àwùjọ", "Ẹkọ Ọrọ Ayélujára"],
+                "legal": ["Ìṣírí", "Àwọn Òfin", "Ààbò", "Kuki"],
+                "privacy": "Ìlànà Ìṣírí",
+                "terms": "Àwọn Òfin Iṣẹ́",
+                "cookies": "Ìlànà Kuki"
+              },
+              "copyright": "© {{year}} Ninebug DSA. Gbogbo ẹ̀tọ́ wa ni ipamọ."
+            }
 }

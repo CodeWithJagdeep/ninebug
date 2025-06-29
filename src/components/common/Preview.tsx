@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 import {
   Route,
   List,
@@ -461,7 +462,7 @@ const CompanyCard = ({ key, company }: any) => {
   const [expanded, setExpanded] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { isAuthenticated } = { isAuthenticated: false };
-
+  const { t } = useTranslation("preview");
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -520,6 +521,7 @@ const CompanyCard = ({ key, company }: any) => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           transition={{ duration: 0.3 }}
+          
           className="overflow-hidden w-full px-8 relative"
         >
           <div className="inset-0 flex items-center justify-center z-10">
@@ -527,16 +529,15 @@ const CompanyCard = ({ key, company }: any) => {
               <div className="flex flex-col items-center text-center space-y-6">
                 <Lock className="w-12 h-12 text-[#fc3830]" />
                 <h2 className="text-2xl font-bold text-white">
-                  Sign In Required
+                  {t("preview.signInRequired")}
                 </h2>
-                <p className="text-gray-300">
-                  Please sign in to access the problemset and start practicing
-                  coding interview questions.
-                </p>
+                <p className="text-gray-300">{t("preview.signInMessage")}</p>
                 <div className="flex space-x-4 w-full">
                   <div className="py-3 px-7 cursor-pointer border border-white/70 w-full rounded-lg flex items-center justify-between text-white/80">
                     <FcGoogle size={23} />
-                    <span className="ml-3 text-base">Continue with Google</span>
+                    <span className="ml-3 text-base">
+                      {t("preview.continueWithGoogle")}
+                    </span>
                     <div></div>
                   </div>
                 </div>
@@ -550,6 +551,7 @@ const CompanyCard = ({ key, company }: any) => {
 };
 
 export default function ProblemPreview() {
+  const { t } = useTranslation();
   return (
     <div className="py-20 bg-black relative overflow-hidden">
       {/* Animated background elements */}
@@ -562,7 +564,7 @@ export default function ProblemPreview() {
       <section
         id="companies"
         aria-labelledby="companies-heading"
-        className="relative py-10 px-24"
+        className="relative py-10 px-4 sm:px-6 md:px-10 lg:px-24"
       >
         <div className="mx-auto">
           <motion.div
@@ -575,20 +577,19 @@ export default function ProblemPreview() {
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-sm border border-orange-500/30 rounded-full px-4 py-2 mb-2">
               <Flame className="w-4 h-4 text-orange-400" />
               <span className="text-white text-sm font-medium">
-                Practice Platform
+                {t("preview.practicePlatform")}
               </span>
             </div>
-            <h1 className="text-5xl lg:text-5xl text-white mb-0 leading-tight">
-              Master{" "}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-0 leading-tight">
+              {t("preview.master")}{" "}
               <span className="bg-[#ed7519] bg-clip-text text-transparent">
-                Coding Interviews
+                {t("preview.codingInterviews")}
               </span>
             </h1>
-            <p className="text-base max-w-5xl lg:text-xl text-slate-300 leading-relaxed">
-              Practice problems from top tech companies with our structured
-              learning paths and company-specific question sets
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed">
+              {t("preview.practiceDescription")}
             </p>
-            <div className="flex items-center justify-start space-x-8 mt-8">
+            <div className="flex flex-wrap gap-4 sm:gap-8 items-center justify-start mt-6">
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-blue-400" />
                 <span className="text-slate-400">50k+ Developers</span>
@@ -605,28 +606,28 @@ export default function ProblemPreview() {
           </motion.div>
 
           <Tabs defaultValue="roadmap" className="w-full">
-            <div className="flex justify-start mb-12">
+            <div className="w-full overflow-x-auto">
               <TabsList className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-none h-12">
                 <TabsTrigger
                   value="roadmap"
                   className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg px-5 h-full text-slate-400 hover:text-white transition-all duration-300"
                 >
                   <Route className="mr-2" size={18} />
-                  Learning Roadmap
+                  {t("preview.learningRoadmap")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="companies"
                   className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg px-8 py-4 text-slate-400 hover:text-white transition-all duration-300"
                 >
                   <Building className="mr-2" size={18} />
-                  Company Questions
+                  {t("preview.companyQuestions")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="random"
                   className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg px-8 py-4 text-slate-400 hover:text-white transition-all duration-300"
                 >
                   <Shuffle className="mr-2" size={18} />
-                  Random Practice
+                  {t("preview.randomPractice")}
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -649,9 +650,8 @@ export default function ProblemPreview() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="grid grid-cols-1"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                
                 {companies.map((company, index) => (
                   <CompanyCard
                     key={index}
@@ -666,7 +666,7 @@ export default function ProblemPreview() {
                       <div className="flex items-center space-x-4">
                         <div>
                           <h3 className="text-xl font-bold text-center text-white">
-                            Explore more companies
+                            {t("preview.exploreMoreCompanies")}
                           </h3>
                         </div>
                       </div>
@@ -687,17 +687,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          Daily Challenge
+                          {t("preview.dailyChallenge")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          One new problem every day
+                          {t("preview.dailyChallengeDescription")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 font-medium rounded-md">
-                        Start Today's Challenge
+                        {t("preview.startTodaysChallenge")}
                       </button>
                     </div>
                   </div>
@@ -710,17 +710,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          Random Mix
+                          {t("preview.randomMix")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          Curated selection of problems
+                          {t("preview.randomMix")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="border-orange-600 border hover:bg-orange-700 text-white px-6 py-2 font-medium rounded-md">
-                        Shuffle now
+                        {t("preview.shuffleNow")}
                       </button>
                     </div>
                   </div>
@@ -733,17 +733,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          15-Minute Sprint
+                          {t("preview.minuteSprint")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          Quick easy problems for warm-up
+                          {t("preview.sprintDescription")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="w-full px-5 bg-white border border-white hover:bg-green-700 text-black text-sm font-medium py-2 rounded-md">
-                        Start Sprint
+                        {t("preview.startSprint")}
                       </button>
                     </div>
                   </div>
@@ -756,17 +756,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          Random Mix
+                          {t("preview.randomMix")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          Curated selection of problems
+                          {t("preview.curatedSelection")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="border-orange-600 border hover:bg-orange-700 text-white px-6 py-2 font-medium rounded-md">
-                        Start Sprint
+                        {t("preview.startSprint")}
                       </button>
                     </div>
                   </div>

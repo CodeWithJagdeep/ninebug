@@ -115,7 +115,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+    <section className="pt-20 sm:pt-24 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -128,15 +128,15 @@ function HeroSection() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <h1 className="text-[80px] text-white/90 mb-6 text-center leading-21">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] text-white/90 mb-6 text-center leading-tight">
               {t("hero.title")}
             </h1>
 
-            <p className="text-lg md:text-xl lg:text-2xl text-center text-white/80 font-normal mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-center text-white/80 font-normal mb-10 max-w-3xl mx-auto leading-relaxed">
               {t("hero.subtitle")}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center w-full max-w-md sm:max-w-none">
+            <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center w-full max-w-sm sm:max-w-md md:max-w-none">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

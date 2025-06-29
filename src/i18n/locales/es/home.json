@@ -1,0 +1,194 @@
+{
+  "home": {
+    "cta": {
+      "title": {
+        "line1": "¿Listo para Elevar Tu",
+        "line2": "Viaje de EDAs"
+      },
+      "subtitle": "Domina estructuras de datos y algoritmos con nuestra ruta de aprendizaje completa. Haz seguimiento de tu progreso, resuelve desafíos y prepárate para entrevistas técnicas.",
+      "button": "Comienza a Aprender Ahora"
+    }
+  },
+  "hero": {
+    "title": "Supera Entrevistas de Programación Sin Agotarte",
+    "subtitle": "Reconoce patrones, no problemas. Entrena tu cerebro, no tu suerte.",
+    "startFreeTrial": "Comenzar Ruta",
+    "watchDemo": "Ver Demo"
+  },
+  "feedback": {
+    "aiAssistant": "Asistente de IA",
+    "aiIntro": "Así puedes mejorar tu solución:",
+    "testCasesFailed": "Caso(s) de Prueba Fallidos",
+    "input": "Entrada",
+    "expected": "Esperado",
+    "received": "Recibido",
+    "aisuggestion": "🧠 Optimizando Two Sum\n\nTu solución actual podría estar verificando cada par — eso es tiempo O(n²).\n\nAsí puedes mejorarlo:\n\n1. **Piensa en almacenar elementos que ya has visto** — ¿hay manera de recordar sus posiciones?\n2. **¿Y si pudieras buscar instantáneamente el complemento (objetivo - número actual)?** Eso evitaría el bucle interno por completo.\n3. **Prueba usando un mapa hash** para rastrear índices. Las búsquedas son rápidas — O(1).\n4. Recorre el arreglo una vez y decide qué necesitas almacenar o verificar en cada paso.\n5. No olvides manejar casos extremos, como valores duplicados o sin par válido.\n\n¿Puedes construir esta lógica paso a paso?"
+  },
+  "editor": {
+    "runCode": {
+      "default": "Ejecutar Código",
+      "running": "Ejecutando...",
+      "typing": "Escribiendo..."
+    },
+    "fileName": "{{question}}.py",
+    "testCases": "Casos de Prueba",
+    "passedCount": "{{passed}}/{{total}} Pasaron",
+    "loadingEditor": "Cargando editor..."
+  },
+  "header": {
+    "navigation": {
+      "learningPaths": "Rutas de aprendizaje",
+      "courses": "Cursos",
+      "resources": "Recursos",
+      "pricing": "Precios"
+    },
+    "userMenu": {
+      "profile": "Perfil",
+      "accountBilling": "Cuenta & Facturación",
+      "myHome": "Mi Inicio",
+      "helpCenter": "Centro de ayuda",
+      "giveFeedback": "Dar opinión",
+      "logOut": "Cerrar sesión",
+      "myAccount": "Mi Cuenta"
+    },
+    "auth": {
+      "login": "Iniciar sesión",
+      "createAccount": "Crear cuenta gratis",
+      "createAccountShort": "Crear cuenta"
+    }
+  },
+  "infiniteScroll": {
+    "getHiredText": "Consigue trabajo en las mejores empresas"
+  },
+    "preview": {
+      "practicePlatform": "Plataforma de Práctica",
+      "master": "Dominar",
+      "codingInterviews": "Entrevistas de Codificación",
+      "practiceDescription": "Practica problemas de las principales empresas tecnológicas con nuestras rutas de aprendizaje estructuradas y conjuntos de preguntas específicas de empresas",
+      "developersCount": "50k+ Desarrolladores",
+      "successRate": "95% Tasa de Éxito",
+      "industryApproved": "Aprobado por la Industria",
+      "learningRoadmap": "Ruta de Aprendizaje",
+      "companyQuestions": "Preguntas por Empresa",
+      "randomPractice": "Práctica Aleatoria",
+      "exploreMoreCompanies": "Explorar más empresas",
+      "dailyChallenge": "Desafío Diario",
+      "dailyChallengeDescription": "Un nuevo problema cada día",
+      "randomMix": "Mezcla Aleatoria",
+      "randomMixDescription": "Selección curada de problemas",
+      "minuteSprint": "Sprint de 15 Minutos",
+      "sprintDescription": "Problemas fáciles para calentar",
+      "startTodaysChallenge": "Comenzar el Desafío de Hoy",
+      "shuffleNow": "Mezclar ahora",
+      "startSprint": "Comenzar Sprint",
+      "signInRequired": "Inicio de Sesión Requerido",
+      "signInMessage": "Por favor inicia sesión para acceder al conjunto de problemas y comenzar a practicar preguntas de entrevistas de codificación.",
+      "continueWithGoogle": "Continuar con Google"
+    },
+      "journey": {
+        "header": {
+          "title": "Tu Viaje de",
+          "journey": "Programación",
+          "subtitle": "Desde el problema hasta la solución, con guía impulsada por IA en cada paso"
+        },
+        "section1": {
+          "title": "Comienza Tu Viaje de Programación",
+          "description": "Empieza comprendiendo el problema. Lee cuidadosamente, analiza los requisitos y planifica tu enfoque. Toda gran solución comienza con una comprensión clara."
+        },
+        "section2": {
+          "title": "Escribe Tu Código",
+          "description": "Transforma tus ideas en código. Usa el editor para implementar tu solución paso a paso. No te preocupes por la perfección: concéntrate primero en que tu lógica sea correcta."
+        },
+        "section3": {
+          "title": "Cuando las Cosas No Funcionan",
+          "description": "¿Atascado? ¿Pruebas fallidas? ¡No te preocupes! Esto es parte del proceso de aprendizaje. Todo desarrollador enfrenta desafíos: así es como crecemos y mejoramos nuestras habilidades."
+        },
+        "section4": {
+          "title": "Asistencia con IA",
+          "description": "Obtén ayuda personalizada cuando la necesites. Nuestra IA analiza tu código, entiende tus errores y proporciona sugerencias personalizadas para guiarte."
+        },
+        "editor": {
+          "ready": "¿Listo para empezar a programar?"
+        },
+        "testFailed": "Prueba Fallida",
+        "dontWorry": "¡No te preocupes! Esto es parte del aprendizaje.",
+        "ai": {
+          "title": "Asistente de IA",
+          "suggestion1": "💡 Noté que falta una declaración de retorno en tu función.",
+          "suggestion2": "🔍 Intenta agregar manejo de errores para casos extremos.",
+          "suggestion3": "⚡ Considera usar un mapa hash para complejidad O(n).",
+          "applyButton": "Aplicar Sugerencias"
+        }
+      },
+        "helping": {
+          "header": {
+            "tagline": "Cómo Aceleramos Tu Éxito",
+            "title": {
+              "line1": "Transforma Tu",
+              "line2": "Viaje de Programación"
+            },
+            "subtitle": "Nuestra plataforma inteligente combina IA de vanguardia con metodologías probadas para ofrecer experiencias de aprendizaje personalizadas que se adaptan a tu ritmo y objetivos únicos."
+          },
+          "steps": {
+            "step1": {
+              "title": "Reconocimiento de Patrones con IA",
+              "description": "Algoritmos avanzados analizan tus patrones de codificación e identifican brechas de conocimiento con precisión, creando un plan de aprendizaje personalizado adaptado a tus fortalezas y áreas de mejora."
+            },
+            "step2": {
+              "title": "Motor de Aprendizaje Adaptativo",
+              "description": "Nuestro sistema inteligente se adapta continuamente a tu progreso, entregando conjuntos de problemas personalizados que coinciden con tu nivel de habilidad y los requisitos de la empresa objetivo."
+            },
+            "step3": {
+              "title": "Simulación de Entrevistas Reales",
+              "description": "Experimenta escenarios de entrevista auténticos de las principales empresas tecnológicas con retroalimentación en tiempo real, análisis de rendimiento y preparación integral para entrevistas técnicas."
+            }
+          },
+          "cta": {
+            "explore": "Explorar Función"
+          }
+        },
+          "testimonials": {
+            "trusted": "Confiable por desarrolladores de todo el mundo",
+            "title": "Construyendo el futuro de la educación tecnológica",
+            "subtitle": "Únete a cientos de desarrolladores que están acelerando su aprendizaje con nuestra plataforma. Estamos dando forma a la próxima generación de educación tecnológica - sé parte del viaje.",
+            "items": [
+              {
+                "quote": "Se siente como tener un desarrollador senior guiándome 24/7.",
+                "text": "Estoy resolviendo problemas complejos en la mitad del tiempo. La retroalimentación personalizada cambia las reglas del juego.",
+                "author": "Usuario Beta Temprano",
+                "role": "Desarrollador Full-stack"
+              },
+              {
+                "quote": "Las rutas de aprendizaje están increíblemente bien estructuradas",
+                "text": "Finalmente encontré una plataforma que desglosa conceptos avanzados sin simplificarlos demasiado.",
+                "author": "Miembro de la Comunidad Discord",
+                "role": "Ingeniero Frontend"
+              },
+              {
+                "quote": "La retroalimentación en tiempo real transformó mi flujo de trabajo",
+                "text": "Enviar código y obtener análisis impulsado por IA en segundos ha mejorado dramáticamente mis habilidades.",
+                "author": "Probador Alfa Privado",
+                "role": "Desarrollador Backend"
+              }
+            ]
+          },
+            "footer": {
+              "description": "Domina Estructuras de Datos y Algoritmos con guía potenciada por IA y problemas reales de empresas.",
+              "sections": {
+                "platform": "Plataforma",
+                "resources": "Recursos",
+                "legal": "Legal"
+              },
+              "links": {
+                "platform": ["Practicar", "Precios", "Desafío Diario", "Preparación para Entrevistas"],
+                "resources": ["Documentación", "Blog", "Comunidad", "Seminarios Web"],
+                "legal": ["Privacidad", "Términos", "Seguridad", "Cookies"],
+                "privacy": "Política de Privacidad",
+                "terms": "Términos de Servicio",
+                "cookies": "Política de Cookies"
+              },
+              "copyright": "© {{year}} Ninebug DSA. Todos los derechos reservados."
+            }
+          
+  
+}

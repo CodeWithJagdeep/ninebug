@@ -1,4 +1,14 @@
 {
+  "home": {
+    "cta": {
+      "title": {
+        "line1": "Tayari Kufufua",
+        "line2": "Safari Yako ya DSA"
+      },
+      "subtitle": "Jifunze miundo ya data na algoriti kwa njia yetu ya kujifunza. Fuatilia maendeleo, tatua changamoto, na jiandae kwa mahojiano ya kiufundi.",
+      "button": "Anza Kujifunza Sasa"
+    }
+  },
   "hero": {
     "title": "Changua Mihojiano ya Coding Bila Kupata Mafadhaiko",
     "subtitle": "Tambua mifumo, sio matatizo. Funza ubongo wako, sio bahati yako.",
@@ -24,5 +34,160 @@
     "testCases": "Majaribio",
     "passedCount": "{{passed}}/{{total}} Imepitisha",
     "loadingEditor": "Inapakia mhariri..."
-  }
+  },
+  "header": {
+    "navigation": {
+      "learningPaths": "Mradi wa Kujifunza",
+      "courses": "Kozi",
+      "resources": "Rasilimali",
+      "pricing": "Bei"
+    },
+    "userMenu": {
+      "profile": "Wasifu",
+      "accountBilling": "Akaunti na Malipo",
+      "myHome": "Nyumba Yangu",
+      "helpCenter": "Kituo cha Usaidizi",
+      "giveFeedback": "Toa Maoni",
+      "logOut": "Ondoka",
+      "myAccount": "Akaunti Yangu"
+    },
+    "auth": {
+      "login": "Ingia",
+      "createAccount": "Fungua Akaunti ya Bure",
+      "createAccountShort": "Fungua Akaunti"
+    }
+  },
+  "infiniteScroll": {
+    "getHiredText": "Pata kazi katika kampuni bora zaidi"
+  },
+    "preview": {
+      "practicePlatform": "Jukwaa la Mazoezi",
+      "master": "Jifunze",
+      "codingInterviews": "Mahojiano ya Coding",
+      "practiceDescription": "Fanya mazoezi ya matatizo kutoka kwa kampuni bora za teknolojia kwa njia zilizopangwa na seti za maswali maalum ya kampuni",
+      "developersCount": "Wasanidi 50k+",
+      "successRate": "Kiwango cha mafanikio 95%",
+      "industryApproved": "Imethibitishwa na Sekta",
+      "learningRoadmap": "Ramani ya Kujifunza",
+      "companyQuestions": "Maswali ya Kampuni",
+      "randomPractice": "Mazoezi ya Nasibu",
+      "exploreMoreCompanies": "Gundua kampuni zaidi",
+      "dailyChallenge": "Changamoto ya Kila Siku",
+      "dailyChallengeDescription": "Tatizo moja jipya kila siku",
+      "randomMix": "Mchanganyiko wa Nasibu",
+      "randomMixDescription": "Uchaguzi wa matatizo yaliyochaguliwa",
+      "minuteSprint": "Harakati za Dakika 15",
+      "sprintDescription": "Matatizo rahisi ya kujipasha joto",
+      "startTodaysChallenge": "Anza Changamoto ya Leo",
+      "shuffleNow": "Changanya sasa",
+      "startSprint": "Anza Harakati",
+      "signInRequired": "Inahitajika Kuingia",
+      "signInMessage": "Tafadhali ingia kufikia seti ya matatizo na kuanza kufanya mazoezi ya maswali ya mahojiano ya coding.",
+      "continueWithGoogle": "Endelea na Google"
+    },
+      "journey": {
+        "header": {
+          "title": "Safari Yako ya",
+          "journey": "Coding",
+          "subtitle": "Kutoka tatizo hadi suluhisho, kwa mwongozo wa AI katika kila hatua"
+        },
+        "section1": {
+          "title": "Anza Safari Yako ya Coding",
+          "description": "Anza kwa kuelewa tatizo. Soma kwa makini, chambua mahitaji, na panga mbinu yako. Kila suluhisho zuri huanza na ufahamu wazi."
+        },
+        "section2": {
+          "title": "Andika Msimbo Wako",
+          "description": "Badilisha mawazo yako kuwa msimbo. Tumia mhariri kutekeleza suluhisho lako hatua kwa hatua. Usijali ukamilifu - kazia kwanza kupata mantiki yako sawa."
+        },
+        "section3": {
+          "title": "Wakati Mambo Hayafanyi Kazi",
+          "description": "Umesimama? Majaribio yameshindwa? Usijali! Hii ni sehemu ya mchakato wa kujifunza. Kila msanidi hukumbana na changamoto - ndivyo tunavyokua na kuboresha ujuzi wetu."
+        },
+        "section4": {
+          "title": "Msaada wa AI",
+          "description": "Pata msaada wa kibinafsi unapohitaji. AI yetu inachambua msimbo wako, inaelewa makosa yako, na inatoa mapendekezo yaliyoboreshwa kukuelekeza."
+        },
+        "editor": {
+          "ready": "Tayari kuanza coding?"
+        },
+        "testFailed": "Mtihani Umefaulu",
+        "dontWorry": "Usijali! Hii ni sehemu ya kujifunza.",
+        "ai": {
+          "title": "Msaidizi wa AI",
+          "suggestion1": "💡 Niligundua hauna taarifa ya kurudi katika chaguo lako.",
+          "suggestion2": "🔍 Jaribu kuongeza udhibiti wa makosa kwa hali ya mipaka.",
+          "suggestion3": "⚡ Fikiria kutumia ramani ya hash kwa wakati O(n).",
+          "applyButton": "Tumia Mapendekezo"
+        }
+      },
+        "helping": {
+          "header": {
+            "tagline": "Jinsi Tunavyoharakisha Mafanikio Yako",
+            "title": {
+              "line1": "Badilisha Safari Yako ya",
+              "line2": "Coding"
+            },
+            "subtitle": "Jukwaa letu la akili linaunganisha AI ya kisasa na mbinu zilizothibitishwa kutoa uzoefu wa kujifunza unaofaa ambayo inalingana na kasi yako na malengo yako ya kipekee."
+          },
+          "steps": {
+            "step1": {
+              "title": "Utambuzi wa Muundo wa AI",
+              "description": "Algorithms za hali ya juu zinachambua mifumo yako ya coding na kutambua mapungufu ya ujuzi kwa usahihi, kuunda ramani ya kujifunza iliyobinafsishwa inayolingana na ujuzi wako na maeneo ya uboreshaji."
+            },
+            "step2": {
+              "title": "Injini ya Kujifunza Inayobadilika",
+              "description": "Mfumo wetu wa akili unaendelea kukabiliana na maendeleo yako, ukitoa seti za shida zilizobinafsishwa zinazolingana na kiwango chako cha ujuzi na mahitaji ya kampuni lengwa, kuhakikisha ufanisi bora wa kujifunza."
+            },
+            "step3": {
+              "title": "Uigaji wa Mahojiano ya Ulimwengu Halisi",
+              "description": "Pata uzoefu wa hali halisi za mahojiano kutoka kwa kampuni zinazoongoza za teknolojia na maoni ya papo hapo, uchambuzi wa utendaji, na maandalizi kamili ya mahojiano ya kiufundi."
+            }
+          },
+          "cta": {
+            "explore": "Chunguza Kipengele"
+          }
+        },
+          "testimonials": {
+            "trusted": "Kuaminika na Wasanidi Ulimwenguni Pote",
+            "title": "Kujenga Mustakabali wa Elimu ya Teknolojia",
+            "subtitle": "Jiunge na mamia ya wasanidi wanaokamilisha kujifunza kwao kwa kutumia jukwaa letu. Tunabuni kizazi kipya cha elimu ya teknolojia - kuwa sehemu ya safari hii.",
+            "items": [
+              {
+                "quote": "Inahisi kama kuwa na msanidi mwenye uzoefu anayeniongoza kila wakati.",
+                "text": "Ninatatua matatizo magumu katika nusu ya muda. Maoni ya kibinafsi yamebadilisha mchezo.",
+                "author": "Mtumiaji wa Mapema wa Beta",
+                "role": "Msanidi wa Full-stack"
+              },
+              {
+                "quote": "Njia za kujifunza zimepangwa vizuri sana",
+                "text": "Mwishowe nimepata jukwaa linalovunja dhana za hali ya juu bila kuzifanya ziwe rahisi kupita kiasi.",
+                "author": "Mwanachama wa Jumuiya ya Discord",
+                "role": "Mhandisi wa Frontend"
+              },
+              {
+                "quote": "Maoni ya papo hapo yalibadilisha mtindo wangu wa kazi",
+                "text": "Kuwasilisha msimbo na kupata uchambuzi wa AI ndani ya sekunde umeboresha ujuzi wangu kwa kiasi kikubwa.",
+                "author": "Mjaribu wa Alpha wa Kibinafsi",
+                "role": "Msanidi wa Backend"
+              }
+            ]
+          },
+            "footer": {
+              "description": "Jifunze Miundo ya Data na Algoriti kwa mwongozo wa AI na matatizo halisi ya kampuni.",
+              "sections": {
+                "platform": "Jukwaa",
+                "resources": "Rasilimali",
+                "legal": "Kisheria"
+              },
+              "links": {
+                "platform": ["Mazoezi", "Bei", "Changamoto ya Kila Siku", "Maandalizi ya Mahojiano"],
+                "resources": ["Nyaraka", "Blogu", "Jumuiya", "Semina za Mtandaoni"],
+                "legal": ["Faragha", "Masharti", "Usalama", "Vidakuzi"],
+                "privacy": "Sera ya Faragha",
+                "terms": "Masharti ya Huduma",
+                "cookies": "Sera ya Vidakuzi"
+              },
+              "copyright": "© {{year}} Ninebug DSA. Haki zote zimehifadhiwa."
+            }
+  
 }
