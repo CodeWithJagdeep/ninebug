@@ -466,7 +466,11 @@ const CompanyCard = ({ key, company }: any) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  console.log("Translation test:", {
+    signInRequired: t("preview.signInRequired"),
+    signInMessage: t("preview.signInMessage"),
+    continueWithGoogle: t("preview.continueWithGoogle"),
+  });
   return (
     <>
       <motion.div
