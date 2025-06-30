@@ -1,32 +1,16 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-import PanelHeader from "../components/dashboard/Pannelheader";
-import Sidebar from "../components/dashboard/Sidebar";
 import {ReactNode} from "react";
 
-type DashboardLayoutProps = {
-  children: ReactNode;
-};
+
 
 // Layout
-const DashboardLayout = ({ children }: DashboardLayoutProps) => (
-  <div className="min-h-screen bg-black">
-    <PanelHeader />
-    <div className="flex items-start">
-      <Sidebar />
-      <div className="flex-1">
-        <main className="p-6 space-y-4">{children}</main>
-      </div>
-    </div>
-  </div>
-);
-
-
+const DashboardLayout=lazy(()=>import("@/layout/DashboardLayout"));
 // Public Pages
 const Home = lazy(() => import("@/Pages/Home"));
 const Login = lazy(() => import("@/Pages/Auth/Login"));
-
+const DSAInterviewPlatform=lazy (()=>import("@/components/interview/DSAInterview"));
 // Dashboard Pages
 const CodingPanelPage = lazy(() => import("@/Pages/Panel/Pannel"));
 const DSAQuestionsDashboard = lazy(
@@ -48,7 +32,7 @@ const AppRoutes = () => {
 
         {/* Problem Routes */}
         <Route path="/problem/:slug" element={<CodingPanelPage />} />
-
+        <Route path="/interview" element={<DSAInterviewPlatform />} />
         {/* Dashboard Routes */}
         <Route
           path="/in/problems"
