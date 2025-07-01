@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback,useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -66,6 +66,11 @@ export default function DSAInterviewPlatform() {
   const { timeLeft, setRunCodeCallback } = useInterviewTimer();
 
   const [userApproach, setUserApproach] = useState("");
+  const [lastTypedTime, setLastTypedTime] = useState(Date.now());
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [hasPrompted, setHasPrompted] = useState(false);
+
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -111,7 +116,7 @@ export default function DSAInterviewPlatform() {
   }, []);
 
   // Speech recognition implementation
-  useEffect(() => {
+  useEffect(() => { 
     if (!listening || !browserSupport.speechRecognition) return;
 
     let recognition: any;
@@ -168,7 +173,33 @@ export default function DSAInterviewPlatform() {
     }
     setListening((prev) => !prev);
   }, [browserSupport]);
+  useEffect(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
+    timeoutRef.current = setTimeout(() => {
+      const now = Date.now();
+      const differenceInMinutes = (now - lastTypedTime) / 1000 / 60;
+
+      if (differenceInMinutes >= 5 && !hasPrompted) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString(),
+            sender: "geeta",
+            content: "Are you stuck somewhere? Let me know if I can help.",
+            timestamp: new Date(),
+          },
+        ]);
+        setHasPrompted(true);
+      }
+    }, 5 * 60 * 1000);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [lastTypedTime, hasPrompted]);
+  
+  
   const formatTime = useCallback((seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -371,7 +402,11 @@ const getDifficultyColor = useCallback((difficulty: string) => {
                     <Textarea
                       placeholder="Describe your approach to solve this problem..."
                       value={userApproach}
-                      onChange={(e) => setUserApproach(e.target.value)}
+                      onChange={(e) => {
+                        setUserApproach(e.target.value);
+                        setLastTypedTime(Date.now());
+                        setHasPrompted(false); 
+                      }}
                       className="flex-1 min-h-[120px] resize-none bg-zinc-900 text-white border-zinc-700"
                     />
                     <div className="mt-4 flex gap-2">
