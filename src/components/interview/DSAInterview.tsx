@@ -5,9 +5,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Mic, MicOff, Send, Clock, Code, User, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { SpeechRecognition } from "@/types/speech";
+import { useInterviewTimer } from "../../Context/InterviewTimerContext";
+import InterviewHeader from "./interviewHeader";
 
-// Memoized demo questions to prevent recreation on re-renders
+// Check if browser is Firefox
+const isFirefox =
+  typeof window !== "undefined" &&
+  navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+
+// Memoized demo questions
 const DEMO_QUESTIONS = [
   {
     id: 1,
@@ -54,30 +60,115 @@ interface Message {
 }
 
 export default function DSAInterviewPlatform() {
-  // Memoized random question selection
   const currentQuestion = useMemo(() => {
     return DEMO_QUESTIONS[Math.floor(Math.random() * DEMO_QUESTIONS.length)];
   }, []);
+  const { timeLeft, setRunCodeCallback } = useInterviewTimer();
 
-  const [timeLeft, setTimeLeft] = useState(45 * 60); // 45 minutes in seconds
   const [userApproach, setUserApproach] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       sender: "geeta",
-      content:
-        "Hi, I'm Geeta, your instructor. Please type or speak your approach to solve the DSA question above.",
+      content: `Hi, I'm Geeta, your instructor. Your question is: ${currentQuestion.title}\n\n${currentQuestion.description}\n\nDifficulty: ${currentQuestion.difficulty}\n\nPlease describe your approach to solve this problem.`,
       timestamp: new Date(),
     },
   ]);
-  const [isListening, setIsListening] = useState(false);
-  const [recognition, setRecognition] = useState<SpeechRecognition | null>(
-    null
-  );
   const [editorUnlocked, setEditorUnlocked] = useState(false);
   const [code, setCode] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [browserSupport, setBrowserSupport] = useState({
+    speechRecognition: false,
+    microphone: false,
+  });
 
-  // Memoized time formatter
+  // Initialize speech recognition
+  useEffect(() => {
+    const checkSupport = async () => {
+      try {
+        // Check for microphone access
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        stream.getTracks().forEach((track) => track.stop());
+
+        // Check for speech recognition support
+        const speechSupport =
+          "webkitSpeechRecognition" in window || "SpeechRecognition" in window;
+
+        setBrowserSupport({
+          speechRecognition: speechSupport,
+          microphone: true,
+        });
+      } catch (err) {
+        console.error("Microphone access denied:", err);
+        setBrowserSupport((prev) => ({ ...prev, microphone: false }));
+      }
+    };
+
+    checkSupport();
+  }, []);
+
+  // Speech recognition implementation
+  useEffect(() => {
+    if (!listening || !browserSupport.speechRecognition) return;
+
+    let recognition: any;
+    if ("webkitSpeechRecognition" in window) {
+      recognition = new (window as any).webkitSpeechRecognition();
+    } else if ("SpeechRecognition" in window) {
+      recognition = new (window as any).SpeechRecognition();
+    } else {
+      return;
+    }
+
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    recognition.onresult = (event: any) => {
+      let interimTranscript = "";
+      let finalTranscript = "";
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript + " ";
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+
+      setUserApproach((prev) => prev + finalTranscript);
+    };
+
+    recognition.onerror = (event: any) => {
+      console.error("Speech recognition error", event.error);
+      setListening(false);
+    };
+
+    recognition.start();
+
+    return () => {
+      if (recognition) {
+        recognition.stop();
+      }
+    };
+  }, [listening, browserSupport.speechRecognition]);
+
+  const toggleListening = useCallback(() => {
+    if (!browserSupport.speechRecognition || !browserSupport.microphone) {
+      alert(
+        browserSupport.microphone
+          ? "Speech recognition is not supported in your browser. Try Chrome or Edge."
+          : "Microphone access is required for voice input. Please enable microphone permissions."
+      );
+      return;
+    }
+    setListening((prev) => !prev);
+  }, [browserSupport]);
+
   const formatTime = useCallback((seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -86,87 +177,34 @@ export default function DSAInterviewPlatform() {
       .padStart(2, "0")}`;
   }, []);
 
-  // Memoized difficulty color getter
-  const getDifficultyColor = useCallback((difficulty: string) => {
-    switch (difficulty.toLowerCase()) {
-      case "easy":
-        return "bg-green-100 text-green-800";
-      case "medium":
-        return "bg-yellow-100 text-yellow-800";
-      case "hard":
-        return "bg-red-100 text-red-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  }, []);
+const getDifficultyColor = useCallback((difficulty: string) => {
+  switch (difficulty.toLowerCase()) {
+    case "easy":
+      return "bg-green-800 text-green-100";
+    case "medium":
+      return "bg-yellow-800 text-yellow-100";
+    case "hard":
+      return "bg-red-800 text-red-100";
+    default:
+      return "bg-gray-700 text-gray-100";
+  }
+}, []);
 
-  // Initialize speech recognition
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+    const autoSubmit = () => {
+      if (!editorUnlocked || isSubmitted) return;
+      setIsSubmitted(true);
+      alert("Time's up! Code submitted automatically.");
+    };
+    setRunCodeCallback(() => autoSubmit);
+  }, [editorUnlocked, isSubmitted, setRunCodeCallback]);
 
-      if (!SpeechRecognition) return;
-
-      const recognitionInstance = new SpeechRecognition();
-      recognitionInstance.continuous = true;
-      recognitionInstance.interimResults = true;
-      recognitionInstance.lang = "en-US";
-
-      const handleResult = (event: any) => {
-        let finalTranscript = "";
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript;
-          }
-        }
-        if (finalTranscript) {
-          setUserApproach((prev) => prev + finalTranscript + " ");
-        }
-      };
-
-      const handleError = () => setIsListening(false);
-      const handleEnd = () => setIsListening(false);
-
-      recognitionInstance.onresult = handleResult;
-      recognitionInstance.onerror = handleError;
-      recognitionInstance.onend = handleEnd;
-
-      setRecognition(recognitionInstance);
-
-      return () => {
-        recognitionInstance.stop();
-        recognitionInstance.onresult = () => {};
-        recognitionInstance.onerror = () => {};
-        recognitionInstance.onend = () => {};
-      };
-    }
-  }, []);
-
-  // Timer countdown
-  useEffect(() => {
-    if (timeLeft <= 0) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          setEditorUnlocked(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft]);
-
-  // Memoized approach analyzer
   const analyzeApproach = useCallback(
     (approach: string) => {
       const lowerApproach = approach.toLowerCase();
       const questionTitle = currentQuestion.title.toLowerCase();
 
-      // Simple analysis based on keywords
       if (questionTitle.includes("two sum")) {
         if (lowerApproach.includes("hash") || lowerApproach.includes("map")) {
           return {
@@ -203,7 +241,6 @@ export default function DSAInterviewPlatform() {
         };
       }
 
-      // Default responses
       if (approach.length < 20) {
         return {
           correct: false,
@@ -221,22 +258,9 @@ export default function DSAInterviewPlatform() {
     [currentQuestion.title]
   );
 
-  const toggleListening = useCallback(() => {
-    if (!recognition) return;
-
-    if (isListening) {
-      recognition.stop();
-      setIsListening(false);
-    } else {
-      recognition.start();
-      setIsListening(true);
-    }
-  }, [recognition, isListening]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const handleSubmitApproach = useCallback(() => {
     if (!userApproach.trim()) return;
 
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       sender: "user",
@@ -246,7 +270,6 @@ export default function DSAInterviewPlatform() {
 
     const analysis = analyzeApproach(userApproach);
 
-    // Add Geeta's response
     const geetaMessage: Message = {
       id: (Date.now() + 1).toString(),
       sender: "geeta",
@@ -261,160 +284,162 @@ export default function DSAInterviewPlatform() {
     }
 
     setUserApproach("");
+    setListening(false);
   }, [userApproach, analyzeApproach]);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Left Side - Question and AI Assistant */}
-          <div className="space-y-4">
-            {/* Question Display */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl">
-                    {currentQuestion.title}
+    <>
+      <InterviewHeader />
+      <div className="h-[calc(100vh-64px)] bg-black text-white">
+        <div className="h-full mx-auto p-4 ">
+          <div className="h-full grid lg:grid-cols-2 gap-6">
+            {/* Left Side - AI Assistant Chat */}
+            <div className="h-full flex flex-col">
+              <Card className="flex-1 flex flex-col bg-zinc-900 text-white border-zinc-700">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Bot className="w-5 h-5 text-blue-600" />
+                    Geeta - AI Instructor
                   </CardTitle>
-                  <Badge
-                    className={getDifficultyColor(currentQuestion.difficulty)}
-                  >
-                    {currentQuestion.difficulty}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700 leading-relaxed">
-                  {currentQuestion.description}
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* AI Assistant Chat */}
-            <Card className="flex-1">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Bot className="w-5 h-5 text-blue-600" />
-                  Geeta - AI Instructor
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="h-[400px] flex flex-col">
-                <div className="flex-1 overflow-y-auto space-y-4 mb-4">
-                  {messages.map((message) => (
-                    <div
-                      key={message.id}
-                      className={cn(
-                        "flex gap-3",
-                        message.sender === "user"
-                          ? "justify-end"
-                          : "justify-start"
-                      )}
-                    >
+                </CardHeader>
+                <CardContent className="flex-1 flex flex-col">
+                  <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+                    {messages.map((message) => (
                       <div
+                        key={message.id}
                         className={cn(
-                          "max-w-[80%] p-3 rounded-lg",
+                          "flex gap-3",
                           message.sender === "user"
-                            ? "bg-blue-600 text-white"
-                            : "bg-gray-100 text-gray-900"
+                            ? "justify-end"
+                            : "justify-start"
                         )}
                       >
-                        <div className="flex items-center gap-2 mb-1">
-                          {message.sender === "user" ? (
-                            <User className="w-4 h-4" />
-                          ) : (
-                            <Bot className="w-4 h-4" />
+                        <div
+                          className={cn(
+                            "max-w-[80%] p-3 rounded-lg",
+                            message.sender === "user"
+                              ? "bg-blue-800 text-white"
+                              : "bg-gray-800 text-gray-100"
                           )}
-                          <span className="text-sm font-medium">
-                            {message.sender === "user" ? "You" : "Geeta"}
-                          </span>
+                        >
+                          <div className="flex items-center gap-2 mb-1">
+                            {message.sender === "user" ? (
+                              <User className="w-4 h-4" />
+                            ) : (
+                              <Bot className="w-4 h-4" />
+                            )}
+                            <span className="text-sm font-medium">
+                              {message.sender === "user" ? "You" : "Geeta"}
+                            </span>
+                            {message.sender === "geeta" &&
+                              message.id === "1" && (
+                                <Badge
+                                  className={cn(
+                                    "ml-2",
+                                    getDifficultyColor(
+                                      currentQuestion.difficulty
+                                    )
+                                  )}
+                                >
+                                  {currentQuestion.difficulty}
+                                </Badge>
+                              )}
+                          </div>
+                          <p className="text-sm whitespace-pre-wrap">
+                            {message.content}
+                          </p>
                         </div>
-                        <p className="text-sm">{message.content}</p>
                       </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right Side - Input Area */}
+            <div className="h-full flex flex-col">
+              {!editorUnlocked ? (
+                // Approach Input
+                <Card className="flex-1 flex flex-col bg-zinc-900 text-white border-zinc-700">
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <User className="w-5 h-5" />
+                      Your Approach
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col">
+                    <Textarea
+                      placeholder="Describe your approach to solve this problem..."
+                      value={userApproach}
+                      onChange={(e) => setUserApproach(e.target.value)}
+                      className="flex-1 min-h-[120px] resize-none bg-zinc-900 text-white border-zinc-700"
+                    />
+                    <div className="mt-4 flex gap-2">
+                      <Button
+                        variant={listening ? "destructive" : "secondary"}
+                        size="sm"
+                        onClick={toggleListening}
+                        disabled={
+                          !browserSupport.speechRecognition ||
+                          !browserSupport.microphone
+                        }
+                      >
+                        {listening ? (
+                          <MicOff className="w-4 h-4" />
+                        ) : (
+                          <Mic className="w-4 h-4" />
+                        )}
+                        {listening ? "Stop" : "Voice"}
+                        {isFirefox && (
+                          <span className="ml-1 text-xs">
+                            (Chrome recommended)
+                          </span>
+                        )}
+                      </Button>
+
+                      <Button
+                        onClick={handleSubmitApproach}
+                        disabled={!userApproach.trim()}
+                        className="flex-1"
+                      >
+                        <Send className="w-4 h-4 mr-2" />
+                        Submit Approach
+                      </Button>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Right Side - Timer, Input, and Code Editor */}
-          <div className="space-y-4">
-            {/* Timer */}
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center justify-center gap-2">
-                  <Clock className="w-6 h-6 text-red-600" />
-                  <span className="text-3xl font-mono font-bold text-red-600">
-                    {formatTime(timeLeft)}
-                  </span>
-                </div>
-                <p className="text-center text-sm text-gray-600 mt-2">
-                  Time remaining
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* Approach Input */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Your Approach</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Textarea
-                  placeholder="Describe your approach to solve this problem..."
-                  value={userApproach}
-                  onChange={(e) => setUserApproach(e.target.value)}
-                  className="min-h-[120px] resize-none"
-                />
-                <div className="flex gap-2">
-                  <Button
-                    variant={isListening ? "destructive" : "outline"}
-                    size="sm"
-                    onClick={toggleListening}
-                    disabled={!recognition}
-                  >
-                    {isListening ? (
-                      <MicOff className="w-4 h-4" />
-                    ) : (
-                      <Mic className="w-4 h-4" />
+                    {(!browserSupport.speechRecognition ||
+                      !browserSupport.microphone) && (
+                      <div className="mt-2 text-sm text-red-400">
+                        {!browserSupport.microphone
+                          ? "Microphone access is required for voice input. Please enable microphone permissions."
+                          : "Speech recognition is not fully supported in your browser. For best results, use Chrome or Edge."}
+                      </div>
                     )}
-                    {isListening ? "Stop" : "Voice"}
-                  </Button>
-                  <Button
-                    onClick={handleSubmitApproach}
-                    disabled={!userApproach.trim()}
-                    className="flex-1"
-                  >
-                    <Send className="w-4 h-4 mr-2" />
-                    Submit Approach
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Code Editor */}
-            <Card className={cn("flex-1", !editorUnlocked && "opacity-50")}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Code className="w-5 h-5" />
-                  Code Editor
-                  {!editorUnlocked && <Badge variant="secondary">Locked</Badge>}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {editorUnlocked ? (
-                  <>
+                  </CardContent>
+                </Card>
+              ) : (
+                // Code Editor
+                <Card className="flex-1 flex flex-col bg-zinc-900 text-white border-zinc-700">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Code className="w-5 h-5" />
+                      Code Editor
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col">
                     <Textarea
                       placeholder="// Write your code here..."
                       value={code}
                       onChange={(e) => setCode(e.target.value)}
-                      className="min-h-[300px] font-mono text-sm resize-none bg-gray-900 text-green-400 border-gray-700"
+                      className="flex-1 min-h-[300px] font-mono text-sm resize-none bg-gray-900 text-green-400 border-gray-700"
                     />
-                    <div className="mt-4 flex justify-end">
+                    <div className="mt-4 flex justify-between items-center">
+                      <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <Clock className="w-4 h-4" />
+                        <span>{formatTime(timeLeft)} remaining</span>
+                      </div>
                       <Button
                         onClick={() => {
                           setIsSubmitted(true);
-                          // Simulate code execution (replace with actual API call)
                           alert(
                             "Code submitted!\nResult will be evaluated by Geeta."
                           );
@@ -424,23 +449,13 @@ export default function DSAInterviewPlatform() {
                         {isSubmitted ? "Submitted ✅" : "Run Code"}
                       </Button>
                     </div>
-                  </>
-                ) : (
-                  <div className="min-h-[300px] bg-gray-100 rounded-md flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                      <Code className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                      <p className="font-medium">Code Editor Locked</p>
-                      <p className="text-sm">
-                        Submit your approach or wait for timer to unlock
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
