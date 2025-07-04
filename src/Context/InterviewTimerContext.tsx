@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 interface InterviewTimerContextType {
   timeLeft: number;
@@ -28,8 +29,13 @@ export const InterviewTimerProvider: React.FC<{
   const [runCodeCallback, setRunCodeCallbackInternal] = useState<() => void>(
     () => () => {}
   );
+  const location = useLocation();
 
   useEffect(() => {
+    const isInterviewPage =
+      location.pathname === "/interview" ||
+      location.pathname === "/friend-interview";
+      if (!isInterviewPage) return;
     if (timeLeft <= 0) {
       runCodeCallback();
       return;

@@ -5,6 +5,7 @@ import userReducer from "./slicers/userSlicer";
 import coursesReducer from "./slicers/coursesSlicer";
 import codeReducer from "./slicers/CodingSlicer";
 import progressReducer from "./slicers/ProgressSlicer";
+import interviewReducer from "./slicers/interviewSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     courses: coursesReducer,
     code: codeReducer,
     progress: progressReducer,
+    interview: interviewReducer,
   },
   devTools: true,
 });

@@ -6,6 +6,8 @@ import "@/i18n/i18n.ts";
 import { Provider } from "react-redux";
 import { AuthProvider } from "./Context/AuthContext.tsx";
 import { store } from "./Container/reducer/store.ts";
+// For simple-peer to work in browser
+(window as any).global = window;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
