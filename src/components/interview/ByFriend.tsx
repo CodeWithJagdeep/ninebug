@@ -1,199 +1,244 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Mic, MicOff, Code } from "lucide-react";
-import io from "socket.io-client";
-import Peer from "simple-peer";
-import { useRef } from "react";
-
-
-const socket = io("http://localhost:4000"); // 🔁 Replace with your deployed URL
+import { Code, Mic, MicOff } from "lucide-react";
+import { io, Socket } from "socket.io-client";
 
 export default function ByFriendInterview() {
   const { sessionId } = useParams();
-  const [userApproach, setUserApproach] = useState("");
+
   const [code, setCode] = useState("");
-  const [listening, setListening] = useState(false);
-  const [browserSupport, setBrowserSupport] = useState({
-    speechRecognition: false,
-    microphone: false,
-  });
-  const [micEnabled, setMicEnabled] = useState(true);
-  const localStream = useRef<MediaStream | null>(null);
-  const peerRef = useRef<Peer | null>(null);
+  const [chatMessages, setChatMessages] = useState<string[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [friendConnected, setFriendConnected] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isCallActive, setIsCallActive] = useState(false);
+  const [isMicEnabled, setIsMicEnabled] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState("disconnected");
 
+  const socketRef = useRef<Socket | null>(null);
+  const localAudioRef = useRef<HTMLAudioElement | null>(null);
+  const remoteAudioRef = useRef<HTMLAudioElement | null>(null);
+  const localStreamRef = useRef<MediaStream | null>(null);
+  const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
 
+  const initializeWebRTC = async () => {
+    try {
+      setConnectionStatus("connecting");
 
-  // ✅ Check mic & speech support
-  useEffect(() => {
-    const checkSupport = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        stream.getTracks().forEach((track) => track.stop());
-
-        const speechSupport =
-          "webkitSpeechRecognition" in window || "SpeechRecognition" in window;
-
-        setBrowserSupport({ speechRecognition: speechSupport, microphone: true });
-      } catch {
-        setBrowserSupport((prev) => ({ ...prev, microphone: false }));
-      }
-    };
-    checkSupport();
-  }, []);
-
-  // ✅ Handle voice-to-text
-  useEffect(() => {
-    if (!listening || !browserSupport.speechRecognition) return;
-
-    let recognition: any = null;
-
-    if ("webkitSpeechRecognition" in window) {
-      recognition = new (window as any).webkitSpeechRecognition();
-    } else if ("SpeechRecognition" in window) {
-      recognition = new (window as any).SpeechRecognition();
-    }
-
-
-    if (!recognition) return;
-
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = "en-US";
-
-    recognition.onresult = (event: any) => {
-      let finalTranscript = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript + " ";
-        }
-      }
-      setUserApproach((prev) => {
-        const updated = prev + finalTranscript;
-        socket.emit("update-approach", { sessionId, approach: updated });
-        return updated;
+      // Get local audio stream with better audio settings
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
+        video: false,
       });
-    };
+      localStreamRef.current = stream;
 
-    recognition.onerror = () => setListening(false);
-    recognition.start();
+      if (localAudioRef.current) {
+        localAudioRef.current.srcObject = stream;
+      }
 
-    return () => recognition.stop();
-  }, [listening, browserSupport.speechRecognition]);
+      // Create peer connection with better configuration
+      const peerConnection = new RTCPeerConnection({
+        iceServers: [
+          { urls: "stun:stun.l.google.com:19302" },
+          { urls: "stun:stun1.l.google.com:19302" },
+          { urls: "stun:stun2.l.google.com:19302" },
+        ],
+        iceCandidatePoolSize: 10,
+      });
 
-  useEffect(() => {
-    return () => {
-      peerRef.current?.destroy();
-      socket.disconnect();
-    };
-  }, []);
-  
-  const toggleListening = () => {
-    if (!browserSupport.microphone || !browserSupport.speechRecognition) return;
-    setListening((prev) => !prev);
+      // Add local stream to connection
+      stream.getTracks().forEach((track) => {
+        peerConnection.addTrack(track, stream);
+      });
+
+      // Handle remote stream
+      peerConnection.ontrack = (event) => {
+        if (remoteAudioRef.current) {
+          remoteAudioRef.current.srcObject = event.streams[0];
+          setConnectionStatus("connected");
+          setIsCallActive(true);
+        }
+      };
+
+      // ICE candidate handling
+      peerConnection.onicecandidate = (event) => {
+        if (event.candidate && socketRef.current) {
+          socketRef.current.emit("ice-candidate", {
+            roomId: sessionId,
+            candidate: event.candidate,
+          });
+        }
+      };
+
+      // Connection state handling
+      peerConnection.onconnectionstatechange = () => {
+        switch (peerConnection.connectionState) {
+          case "connected":
+            setConnectionStatus("connected");
+            break;
+          case "disconnected":
+          case "failed":
+            setConnectionStatus("disconnected");
+            setIsCallActive(false);
+            break;
+          case "closed":
+            setConnectionStatus("disconnected");
+            setIsCallActive(false);
+            break;
+        }
+      };
+
+      // Debugging logs
+      peerConnection.oniceconnectionstatechange = () => {
+        console.log("ICE connection state:", peerConnection.iceConnectionState);
+      };
+      peerConnection.onicegatheringstatechange = () => {
+        console.log("ICE gathering state:", peerConnection.iceGatheringState);
+      };
+      peerConnection.onsignalingstatechange = () => {
+        console.log("Signaling state:", peerConnection.signalingState);
+      };
+
+      peerConnectionRef.current = peerConnection;
+      setIsMicEnabled(true);
+    } catch (error) {
+      console.error("Error initializing WebRTC:", error);
+      setConnectionStatus("failed");
+    }
   };
 
-  // ✅ Join session + listen for updates
+  const cleanupWebRTC = () => {
+    if (peerConnectionRef.current) {
+      peerConnectionRef.current.close();
+      peerConnectionRef.current = null;
+    }
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => track.stop());
+      localStreamRef.current = null;
+    }
+    setIsCallActive(false);
+    setIsMicEnabled(false);
+    setConnectionStatus("disconnected");
+  };
+
+  const toggleMute = () => {
+    if (localStreamRef.current) {
+      const audioTracks = localStreamRef.current.getAudioTracks();
+      const newMuteState = !audioTracks[0].enabled;
+      audioTracks.forEach((track) => {
+        track.enabled = newMuteState;
+      });
+      setIsMuted(newMuteState);
+    }
+  };
+
   useEffect(() => {
-    if (!sessionId) return;
+    socketRef.current = io("http://localhost:4000", {
+      withCredentials: true,
+      transports: ["websocket"],
+    });
+    const socket = socketRef.current;
 
-    socket.emit("join-session", sessionId);
+    if (sessionId) {
+      socket.emit("join-room", sessionId);
+    }
 
-    socket.on("remote-approach-update", (newApproach) => {
-      setUserApproach(newApproach);
+    socket.on("chat-message", (message: string) => {
+      setChatMessages((prev) => [...prev, `Friend: ${message}`]);
     });
 
-    socket.on("remote-code-update", (newCode) => {
-      setCode(newCode);
+    socket.on("code-update", (incomingCode: string) => {
+      setCode(incomingCode);
+    });
+
+    socket.on("friend-connected", () => {
+      setFriendConnected(true);
+      initializeWebRTC();
+    });
+
+    // WebRTC signaling handlers
+    socket.on("offer", async (offer) => {
+      if (!peerConnectionRef.current) return;
+
+      try {
+        await peerConnectionRef.current.setRemoteDescription(offer);
+        const answer = await peerConnectionRef.current.createAnswer();
+        await peerConnectionRef.current.setLocalDescription(answer);
+        socket.emit("answer", { roomId: sessionId, answer });
+      } catch (error) {
+        console.error("Error handling offer:", error);
+      }
+    });
+
+    socket.on("answer", async (answer) => {
+      if (!peerConnectionRef.current) return;
+      try {
+        await peerConnectionRef.current.setRemoteDescription(answer);
+      } catch (error) {
+        console.error("Error handling answer:", error);
+      }
+    });
+
+    socket.on("ice-candidate", async (candidate) => {
+      if (!peerConnectionRef.current) return;
+      try {
+        await peerConnectionRef.current.addIceCandidate(candidate);
+      } catch (error) {
+        console.error("Error adding ICE candidate:", error);
+      }
+    });
+
+    socket.on("create-offer", async () => {
+      if (!peerConnectionRef.current) return;
+
+      try {
+        const offer = await peerConnectionRef.current.createOffer();
+        await peerConnectionRef.current.setLocalDescription(offer);
+        socket.emit("offer", { roomId: sessionId, offer });
+      } catch (error) {
+        console.error("Error creating offer:", error);
+      }
     });
 
     return () => {
-      socket.off("remote-approach-update");
-      socket.off("remote-code-update");
+      cleanupWebRTC();
+      socket.disconnect();
     };
   }, [sessionId]);
 
-  useEffect(() => {
-    if (!sessionId) return;
+  const sendMessage = () => {
+    if (chatInput.trim() === "") return;
+    setChatMessages((prev) => [...prev, `You: ${chatInput}`]);
+    socketRef.current?.emit("chat-message", {
+      roomId: sessionId,
+      message: chatInput,
+    });
+    setChatInput("");
+  };
 
-    // Step 1: Get audio stream
-    navigator.mediaDevices
-      .getUserMedia({ audio: true, video: false })
-      .then((stream) => {
-        localStream.current = stream;
-
-        socket.emit("join-voice-room", sessionId);
-
-        socket.on("other-user", (userId: string) => {
-          const peer = new Peer({
-            initiator: true,
-            trickle: false,
-            stream: micEnabled ? stream : undefined,
-          });
-
-          peer.on("signal", (signal) => {
-            socket.emit("send-signal", {
-              userToSignal: userId,
-              signal,
-              sessionId,
-            });
-          });
-
-          peer.on("stream", (remoteStream) => {
-            const audio = new Audio();
-            audio.srcObject = remoteStream;
-            audio.play();
-          });
-
-          peerRef.current = peer;
-        });
-
-        socket.on("user-joined", ({ signal, callerId }) => {
-          const peer = new Peer({
-            initiator: false,
-            trickle: false,
-            stream: micEnabled ? stream : undefined,
-          });
-
-          peer.on("signal", (signalData) => {
-            socket.emit("return-signal", { signal: signalData, callerId });
-          });
-
-          peer.on("stream", (remoteStream) => {
-            const audio = new Audio();
-            audio.srcObject = remoteStream;
-            audio.play();
-          });
-
-          peer.signal(signal);
-          peerRef.current = peer;
-        });
-
-        socket.on("received-returned-signal", (signal) => {
-          peerRef.current?.signal(signal);
-        });
-      });
-  }, [sessionId, micEnabled]);
-  
-  // ✅ Update + broadcast
   const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newCode = e.target.value;
     setCode(newCode);
-    socket.emit("update-code", { sessionId, code: newCode });
-  };
-
-  const handleApproachChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newApproach = e.target.value;
-    setUserApproach(newApproach);
-    socket.emit("update-approach", { sessionId, approach: newApproach });
+    socketRef.current?.emit("code-change", {
+      roomId: sessionId,
+      code: newCode,
+    });
   };
 
   return (
     <div className="h-screen bg-black text-white p-4">
-      {/* Session Share */}
-      <div className="mb-4 p-4 bg-zinc-800 rounded-lg text-white flex items-center justify-between">
+      <div className="text-sm text-green-400 mb-2">
+        {friendConnected ? "✅ Friend Connected" : "⏳ Waiting for friend..."}
+      </div>
+
+      <div className="mb-4 p-4 bg-zinc-800 rounded-lg flex items-center justify-between">
         <span>Session Link:</span>
         <div className="flex gap-2 items-center">
           <code className="text-blue-400 text-sm bg-zinc-900 px-2 py-1 rounded">
@@ -206,63 +251,87 @@ export default function ByFriendInterview() {
             Copy Link
           </Button>
         </div>
+      </div>
+
+      {/* Audio controls */}
+      <div className="mb-4 p-4 bg-zinc-800 rounded-lg flex items-center gap-4">
         <Button
-          variant={micEnabled ? "secondary" : "destructive"}
-          onClick={() => {
-            setMicEnabled((prev) => {
-              const enabled = !prev;
-              if (localStream.current) {
-                localStream.current.getAudioTracks()[0].enabled = enabled;
-              }
-              return enabled;
-            });
-          }}
+          onClick={toggleMute}
+          variant={isMuted ? "destructive" : "default"}
+          className="flex items-center gap-2"
+          disabled={!isMicEnabled}
         >
-          {micEnabled ? (
+          {isMuted ? (
             <MicOff className="w-4 h-4" />
           ) : (
             <Mic className="w-4 h-4" />
           )}
-          {micEnabled ? "Mic Off" : "Mic On"}
+          {isMuted ? "Unmute" : "Mute"}
         </Button>
+        <div className="flex items-center gap-2">
+          <div
+            className={`w-3 h-3 rounded-full ${
+              connectionStatus === "connected"
+                ? "bg-green-500"
+                : connectionStatus === "connecting"
+                ? "bg-yellow-500"
+                : "bg-red-500"
+            }`}
+          />
+          <span className="text-sm">
+            {connectionStatus === "connected"
+              ? "Voice call active"
+              : connectionStatus === "connecting"
+              ? "Connecting..."
+              : "Voice call disconnected"}
+          </span>
+        </div>
       </div>
+
+      {/* Hidden audio elements */}
+      <audio ref={localAudioRef} autoPlay muted />
+      <audio ref={remoteAudioRef} autoPlay />
 
       {/* Grid Layout */}
       <div className="grid lg:grid-cols-2 gap-4 h-full">
-        {/* Approach Panel */}
+        {/* Chat */}
         <Card className="bg-zinc-900 border-zinc-700 flex flex-col">
           <CardHeader>
-            <CardTitle className="text-white">Your Approach</CardTitle>
+            <CardTitle className="text-white">Chat Room</CardTitle>
           </CardHeader>
-          <CardContent className="flex-1 flex flex-col">
-            <Textarea
-              value={userApproach}
-              onChange={handleApproachChange}
-              className="min-h-[120px] resize-none bg-zinc-900 text-white"
-              placeholder="Start speaking or type your approach..."
-            />
-            <div className="mt-4 flex gap-2">
-              <Button
-                variant={listening ? "destructive" : "secondary"}
-                onClick={toggleListening}
-              >
-                {listening ? (
-                  <MicOff className="w-4 h-4" />
-                ) : (
-                  <Mic className="w-4 h-4" />
-                )}
-                {listening ? "Stop" : "Voice"}
-              </Button>
+          <CardContent className="flex-1 flex flex-col justify-between">
+            <div className="flex-1 overflow-y-auto space-y-2 mb-4">
+              {chatMessages.map((msg, idx) => (
+                <div
+                  key={idx}
+                  className="bg-zinc-800 text-white p-2 rounded-lg"
+                >
+                  {msg}
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") sendMessage();
+                }}
+                className="flex-1 px-3 py-2 rounded-lg bg-zinc-800 text-white"
+                placeholder="Type your message..."
+              />
+              <Button onClick={sendMessage}>Send</Button>
             </div>
           </CardContent>
         </Card>
 
-        {/* Code Panel */}
+        {/* Code Editor */}
         <Card className="bg-zinc-900 border-zinc-700 flex flex-col">
           <CardHeader>
             <CardTitle className="text-white flex gap-2 items-center">
               <Code className="w-5 h-5" />
-              Collaborative Code Editor
+              Code Editor
             </CardTitle>
           </CardHeader>
           <CardContent className="flex-1">
