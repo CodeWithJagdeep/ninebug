@@ -19,10 +19,13 @@ import {
   UserIcon,
   MenuIcon,
   XIcon,
+  HomeIcon,
+  LifeBuoyIcon,
 } from "lucide-react";
 import LanguageSelect from "./LanguageSelect";
 import authServices from "@/Services/authService";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const navItems = [
   { title: "DSA Roadmap", href: "/roadmap" },
@@ -33,7 +36,7 @@ const navItems = [
 
 function Header() {
   const { currentUser, isAuthenticated } = useSelector(selectCurrentUser);
-  console.log(isAuthenticated);
+  const { t } = useTranslation();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -65,39 +68,68 @@ function Header() {
           <LanguageSelect />
           {isAuthenticated ? (
             <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Avatar className="h-9 w-9">
-                  <AvatarImage src={currentUser?.profilePicture} />
-                  <AvatarFallback className="bg-black text-white">
-                    {currentUser?.name?.[0]}
+              <DropdownMenuTrigger className="focus:outline-none">
+                <Avatar className="h-9 w-9 bg-[#15151d] flex items-center justify-center">
+                  <AvatarImage src={currentUser?.profilePicture as string} />
+                  <AvatarFallback className="bg-black">
+                    {currentUser?.name?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link to="/profile" className="flex items-center gap-2">
-                    <UserIcon className="h-4 w-4" /> Profile
+              <DropdownMenuContent align="end" className="w-72 py-2">
+                <DropdownMenuItem asChild className="px-4 py-3 cursor-pointer">
+                  <Link to="/profile" className="flex items-center gap-3">
+                    <UserIcon className="h-5 w-5" />
+                    <span className="text-lg">
+                      {t("header.userMenu.profile")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
                   <Link
                     to="/account/billing"
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-3"
                   >
-                    <CreditCardIcon className="h-4 w-4" /> Billing
+                    <CreditCardIcon className="h-5 w-5" />
+                    <span className="text-base">
+                      {t("header.userMenu.accountBilling")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/feedback" className="flex items-center gap-2">
-                    <MessageSquareIcon className="h-4 w-4" /> Feedback
+                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
+                  <Link to="/home" className="flex items-center gap-3">
+                    <HomeIcon className="h-5 w-5" />
+                    <span className="text-base">
+                      {t("header.userMenu.myHome")}
+                    </span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                <DropdownMenuSeparator className="my-1" />
+                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
+                  <Link to="/help" className="flex items-center gap-3">
+                    <LifeBuoyIcon className="h-5 w-5" />
+                    <span className="text-base">
+                      {t("header.userMenu.helpCenter")}
+                    </span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="px-4 py-2 cursor-pointer">
+                  <Link to="/feedback" className="flex items-center gap-3">
+                    <MessageSquareIcon size={40} />
+                    <span className="text-base">
+                      {t("header.userMenu.giveFeedback")}
+                    </span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="my-1" />
                 <DropdownMenuItem
-                  onClick={() => new authServices().logout()}
-                  className="text-red-500"
+                  className="px-4 py-2.5 text-destructive focus:bg-destructive/10 cursor-pointer"
+                  onClick={async () => {
+                    new authServices().logout();
+                  }}
                 >
-                  <LogOutIcon className="h-4 w-4 mr-2" /> Logout
+                  <LogOutIcon className="h-5 w-5 mr-3" />
+                  <span className="text-base">Log Out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -107,13 +139,13 @@ function Header() {
                 to="/in/auth"
                 className="text-sm text-black hover:text-black border border-black/70 rounded-md px-4 py-2 "
               >
-                Login
+                {t("header.auth.login")}
               </Link>
               <Link
                 to="/in/auth"
                 className="bg-black text-white px-4 py-2 text-sm rounded-md hover:bg-gray-900 transition"
               >
-                Create Account
+                {t("header.auth.createAccount")}
               </Link>
             </div>
           )}

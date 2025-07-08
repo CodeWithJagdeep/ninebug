@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Flame, Calendar } from "lucide-react";
-import { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type ActivityDay = {
@@ -7,6 +7,17 @@ type ActivityDay = {
   count: number;
   level: number;
 };
+
+interface ContributionData {
+  [date: string]: number;
+}
+
+interface CalendarDay {
+  date: Date;
+  count: number;
+  level: number;
+  isCurrentMonth: boolean;
+}
 
 const StreakCalendar = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -16,21 +27,171 @@ const StreakCalendar = () => {
     position: { x: number; y: number };
   } | null>(null);
 
-  //   const months = [
-  //     "Jan",
-  //     "Feb",
-  //     "Mar",
-  //     "Apr",
-  //     "May",
-  //     "Jun",
-  //     "Jul",
-  //     "Aug",
-  //     "Sep",
-  //     "Oct",
-  //     "Nov",
-  //     "Dec",
-  //   ];
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear()
+  );
+  const [hoveredCell, setHoveredCell] = useState<CalendarDay | null>(null);
+  const [contributionData, setContributionData] = useState<ContributionData>(
+    {}
+  );
+  const [mousePosition, setMousePosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
+
+  // Generate GitHub-like contribution data
+  const generateContributionData = (year: number): ContributionData => {
+    const data: ContributionData = {};
+    const startDate = new Date(year, 0, 1);
+    const endDate = new Date(year, 11, 31);
+
+    for (
+      let d = new Date(startDate);
+      d <= endDate;
+      d.setDate(d.getDate() + 1)
+    ) {
+      const dateStr = d.toISOString().split("T")[0];
+      const dayOfWeek = d.getDay();
+      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+
+      let rand = Math.random();
+      if (isWeekend) rand = rand * 0.7;
+
+      let count = 0;
+      if (rand > 0.7) count = Math.floor(Math.random() * 3) + 1;
+      if (rand > 0.85) count = Math.floor(Math.random() * 5) + 3;
+      if (rand > 0.95) count = Math.floor(Math.random() * 10) + 8;
+
+      data[dateStr] = count;
+    }
+    return data;
+  };
+
+  useEffect(() => {
+    setContributionData(generateContributionData(selectedYear));
+  }, [selectedYear]);
+
+  // GitHub's green color scheme - enhanced
+  const getActivityColor = (level: number): string => {
+    const colors = [
+      "#1a1a1a", // 0 - Dark gray for black theme
+      "#0d4429", // 1 - Dark green
+      "#006d32", // 2 - Medium green
+      "#26a641", // 3 - Light green
+      "#39d353", // 4 - Bright green
+    ];
+    return colors[level] || colors[0];
+  };
+
+  const getActivityLevel = (count: number): number => {
+    if (count === 0) return 0;
+    if (count <= 2) return 1;
+    if (count <= 5) return 2;
+    if (count <= 10) return 3;
+    return 4;
+  };
+
+  // Create GitHub-style calendar layout (weeks as columns)
+  const createCalendar = (year: number) => {
+    const weeks: CalendarDay[][] = Array(53)
+      .fill(null)
+      .map(() => []);
+    const firstDay = new Date(year, 0, 1);
+
+    // Adjust to start on Sunday
+    const startDate = new Date(firstDay);
+    startDate.setDate(firstDay.getDate() - firstDay.getDay());
+
+    // Fill all 53 weeks
+    for (let week = 0; week < 53; week++) {
+      for (let day = 0; day < 7; day++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + week * 7 + day);
+
+        const dateStr = currentDate.toISOString().split("T")[0];
+        const count = contributionData[dateStr] || 0;
+        const isCurrentMonth = currentDate.getFullYear() === year;
+
+        weeks[week][day] = {
+          date: new Date(currentDate),
+          count,
+          level: isCurrentMonth ? getActivityLevel(count) : 0,
+          isCurrentMonth,
+        };
+      }
+    }
+
+    return weeks;
+  };
+
+  const weeks = createCalendar(selectedYear);
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  // Calculate statistics
+  const totalContributions = Object.values(contributionData).reduce(
+    (sum, count) => sum + count,
+    0
+  );
+  const activeDays = Object.values(contributionData).filter(
+    (count) => count > 0
+  ).length;
+
+  const formatDate = (date: Date): string => {
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const availableYears = Array.from(
+    { length: 6 },
+    (_, i) => new Date().getFullYear() - i
+  );
+
+  const renderMonthLabels = () => {
+    const months = [];
+    let currentMonth = -1;
+
+    for (let week = 0; week < Math.min(weeks.length, 53); week++) {
+      const firstDay = weeks[week][0]?.date;
+      if (!firstDay) continue;
+
+      const month = firstDay.getMonth();
+
+      if (month !== currentMonth && week > 0) {
+        months.push(
+          <div
+            key={`month-${week}`}
+            className="text-xs font-medium text-white/60 h-5 flex items-center"
+            style={{
+              gridColumn: `${week + 2} / span 4`,
+            }}
+          >
+            {monthNames[month]}
+          </div>
+        );
+        currentMonth = month;
+      }
+    }
+
+    return months;
+  };
 
   // Generate realistic activity data for multiple years
   const generateStreakData = useMemo(() => {
@@ -202,41 +363,6 @@ const StreakCalendar = () => {
     });
   }, [generateStreakData, currentYear]);
 
-  // Group data by weeks for the current year
-  const weeks = useMemo(() => {
-    const weeks: (ActivityDay | null)[][] = [];
-    let currentWeek: (ActivityDay | null)[] = [];
-
-    yearData.forEach((day, index) => {
-      const date = new Date(day.date);
-      const dayOfWeek = date.getDay();
-
-      if (index === 0) {
-        // Fill empty days at the beginning of the first week
-        for (let i = 0; i < dayOfWeek; i++) {
-          currentWeek.push(null);
-        }
-      }
-
-      currentWeek.push(day);
-
-      if (currentWeek.length === 7) {
-        weeks.push(currentWeek);
-        currentWeek = [];
-      }
-    });
-
-    // Add remaining days to the last week
-    if (currentWeek.length > 0) {
-      while (currentWeek.length < 7) {
-        currentWeek.push(null);
-      }
-      weeks.push(currentWeek);
-    }
-
-    return weeks;
-  }, [yearData]);
-
   const getIntensityColor = (level: number) => {
     switch (level) {
       case 0:
@@ -277,13 +403,7 @@ const StreakCalendar = () => {
     return { currentStreak, maxStreak, totalSubmissions: total };
   }, [generateStreakData]);
 
-  const availableYears = useMemo(() => {
-    const years = new Set<number>();
-    generateStreakData.forEach((day) => {
-      years.add(new Date(day.date).getFullYear());
-    });
-    return Array.from(years).sort((a, b) => b - a); // Most recent first
-  }, [generateStreakData]);
+
 
   const handlePrevYear = () => {
     const currentIndex = availableYears.indexOf(currentYear);
@@ -306,12 +426,6 @@ const StreakCalendar = () => {
     const maxYear = Math.max(...availableYears);
     return `${minYear} - ${maxYear}`;
   };
-
-  // Get the first day of the first week to determine offset
-  const firstDayOfFirstWeek = useMemo(() => {
-    if (yearData.length === 0) return null;
-    return new Date(yearData[0].date);
-  }, [yearData]);
 
   return (
     <motion.div
@@ -426,66 +540,69 @@ const StreakCalendar = () => {
           </div>
 
           {/* Calendar grid */}
-          <div className="flex-1">
-            {/* Month labels */}
-            <div className="flex mb-1 h-6">
-              {weeks.map((week, weekIndex) => {
-                const firstDay = week.find((day) => day !== null);
-                if (!firstDay) return null;
-
-                const date = new Date(firstDay.date);
-
-                return (
-                  <div
-                    key={weekIndex}
-                    className="w-4 flex justify-center"
-                    style={{
-                      marginLeft:
-                        weekIndex === 0 && firstDayOfFirstWeek
-                          ? `${firstDayOfFirstWeek.getDay() * 16}px`
-                          : "0",
-                    }}
-                  ></div>
-                );
-              })}
-            </div>
-
-            {/* Activity grid */}
-            <div className="flex space-x-1">
-              {weeks.map((week, weekIndex) => (
-                <div key={weekIndex} className="flex flex-col space-y-1">
-                  {week.map((day, dayIndex) => (
-                    <motion.div
-                      key={dayIndex}
-                      className={`w-4 h-4 rounded-sm ${
-                        day ? getIntensityColor(day.level) : "bg-transparent"
-                      } cursor-pointer relative border border-transparent hover:border-gray-300 dark:hover:border-gray-600`}
-                      onMouseEnter={(e) => {
-                        if (!day) return;
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        setHoveredDay({
-                          date: day.date,
-                          count: day.count,
-                          position: {
-                            x: rect.left + window.scrollX,
-                            y: rect.top + window.scrollY - 50,
-                          },
-                        });
-                      }}
-                      onMouseLeave={() => setHoveredDay(null)}
-                      whileHover={{ scale: 1.15 }}
-                    >
-                      {(day?.count as number) > 3 && (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full border border-white dark:border-gray-900"
-                        />
-                      )}
-                    </motion.div>
-                  ))}
+          <div className="p-4 sm:p-6 lg:p-8">
+            <div className="w-full overflow-x-auto">
+              <div
+                className="grid gap-0.5 sm:gap-1"
+                style={{
+                  gridTemplateColumns: "auto repeat(53, minmax(10px, 16px))",
+                  gridTemplateRows: "auto repeat(7, minmax(10px, 16px))",
+                  minWidth: "700px",
+                }}
+              >
+                {/* Month labels row */}
+                <div className="col-start-2 col-span-full grid grid-cols-53 gap-0.5 sm:gap-1 mb-2">
+                  {renderMonthLabels()}
                 </div>
-              ))}
+
+                {/* Day labels */}
+                {dayNames.map((day, i) => (
+                  <div
+                    key={i}
+                    className="text-xs font-medium text-white/50 flex items-center justify-end pr-1 sm:pr-2 w-6 sm:w-8"
+                    style={{ gridRow: i + 2 }}
+                  >
+                    <span className="hidden sm:inline">{day}</span>
+                    <span className="sm:hidden">{day.charAt(0)}</span>
+                  </div>
+                ))}
+
+                {/* Contribution squares */}
+                {dayNames.map((_, dayIndex) => (
+                  <React.Fragment key={dayIndex}>
+                    {weeks.map((week, weekIndex) => {
+                      const day = week[dayIndex];
+                      if (!day) return null;
+
+                      return (
+                        <div
+                          key={`${weekIndex}-${dayIndex}`}
+                          className={`w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-4 lg:h-4 rounded-sm transition-all duration-200 ${
+                            day.isCurrentMonth
+                              ? "cursor-pointer hover:ring-1 hover:ring-green-400 hover:ring-opacity-60"
+                              : "opacity-30"
+                          }`}
+                          style={{
+                            backgroundColor: getActivityColor(day.level),
+                            gridColumn: weekIndex + 2,
+                            gridRow: dayIndex + 2,
+                          }}
+                          onMouseEnter={() =>
+                            day.isCurrentMonth && setHoveredCell(day)
+                          }
+                          onMouseLeave={() => {
+                            setHoveredCell(null);
+                            setMousePosition(null);
+                          }}
+                          onMouseMove={(e) => {
+                            setMousePosition({ x: e.clientX, y: e.clientY });
+                          }}
+                        />
+                      );
+                    })}
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
           </div>
         </div>
