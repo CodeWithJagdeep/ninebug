@@ -1,4 +1,14 @@
 {
+  "home": {
+    "cta": {
+      "title": {
+        "line1": "Ready to Elevate Your",
+        "line2": "DSA Journey"
+      },
+      "subtitle": "Master data structures and algorithms with our comprehensive learning path. Track progress, solve challenges, and prepare for technical interviews.",
+      "button": "Start Learning Now"
+    }
+  },
   "hero": {
     "title": "Crack Coding Interviews Without Burning Out",
     "subtitle": "Recognize patterns, not problems. Train your brain, not your luck.",
@@ -24,5 +34,164 @@
     "testCases": "Test Cases",
     "passedCount": "{{passed}}/{{total}} Passed",
     "loadingEditor": "Loading editor..."
+  },
+  "header": {
+    "navigation": {
+      "learningPaths": "Learning Paths",
+      "courses": "Courses",
+      "resources": "Resources",
+      "pricing": "Pricing"
+    },
+    "userMenu": {
+      "profile": "Profile",
+      "accountBilling": "Account & Billing",
+      "myHome": "My Home",
+      "helpCenter": "Help Center",
+      "giveFeedback": "Give Feedback",
+      "logOut": "Log Out",
+      "myAccount": "My Account"
+    },
+    "auth": {
+      "login": "Login",
+      "createAccount": "Create a free account",
+      "createAccountShort": "Create Account"
+    }
+  },
+  "infiniteScroll": {
+    "getHiredText": "Get hired at top companies"
+  },
+  "preview": {
+    "practicePlatform": "Practice Platform",
+    "master": "Master",
+    "codingInterviews": "Coding Interviews",
+    "practiceDescription": "Practice problems from top tech companies with our structured learning paths and company-specific question sets",
+    "developersCount": "50k+ Developers",
+    "successRate": "95% Success Rate",
+    "industryApproved": "Industry Approved",
+    "learningRoadmap": "Learning Roadmap",
+    "companyQuestions": "Company Questions",
+    "randomPractice": "Random Practice",
+    "exploreMoreCompanies": "Explore more companies",
+    "dailyChallenge": "Daily Challenge",
+    "dailyChallengeDescription": "One new problem every day",
+    "randomMix": "Random Mix",
+    "randomMixDescription": "Curated selection of problems",
+    "minuteSprint": "15-Minute Sprint",
+    "sprintDescription": "Quick easy problems for warm-up",
+    "startTodaysChallenge": "Start Today's Challenge",
+    "shuffleNow": "Shuffle now",
+    "startSprint": "Start Sprint",
+    "signInRequired": "Sign In Required",
+    "signInMessage": "Please sign in to access the problemset and start practicing coding interview questions.",
+    "continueWithGoogle": "Continue with Google"
+  },
+  "journey": {
+    "header": {
+      "title": "Your Coding",
+      "journey": "Journey",
+      "subtitle": "From problem to solution, with AI-powered guidance every step of the way"
+    },
+    "section1": {
+      "title": "Start Your Coding Journey",
+      "description": "Begin with understanding the problem. Read carefully, analyze the requirements, and plan your approach. Every great solution starts with a clear understanding."
+    },
+    "section2": {
+      "title": "Write Your Code",
+      "description": "Transform your ideas into code. Use the editor to implement your solution step by step. Don't worry about perfection - focus on getting your logic right first."
+    },
+    "section3": {
+      "title": "When Things Don't Work",
+      "description": "Stuck? Failed tests? No worries! This is part of the learning process. Every developer faces challenges - it's how we grow and improve our skills."
+    },
+    "section4": {
+      "title": "AI-Powered Assistance",
+      "description": "Get personalized help when you need it. Our AI analyzes your code, understands your mistakes, and provides tailored suggestions to guide you forward."
+    },
+    "editor": {
+      "ready": "Ready to start coding?"
+    },
+    "testFailed": "Test Failed",
+    "dontWorry": "Don't worry! This is part of learning.",
+    "ai": {
+      "title": "AI Assistant",
+      "suggestion1": "💡 I noticed you're missing a return statement in your function.",
+      "suggestion2": "🔍 Try adding proper error handling for edge cases.",
+      "suggestion3": "⚡ Consider using a hash map for O(n) time complexity.",
+      "applyButton": "Apply Suggestions"
+    }
+  },
+  "helping": {
+    "header": {
+      "tagline": "How We Accelerate Your Success",
+      "title": {
+        "line1": "Transform Your",
+        "line2": "Coding Journey"
+      },
+      "subtitle": "Our intelligent platform combines cutting-edge AI with proven methodologies to deliver personalized learning experiences that adapt to your unique pace and goals."
+    },
+    "steps": {
+      "step1": {
+        "title": "AI-Powered Pattern Recognition",
+        "description": "Advanced algorithms analyze your coding patterns and identify knowledge gaps with precision, creating a personalized learning roadmap tailored to your unique strengths and areas for improvement."
+      },
+      "step2": {
+        "title": "Adaptive Learning Engine",
+        "description": "Our intelligent system continuously adapts to your progress, delivering personalized problem sets that match your skill level and target company requirements, ensuring optimal learning efficiency."
+      },
+      "step3": {
+        "title": "Real-World Interview Simulation",
+        "description": "Experience authentic interview scenarios from leading tech companies with real-time feedback, performance analytics, and comprehensive preparation for technical interviews."
+      }
+    },
+    "cta": {
+      "explore": "Explore Feature"
+    }
+  },
+  "testimonials": {
+    "trusted": "Trusted by Developers Worldwide",
+    "title": "Building the Future of Tech Education",
+    "subtitle": "Join hundreds of developers who are accelerating their learning with our platform. We're shaping the next generation of tech education - be part of the journey.",
+    "items": [
+      {
+        "quote": "Feels like having a senior developer guiding me 24/7.",
+        "text": "I'm solving complex problems in half the time. The personalized feedback is game-changing.",
+        "author": "Early Beta User",
+        "role": "Full-stack Developer"
+      },
+      {
+        "quote": "The learning paths are incredibly well-structured",
+        "text": "Finally found a platform that breaks down advanced concepts without oversimplifying them.",
+        "author": "Discord Community Member",
+        "role": "Frontend Engineer"
+      },
+      {
+        "quote": "Real-time feedback transformed my workflow",
+        "text": "Submitting code and getting AI-powered analysis within seconds has dramatically improved my skills.",
+        "author": "Private Alpha Tester",
+        "role": "Backend Developer"
+      }
+    ]
+  },
+
+  "currency": {
+    "symbol": "$",
+    "name": "US Dollar"
+  },
+  "footer": {
+    "description": "Master Data Structures and Algorithms with AI-powered guidance and real-world company problems.",
+    "sections": {
+      "platform": "Platform",
+      "resources": "Resources",
+      "legal": "Legal"
+    },
+    "links": {
+      "platform": ["Practice", "Pricing", "Daily Challenge", "Interview Prep"],
+      "resources": ["Documentation", "Blog", "Community", "Webinars"],
+      "legal": ["Privacy", "Terms", "Security", "Cookies"],
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy"
+    },
+    "copyright": "© {{year}} Ninebug DSA. All rights reserved."
   }
 }

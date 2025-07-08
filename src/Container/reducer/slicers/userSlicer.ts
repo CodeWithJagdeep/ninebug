@@ -49,7 +49,7 @@ const userSlice = createSlice({
 export const { setUser, clearUser, updateCoins } = userSlice.actions;
 
 // Selectors
-export const selectCurrentUser = (state: RootState) => state.user.currentUser;
+export const selectCurrentUser = (state: RootState) => state.user;
 export const selectIsAuthenticated = (state: RootState) =>
   state.user.isAuthenticated;
 export const selectUserStatus = (state: RootState) => state.user.status;

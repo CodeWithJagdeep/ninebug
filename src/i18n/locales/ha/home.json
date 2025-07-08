@@ -1,4 +1,18 @@
 {
+  "home": {
+    "cta": {
+      "title": {
+        "line1": "Shirye don Haɓaka",
+        "line2": "Tafiyar DSA"
+      },
+      "subtitle": "Ƙware tsarin bayanai da algorithms tare da cikakkiyar hanyar koyo. Bi ci gaba, warware ƙalubale, kuma shirya don tambayoyin fasaha.",
+      "button": "Fara Koyo Yanzu"
+    }
+  },
+  "currency": {
+    "symbol": "₦",
+    "name": "Naira"
+  },
   "hero": {
     "title": "Warware Tattaunawar Coding Ba Tare da Gajiya ba",
     "subtitle": "Gano samfura, ba matsaloli ba. Horar da kwakwalwarka, ba sa'a ba.",
@@ -24,5 +38,164 @@
     "testCases": "Gwaje-gwaje",
     "passedCount": "{{passed}}/{{total}} Ya wuce",
     "loadingEditor": "Ana loda edita..."
+  },
+  "header": {
+    "navigation": {
+      "learningPaths": "Hanyoyin Koyo",
+      "courses": "Darussa",
+      "resources": "Albarkatu",
+      "pricing": "Farashi"
+    },
+    "userMenu": {
+      "profile": "Bayanan mai amfani",
+      "accountBilling": "Asusu & Biya",
+      "myHome": "Gidana",
+      "helpCenter": "Cibiyar Taimako",
+      "giveFeedback": "Ba da ra'ayi",
+      "logOut": "Fita",
+      "myAccount": "Asusuna"
+    },
+    "auth": {
+      "login": "Shiga",
+      "createAccount": "Ƙirƙiri asusu kyauta",
+      "createAccountShort": "Ƙirƙiri asusu"
+    }
+  },
+  "infiniteScroll": {
+    "getHiredText": "Samu aiki a manyan kamfanoni"
+  },
+  "preview": {
+    "practicePlatform": "Dandalin Aiki",
+    "master": "Mai gwaninta",
+    "codingInterviews": "Tambayoyin Coding",
+    "practiceDescription": "Yi aiki kan matsaloli daga manyan kamfanonin fasaha tare da hanyoyin koyo da tsararrun tambayoyin kamfani",
+    "developersCount": "Masu haɓaka 50k+",
+    "successRate": "Kashi 95% Nasara",
+    "industryApproved": "An amince da masana'antu",
+    "learningRoadmap": "Hanyar Koyo",
+    "companyQuestions": "Tambayoyin Kamfani",
+    "randomPractice": "Aikin Bazuwar",
+    "exploreMoreCompanies": "Bincika ƙarin kamfanoni",
+    "dailyChallenge": "Ƙalubalen Yau da Kullum",
+    "dailyChallengeDescription": "Sabuwar matsala kowace rana",
+    "randomMix": "Gaurayawan Bazuwar",
+    "randomMixDescription": "Zaɓaɓɓun matsaloli",
+    "minuteSprint": "Gudu na Minti 15",
+    "sprintDescription": "Matsaloli masu sauƙi don dumama",
+    "startTodaysChallenge": "Fara Ƙalubalen Yau",
+    "shuffleNow": "Gauraya yanzu",
+    "startSprint": "Fara Gudu",
+    "signInRequired": "Ana Bukatar Shiga",
+    "signInMessage": "Da fatan za a shiga don samun damar yin amfani da matsalolin farko na tambayoyin coding.",
+    "continueWithGoogle": "Ci gaba da Google"
+  },
+  "journey": {
+    "header": {
+      "title": "Tafiyar Coding",
+      "journey": "Dinka",
+      "subtitle": "Daga matsala zuwa mafita, tare da jagorar AI a kowane mataki"
+    },
+    "section1": {
+      "title": "Fara Tafiyar Coding Dinka",
+      "description": "Fara da fahimtar matsalar. Karanta a hankali, bincika bukatun, kuma tsara tsarin ku. Kowane babban mafita yana farawa da fahimta bayyananne."
+    },
+    "section2": {
+      "title": "Rubuta Lambar Ku",
+      "description": "Canza ra'ayoyin ku zuwa lamba. Yi amfani da edita don aiwatar da mafita ta ku mataki-mataki. Kada ku damu da kamala - mayar da hankali kan samun dabaru daidai da farko."
+    },
+    "section3": {
+      "title": "Lokacin da Abubuwa Basu Aiki ba",
+      "description": "Makale? Gwaje-gwaje sun gaza? Kada ku damu! Wannan wani bangare ne na tsarin koyo. Kowane mai haɓakawa yana fuskantar ƙalubale - haka muke girma da haɓaka ƙwarewarmu."
+    },
+    "section4": {
+      "title": "Taimakon AI",
+      "description": "Samu taimako na musamman lokacin da kuke buƙata. AI ɗinmu yana nazarin lambar ku, yana fahimtar kurakuran ku, kuma yana ba da shawarwari masu dacewa don jagorancin ku."
+    },
+    "editor": {
+      "ready": "Shirye don fara coding?"
+    },
+    "testFailed": "Gwajin ya Gasa",
+    "dontWorry": "Kada ku damu! Wannan wani bangare ne na koyo.",
+    "ai": {
+      "title": "Mataimakin AI",
+      "suggestion1": "💡 Na lura ba ku da maganar dawowa a cikin aikin ku.",
+      "suggestion2": "🔍 Gwada ƙara sarrafa kurakurai don matsanancin yanayi.",
+      "suggestion3": "⚡ Yi la'akari da amfani da taswirar hash don lokaci O(n).",
+      "applyButton": "Aiwatar da Shawarwari"
+    }
+  },
+  "helping": {
+    "header": {
+      "tagline": "Yadda Muke Haɓaka Nasarar Ku",
+      "title": {
+        "line1": "Canza Tafiyar Ku ta",
+        "line2": "Coding"
+      },
+      "subtitle": "Dandalin mu na hankali ya haɗu da AI na ci gaba da ingantattun hanyoyin koyarwa don ba da ƙwarewar koyo wanda ya dace da saurin ku da manufofin ku na musamman."
+    },
+    "steps": {
+      "step1": {
+        "title": "Gano Tsarin AI",
+        "description": "Haɓaɓɓun algorithms suna nazarin tsarin coding ɗin ku kuma suna gano gibin ilimi daidai, suna ƙirƙirar taswirar koyo ta musamman wacce ta dace da ƙwarewar ku da wuraren haɓakawa."
+      },
+      "step2": {
+        "title": "Injin Koyo Mai Daidaitawa",
+        "description": "Tsarin mu na hankali yana ci gaba da daidaitawa da ci gaban ku, yana ba da saitin matsaloli na musamman waɗanda suka dace da matakin ƙwarewar ku da buƙatun kamfani, yana tabbatar da ingantaccen ingancin koyo."
+      },
+      "step3": {
+        "title": "Kwaikwayon Tambayoyin Aiki Na Ainihi",
+        "description": "Ku fuskanci yanayin tambayoyin gaskiya daga manyan kamfanonin fasaha tare da ra'ayi na ainihi, nazarin aiki, da cikakken shiri don tambayoyin fasaha."
+      }
+    },
+    "cta": {
+      "explore": "Bincika Fasalin"
+    }
+  },
+  "testimonials": {
+    "trusted": "Amince da Masu Haɓakawa a Duniya",
+    "title": "Gina Makomar Ilimin Fasaha",
+    "subtitle": "Haɗa da ɗaruruwan masu haɓakawa waɗanda ke haɓaka koyo tare da dandalin mu. Muna tsara ƙarni na gaba na ilimin fasaha - ku kasance cikin tafiya.",
+    "items": [
+      {
+        "quote": "Yana jin kamar samun babban mai haɓakawa yana jagoranta 24/7.",
+        "text": "Ina warware matsaloli masu sarkakiya cikin rabin lokaci. Amfanin da aka keɓance ya canza wasa.",
+        "author": "Farko Mai Amfani da Beta",
+        "role": "Mai Haɓaka Cikakken Tsarin"
+      },
+      {
+        "quote": "Hanyoyin koyo suna da tsari sosai",
+        "text": "A ƙarshe na sami dandali wanda ke warware abubuwa masu zurfi ba tare da sauƙaƙa su ba.",
+        "author": "Memba na Al'umma Discord",
+        "role": "Injiniyan Frontend"
+      },
+      {
+        "quote": "Amfanin cikin gaggawa ya canza ayyukana",
+        "text": "Ƙaddamar da lamba da samun bincike na AI cikin daƙiƙa ya inganta ƙwarewara sosai.",
+        "author": "Mai Gwada Alpha na Sirri",
+        "role": "Mai Haɓaka Backend"
+      }
+    ]
+  },
+  "footer": {
+    "description": "Ƙware Tsarin Bayanai da Algorithms tare da jagorar AI da matsalolin kamfani na ainihi.",
+    "sections": {
+      "platform": "Dandali",
+      "resources": "Albarkatu",
+      "legal": "Doka"
+    },
+    "links": {
+      "platform": [
+        "Aiki",
+        "Farashi",
+        "Ƙalubalen Yau da Kullum",
+        "Shirye-shiryen Tambaya"
+      ],
+      "resources": ["Takardu", "Shafin Yabo", "Al'umma", "Taron Yanar Gizo"],
+      "legal": ["Sirri", "Sharuɗɗa", "Tsaro", "Cookies"],
+      "privacy": "Manufar Sirri",
+      "terms": "Sharuɗɗan Sabis",
+      "cookies": "Manufar Cookies"
+    },
+    "copyright": "© {{year}} Ninebug DSA. Duk haƙƙoƙin ajiye."
   }
 }

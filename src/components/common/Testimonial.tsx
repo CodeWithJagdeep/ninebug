@@ -1,40 +1,42 @@
+import { useTranslation } from "react-i18next";
+
 export const PremiumTestimonials = () => {
+  const { t } = useTranslation();
+
   return (
-    <section className="bg-black text-white py-10 px-20">
-      <div className=" mx-auto">
-        <div className="text-center mb-16 px-20">
+    <section className="bg-black text-white py-10 px-4 sm:px-6 md:px-10 lg:px-20">
+      <div className="mx-auto">
+        <div className="text-center mb-16 px-4 sm:px-6 md:px-10 lg:px-20">
           <span className="inline-block bg-emerald-500/10 text-white border-white border text-sm font-medium px-4 py-1.5 rounded-full mb-4">
-            Trusted by Developers Worldwide
+            {t("testimonials.trusted")}
           </span>
-          <h2 className="text-7xl mt-6 text-white">
-            Building the Future of Tech Education
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl mt-6 text-white">
+            {t("testimonials.title")}
           </h2>
-          <p className="text-slate-300 text-xl max-w-7xl mx-auto mt-6">
-            Join hundreds of developers who are accelerating their learning with
-            our platform. We're shaping the next generation of tech education -
-            be part of the journey.
+          <p className="text-slate-300 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mt-6">
+            {t("testimonials.subtitle")}
           </p>
         </div>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
-              quote: "Feels like having a senior developer guiding me 24/7.",
-              text: "I'm solving complex problems in half the time. The personalized feedback is game-changing.",
-              author: "Early Beta User",
-              role: "Full-stack Developer",
+              quote: t("testimonials.items.0.quote"),
+              text: t("testimonials.items.0.text"),
+              author: t("testimonials.items.0.author"),
+              role: t("testimonials.items.0.role"),
             },
             {
-              quote: "The learning paths are incredibly well-structured",
-              text: "Finally found a platform that breaks down advanced concepts without oversimplifying them.",
-              author: "Discord Community Member",
-              role: "Frontend Engineer",
+              quote: t("testimonials.items.1.quote"),
+              text: t("testimonials.items.1.text"),
+              author: t("testimonials.items.1.author"),
+              role: t("testimonials.items.1.role"),
             },
             {
-              quote: "Real-time feedback transformed my workflow",
-              text: "Submitting code and getting AI-powered analysis within seconds has dramatically improved my skills.",
-              author: "Private Alpha Tester",
-              role: "Backend Developer",
+              quote: t("testimonials.items.2.quote"),
+              text: t("testimonials.items.2.text"),
+              author: t("testimonials.items.2.author"),
+              role: t("testimonials.items.2.role"),
             },
           ].map((testimonial, index) => (
             <div

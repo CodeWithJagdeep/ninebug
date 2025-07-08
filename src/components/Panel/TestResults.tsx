@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Check,
   X,
@@ -21,7 +21,15 @@ import {
   Terminal,
   GitPullRequest,
   BookOpen,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { useSelector } from "react-redux";
+import { selectCodingState } from "@/Container/reducer/slicers/CodingSlicer";
+import { userInfo } from "os";
+import { selectCurrentUser } from "@/Container/reducer/slicers/userSlicer";
 
 interface TestCase {
   passed: boolean;
@@ -50,13 +58,34 @@ interface SubmissionData {
 }
 
 const TestResults = () => {
+  const { currentUser } = useSelector(selectCurrentUser);
+  const { result, aihint, executionTime } = useSelector(selectCodingState);
   const [showUpgrade, setShowUpgrade] = useState(false);
+  const [currentFailer, setCurrentFailer] = useState<any>({});
   const [expandedTestCases, setExpandedTestCases] = useState<number[]>([]);
   const [viewMode, setViewMode] = useState<"all" | "passed" | "failed">("all");
+  const [aiMessage, setAiMessage] = useState("");
+  const [showAiInsights, setShowAiInsights] = useState(false);
+  // Sample data for demonstration
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [expandedTests, setExpandedTests] = useState(new Set());
+  const [aiTyping, setAiTyping] = useState(false);
+
+  const [aiAnalyzing, setAiAnalyzing] = useState(false);
   const [activeTab, setActiveTab] = useState<
     "results" | "analysis" | "details"
   >("results");
 
+  const toggleTestExpansion = (index: any) => {
+    const newExpanded = new Set(expandedTests);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
+    }
+    setExpandedTests(newExpanded);
+  };
+  const hasSubscription = true;
   // Sample data - in a real app this would come from props
   const passedSubmission: SubmissionData = {
     results: [
@@ -180,27 +209,10 @@ const TestResults = () => {
     submissionDate: "2023-06-15T14:28:12Z",
   };
 
-  // Toggle between passed and failed for demo
-  const [isAllPassed, setIsAllPassed] = useState(true);
-  const submission = isAllPassed ? passedSubmission : failedSubmission;
-
-  // Filter results based on view mode
-  const filteredResults = submission.results.filter((result) => {
-    if (viewMode === "all") return true;
-    if (viewMode === "passed") return result.passed;
-    return !result.passed;
-  });
-
-  const passedCount = submission.results.filter((r) => r.passed).length;
-  const totalCount = submission.results.length;
+  const passedCount = result.filter((r) => r.passed).length;
+  const totalCount = result.length;
   const passRate = (passedCount / totalCount) * 100;
   const allPassed = passedCount === totalCount;
-
-  const toggleTestCase = (index: number) => {
-    setExpandedTestCases((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
-  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -213,648 +225,311 @@ const TestResults = () => {
     });
   };
 
+  // AI Analysis Effect
+  useEffect(() => {
+    if (result) {
+      setAiAnalyzing(true);
+      const timer = setTimeout(() => {
+        setAiAnalyzing(false);
+        setAiTyping(true);
+        const message = aihint;
+
+        // Simulate typing effect
+        let index = 0;
+        const typingInterval = setInterval(() => {
+          if (index < message.length) {
+            setAiMessage(message.slice(0, index + 1));
+            index++;
+          } else {
+            clearInterval(typingInterval);
+            setAiTyping(false);
+            setShowAiInsights(true);
+          }
+        }, 30);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [result, aihint]);
+
   return (
-    <div className="bg-black text-gray-900 font-sans">
+    <div className="bg-black text-gray-900 font-sans py-2 px-2">
       {/* Header with metadata */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-white">Submission Analysis</h1>
-          <p className="text-white/90">
-            Detailed performance metrics and optimization insights
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-5 gap-4"></div>
+      {/* Detailed Analysis */}
+      <div className="bg-black pb-6">
+        <div className="mt-">
+          <div className="flex items-center mb-2">
+            <Sparkles className="h-5 w-5 mr-2 text-yellow-400" />
+            <h3 className="text-xl font-bold text-white">
+              Jennie ( Personal assistant )
+            </h3>
+          </div>
+          <p className="text-sm text-slate-300 mx-2">
+            {aiAnalyzing
+              ? "Analyzing your solution..."
+              : aiTyping
+              ? "Typing..."
+              : "Ready to help optimize your code"}
+          </p>
+
+          {hasSubscription || (currentUser?.trial?.answersLeft ?? 0) > 0 ? (
+            <div className="bg-black rounded-lg mt-2">
+              <div className="bg-black p-3 rounded-xl border border-white/20">
+                <p className="text-base text-white leading-relaxed">
+                  <Markdown remarkPlugins={[remarkGfm]}>{aiMessage}</Markdown>
+                  {/* {aiMessage} */}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-gray-900 rounded-lg border h-32 border-gray-700 overflow-hidden relative">
+              <div className="p-4">
+                <p className="text-gray-100">
+                  Great thinking, Jagdeep. The issue with your current solution
+                  is that the result isn't being stored.
+                </p>
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm flex items-center p-4">
+                <div className="flex items-start">
+                  <div className="bg-yellow-500/10 p-2 rounded-lg mr-3 flex-shrink-0">
+                    <Sparkles className="h-5 w-5 text-yellow-400" />
+                  </div>
+                  <div>
+                    <p className="text-gray-300 mb-3 text-sm">
+                      Upgrade to unlock AI-powered optimization recommendations
+                      and in-depth code analysis.
+                    </p>
+                    <button
+                      onClick={() => setShowUpgrade(true)}
+                      className="px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 rounded-md text-white text-sm font-medium transition-all hover:shadow-lg"
+                    >
+                      Upgrade Plan
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div>{}</div>
+      <>
+        {/* Summary Card */}
+        {/* <div
+          className={`rounded-xl py-6 mb-8 px-6 transition-all ${
+            allPassed ? "bg-black" : "bg-black border border-red-200"
+          }`}
+        > */}
+        {/* <div className="grid grid-cols-3 gap-4 mt-3">
+              <div className="border border-white/20 px-3 py-4 rounded-lg text-center shadow-xs">
+                <p className="text-xs font-medium text-white mb-1">RUNTIME</p>
+                <p className="font-mono font-bold text-white">
+                  {result.executionTime} ms
+                  <span className="text-xs font-normal text-white/80 ml-1">
+                    (avg)
+                  </span>
+                </p>
+              </div>
+              <div className="border border-white/20 px-3 py-4 rounded-lg text-center shadow-xs">
+                <p className="text-xs font-medium text-white mb-1">MEMORY</p>
+                <p className="font-mono font-bold text-white">
+                  {submission.memoryUsage} MB
+                  <span className="text-xs font-normal text-white/80 ml-1">
+                    (avg)
+                  </span>
+                </p>
+              </div>
+              <div className="border border-white/20 px-3 py-4 rounded-lg text-center shadow-xs">
+                <p className="text-xs font-medium text-white mb-1">SCORE</p>
+                <p className="font-mono font-bold text-white">
+                  {submission.optimizationScore}/100
+                </p>
+              </div>
+            </div> */}
+
+        {/* Progress bar */}
+        <div className="my-6 px-3">
+          <div className="flex justify-between text-sm mb-2">
+            <span className="font-medium text-white">
+              {Math.round(passRate)}% passed
+            </span>
+            <span className="text-white">
+              {passedCount}/{totalCount} test cases
+            </span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all duration-500 ${
+                allPassed ? "bg-green-500" : "bg-red-500"
+              }`}
+              style={{ width: `${passRate}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="mb-6 px-3">
+          <h2 className="text-xl text-white font-semibold">
+            {allPassed ? "All Tests Passed" : "Tests Failed"}
+          </h2>
+          <p className="text-white/70 text-sm">
+            {allPassed
+              ? "Your solution meets all requirements"
+              : `${passedCount} of ${totalCount} test cases passed`}
           </p>
         </div>
-
-        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-          <button
-            onClick={() => setIsAllPassed(!isAllPassed)}
-            className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-white text-sm transition-colors shadow-sm flex items-center justify-center"
-          >
-            <Zap className="h-4 w-4 mr-2" />
-            {isAllPassed ? "Show Failed Case" : "Show Passed Case"}
-          </button>
-        </div>
-      </div>
-
-      {/* Navigation Tabs */}
-      <div className="flex border-b border-gray-200 mb-6">
-        <button
-          onClick={() => setActiveTab("results")}
-          className={`px-4 py-3 text-sm font-medium transition-colors relative ${
-            activeTab === "results"
-              ? "text-yellow-400"
-              : "text-yellow-400 hover:text-yellow-700"
-          }`}
-        >
-          Test Results
-          {activeTab === "results" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-t"></div>
-          )}
-        </button>
-        <button
-          onClick={() => setActiveTab("analysis")}
-          className={`px-4 py-3 text-sm font-medium transition-colors relative ${
-            activeTab === "analysis"
-              ? "text-yellow-400"
-              : "text-yellow-400 hover:text-yellow-700"
-          }`}
-        >
-          Performance Analysis
-          {activeTab === "analysis" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400 rounded-t"></div>
-          )}
-        </button>
-        <button
-          onClick={() => setActiveTab("details")}
-          className={`px-4 py-3 text-sm font-medium transition-colors relative ${
-            activeTab === "details"
-              ? "text-yellow-400"
-              : "text-yellow-400 hover:text-yellow-700"
-          }`}
-        >
-          Submission Details
-          {activeTab === "details" && (
-            <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 rounded-t"></div>
-          )}
-        </button>
-      </div>
-
-      {/* Results Tab */}
-      {activeTab === "results" && (
-        <>
-          {/* Summary Card */}
-          <div
-            className={`rounded-xl p-6 mb-8 transition-all ${
-              allPassed
-                ? "bg-gradient-to-r from-green-50 to-green-100 border border-green-200"
-                : "bg-gradient-to-r from-red-50 to-red-100 border border-red-200"
-            }`}
-          >
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center space-x-4 mb-4 md:mb-0">
-                <div
-                  className={`p-3 rounded-lg ${
-                    allPassed
-                      ? "bg-green-100 text-green-600"
-                      : "bg-red-100 text-red-600"
-                  }`}
-                >
-                  {allPassed ? (
-                    <Check className="h-6 w-6" />
+        <div className="space-y-3 px-3">
+          {result.map((testCase, index) => (
+            <div
+              key={index}
+              onClick={() => toggleTestExpansion(index)}
+              className="py-3 px-5 bg-white/5 border-white/30 border"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  {testCase.passed ? (
+                    <CheckCircle className="w-5 h-5 text-emerald-600" />
                   ) : (
-                    <X className="h-6 w-6" />
+                    <XCircle className="w-5 h-5 text-red-600" />
+                  )}
+                  <div>
+                    <h4 className="text-lg font-medium text-white">
+                      Test Case {index + 1}
+                    </h4>
+                    <p
+                      className={`text-base ${
+                        testCase.passed ? "text-emerald-600" : "text-red-300"
+                      }`}
+                    >
+                      {testCase.passed ? "Passed" : "Failed"}
+                    </p>
+                  </div>
+                </div>
+                <button className="text-gray-500 hover:text-gray-700 p-1 rounded-md hover:bg-gray-100 transition-colors">
+                  {expandedTests.has(index) ? (
+                    <ChevronUp className="w-4 h-4" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
+
+              {expandedTests.has(index) && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-white mb-2">
+                        Input
+                      </label>
+                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+                        <pre className="text-sm text-black font-mono overflow-x-auto">
+                          {JSON.stringify(testCase.input, null, 2)}
+                        </pre>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-white mb-2">
+                        Expected Output
+                      </label>
+                      <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3">
+                        <pre className="text-sm text-emerald-900 font-mono overflow-x-auto">
+                          {JSON.stringify(testCase.expected, null, 2)}
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+
+                  {!testCase.passed && (
+                    <div>
+                      <label className="block text-sm font-medium text-white mb-2">
+                        Actual Output
+                      </label>
+                      <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                        <div className="text-sm text-red-900 font-mono overflow">
+                          {JSON.stringify(testCase.actual, null, 2)}
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
-                <div>
-                  <h2 className="text-xl font-bold">
-                    {allPassed ? "All Tests Passed" : "Tests Failed"}
-                  </h2>
-                  <p className="text-gray-600">
-                    {allPassed
-                      ? "Your solution meets all requirements"
-                      : `${passedCount} of ${totalCount} test cases passed`}
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-white/80 p-3 rounded-lg text-center border border-gray-200 shadow-xs">
-                  <p className="text-xs font-medium text-gray-500 mb-1">
-                    RUNTIME
-                  </p>
-                  <p className="font-mono font-bold text-gray-800">
-                    {submission.executionTime} ms
-                    <span className="text-xs font-normal text-gray-500 ml-1">
-                      (avg)
-                    </span>
-                  </p>
-                </div>
-                <div className="bg-white/80 p-3 rounded-lg text-center border border-gray-200 shadow-xs">
-                  <p className="text-xs font-medium text-gray-500 mb-1">
-                    MEMORY
-                  </p>
-                  <p className="font-mono font-bold text-gray-800">
-                    {submission.memoryUsage} MB
-                    <span className="text-xs font-normal text-gray-500 ml-1">
-                      (avg)
-                    </span>
-                  </p>
-                </div>
-                <div className="bg-white/80 p-3 rounded-lg text-center border border-gray-200 shadow-xs">
-                  <p className="text-xs font-medium text-gray-500 mb-1">
-                    SCORE
-                  </p>
-                  <p className="font-mono font-bold text-gray-800">
-                    {submission.optimizationScore}/100
-                  </p>
-                </div>
-              </div>
+              )}
             </div>
-
-            {/* Progress bar */}
-            <div className="mt-6">
-              <div className="flex justify-between text-sm mb-1">
-                <span className="font-medium">
-                  {Math.round(passRate)}% passed
-                </span>
-                <span className="text-gray-500">
-                  {passedCount}/{totalCount} test cases
-                </span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-500 ${
-                    allPassed ? "bg-green-500" : "bg-red-500"
-                  }`}
-                  style={{ width: `${passRate}%` }}
-                />
-              </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="bg-black p-5 rounded-xl shadow-xs border border-white/20 text-white">
+            {/* <div className="flex items-center mb-4">
+              <Cpu className="h-5 w-5 mr-2 text-blue-500" />
+              <h3 className="text-lg font-semibold">Time Complexity</h3>
             </div>
-          </div>
-
-          {/* Test Case Filter */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            <button
-              onClick={() => setViewMode("all")}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                viewMode === "all"
-                  ? "bg-gray-800 text-white shadow-sm"
-                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
-              }`}
-            >
-              All ({totalCount})
-            </button>
-            <button
-              onClick={() => setViewMode("passed")}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                viewMode === "passed"
-                  ? "bg-green-600 text-white shadow-sm"
-                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
-              }`}
-            >
-              Passed ({passedCount})
-            </button>
-            <button
-              onClick={() => setViewMode("failed")}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                viewMode === "failed"
-                  ? "bg-red-600 text-white shadow-sm"
-                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
-              }`}
-            >
-              Failed ({totalCount - passedCount})
-            </button>
-          </div>
-
-          {/* Test Cases List */}
-          <div className="space-y-3 mb-8">
-            {filteredResults.map((result, index) => (
-              <div
-                key={index}
-                className={`bg-white rounded-xl shadow-xs overflow-hidden transition-all ${
-                  result.passed
-                    ? "border border-green-100 hover:border-green-200"
-                    : "border border-red-100 hover:border-red-200"
-                }`}
-              >
-                <div
-                  className={`p-4 flex justify-between items-center cursor-pointer transition-colors ${
-                    result.passed ? "hover:bg-green-50" : "hover:bg-red-50"
-                  }`}
-                  onClick={() => toggleTestCase(index)}
-                >
-                  <div className="flex items-center">
-                    {result.passed ? (
-                      <Check className="h-5 w-5 text-green-500 mr-3" />
-                    ) : (
-                      <X className="h-5 w-5 text-red-500 mr-3" />
-                    )}
-                    <div>
-                      <span className="font-medium">Test Case {index + 1}</span>
-                      <span
-                        className={`ml-2 text-sm ${
-                          result.passed ? "text-green-600" : "text-red-600"
-                        }`}
-                      >
-                        {result.passed ? "Passed" : "Failed"}
-                      </span>
-                      {result.description && (
-                        <p className="text-xs text-gray-500 mt-1">
-                          {result.description}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4 text-sm">
-                    <span className="flex items-center text-gray-500">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {result.runtime} ms
-                    </span>
-                    <span className="flex items-center text-gray-500">
-                      <div className="h-3 w-3 rounded bg-purple-400 mr-1" />
-                      {result.memory} MB
-                    </span>
-                    {expandedTestCases.includes(index) ? (
-                      <ChevronUp className="h-5 w-5 text-gray-400" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-gray-400" />
-                    )}
-                  </div>
-                </div>
-
-                {expandedTestCases.includes(index) && (
-                  <div className="p-4 border-t border-gray-100 bg-gray-50">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">
-                          Input
-                        </p>
-                        <div className="bg-gray-100 p-3 rounded-lg font-mono text-sm">
-                          {result.input}
-                        </div>
-                      </div>
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">
-                          Expected
-                        </p>
-                        <div className="bg-green-50 p-3 rounded-lg font-mono text-sm text-green-700 border border-green-100">
-                          {result.expected}
-                        </div>
-                      </div>
-                      <div>
-                        <p className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">
-                          Output
-                        </p>
-                        <div
-                          className={`p-3 rounded-lg font-mono text-sm border ${
-                            result.passed
-                              ? "bg-green-50 text-green-700 border-green-100"
-                              : "bg-red-50 text-red-700 border-red-100"
-                          }`}
-                        >
-                          {result.output}
-                        </div>
-                      </div>
-                    </div>
-                    {!result.passed && (
-                      <div className="mt-4 p-3 bg-red-50 rounded-lg border border-red-100">
-                        <div className="flex items-start">
-                          <Info className="h-4 w-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-medium text-red-700">
-                              Failure Analysis
-                            </p>
-                            <p className="text-sm text-red-600">
-                              The output indices are correct but in reverse
-                              order. The problem expects the indices in
-                              ascending order.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Analysis Tab */}
-      {activeTab === "analysis" && (
-        <div className="space-y-6">
-          {/* Performance Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
-              <div className="flex items-center mb-4">
-                <Cpu className="h-5 w-5 mr-2 text-blue-500" />
-                <h3 className="text-lg font-semibold">Time Complexity</h3>
-              </div>
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-2xl font-bold font-mono">
-                    {submission.timeComplexity}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Algorithm efficiency
-                  </p>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs font-medium text-gray-500 mb-1">
-                    SCORE
-                  </div>
-                  <p className="text-xl font-bold text-blue-600">
-                    {
-                      submission.benchmarks.find(
-                        (b) => b.metric === "Time Complexity"
-                      )?.score
-                    }
-                    /100
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-700">
-                {
-                  submission.benchmarks.find(
-                    (b) => b.metric === "Time Complexity"
-                  )?.description
-                }
-              </div>
-            </div>
-
-            <div className="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
-              <div className="flex items-center mb-4">
-                <HardDrive className="h-5 w-5 mr-2 text-purple-500" />
-                <h3 className="text-lg font-semibold">Space Complexity</h3>
-              </div>
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-2xl font-bold font-mono">
-                    {submission.spaceComplexity}
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">Memory usage</p>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs font-medium text-gray-500 mb-1">
-                    SCORE
-                  </div>
-                  <p className="text-xl font-bold text-purple-600">
-                    {
-                      submission.benchmarks.find(
-                        (b) => b.metric === "Space Efficiency"
-                      )?.score
-                    }
-                    /100
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 p-3 bg-purple-50 rounded-lg text-sm text-purple-700">
-                {
-                  submission.benchmarks.find(
-                    (b) => b.metric === "Space Efficiency"
-                  )?.description
-                }
-              </div>
-            </div>
-
-            <div className="bg-white p-5 rounded-xl shadow-xs border border-gray-200">
-              <div className="flex items-center mb-4">
-                <Code className="h-5 w-5 mr-2 text-green-500" />
-                <h3 className="text-lg font-semibold">Code Quality</h3>
-              </div>
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-2xl font-bold">
-                    {submission.optimizationScore}%
-                  </p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Optimization score
-                  </p>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs font-medium text-gray-500 mb-1">
-                    SCORE
-                  </div>
-                  <p className="text-xl font-bold text-green-600">
-                    {
-                      submission.benchmarks.find(
-                        (b) => b.metric === "Code Quality"
-                      )?.score
-                    }
-                    /100
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 p-3 bg-green-50 rounded-lg text-sm text-green-700">
-                {
-                  submission.benchmarks.find((b) => b.metric === "Code Quality")
-                    ?.description
-                }
-              </div>
-            </div>
-          </div>
-
-          {/* Detailed Analysis */}
-          <div className="bg-white rounded-xl shadow-xs border border-gray-200 p-6">
-            <div className="flex items-center mb-6">
-              <BarChart2 className="h-5 w-5 mr-2 text-blue-500" />
-              <h3 className="text-xl font-bold">
-                Detailed Performance Analysis
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex items-end justify-between">
               <div>
-                <h4 className="font-medium mb-3 flex items-center">
-                  <Flame className="h-4 w-4 mr-2 text-orange-500" />
-                  Runtime Distribution
-                </h4>
-                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <div className="h-40 flex items-end space-x-1">
-                    <div className="flex-1 bg-blue-100 h-1/4 rounded-t-sm"></div>
-                    <div className="flex-1 bg-blue-200 h-1/2 rounded-t-sm"></div>
-                    <div className="flex-1 bg-blue-300 h-3/4 rounded-t-sm"></div>
-                    <div className="flex-1 bg-blue-400 h-full rounded-t-sm"></div>
-                    <div className="flex-1 bg-blue-500 h-2/3 rounded-t-sm relative">
-                      <div className="absolute -top-5 left-0 right-0 text-center text-xs font-medium">
-                        Your solution
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-4 text-xs text-gray-500 text-center">
-                    Faster submissions → Slower submissions
-                  </div>
-                </div>
-                <p className="mt-3 text-sm text-gray-600">
-                  Your solution is faster than{" "}
+                <p className="text-2xl font-bold font-mono">
+                  {submission.timeComplexity}
+                </p>
+                <p className="text-sm text-white/70 mt-1">
+                  Algorithm efficiency
+                </p>
+              </div>
+              <div className="text-right">
+                <div className="text-xs font-medium text-white mb-1">SCORE</div>
+                <p className="text-xl font-bold text-blue-600">
                   {
                     submission.benchmarks.find(
                       (b) => b.metric === "Time Complexity"
                     )?.score
                   }
-                  % of submissions.
+                  /100
                 </p>
               </div>
+            </div> */}
+            {/* <div className="mt-4 p-3 bg-blue-50 rounded-lg text-sm text-blue-700">
+              {
+                submission.benchmarks.find(
+                  (b) => b.metric === "Time Complexity"
+                )?.description
+              }
+            </div> */}
+          </div>
 
+          <div className="bg-black p-5 rounded-xl shadow-xs border border-white/20">
+            {/* <div className="flex items-center mb-4">
+              <HardDrive className="h-5 w-5 mr-2 text-purple-500" />
+              <h3 className="text-lg font-semibold">Space Complexity</h3>
+            </div> */}
+            {/* <div className="flex items-end justify-between">
               <div>
-                <h4 className="font-medium mb-3 flex items-center">
-                  <Shield className="h-4 w-4 mr-2 text-purple-500" />
-                  Memory Usage
-                </h4>
-                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <div className="h-40 flex items-end space-x-1">
-                    <div className="flex-1 bg-purple-500 h-3/5 rounded-t-sm relative">
-                      <div className="absolute -top-5 left-0 right-0 text-center text-xs font-medium">
-                        Your solution
-                      </div>
-                    </div>
-                    <div className="flex-1 bg-purple-400 h-full rounded-t-sm"></div>
-                    <div className="flex-1 bg-purple-300 h-3/4 rounded-t-sm"></div>
-                    <div className="flex-1 bg-purple-200 h-1/2 rounded-t-sm"></div>
-                    <div className="flex-1 bg-purple-100 h-1/4 rounded-t-sm"></div>
-                  </div>
-                  <div className="mt-4 text-xs text-gray-500 text-center">
-                    More efficient → Less efficient
-                  </div>
+                <p className="text-2xl font-bold font-mono">
+                  {submission.spaceComplexity}
+                </p>
+                <p className="text-sm text-gray-500 mt-1">Memory usage</p>
+              </div>
+              <div className="text-right">
+                <div className="text-xs font-medium text-gray-500 mb-1">
+                  SCORE
                 </div>
-                <p className="mt-3 text-sm text-gray-600">
-                  Your solution uses less memory than{" "}
+                <p className="text-xl font-bold text-purple-600">
                   {
                     submission.benchmarks.find(
                       (b) => b.metric === "Space Efficiency"
                     )?.score
                   }
-                  % of submissions.
+                  /100
                 </p>
               </div>
             </div>
-
-            {!allPassed && (
-              <div className="mt-8">
-                <div className="flex items-center mb-4">
-                  <Sparkles className="h-5 w-5 mr-2 text-yellow-500" />
-                  <h3 className="text-xl font-bold">
-                    Optimization Recommendations
-                  </h3>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
-                    <div className="flex">
-                      <GitPullRequest className="h-5 w-5 text-blue-500 mr-3 flex-shrink-0" />
-                      <div>
-                        <p className="font-medium text-gray-800 mb-1">
-                          Use a Hash Map for O(n) Time Complexity
-                        </p>
-                        <p className="text-gray-700 text-sm">
-                          Your current O(n²) solution can be optimized to O(n)
-                          by using a hash map to store previously seen numbers,
-                          allowing for constant time lookups.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="p-4 bg-green-50 rounded-lg border border-green-100">
-                    <div className="flex">
-                      <BookOpen className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                      <div>
-                        <p className="font-medium text-gray-800 mb-1">
-                          Edge Case Handling
-                        </p>
-                        <p className="text-gray-700 text-sm">
-                          Add explicit checks for edge cases like empty input
-                          arrays or cases where no solution exists to make your
-                          code more robust.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => setShowUpgrade(true)}
-                  className="mt-6 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-white text-sm transition-colors flex items-center"
-                >
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  Show Advanced Optimization Strategies
-                </button>
-              </div>
-            )}
+            <div className="mt-4 p-3 bg-purple-50 rounded-lg text-sm text-purple-700">
+              {
+                submission.benchmarks.find(
+                  (b) => b.metric === "Space Efficiency"
+                )?.description
+              }
+            </div> */}
           </div>
         </div>
-      )}
-
-      {/* Details Tab */}
-      {activeTab === "details" && (
-        <div className="bg-white rounded-xl shadow-xs border border-gray-200 p-6">
-          <div className="flex items-center mb-6">
-            <Info className="h-5 w-5 mr-2 text-blue-500" />
-            <h3 className="text-xl font-bold">Submission Details</h3>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-medium mb-3">Execution Environment</h4>
-              <div className="space-y-3">
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-gray-600">Language</span>
-                  <span className="font-medium">{submission.language}</span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-gray-600">Submission Time</span>
-                  <span className="font-medium">
-                    {formatDate(submission.submissionDate)}
-                  </span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-gray-600">Test Cases</span>
-                  <span className="font-medium">
-                    {submission.results.length} total
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-medium mb-3">Performance Metrics</h4>
-              <div className="space-y-3">
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-gray-600">Average Runtime</span>
-                  <span className="font-medium">
-                    {submission.executionTime} ms
-                  </span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-gray-600">Average Memory</span>
-                  <span className="font-medium">
-                    {submission.memoryUsage} MB
-                  </span>
-                </div>
-                <div className="flex justify-between border-b border-gray-100 pb-2">
-                  <span className="text-gray-600">Optimization Score</span>
-                  <span className="font-medium">
-                    {submission.optimizationScore}/100
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8">
-            <h4 className="font-medium mb-3">Complexity Analysis</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div className="flex items-center mb-2">
-                  <Gauge className="h-4 w-4 mr-2 text-blue-500" />
-                  <span className="font-medium">Time Complexity</span>
-                </div>
-                <div className="font-mono font-bold text-lg">
-                  {submission.timeComplexity}
-                </div>
-                <p className="text-sm text-gray-600 mt-1">
-                  {submission.timeComplexity === "O(n)"
-                    ? "Linear time complexity indicates efficient algorithm"
-                    : "Quadratic time complexity suggests potential for optimization"}
-                </p>
-              </div>
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <div className="flex items-center mb-2">
-                  <HardDrive className="h-4 w-4 mr-2 text-purple-500" />
-                  <span className="font-medium">Space Complexity</span>
-                </div>
-                <div className="font-mono font-bold text-lg">
-                  {submission.spaceComplexity}
-                </div>
-                <p className="text-sm text-gray-600 mt-1">
-                  {submission.spaceComplexity === "O(n)"
-                    ? "Linear space usage is typical for this problem type"
-                    : "Constant space usage is memory efficient"}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      </>
 
       {/* Optimization Insights */}
 

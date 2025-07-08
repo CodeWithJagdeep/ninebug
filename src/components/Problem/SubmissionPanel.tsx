@@ -1,6 +1,9 @@
 import { FileX, Loader2 } from "lucide-react";
 import { SubmissionDetailModal } from "./SubmissionDetailModal";
 import { useEffect, useState } from "react";
+import TestResults from "../Panel/TestResults";
+import { useSelector } from "react-redux";
+import { selectCodingState } from "@/Container/reducer/slicers/CodingSlicer";
 
 // Demo submissions data
 const demoSubmissions = [
@@ -173,125 +176,94 @@ const demoSubmissions = [
 ];
 
 // Submissions Panel Component
-export const SubmissionsPanel = () => {
-  const [submissions, setSubmissions] = useState([]);
-  const [loading, setLoading] = useState(true);
+export const SubmissionsPanel = ({ submited }: { submited: boolean }) => {
+  const { submissions } = useSelector(selectCodingState);
   const [selectedSubmission, setSelectedSubmission] = useState(null);
-
-  useEffect(() => {
-    // Simulate API call with demo data
-    const fetchSubmissions = async () => {
-      try {
-        setLoading(true);
-
-        // Simulate network delay
-        await new Promise((resolve) => setTimeout(resolve, 800));
-
-        // In a real app, this would be:
-        // const response = await fetch("/api/submissions");
-        // const data = await response.json();
-
-        // For demo purposes, use the demo data
-        setSubmissions(demoSubmissions);
-      } catch (error) {
-        console.error("Failed to fetch submissions:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSubmissions();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="h-full flex items-center justify-center p-4">
-        <div className="flex flex-col items-center">
-          <Loader2 className="h-6 w-6 animate-spin text-blue-500 mb-2" />
-          <p className="text-sm text-gray-600">Loading submissions...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="h-full overflow-auto p-4 bg-black">
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold text-white mb-2">
-          My Submissions
-        </h3>
-        <p className="text-sm text-white/80">
-          View your previous attempts and their results
-        </p>
-      </div>
-
-      {submissions.length === 0 ? (
-        <div className="flex flex-col items-center justify-center h-64 text-gray-500">
-          <FileX className="h-12 w-12 mb-4" />
-          <p className="text-lg font-medium">No submissions yet</p>
-          <p className="text-sm">Submit your solution to see it here</p>
-        </div>
+      {submited ? (
+        <TestResults />
       ) : (
-        <div className="space-y-3">
-          {submissions.map((submission: any, index) => (
-            <div
-              key={submission.id}
-              className="border border-gray-200 rounded-lg p-4 hover:bg-white/5 cursor-pointer transition-colors"
-              onClick={() => setSelectedSubmission(submission)}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-white">
-                    Submission #{submissions.length - index}
-                  </span>
-                  <span
-                    className={`px-2 py-1 text-xs rounded-full ${
-                      submission.status === "accepted"
-                        ? "bg-green-100 text-green-800"
-                        : submission.status === "wrong_answer"
-                        ? "bg-red-100 text-red-800"
-                        : submission.status === "time_limit_exceeded"
-                        ? "bg-orange-100 text-orange-800"
-                        : submission.status === "compilation_error"
-                        ? "bg-purple-100 text-purple-800"
-                        : "bg-yellow-100 text-yellow-800"
-                    }`}
-                  >
-                    {submission.status.replace(/_/g, " ").toUpperCase()}
-                  </span>
-                </div>
-                <span className="text-xs text-white/80">
-                  {new Date(submission.createdAt).toLocaleString()}
-                </span>
-              </div>
-
-              <div className="text-sm text-white/90">
-                Language: {submission.language} | Runtime:{" "}
-                {submission.runtime > 0 ? `${submission.runtime}ms` : "N/A"}
-              </div>
-
-              {submission.score !== undefined && (
-                <div className="text-sm text-white">
-                  Score: {submission.score}/{submission.totalTests} tests passed
-                </div>
-              )}
-
-              {submission.status === "compilation_error" && (
-                <div className="text-sm text-red-600 mt-1">
-                  Compilation failed
-                </div>
-              )}
+        <>
+          {" "}
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-white mb-2">
+              My Submissions
+            </h3>
+            <p className="text-sm text-white/80">
+              View your previous attempts and their results
+            </p>
+          </div>
+          {submissions?.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+              <FileX className="h-12 w-12 mb-4" />
+              <p className="text-lg font-medium">No submissions yet</p>
+              <p className="text-sm">Submit your solution to see it here</p>
             </div>
-          ))}
-        </div>
-      )}
+          ) : (
+            <div className="space-y-3">
+              {submissions.map((submission: any, index: number) => (
+                <div
+                  key={submission.id}
+                  className="border border-gray-200 rounded-lg p-4 hover:bg-white/5 cursor-pointer transition-colors"
+                  onClick={() => setSelectedSubmission(submission)}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium text-white">
+                        Submission #{submissions.length - index}
+                      </span>
+                      <span
+                        className={`px-2 py-1 text-xs rounded-full ${
+                          submission.status === "accepted"
+                            ? "bg-green-100 text-green-800"
+                            : submission.status === "wrong_answer"
+                            ? "bg-red-100 text-red-800"
+                            : submission.status === "time_limit_exceeded"
+                            ? "bg-orange-100 text-orange-800"
+                            : submission.status === "compilation_error"
+                            ? "bg-purple-100 text-purple-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}
+                      >
+                        {submission.status.replace(/_/g, " ").toUpperCase()}
+                      </span>
+                    </div>
+                    <span className="text-xs text-white/80">
+                      {new Date(submission.createdAt).toLocaleString()}
+                    </span>
+                  </div>
 
-      {/* Submission Detail Modal */}
-      {selectedSubmission && (
-        <SubmissionDetailModal
-          submission={selectedSubmission}
-          onClose={() => setSelectedSubmission(null)}
-        />
+                  <div className="text-sm text-white/90">
+                    Language: {submission.language} | Runtime:{" "}
+                    {submission.runtime > 0 ? `${submission.runtime}ms` : "N/A"}
+                  </div>
+
+                  {submission.score !== undefined && (
+                    <div className="text-sm text-white">
+                      Score: {submission.score}/{submission.totalTests} tests
+                      passed
+                    </div>
+                  )}
+
+                  {submission.status === "compilation_error" && (
+                    <div className="text-sm text-red-600 mt-1">
+                      Compilation failed
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          {/* Submission Detail Modal */}
+          {selectedSubmission && (
+            <SubmissionDetailModal
+              submission={selectedSubmission}
+              onClose={() => setSelectedSubmission(null)}
+            />
+          )}
+        </>
       )}
     </div>
   );

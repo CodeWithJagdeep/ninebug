@@ -251,3 +251,29 @@
   padding: 1rem;
   margin: 1rem 0;
 }
+
+@keyframes rotateStepwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(90deg);
+  }
+  40% {
+    transform: rotate(90deg);
+  }
+  60% {
+    transform: rotate(180deg);
+  }
+  80% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+.animate-rotate {
+  animation: rotateStepwise 3s steps(1, end) infinite;
+  animation-timing-function: ease-in-out;
+}

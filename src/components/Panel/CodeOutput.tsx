@@ -1,3 +1,4 @@
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
   CheckCircleIcon,
   CircleIcon,
@@ -5,10 +6,12 @@ import {
   Loader2Icon,
   PlusIcon,
   PlayIcon,
-  Trash2Icon,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useSelector } from "react-redux";
 import {
   selectCodeExecutionOutput,
@@ -16,10 +19,14 @@ import {
   selectIsRunning,
   selectIsSuccess,
 } from "@/Container/reducer/slicers/CodingSlicer";
-import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+// Types
+interface TestCase {
+  id: number;
+  name: string;
+  input: string;
+  expected: string;
+}
 
 interface CodeOutputProps {
   checkpoint?: string;
@@ -27,42 +34,40 @@ interface CodeOutputProps {
   onRunTestCases?: (testCases: TestCase[]) => void;
 }
 
-interface TestCase {
-  id: string;
-  name: string;
-  input: string;
-  expected: string;
-}
+// Constants
+const DEFAULT_TEST_CASE: Omit<TestCase, "id"> = {
+  name: "Test Case 1",
+  input: "",
+  expected: "",
+};
 
-const CodeOutput = ({
-  checkpoint,
+const MIN_TEST_CASES = 1;
+const MAX_TEST_CASES = 10;
+
+const CodeOutput: React.FC<CodeOutputProps> = ({
   className,
   onRunTestCases,
-}: CodeOutputProps) => {
-  const isRunning = useSelector(selectIsRunning);
+}) => {
+  // Redux selectors
   const hasError = useSelector(selectIsError);
-  const output = useSelector(selectCodeExecutionOutput);
-  const hasSuccess = useSelector(selectIsSuccess);
-  const instructionsScrollRef = useRef(null);
+  const isRunning = useSelector(selectIsRunning);
+  const isSuccess = useSelector(selectIsSuccess);
+  const executionOutput = useSelector(selectCodeExecutionOutput);
 
+  // Refs
+  const instructionsScrollRef = useRef<HTMLDivElement>(null);
+
+  // State
   const [testCases, setTestCases] = useState<TestCase[]>([
     {
-      id: "1",
-      name: "Test Case 1",
-      input: "Sample input 1",
-      expected: "Expected output 1",
-    },
-    {
-      id: "2",
-      name: "Test Case 2",
-      input: "Sample input 2",
-      expected: "Expected output 2",
+      id: 0,
+      ...DEFAULT_TEST_CASE,
     },
   ]);
-  const [activeTab, setActiveTab] = useState("1");
-  const [newTestCaseName, setNewTestCaseName] = useState("");
+  const [activeTabId, setActiveTabId] = useState<number>(0);
+  const [newTestCaseName, setNewTestCaseName] = useState<string>("");
 
-  // Auto-scroll to top of instructions when error occurs
+  // Auto-scroll to top when error occurs
   useEffect(() => {
     if (hasError && instructionsScrollRef.current) {
       instructionsScrollRef.current.scrollTo({
@@ -72,266 +77,196 @@ const CodeOutput = ({
     }
   }, [hasError]);
 
-  const parseOutput = (output: string) => {
-    if (!output) return null;
-    return output.split("\n").map((line, i) => {
-      const isErrorLine = line.startsWith("Error") || line.startsWith("error");
-      return (
-        <p
-          key={i}
-          className={cn(
-            "text-sm",
-            isErrorLine ? "text-red-500" : "text-foreground"
-          )}
-        >
-          {line}
-        </p>
+  // Handlers
+  const handleAddTestCase = useCallback(() => {
+    if (testCases.length >= MAX_TEST_CASES) {
+      console.warn(`Maximum of ${MAX_TEST_CASES} test cases allowed`);
+      return;
+    }
+
+    const trimmedName = newTestCaseName.trim();
+    const testCaseName = trimmedName || `Test Case ${testCases.length + 1}`;
+
+    const newTestCase: TestCase = {
+      id: Date.now(), // Using timestamp for unique IDs
+      name: testCaseName,
+      input: "",
+      expected: "",
+    };
+
+    setTestCases((prevTestCases) => [...prevTestCases, newTestCase]);
+    setActiveTabId(newTestCase.id);
+    setNewTestCaseName("");
+  }, [newTestCaseName, testCases.length]);
+
+  const handleRemoveTestCase = useCallback(
+    (testCaseId: number) => {
+      if (testCases.length <= MIN_TEST_CASES) {
+        console.warn(`Minimum of ${MIN_TEST_CASES} test case required`);
+        return;
+      }
+
+      setTestCases((prevTestCases) => {
+        const filteredTestCases = prevTestCases.filter(
+          (tc) => tc.id !== testCaseId
+        );
+
+        // Update active tab if the removed tab was active
+        if (activeTabId === testCaseId) {
+          const newActiveTab = filteredTestCases[filteredTestCases.length - 1];
+          setActiveTabId(newActiveTab.id);
+        }
+
+        return filteredTestCases;
+      });
+    },
+    [testCases.length, activeTabId]
+  );
+
+  const handleUpdateTestCase = useCallback(
+    (testCaseId: number, field: keyof Omit<TestCase, "id">, value: string) => {
+      setTestCases((prevTestCases) =>
+        prevTestCases.map((tc) =>
+          tc.id === testCaseId ? { ...tc, [field]: value } : tc
+        )
       );
-    });
-  };
+    },
+    []
+  );
 
-  const addTestCase = () => {
-    if (newTestCaseName.trim()) {
-      const newId = Date.now().toString();
-      const newTestCase = {
-        id: newId,
-        name: newTestCaseName,
-        input: "",
-        expected: "",
-      };
-      setTestCases([...testCases, newTestCase]);
-      setActiveTab(newId);
-      setNewTestCaseName("");
-    }
-  };
+  const handleTabSelect = useCallback((testCaseId: number) => {
+    setActiveTabId(testCaseId);
+  }, []);
 
-  const removeTestCase = (id: string) => {
-    const newTestCases = testCases.filter((testCase) => testCase.id !== id);
-    setTestCases(newTestCases);
-    if (activeTab === id && newTestCases.length > 0) {
-      setActiveTab(newTestCases[0].id);
-    } else if (newTestCases.length === 0) {
-      setActiveTab("");
-    }
-  };
-
-  const updateTestCase = (id: string, field: keyof TestCase, value: string) => {
-    setTestCases(
-      testCases.map((tc) => (tc.id === id ? { ...tc, [field]: value } : tc))
-    );
-  };
-
-  const runTestCases = () => {
+  const handleRunTestCases = useCallback(() => {
     if (onRunTestCases) {
       onRunTestCases(testCases);
     }
-  };
+  }, [testCases, onRunTestCases]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+        handleRunTestCases();
+      }
+    },
+    [handleRunTestCases]
+  );
+
+  // Render helpers
+  const renderTabHeader = (testCase: TestCase, index: number) => (
+    <div
+      key={testCase.id}
+      className={cn(
+        "flex items-center gap-2 px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-200 rounded-t-md border-b-2",
+        activeTabId === testCase.id
+          ? "border-blue-500 text-white bg-white/10"
+          : "border-transparent text-white/70 hover:text-white hover:bg-white/5"
+      )}
+      onClick={() => handleTabSelect(testCase.id)}
+      role="tab"
+      aria-selected={activeTabId === testCase.id}
+      aria-controls={`testcase-panel-${testCase.id}`}
+      tabIndex={activeTabId === testCase.id ? 0 : -1}
+    >
+      <span className="truncate max-w-24">{testCase.name}</span>
+      {testCases.length > MIN_TEST_CASES && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRemoveTestCase(testCase.id);
+          }}
+          className="p-1 h-auto w-auto hover:bg-red-500/20 rounded-full"
+          aria-label={`Remove ${testCase.name}`}
+        >
+          <X className="h-3 w-3 text-red-300" />
+        </Button>
+      )}
+    </div>
+  );
+
+  const renderTestCasePanel = (testCase: TestCase) => (
+    <div
+      key={testCase.id}
+      id={`testcase-panel-${testCase.id}`}
+      className={cn("space-y-4", activeTabId !== testCase.id && "hidden")}
+      role="tabpanel"
+      aria-labelledby={`tab-${testCase.id}`}
+    >
+      <div className="space-y-2">
+        <label
+          htmlFor={`input-${testCase.id}`}
+          className="block text-sm font-medium text-white"
+        >
+          Test Input
+        </label>
+        <textarea
+          id={`input-${testCase.id}`}
+          value={testCase.input}
+          onChange={(e) =>
+            handleUpdateTestCase(testCase.id, "input", e.target.value)
+          }
+          onKeyDown={handleKeyDown}
+          className="w-full p-3 text-sm text-white bg-black border border-white/20 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+          placeholder="Example: 10 20 30 40 60"
+          rows={4}
+        />
+      </div>
+
+      <div className="space-y-2">
+        <label
+          htmlFor={`expected-${testCase.id}`}
+          className="block text-sm font-medium text-white"
+        >
+          Expected Output
+        </label>
+        <textarea
+          id={`expected-${testCase.id}`}
+          value={testCase.expected}
+          onChange={(e) =>
+            handleUpdateTestCase(testCase.id, "expected", e.target.value)
+          }
+          onKeyDown={handleKeyDown}
+          className="w-full p-3 text-sm text-white bg-black border border-white/20 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+          placeholder="Enter expected output..."
+          rows={4}
+        />
+      </div>
+    </div>
+  );
 
   return (
-    <div className={cn("flex flex-col h-full", className)}>
+    <div className={cn("flex flex-col h-full bg-black", className)}>
       {/* Test Cases Panel */}
-      <div className="border-b p-4">
-        <div className="flex justify-between items-center mb-2">
-          <h3 className="font-semibold">Test Cases</h3>
-          <div className="flex gap-2">
-            <Input
-              value={newTestCaseName}
-              onChange={(e) => setNewTestCaseName(e.target.value)}
-              placeholder="New test case name"
-              className="w-40"
-            />
-            <Button variant="outline" onClick={addTestCase}>
-              <PlusIcon className="h-4 w-4 mr-2" />
-              Add Test
-            </Button>
-            <Button
-              onClick={runTestCases}
-              disabled={isRunning || testCases.length === 0}
-            >
-              <PlayIcon className="h-4 w-4 mr-2" />
-              Run All Tests
-            </Button>
-          </div>
+      <div className="flex-1 p-4 space-y-4">
+        {/* Tab Navigation */}
+        <div
+          className="flex items-center gap-2 overflow-x-auto pb-1"
+          role="tablist"
+          aria-label="Test cases"
+        >
+          {testCases.map(renderTabHeader)}
+
+          {/* <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleAddTestCase}
+            disabled={testCases.length >= MAX_TEST_CASES}
+            className="flex-shrink-0 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+            aria-label="Add new test case"
+          >
+            <PlusIcon className="h-4 w-4 text-white" />
+          </Button> */}
         </div>
 
-        {testCases.length > 0 ? (
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="w-full">
-              {testCases.map((testCase) => (
-                <TabsTrigger
-                  key={testCase.id}
-                  value={testCase.id}
-                  className="flex items-center gap-2"
-                >
-                  {testCase.name}
-                  <Button
-                    variant="ghost"
-                    size="iconSm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeTestCase(testCase.id);
-                    }}
-                    className="h-4 w-4 rounded-full hover:bg-red-100"
-                  >
-                    <Trash2Icon className="h-3 w-3 text-red-500" />
-                  </Button>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            {testCases.map((testCase) => (
-              <TabsContent
-                key={testCase.id}
-                value={testCase.id}
-                className="pt-4"
-              >
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Input
-                    </label>
-                    <Input
-                      value={testCase.input}
-                      onChange={(e) =>
-                        updateTestCase(testCase.id, "input", e.target.value)
-                      }
-                      placeholder="Enter test input"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Expected Output
-                    </label>
-                    <Input
-                      value={testCase.expected}
-                      onChange={(e) =>
-                        updateTestCase(testCase.id, "expected", e.target.value)
-                      }
-                      placeholder="Enter expected output"
-                    />
-                  </div>
-                  <div className="flex justify-end">
-                    <Button
-                      onClick={() => onRunTestCases?.([testCase])}
-                      disabled={isRunning}
-                      size="sm"
-                    >
-                      <PlayIcon className="h-4 w-4 mr-2" />
-                      Run This Test
-                    </Button>
-                  </div>
-                </div>
-              </TabsContent>
-            ))}
-          </Tabs>
-        ) : (
-          <div className="text-center py-8 text-muted-foreground">
-            <p>No test cases added yet</p>
-            <p className="text-sm">Add a test case to get started</p>
-          </div>
-        )}
-      </div>
+        {/* Test Case Name Input */}
 
-      {/* Output Panel */}
-      <div className="flex-1 overflow-hidden">
-        <div className="h-full flex flex-col">
-          <div className="border-b p-2 px-4 flex justify-between items-center">
-            <h3 className="font-semibold">Code Output</h3>
-            {isRunning && (
-              <div className="flex items-center text-sm text-muted-foreground">
-                <Loader2Icon className="h-4 w-4 mr-2 animate-spin" />
-                Executing...
-              </div>
-            )}
-          </div>
-          <ScrollArea className="flex-1 p-4">
-            {isRunning ? (
-              <div className="flex items-center justify-center h-full text-muted-foreground">
-                <Loader2Icon className="h-8 w-8 mr-2 animate-spin" />
-                Running your code...
-              </div>
-            ) : output ? (
-              <div className="space-y-1">{parseOutput(output)}</div>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground">
-                <div className="mb-2">
-                  <CircleIcon className="h-12 w-12" />
-                </div>
-                <p className="font-medium">No output yet</p>
-                <p className="text-sm">Run your code to see the results here</p>
-              </div>
-            )}
-          </ScrollArea>
-        </div>
-      </div>
+        {/* Tab Content */}
+        <div className="flex-1">{testCases.map(renderTestCasePanel)}</div>
 
-      {/* Instructions Panel */}
-      <div className="border-t flex-1 overflow-hidden">
-        <div className="h-full flex flex-col">
-          <div className="border-b p-2 px-4">
-            <h3 className="font-semibold">Challenge Instructions</h3>
-          </div>
-          <ScrollArea ref={instructionsScrollRef} className="flex-1 p-4">
-            {checkpoint ? (
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  {isRunning ? (
-                    <Loader2Icon className="h-5 w-5 mt-0.5 animate-spin text-yellow-500" />
-                  ) : hasError ? (
-                    <XCircleIcon className="h-5 w-5 mt-0.5 text-red-500" />
-                  ) : hasSuccess ? (
-                    <CheckCircleIcon className="h-5 w-5 mt-0.5 text-green-500" />
-                  ) : (
-                    <CircleIcon className="h-5 w-5 mt-0.5 text-gray-500" />
-                  )}
-                  <div>
-                    <p className="font-medium">{checkpoint}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {isRunning
-                        ? "Executing..."
-                        : hasError
-                        ? "Failed to complete"
-                        : hasSuccess
-                        ? "Successfully completed"
-                        : "Ready to execute"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <p className="text-muted-foreground">
-                No active challenge selected
-              </p>
-            )}
-          </ScrollArea>
-        </div>
-      </div>
-
-      {/* Status Bar */}
-      <div className="border-t p-2 px-4 flex justify-between items-center text-sm">
-        <div className="flex items-center">
-          {hasError ? (
-            <>
-              <XCircleIcon className="h-4 w-4 mr-2 text-red-500" />
-              Challenge incomplete
-            </>
-          ) : hasSuccess ? (
-            <>
-              <CheckCircleIcon className="h-4 w-4 mr-2 text-green-500" />
-              Challenge completed!
-            </>
-          ) : (
-            <>
-              <CircleIcon className="h-4 w-4 mr-2 text-gray-500" />
-              Ready for code execution
-            </>
-          )}
-        </div>
-        {isRunning && (
-          <div className="flex items-center text-muted-foreground">
-            <Loader2Icon className="h-4 w-4 mr-2 animate-spin" />
-            Processing
-          </div>
-        )}
+        {/* Run Test Cases Button */}
       </div>
     </div>
   );

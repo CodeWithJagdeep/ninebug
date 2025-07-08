@@ -1,19 +1,21 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { Book, Clock, Target, Award } from "lucide-react";
+import { Book, Clock, Target, Award, Building2, Lightbulb } from "lucide-react";
 import parse from "html-react-parser";
 import DOMPurify from "dompurify";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
-
 import { selectCourseLoading } from "@/Container/reducer/slicers/coursesSlicer";
 import { CourseLoader } from "@/components/common/CourseLoader";
-import { ILessonContent } from "@/types/types";
+import { Company } from "@/Container/reducer/slicers/CodingSlicer";
 
 interface DescriptionProps {
-  content: ILessonContent;
+  content: string;
   language?: string;
   activeTab?: string;
+  companies?: Company[]; // Array of company names
+  title: string;
+  hints?: string[]; // Array of hints
 }
 
 const DIFFICULTY_STYLES = {
@@ -23,222 +25,40 @@ const DIFFICULTY_STYLES = {
   Hint: "bg-blue-500/10 text-blue-400 border-blue-500/20",
 } as const;
 
-function Description({ content, language = "javascript" }: DescriptionProps) {
+function Description({
+  title,
+  content,
+  language = "rust",
+  companies = [],
+  hints = [
+    "Think about using a hash map to store numbers you've seen",
+    "For each number, check if its complement exists in the hash map",
+    "The complement is target - current number",
+    "Remember to store the index along with the value",
+  ],
+}: DescriptionProps) {
   const loading = useSelector(selectCourseLoading);
+  const [showCompanies, setShowCompanies] = useState(false);
+  const [showHints, setShowHints] = useState(false);
 
   // Memoize sanitized content to prevent unnecessary re-renders
   const cleanContent = useMemo(() => {
-    if (!content?.text) return "";
-
-    return DOMPurify.sanitize(`
-      <div class="prose prose-invert max-w-none">
-        <p class="text-gray-300 leading-relaxed">
-          Given an array of integers <code class="bg-gray-800 px-2 py-1 rounded text-blue-400">nums</code> 
-          and an integer <code class="bg-gray-800 px-2 py-1 rounded text-blue-400">target</code>, 
-          return the indices of the two numbers such that they add up to 
-          <code class="bg-gray-800 px-2 py-1 rounded text-blue-400">target</code>.
-        </p>
-        
-        <p class="text-gray-300 leading-relaxed">
-          You may assume that each input would have exactly one solution, and you may not use the same element twice.
-        </p>
-        
-        <p class="text-gray-300 leading-relaxed">
-          You can return the answer in any order.
-        </p>
-
-        <div class="mt-8">
-          <h2 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-            <span class="w-1 h-6 bg-blue-500 rounded-full"></span>
-            Constraints
-          </h2>
-          <div class="bg-gray-800/50 rounded-lg p-4 space-y-2">
-            <div class="flex items-center gap-2 text-gray-300">
-              <span class="w-1.5 h-1.5 bg-gray-500 rounded-full"></span>
-              <code class="text-blue-400">2 ≤ nums.length ≤ 10⁴</code>
-            </div>
-            <div class="flex items-center gap-2 text-gray-300">
-              <span class="w-1.5 h-1.5 bg-gray-500 rounded-full"></span>
-              <code class="text-blue-400">-10⁹ ≤ nums[i] ≤ 10⁹</code>
-            </div>
-            <div class="flex items-center gap-2 text-gray-300">
-              <span class="w-1.5 h-1.5 bg-gray-500 rounded-full"></span>
-              <code class="text-blue-400">-10⁹ ≤ target ≤ 10⁹</code>
-            </div>
-            <div class="flex items-center gap-2 text-gray-300">
-              <span class="w-1.5 h-1.5 bg-gray-500 rounded-full"></span>
-              Exactly one valid answer exists.
-            </div>
-          </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6 mt-8">
-          <div>
-            <h3 class="text-lg font-medium text-white mb-3 flex items-center gap-2">
-              <span class="w-1 h-5 bg-green-500 rounded-full"></span>
-              Input Format
-            </h3>
-            <div class="bg-gray-900 rounded-lg p-4 border border-gray-700">
-              <pre class="text-green-400 text-sm"><code>nums = [2, 7, 11, 15]
-target = 9</code></pre>
-            </div>
-          </div>
-          
-          <div>
-            <h3 class="text-lg font-medium text-white mb-3 flex items-center gap-2">
-              <span class="w-1 h-5 bg-purple-500 rounded-full"></span>
-              Output Format
-            </h3>
-            <div class="bg-gray-900 rounded-lg p-4 border border-gray-700">
-              <pre class="text-purple-400 text-sm"><code>[0, 1]</code></pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8">
-          <h2 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-            <span class="w-1 h-6 bg-orange-500 rounded-full"></span>
-            Expected Complexities
-          </h2>
-          
-          <div class="grid md:grid-cols-2 gap-4 mb-8">
-            <div class="bg-gradient-to-r from-green-900/20 to-green-800/20 rounded-lg p-4 border border-green-700/30">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
-                <span class="text-green-400 font-medium text-sm uppercase tracking-wide">Time Complexity</span>
-              </div>
-              <code class="text-green-300 text-lg font-mono">O(n)</code>
-            </div>
-            
-            <div class="bg-gradient-to-r from-blue-900/20 to-blue-800/20 rounded-lg p-4 border border-blue-700/30">
-              <div class="flex items-center gap-2 mb-2">
-                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                <span class="text-blue-400 font-medium text-sm uppercase tracking-wide">Auxiliary Space</span>
-              </div>
-              <code class="text-blue-300 text-lg font-mono">O(1)</code>
-            </div>
-          </div>
-          
-          <div class="space-y-6 mb-8">
-            <div>
-              <h3 class="text-lg font-medium text-white mb-3 flex items-center gap-2">
-                <span class="w-1 h-5 bg-purple-500 rounded-full"></span>
-                Company Tags
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Flipkart</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Morgan Stanley</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Accolite</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Amazon</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Microsoft</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">D-E-Shaw</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Ola Cabs</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">PayU</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Visa</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Intuit</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Adobe</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Cisco</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">Qualcomm</span>
-                <span class="px-3 py-1 bg-purple-600/20 text-purple-300 rounded-full text-xs font-medium border border-purple-600/30 hover:bg-purple-600/30 transition-colors cursor-pointer">TCS</span>
-              </div>
-            </div>
-            
-            <div>
-              <h3 class="text-lg font-medium text-white mb-3 flex items-center gap-2">
-                <span class="w-1 h-5 bg-cyan-500 rounded-full"></span>
-                Topic Tags
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-cyan-600/20 text-cyan-300 rounded-full text-xs font-medium border border-cyan-600/30 hover:bg-cyan-600/30 transition-colors cursor-pointer">Arrays</span>
-                <span class="px-3 py-1 bg-cyan-600/20 text-cyan-300 rounded-full text-xs font-medium border border-cyan-600/30 hover:bg-cyan-600/30 transition-colors cursor-pointer">Searching</span>
-                <span class="px-3 py-1 bg-cyan-600/20 text-cyan-300 rounded-full text-xs font-medium border border-cyan-600/30 hover:bg-cyan-600/30 transition-colors cursor-pointer">Bit Magic</span>
-                <span class="px-3 py-1 bg-cyan-600/20 text-cyan-300 rounded-full text-xs font-medium border border-cyan-600/30 hover:bg-cyan-600/30 transition-colors cursor-pointer">Data Structures</span>
-                <span class="px-3 py-1 bg-cyan-600/20 text-cyan-300 rounded-full text-xs font-medium border border-cyan-600/30 hover:bg-cyan-600/30 transition-colors cursor-pointer">Algorithms</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="space-y-4 mb-8">
-            <div>
-              <h3 class="text-lg font-medium text-white mb-3 flex items-center gap-2">
-                <span class="w-1 h-5 bg-yellow-500 rounded-full"></span>
-                Related Interview Experiences
-              </h3>
-              <div class="space-y-2">
-                <a href="#" class="block p-3 bg-gray-800/40 hover:bg-gray-800/60 rounded-lg border border-gray-700/50 hover:border-gray-600 transition-all duration-200 group">
-                  <span class="text-yellow-400 group-hover:text-yellow-300 text-sm font-medium">Ola Interview Experience Set 11 Internship</span>
-                </a>
-                <a href="#" class="block p-3 bg-gray-800/40 hover:bg-gray-800/60 rounded-lg border border-gray-700/50 hover:border-gray-600 transition-all duration-200 group">
-                  <span class="text-yellow-400 group-hover:text-yellow-300 text-sm font-medium">Intuit Interview Experience Set 12</span>
-                </a>
-                <a href="#" class="block p-3 bg-gray-800/40 hover:bg-gray-800/60 rounded-lg border border-gray-700/50 hover:border-gray-600 transition-all duration-200 group">
-                  <span class="text-yellow-400 group-hover:text-yellow-300 text-sm font-medium">Flipkart Interview Experience For SDE 1</span>
-                </a>
-              </div>
-            </div>
-            
-            <div>
-              <h3 class="text-lg font-medium text-white mb-3 flex items-center gap-2">
-                <span class="w-1 h-5 bg-pink-500 rounded-full"></span>
-                Related Articles
-              </h3>
-              <a href="#" class="block p-3 bg-gray-800/40 hover:bg-gray-800/60 rounded-lg border border-gray-700/50 hover:border-gray-600 transition-all duration-200 group">
-                <span class="text-pink-400 group-hover:text-pink-300 text-sm font-medium">Find The Missing Number</span>
-              </a>
-            </div>
-          </div>
-
-        <div class="mt-8">
-          <h2 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-            <span class="w-1 h-6 bg-yellow-500 rounded-full"></span>
-            Example
-          </h2>
-          
-          <div class="bg-gradient-to-r from-gray-800/50 to-gray-700/50 rounded-lg p-6 border border-gray-600">
-            <div class="space-y-4">
-              <div>
-                <span class="text-sm font-medium text-gray-400 uppercase tracking-wide">Input:</span>
-                <div class="mt-1 bg-gray-900 rounded p-3 border border-gray-700">
-                  <code class="text-green-400">nums = [2, 7, 11, 15], target = 9</code>
-                </div>
-              </div>
-              
-              <div>
-                <span class="text-sm font-medium text-gray-400 uppercase tracking-wide">Output:</span>
-                <div class="mt-1 bg-gray-900 rounded p-3 border border-gray-700">
-                  <code class="text-purple-400">[0, 1]</code>
-                </div>
-              </div>
-              
-              <div>
-                <span class="text-sm font-medium text-gray-400 uppercase tracking-wide">Explanation:</span>
-                <p class="mt-1 text-gray-300">
-                  Because <code class="bg-gray-800 px-2 py-1 rounded text-blue-400">nums[0] + nums[1] == 9</code>, 
-                  we return <code class="bg-gray-800 px-2 py-1 rounded text-purple-400">[0, 1]</code>.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `);
-  }, [content?.text]);
+    if (!content) return "";
+    return DOMPurify.sanitize(content);
+  }, [content]);
 
   useEffect(() => {
     // Enhanced code highlighting with error handling
     const highlightCodeBlocks = () => {
       document.querySelectorAll("pre code").forEach((block) => {
         const element = block as HTMLElement;
-
         // Clean existing classes
         element.className = element.className
           .split(" ")
           .filter((cls) => !cls.startsWith("language-"))
           .join(" ");
-
         // Add language class
-        element.classList.add(`language-${language}`);
-
+        element.classList.add(`language-markdown`);
         try {
           hljs.highlightElement(element);
         } catch (error) {
@@ -246,10 +66,36 @@ target = 9</code></pre>
         }
       });
     };
-
     // Use requestAnimationFrame for better performance
     requestAnimationFrame(highlightCodeBlocks);
   }, [cleanContent, language]);
+
+  // Close popover when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (
+        !target.closest(".companies-popover") &&
+        !target.closest(".companies-trigger")
+      ) {
+        setShowCompanies(false);
+      }
+      if (
+        !target.closest(".hints-popover") &&
+        !target.closest(".hints-trigger")
+      ) {
+        setShowHints(false);
+      }
+    };
+
+    if (showCompanies || showHints) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showCompanies, showHints]);
 
   if (!content) {
     return (
@@ -265,9 +111,7 @@ target = 9</code></pre>
   return (
     <div className="h-full flex flex-col bg-black">
       {/* Modern Header with Glass Effect */}
-
-      {/*  */}
-
+      {/* */}
       {/* Content Area */}
       {loading ? (
         <div className="flex-1 flex items-center justify-center">
@@ -277,16 +121,13 @@ target = 9</code></pre>
         <main className="flex-1 overflow-auto">
           <div className="max-w-4xl mx-auto p-6 space-y-2">
             {/* Problem Header */}
-            <header className="space-y-2">
+            <header className="space-y-4">
               <div className="flex items-start justify-between">
-                <h1 className="text-3xl font-bold text-white leading-tight">
-                  1. Two Sum
-                </h1>
+                <h1 className="text-2xl text-white leading-tight">{title}</h1>
               </div>
-
               {/* Tags */}
               <div className="flex flex-wrap items-center gap-3">
-                {["Easy", "Hint"].map((tag) => (
+                {["Easy"].map((tag) => (
                   <span
                     key={tag}
                     className={`
@@ -302,9 +143,119 @@ target = 9</code></pre>
                     {tag}
                   </span>
                 ))}
+
+                {/* Hints Tag with Popover */}
+                <div className="relative">
+                  <button
+                    onClick={() => setShowHints(!showHints)}
+                    className="hints-trigger cursor-pointer inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium
+                             bg-blue-500/10 text-blue-400 border border-blue-500/20
+                             backdrop-blur-sm transition-all duration-200 hover:bg-blue-500/20"
+                  >
+                    <Lightbulb className="w-3 h-3" />
+                    Hints
+                  </button>
+
+                  {/* Hints Popover */}
+                  {showHints && (
+                    <div
+                      className="hints-popover absolute top-full left-0 mt-2 w-80 bg-black/95
+                               backdrop-blur-md border border-gray-700/50 rounded-lg shadow-2xl
+                               z-50 animate-in fade-in-0 zoom-in-95 duration-200"
+                    >
+                      <div className="p-4">
+                        <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                          <Lightbulb className="w-4 h-4 text-blue-400" />
+                          Hints
+                        </h3>
+                        <div className="space-y-3">
+                          {hints.map((hint, index) => (
+                            <div
+                              key={index}
+                              className="flex items-start gap-3 p-3 rounded-md bg-gray-800/30 
+                                       border border-gray-700/30 hover:bg-gray-800/50 
+                                       hover:border-gray-600/50 transition-all duration-150"
+                            >
+                              <div
+                                className="w-6 h-6 bg-gradient-to-br from-blue-500 to-cyan-500 
+                                            rounded-full flex items-center justify-center text-white 
+                                            text-xs font-semibold mt-0.5 flex-shrink-0"
+                              >
+                                {index + 1}
+                              </div>
+                              <p className="text-gray-300 text-sm leading-relaxed">
+                                {hint}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                        {hints.length === 0 && (
+                          <p className="text-gray-500 text-sm text-center py-4">
+                            No hints available
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Companies Tag with Popover */}
+                <div className="relative">
+                  <button
+                    onClick={() => setShowCompanies(!showCompanies)}
+                    className="companies-trigger cursor-pointer inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium
+                             bg-[#f3891c]/10 text-[#f3891c] border border-[#f3891c]
+                             backdrop-blur-sm transition-all duration-200 hover:bg-purple-500/20"
+                  >
+                    <Building2 className="w-3 h-3" />
+                    Companies
+                  </button>
+                  {/* Popover */}
+                  {showCompanies && (
+                    <div
+                      className="companies-popover absolute top-full left-0 mt-2 w-64 bg-black/95
+                               backdrop-blur-md border border-gray-700/50 rounded-lg shadow-2xl
+                               z-50 animate-in fade-in-0 zoom-in-95 duration-200"
+                    >
+                      <div className="p-4">
+                        <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                          <Building2 className="w-4 h-4 text-[#f3891c]" />
+                          Companies
+                        </h3>
+                        <div className="space-y-2">
+                          {companies.map((company, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center gap-3 p-2 rounded-md hover:bg-gray-800/50
+                                       transition-colors duration-150 cursor-pointer group"
+                            >
+                              <img
+                                className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500
+                                         rounded-full flex items-center justify-center text-white
+                                         text-xs font-semibold"
+                                src={company.logoUrl || ""}
+                                alt={company.name}
+                              />
+                              <span
+                                className="text-gray-300 text-sm group-hover:text-white
+                                         transition-colors duration-150"
+                              >
+                                {company.name}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                        {companies.length === 0 && (
+                          <p className="text-gray-500 text-sm text-center py-4">
+                            No companies available
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </header>
-
             {/* Main Content */}
             <div className="lesson_content prose-custom">
               {parse(cleanContent)}

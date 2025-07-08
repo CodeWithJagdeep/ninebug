@@ -8,7 +8,6 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
   DropdownMenu,
@@ -18,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
 import { selectCurrentUser } from "@/Container/reducer/slicers/userSlicer";
 import { useSelector } from "react-redux";
@@ -48,134 +47,21 @@ import {
   MenuIcon,
   XIcon,
   Crown,
+  ChevronDown,
 } from "lucide-react";
 import authServices from "@/Services/authService";
 import { motion, AnimatePresence } from "framer-motion";
+import LanguageSelect from "../common/LanguageSelect";
 
-const learningPaths = [
-  {
-    title: "Frontend Developer",
-    href: "/paths/frontend",
-    description: "Master HTML, CSS, JavaScript and modern frameworks",
-    icon: <LayoutTemplate className="w-5 h-5 text-blue-500" />,
-  },
-  {
-    title: "Full-Stack Engineer",
-    href: "/paths/fullstack",
-    description: "Learn both frontend and backend development",
-    icon: <Code className="w-5 h-5 text-purple-500" />,
-  },
-  {
-    title: "JavaScript Specialist",
-    href: "/paths/javascript",
-    description: "Deep dive into advanced JavaScript concepts",
-    icon: <BookOpen className="w-5 h-5 text-yellow-500" />,
-  },
-  {
-    title: "React Developer",
-    href: "/paths/react",
-    description: "Become proficient in React ecosystem",
-    icon: <Rocket className="w-5 h-5 text-cyan-500" />,
-  },
-  {
-    title: "Node.js Backend",
-    href: "/paths/nodejs",
-    description: "Build scalable server-side applications",
-    icon: <Server className="w-5 h-5 text-green-500" />,
-  },
-  {
-    title: "Python Developer",
-    href: "/paths/python",
-    description: "Learn Python for web, data, and automation",
-    icon: <GraduationCap className="w-5 h-5 text-emerald-500" />,
-  },
+const navItems = [
+  { title: "DSA Roadmap", href: "/roadmap" },
+  { title: "Company Prep", href: "/in/company/prep" },
+  { title: "AI Interview", href: "/interview/onboard" },
 ];
 
-const courses = [
-  {
-    title: "JavaScript Fundamentals",
-    href: "/courses/javascript-fundamentals",
-    description: "Master the core concepts of JavaScript",
-    icon: <BookOpen className="w-5 h-5 text-amber-600" />,
-    bgColor: "hover:bg-amber-500/10",
-    iconBg: "bg-amber-500/10",
-  },
-  {
-    title: "React Complete Guide",
-    href: "/courses/react-complete",
-    description: "From basics to advanced React patterns",
-    icon: <Rocket className="w-5 h-5 text-cyan-600" />,
-    bgColor: "hover:bg-cyan-500/10",
-    iconBg: "bg-cyan-500/10",
-  },
-  {
-    title: "Node.js & Express",
-    href: "/courses/node-express",
-    description: "Build backend services with Node.js",
-    icon: <Server className="w-5 h-5 text-emerald-600" />,
-    bgColor: "hover:bg-emerald-500/10",
-    iconBg: "bg-emerald-500/10",
-  },
-  {
-    title: "TypeScript Mastery",
-    href: "/courses/typescript",
-    description: "Add type safety to your JavaScript",
-    icon: <Type className="w-5 h-5 text-blue-600" />,
-    bgColor: "hover:bg-blue-500/10",
-    iconBg: "bg-blue-500/10",
-  },
-  {
-    title: "CSS & Responsive Design",
-    href: "/courses/css-responsive",
-    description: "Modern styling techniques",
-    icon: <Palette className="w-5 h-5 text-pink-600" />,
-    bgColor: "hover:bg-pink-500/10",
-    iconBg: "bg-pink-500/10",
-  },
-  {
-    title: "Database Fundamentals",
-    href: "/courses/databases",
-    description: "SQL and NoSQL database concepts",
-    icon: <Database className="w-5 h-5 text-orange-600" />,
-    bgColor: "hover:bg-orange-500/10",
-    iconBg: "bg-orange-500/10",
-  },
-];
+function PanelHeader({ children }: PropsWithChildren) {
+  const { currentUser, isAuthenticated } = useSelector(selectCurrentUser);
 
-const resources = [
-  {
-    title: "Blog",
-    href: "/blog",
-    color: "bg-purple-500/10",
-    description: "Articles on learning strategies and tech trends",
-    icon: <FileText className="w-5 h-5 text-purple-500" />,
-  },
-  {
-    title: "Community",
-    href: "/community",
-    color: "bg-green-200/10",
-    description: "Connect with other learners and mentors",
-    icon: <Users className="w-5 h-5 text-green-500" />,
-  },
-  {
-    title: "Career Guide",
-    href: "/in/career",
-    color: "bg-amber-500/10",
-    description: "Job search strategies and interview prep",
-    icon: <Briefcase className="w-5 h-5 text-amber-500" size={28} />,
-  },
-  {
-    title: "FAQ",
-    color: "bg-gray-200",
-    href: "/faq",
-    description: "Answers to common questions",
-    icon: <HelpCircle className="w-10 h-10 text-gray-500" size={28} />,
-  },
-];
-
-function PanelHeader() {
-  const user = useSelector(selectCurrentUser);
-  console.log(user);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -186,6 +72,30 @@ function PanelHeader() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (isMobileMenuOpen && !event.target.closest(".mobile-menu-container")) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isMobileMenuOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   const ListItem = React.forwardRef<
     React.ElementRef<"a">,
@@ -198,18 +108,18 @@ function PanelHeader() {
             to={props.href as string}
             ref={ref}
             className={cn(
-              "flex items-start gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 hover:text-white focus:bg-white/10",
-              "text-gray-300 hover:text-white flex-row items-center",
+              "flex items-start gap-3 select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+              "text-gray-700 hover:text-gray-900 flex-row items-center",
               className
             )}
             {...props}
           >
-            {/* <div className={`mt-0.5 text-xl p-3  ${props.color} rounded-md`}>
+            <div className={`mt-0.5 text-xl p-3 ${props.color} rounded-md`}>
               {icon}
-            </div> */}
+            </div>
             <div>
-              <div className="text-sm leading-none">{title}</div>
-              <p className="line-clamp-2 text-sm leading-snug text-gray-400">
+              <div className="text-sm font-medium leading-none">{title}</div>
+              <p className="line-clamp-2 text-sm leading-snug text-gray-600 mt-1">
                 {children}
               </p>
             </div>
@@ -220,177 +130,299 @@ function PanelHeader() {
   });
   ListItem.displayName = "ListItem";
 
-  const MobileNavItem = ({ item }: { item: any }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-      <div className="border-b border-white/10">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-between w-full py-4 px-2 text-left"
-        >
-          <div className="flex items-center gap-3">
-            {/* {item.icon} */}
-            <span>{item.title}</span>
-          </div>
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </motion.div>
-        </button>
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden"
-            >
-              <div className="pb-2 pl-8 space-y-2">
-                {item.items.map((subItem: any) => (
+  return (
+    <>
+      <header
+        className={`border-b border-gray-200 backdrop-blur-md bg-white/95 sticky top-0 z-50 transition-all duration-300 ${
+          isScrolled ? "shadow-md" : ""
+        }`}
+      >
+        <div className="mx-auto px-4 sm:px-6 lg:px-12 py-3 flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center space-x-13">
+            <Link to="/" className="flex items-center">
+              <img
+                src={Logo}
+                width={120}
+                height={32}
+                alt="Mentorsland Logo"
+                className="object-contain h-8 w-auto"
+              />
+            </Link>
+            <div className="hidden lg:flex items-center space-x-8">
+              <nav className="hidden lg:flex items-center gap-9">
+                {navItems.map((item) => (
                   <Link
-                    key={subItem.title}
-                    to={subItem.href}
-                    className="block py-2 px-2 rounded hover:bg-white/10 transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    key={item.title}
+                    to={item.href}
+                    className="text-black/90 hover:text-black text-sm transition"
                   >
-                    <div className="flex items-center gap-3">
-                      {/* {subItem.icon} */}
-                      <div>
-                        <div className="font-medium">{subItem.title}</div>
-                        <div className="text-sm text-gray-400">
-                          {subItem.description}
-                        </div>
-                      </div>
-                    </div>
+                    {item.title}
                   </Link>
                 ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  };
-
-  const mobileNavItems = [
-    {
-      title: "Learning Paths",
-      // icon: <BookOpen className="w-5 h-5 text-purple-400" />,
-      items: learningPaths,
-    },
-    {
-      title: "Courses",
-      // icon: <GraduationCap className="w-5 h-5 text-blue-400" />,
-      items: courses,
-    },
-    {
-      title: "Resources",
-      // icon: <LifeBuoy className="w-5 h-5 text-green-400" />,
-      items: resources,
-    },
-    {
-      title: "Pricing",
-      // icon: <CreditCardIcon className="w-5 h-5 text-yellow-400" />,
-      items: [
-        {
-          title: "Pricing Plans",
-          href: "/pricing",
-          description: "View our subscription options",
-          icon: <CreditCardIcon className="w-5 h-5" />,
-        },
-      ],
-    },
-  ];
-  return (
-    <header
-      className={`border-b border-white/20 backdrop-blur-md bg-white sticky top-0 z-50 transition-all duration-300`}
-    >
-      <div className="mx-auto px-4 sm:px-6 lg:px-12 py-3.5 flex items-center justify-between">
-        {/* Logo and Desktop Navigation */}
-        <div className="flex items-center space-x-4 lg:space-x-10">
-          <Link to="/" className="flex items-center">
-            <img
-              src={Logo}
-              width={120}
-              height={20}
-              alt="Mentorsland Logo"
-              className="object-contain"
-            />
-          </Link>
-
-          {/* Desktop Navigation - Hidden on mobile */}
-          <div className="hidden lg:block">
-            <div className="flex items-center space-x-8">
-              {/* Learning Paths Dropdown */}
-              <div>
-                <div className="bg-transparent text-sm hover:bg-white/10 text-black data-[state=open]:bg-white/10">
-                  <div className="flex items-center gap-2 font-normal">
-                    Problems
-                  </div>
-                </div>
-              </div>
-
-              {/* Courses Dropdown */}
-              <div>
-                <div className="bg-transparent text-sm hover:bg-white/10 text-black data-[state=open]:bg-white/10">
-                  <div className="flex items-center gap-2 font-normal">
-                    {/* <GraduationCap className="w-4 h-4 text-blue-400" /> */}
-                    Companies
-                  </div>
-                </div>
-              </div>
+              </nav>
             </div>
           </div>
-        </div>
 
-        {/* Right side - Desktop */}
-        <div className="hidden lg:flex items-center gap-8">
-          <div>
-            <img
-              src="https://assets.leetcode.com/users/Jagdeep__singh/avatar_1725206361.png"
-              alt=""
-              className="w-8 h-8 rounded-full object-cover"
-            />
+          {/* Desktop Navigation */}
+
+          {/* Desktop Right Side */}
+          <div className="hidden lg:flex items-center gap-4">
+            <LanguageSelect />
+            {children}
+            {isAuthenticated && currentUser ? (
+              <div className="flex items-center gap-4">
+                <button className="bg-gradient-to-r flex items-center py-2 px-5 text-sm rounded-md text-black from-yellow-400 to-orange-500 border-0 hover:from-yellow-500 hover:to-orange-600 transition-all">
+                  <Crown className="w-4 h-4 mr-2" />
+                  Upgrade to Premium
+                </button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <div className="relative h-9 w-9 flex items-center justify-center bg-black rounded-full">
+                      <Avatar className="h-9 w-9">
+                        <AvatarImage
+                          src={currentUser.profilePicture}
+                          alt={currentUser.name}
+                        />
+                        <AvatarFallback className="bg-gray-900 text-[#ffb76e] w-full  text-center flex items-center justify-center">
+                          <div>
+                            {" "}
+                            {currentUser.name?.[0]?.toUpperCase() || "U"}
+                          </div>
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem asChild>
+                      <Link to="/profile" className="flex items-center gap-2">
+                        <UserIcon className="h-4 w-4" />
+                        Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link
+                        to="/account/billing"
+                        className="flex items-center gap-2"
+                      >
+                        <CreditCardIcon className="h-4 w-4" />
+                        Billing
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/feedback" className="flex items-center gap-2">
+                        <MessageSquareIcon className="h-4 w-4" />
+                        Feedback
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => new authServices().logout()}
+                      className="text-red-600 focus:text-red-600"
+                    >
+                      <LogOutIcon className="h-4 w-4 mr-2" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            ) : (
+              <div className="flex gap-3 items-center">
+                <Link
+                  to="/in/auth"
+                  className="text-sm text-gray-700 hover:text-gray-900 border border-gray-300 rounded-md px-4 py-2 hover:bg-gray-50 transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/in/auth"
+                  className="bg-gray-900 text-white px-4 py-2 text-sm rounded-md hover:bg-gray-800 transition-colors"
+                >
+                  Create Account
+                </Link>
+              </div>
+            )}
           </div>
-          <div className="flex items-center space-x-4">
-            <button className="bg-blue-500 text-white px-4 py-2 text-xs font-medium hover:from-yellow-500 hover:to-orange-600 transition-all">
-              <Crown className="w-4 h-4 inline mr-2" />
-              Upgrade to Premium
+
+          {/* Mobile menu button */}
+          <div className="lg:hidden flex items-center gap-2">
+            {isAuthenticated && currentUser && (
+              <Avatar className="h-8 w-8">
+                <AvatarImage
+                  src={currentUser?.profilePicture}
+                  alt={currentUser.name}
+                  className="w-full h-full"
+                />
+                <AvatarFallback className="bg-gray-900 text-white text-sm">
+                  {currentUser.name?.[0]?.toUpperCase() || "U"}
+                </AvatarFallback>
+              </Avatar>
+            )}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300 transition-colors mobile-menu-container"
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? (
+                <XIcon className="h-5 w-5" />
+              ) : (
+                <MenuIcon className="h-5 w-5" />
+              )}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile menu button - visible only on mobile */}
-        <div className="lg:hidden flex items-center gap-4">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-white focus:outline-none"
-            aria-label="Toggle menu"
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-50 lg:hidden mobile-menu-container"
+            onClick={() => setIsMobileMenuOpen(false)}
           >
-            {isMobileMenuOpen ? (
-              <XIcon className="h-6 w-6" />
-            ) : (
-              <MenuIcon className="h-6 w-6" />
-            )}
-          </button>
-        </div>
-      </div>
-    </header>
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="fixed right-0 top-0 h-full w-80 bg-white shadow-lg overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="p-4 border-b border-gray-200">
+                <div className="flex items-center justify-between">
+                  <img
+                    src={Logo}
+                    width={100}
+                    height={24}
+                    alt="Mentorsland Logo"
+                    className="object-contain h-6 w-auto"
+                  />
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 text-gray-500 hover:text-gray-700 rounded-md"
+                    aria-label="Close menu"
+                  >
+                    <XIcon className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-4 space-y-6">
+                {/* Mobile Navigation Links */}
+                {navItems.map((item) => (
+                  <Link
+                    key={item.title}
+                    to={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-2 text-gray-700 hover:text-black"
+                  >
+                    {item.title}
+                  </Link>
+                ))}
+
+                {/* Mobile Auth Section */}
+                <div className="pt-4 border-t border-gray-200">
+                  {isAuthenticated && currentUser ? (
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage
+                            src={currentUser.profilePicture}
+                            alt={currentUser.name}
+                          />
+                          <AvatarFallback className="bg-gray-900 text-white">
+                            {currentUser.name?.[0]?.toUpperCase() || "U"}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-medium text-gray-900">
+                            {currentUser.name}
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            {currentUser.email}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Link
+                          to="/profile"
+                          className="flex items-center gap-2 p-3 text-sm text-gray-700 hover:bg-gray-50 rounded-md"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <UserIcon className="h-4 w-4" />
+                          Profile
+                        </Link>
+                        <Link
+                          to="/account/billing"
+                          className="flex items-center gap-2 p-3 text-sm text-gray-700 hover:bg-gray-50 rounded-md"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <CreditCardIcon className="h-4 w-4" />
+                          Billing
+                        </Link>
+                        <Link
+                          to="/feedback"
+                          className="flex items-center gap-2 p-3 text-sm text-gray-700 hover:bg-gray-50 rounded-md"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <MessageSquareIcon className="h-4 w-4" />
+                          Feedback
+                        </Link>
+                        <button
+                          onClick={() => {
+                            new authServices().logout();
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className="flex items-center gap-2 p-3 text-sm text-red-600 hover:bg-red-50 rounded-md w-full text-left"
+                        >
+                          <LogOutIcon className="h-4 w-4" />
+                          Logout
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <Link
+                        to="/in/auth"
+                        className="block text-center text-sm text-gray-700 hover:text-gray-900 border border-gray-300 rounded-md px-4 py-3 hover:bg-gray-50 transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        to="/in/auth"
+                        className="block text-center bg-gray-900 text-white px-4 py-3 text-sm rounded-md hover:bg-gray-800 transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        Create Account
+                      </Link>
+                    </div>
+                  )}
+                </div>
+
+                {/* Mobile Premium Button */}
+                <div className="pt-4 border-t border-gray-200">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white border-0 hover:from-yellow-500 hover:to-orange-600 transition-all"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Crown className="w-4 h-4 mr-2" />
+                    Upgrade to Premium
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 

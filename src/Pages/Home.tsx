@@ -1,30 +1,15 @@
-import { motion } from "framer-motion";
 import Header from "@/components/common/Header";
 import HeroSection from "@/components/common/HeroSection";
 import { InfiniteScrollLogos } from "@/components/common/InfiniteScrollLogos";
-import { problemSets } from "@/data/DataStore";
-import { CompanyProblemSet } from "@/components/common/CompanyProblemSet";
 import HowWeHelpSection from "@/components/common/HelpingSection";
-import ChallengeSection from "@/components/common/ChallegeUser";
 import PremiumTestimonials from "@/components/common/Testimonial";
-import CodingProblem from "@/components/common/CodePreview";
 import CodingJourney from "@/components/common/Journey";
 import ProblemPreview from "@/components/common/Preview";
-import { FaDiscord, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
-import Logo from "@/assets/logo4.png";
 import Footer from "@/components/common/Footer";
-export default function Home() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  };
+import { useTranslation } from "react-i18next";
 
+export default function Home() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-black text-gray-100 ">
       {/* <div className="bg-black h-10"></div> */}
@@ -83,17 +68,15 @@ export default function Home() {
           {/* Content */}
           <div className="relative z-10 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0 md:mr-8">
-              <h2 className="text-5xl md:text-5xl text-white mb-3">
-                Ready to Elevate Your{" "}
-                <span className="text-orange-500">DSA</span> Journey?
+              <h2 className="text-5xl  text-white mb-3">
+                {t("home.cta.title.line1")}
+                <span className="text-orange-500">
+                  {t("home.cta.title.line2")}
+                </span>
               </h2>
-              <p className="text-slate-300 mb-5 ">
-                Master data structures and algorithms with our comprehensive
-                learning path. Track progress, solve challenges, and prepare for
-                technical interviews.
-              </p>
+              <p className="text-slate-300 mb-5">{t("home.cta.subtitle")}</p>
               <button className="bg-orange-600 hover:bg-orange-700 text-white font-medium px-6 py-3 rounded-md shadow-md transition-colors">
-                Start Learning Now
+                {t("home.cta.button")}
               </button>
             </div>
 

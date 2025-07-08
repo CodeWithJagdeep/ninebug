@@ -62,6 +62,12 @@ export type SocialLinks = {
   twitter: string;
 };
 
+interface IUserTrial {
+  interviewLeft: number;
+  answersLeft: number;
+  isTrialOver: boolean;
+}
+
 export type UserProfile = {
   _id?: string;
   id?: string;
@@ -77,7 +83,7 @@ export type UserProfile = {
   oauthId: string;
   coins: number;
   enrolledCourse: string[];
-
+  trial: IUserTrial;
   // Login tracking fields
   lastLogin: Date;
   loginCount: number;
@@ -220,7 +226,7 @@ interface IProgress {
   currentCode?: Record<string, string>;
 }
 
-interface ICategory extends Document {
+interface ICategory {
   name: string;
   slug: string;
   description?: string;

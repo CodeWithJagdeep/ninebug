@@ -1,13 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { JSX, ReactNode } from "react";
+import { JSX, ReactNode, useEffect } from "react";
 import PanelHeader from "./components/dashboard/Pannelheader";
 import Sidebar from "./components/dashboard/Sidebar";
 import Home from "./Pages/Home";
 import Login from "./Pages/Auth/Login";
 import CodingPanelPage from "./Pages/Panel/Pannel";
-import DSAQuestionsDashboard from "./components/dashboard/DSAQuestions";
+import { DSAQuestionsDashboard } from "./components/dashboard/DSAQuestions";
 import CodingDashboard from "./Pages/Dashboard/Dashboard";
 import CompanyRoadmap from "./components/dashboard/CompanyRoadMap";
+import InterviewPanel from "./components/Interview/InterviewPanel";
+import Checkout from "./Pages/Checkout/Checkout";
+import CompanyBased from "./Pages/Company/CompanyPage";
+import InterviewPre from "./components/Interview/InterviewPre";
+import { useDispatch } from "react-redux";
+import { fetchRoadmaps } from "./Container/reducer/slicers/roadmapSlicer";
+import { AppDispatch } from "./Container/reducer/store";
+import { RoadmapsPage } from "./Pages/Roadmaps/Roadmaps";
+import Profile from "./Pages/Profile/Profile";
+import RoadmapCreation from "./Pages/Roadmaps/CreateRoadmap";
 
 // ✅ Properly type the props for DashboardLayout
 type DashboardLayoutProps = {
@@ -29,6 +39,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => (
 
 // ✅ Type App as a React component
 function App(): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>(); // 👈 Strongly typed dispatch
+
+  useEffect(() => {
+    dispatch(fetchRoadmaps());
+  }, [dispatch]);
   return (
     <Router>
       <Routes>
@@ -38,6 +53,15 @@ function App(): JSX.Element {
 
         {/* Problem Routes */}
         <Route path="/problem/:slug" element={<CodingPanelPage />} />
+        <Route
+          path="/profile"
+          element={
+            <DashboardLayout>
+              <Profile />{" "}
+            </DashboardLayout>
+          }
+        />
+        <Route path="/interview/onboard" element={<InterviewPre />} />
         <Route
           path="/in/problems"
           element={
@@ -56,6 +80,18 @@ function App(): JSX.Element {
             </DashboardLayout>
           }
         />
+        <Route path="/roadmap" element={<RoadmapsPage />} />
+        <Route path="/roadmap/create" element={<RoadmapCreation />} />
+        <Route path="/in/pricing" element={<Checkout />} />
+        <Route path="/in/interview" element={<InterviewPanel />} />
+        <Route
+          path="/in/dashboard/company/prep"
+          element={
+            <DashboardLayout>
+              <CompanyBased />
+            </DashboardLayout>
+          }
+        />
         <Route
           path="/in/practice/company"
           element={
@@ -64,9 +100,6 @@ function App(): JSX.Element {
             </DashboardLayout>
           }
         />
-
-        {/* Catch-all route for 404 */}
-        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </Router>
   );

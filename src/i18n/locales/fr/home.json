@@ -1,0 +1,201 @@
+{
+  "home": {
+    "cta": {
+      "title": {
+        "line1": "Prêt à Élever Votre",
+        "line2": "Parcours SDA"
+      },
+      "subtitle": "Maîtrisez les structures de données et algorithmes avec notre parcours d'apprentissage complet. Suivez vos progrès, résolvez des défis et préparez-vous aux entretiens techniques.",
+      "button": "Commencer à Apprendre"
+    }
+  },
+  "hero": {
+    "title": "Réussissez les entretiens de codage sans vous épuiser",
+    "subtitle": "Reconnaissez les modèles, pas les problèmes. Entraînez votre cerveau, pas votre chance.",
+    "startFreeTrial": "Commencer l'essai gratuit",
+    "watchDemo": "Voir la démo"
+  },
+  "feedback": {
+    "aiAssistant": "Assistant IA",
+    "aiIntro": "Voici comment améliorer votre solution :",
+    "testCasesFailed": "Cas de test(s) échoué(s)",
+    "input": "Entrée",
+    "expected": "Attendu",
+    "received": "Reçu",
+    "aisuggestion": "🧠 Optimisation de Two Sum\n\nVotre solution actuelle vérifie peut-être chaque paire — c'est du temps O(n²).\n\nVoici comment l'améliorer :\n\n1. **Pensez à stocker les éléments déjà vus** — pouvez-vous mémoriser leurs positions ?\n2. **Et si vous pouviez trouver instantanément le complément (cible - nombre actuel) ?** Cela éviterait la boucle interne.\n3. **Essayez d'utiliser une table de hachage** pour suivre les indices. Les recherches sont rapides — O(1).\n4. Parcourez le tableau une fois et décidez quoi stocker ou vérifier à chaque étape.\n5. N'oubliez pas de gérer les cas particuliers, comme les valeurs en double ou l'absence de paire valide.\n\nPouvez-vous construire cette logique étape par étape ?"
+  },
+  "editor": {
+    "runCode": {
+      "default": "Exécuter le code",
+      "running": "En cours d'exécution...",
+      "typing": "En cours de saisie..."
+    },
+    "fileName": "{{question}}.py",
+    "testCases": "Cas de test",
+    "passedCount": "{{passed}}/{{total}} Réussis",
+    "loadingEditor": "Chargement de l'éditeur..."
+  },
+  "header": {
+    "navigation": {
+      "learningPaths": "Parcours d'apprentissage",
+      "courses": "Cours",
+      "resources": "Ressources",
+      "pricing": "Tarification"
+    },
+    "userMenu": {
+      "profile": "Profil",
+      "accountBilling": "Compte & Facturation",
+      "myHome": "Mon Accueil",
+      "helpCenter": "Centre d'aide",
+      "giveFeedback": "Donner un avis",
+      "logOut": "Se déconnecter",
+      "myAccount": "Mon Compte"
+    },
+    "auth": {
+      "login": "Connexion",
+      "createAccount": "Créer un compte gratuit",
+      "createAccountShort": "Créer un compte"
+    }
+  },
+  "currency": {
+    "symbol": "CFA",
+    "name": "West African CFA franc"
+  },
+  "infiniteScroll": {
+    "getHiredText": "Faites-vous embaucher par les meilleures entreprises"
+  },
+  "preview": {
+    "practicePlatform": "Plateforme d'entraînement",
+    "master": "Maîtriser",
+    "codingInterviews": "Entretiens de Codage",
+    "practiceDescription": "Pratiquez des problèmes des meilleures entreprises technologiques avec nos parcours d'apprentissage structurés et ensembles de questions spécifiques aux entreprises",
+    "developersCount": "50k+ Développeurs",
+    "successRate": "95% Taux de Réussite",
+    "industryApproved": "Approuvé par l'Industrie",
+    "learningRoadmap": "Parcours d'Apprentissage",
+    "companyQuestions": "Questions par Entreprise",
+    "randomPractice": "Pratique Aléatoire",
+    "exploreMoreCompanies": "Explorer plus d'entreprises",
+    "dailyChallenge": "Défi Quotidien",
+    "dailyChallengeDescription": "Un nouveau problème chaque jour",
+    "randomMix": "Mélange Aléatoire",
+    "randomMixDescription": "Sélection organisée de problèmes",
+    "minuteSprint": "Sprint de 15 Minutes",
+    "sprintDescription": "Problèmes faciles pour échauffement",
+    "startTodaysChallenge": "Commencer le Défi d'Aujourd'hui",
+    "shuffleNow": "Mélanger maintenant",
+    "startSprint": "Commencer le Sprint",
+    "signInRequired": "Connexion Requise",
+    "signInMessage": "Veuillez vous connecter pour accéder aux problèmes et commencer à pratiquer les questions d'entretien de codage.",
+    "continueWithGoogle": "Continuer avec Google"
+  },
+  "journey": {
+    "header": {
+      "title": "Votre Voyage de",
+      "journey": "Programmation",
+      "subtitle": "Du problème à la solution, avec un guidage par IA à chaque étape"
+    },
+    "section1": {
+      "title": "Commencez Votre Voyage de Programmation",
+      "description": "Commencez par comprendre le problème. Lisez attentivement, analysez les exigences et planifiez votre approche. Toute grande solution commence par une compréhension claire."
+    },
+    "section2": {
+      "title": "Écrivez Votre Code",
+      "description": "Transformez vos idées en code. Utilisez l'éditeur pour implémenter votre solution étape par étape. Ne vous souciez pas de la perfection - concentrez-vous d'abord sur la logique."
+    },
+    "section3": {
+      "title": "Quand Ça Ne Fonctionne Pas",
+      "description": "Bloqué ? Tests échoués ? Pas de souci ! Cela fait partie de l'apprentissage. Chaque développeur fait face à des défis - c'est ainsi que nous progressons."
+    },
+    "section4": {
+      "title": "Assistance par IA",
+      "description": "Obtenez une aide personnalisée quand vous en avez besoin. Notre IA analyse votre code, comprend vos erreurs et fournit des suggestions sur mesure."
+    },
+    "editor": {
+      "ready": "Prêt à coder ?"
+    },
+    "testFailed": "Test Échoué",
+    "dontWorry": "Ne vous inquiétez pas ! Cela fait partie de l'apprentissage.",
+    "ai": {
+      "title": "Assistant IA",
+      "suggestion1": "💡 J'ai remarqué qu'il manque une instruction return dans votre fonction.",
+      "suggestion2": "🔍 Essayez d'ajouter une gestion d'erreur pour les cas limites.",
+      "suggestion3": "⚡ Envisagez d'utiliser une table de hachage pour une complexité O(n).",
+      "applyButton": "Appliquer les Suggestions"
+    }
+  },
+  "helping": {
+    "header": {
+      "tagline": "Comment Nous Accélérons Votre Succès",
+      "title": {
+        "line1": "Transformez Votre",
+        "line2": "Parcours de Codage"
+      },
+      "subtitle": "Notre plateforme intelligente combine une IA de pointe avec des méthodologies éprouvées pour offrir des expériences d'apprentissage personnalisées qui s'adaptent à votre rythme et à vos objectifs uniques."
+    },
+    "steps": {
+      "step1": {
+        "title": "Reconnaissance de Modèles par IA",
+        "description": "Des algorithmes avancés analysent vos modèles de codage et identifient avec précision les lacunes de connaissances, créant une feuille de route d'apprentissage personnalisée adaptée à vos forces et domaines d'amélioration."
+      },
+      "step2": {
+        "title": "Moteur d'Apprentissage Adaptatif",
+        "description": "Notre système intelligent s'adapte continuellement à votre progression, fournissant des ensembles de problèmes personnalisés qui correspondent à votre niveau de compétence et aux exigences des entreprises cibles."
+      },
+      "step3": {
+        "title": "Simulation d'Entretien Réel",
+        "description": "Vivez des scénarios d'entretien authentiques avec les principales entreprises technologiques, avec des retours en temps réel, des analyses de performance et une préparation complète aux entretiens techniques."
+      }
+    },
+    "cta": {
+      "explore": "Explorer la Fonctionnalité"
+    }
+  },
+  "testimonials": {
+    "trusted": "Fiable par les développeurs du monde entier",
+    "title": "Construire l'avenir de l'éducation technologique",
+    "subtitle": "Rejoignez des centaines de développeurs qui accélèrent leur apprentissage avec notre plateforme. Nous façonnons la prochaine génération d'éducation technologique - faites partie du voyage.",
+    "items": [
+      {
+        "quote": "C'est comme avoir un développeur senior qui me guide 24h/24.",
+        "text": "Je résous des problèmes complexes en deux fois moins de temps. Les retours personnalisés changent la donne.",
+        "author": "Utilisateur Bêta Précoce",
+        "role": "Développeur Full-stack"
+      },
+      {
+        "quote": "Les parcours d'apprentissage sont incroyablement bien structurés",
+        "text": "Enfin une plateforme qui décompose les concepts avancés sans les simplifier à l'excès.",
+        "author": "Membre de la Communauté Discord",
+        "role": "Ingénieur Frontend"
+      },
+      {
+        "quote": "Les retours en temps réel ont transformé mon flux de travail",
+        "text": "Soumettre du code et obtenir une analyse alimentée par l'IA en quelques secondes a considérablement amélioré mes compétences.",
+        "author": "Testeur Alpha Privé",
+        "role": "Développeur Backend"
+      }
+    ]
+  },
+  "footer": {
+    "description": "Maîtrisez les Structures de Données et Algorithmes avec un guidage par IA et des problèmes réels d'entreprises.",
+    "sections": {
+      "platform": "Plateforme",
+      "resources": "Ressources",
+      "legal": "Légal"
+    },
+    "links": {
+      "platform": [
+        "Pratique",
+        "Tarifs",
+        "Défi Quotidien",
+        "Préparation aux Entretiens"
+      ],
+      "resources": ["Documentation", "Blog", "Communauté", "Webinaires"],
+      "legal": ["Confidentialité", "Conditions", "Sécurité", "Cookies"],
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'Utilisation",
+      "cookies": "Politique de Cookies"
+    },
+    "copyright": "© {{year}} Ninebug DSA. Tous droits réservés."
+  }
+}

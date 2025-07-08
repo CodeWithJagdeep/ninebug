@@ -1,45 +1,23 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
 import {
   Route,
-  List,
-  Link,
-  Map,
-  ChartLine,
-  Search,
-  Cog,
   Building,
-  Dice1,
   CalendarDays,
   Shuffle,
   Clock,
-  Timer,
   Flame,
-  Star,
-  TrendingUp,
-  Zap,
   Target,
   Trophy,
   Users,
-  ChevronUp,
-  ChevronDown,
   Lock,
 } from "lucide-react";
 import Problemset from "../Problem/Problemset";
 import { FcGoogle } from "react-icons/fc";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../ui/table";
 import { TbArrowNarrowDown } from "react-icons/tb";
+import { useTranslation } from "react-i18next";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -55,151 +33,6 @@ const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };
-
-const roadmapTopics = [
-  {
-    title: "Arrays & Strings",
-    description: "Foundation data structures",
-    icon: List,
-    questions: 25,
-    gradient: "from-violet-500 via-purple-500 to-blue-500",
-    badgeColor: "bg-gradient-to-r from-violet-500 to-purple-500",
-    difficulty: "Beginner",
-    popularity: 95,
-    mockQuestions: [
-      {
-        title: "Two Sum Problem",
-        difficulty: "Easy",
-        color: "text-emerald-400",
-      },
-      {
-        title: "Maximum Subarray",
-        difficulty: "Medium",
-        color: "text-amber-400",
-      },
-      { title: "Merge Intervals", difficulty: "Hard", color: "text-rose-400" },
-    ],
-  },
-  {
-    title: "Linked Lists",
-    description: "Pointer manipulation mastery",
-    icon: Link,
-    questions: 18,
-    gradient: "from-emerald-500 via-teal-500 to-cyan-500",
-    badgeColor: "bg-gradient-to-r from-emerald-500 to-teal-500",
-    difficulty: "Intermediate",
-    popularity: 87,
-    mockQuestions: [
-      {
-        title: "Reverse Linked List",
-        difficulty: "Easy",
-        color: "text-emerald-400",
-      },
-      { title: "Detect Cycle", difficulty: "Medium", color: "text-amber-400" },
-      {
-        title: "Merge K Sorted Lists",
-        difficulty: "Hard",
-        color: "text-rose-400",
-      },
-    ],
-  },
-  {
-    title: "Trees & Graphs",
-    description: "Hierarchical data exploration",
-    icon: Map,
-    questions: 32,
-    gradient: "from-rose-500 via-pink-500 to-fuchsia-500",
-    badgeColor: "bg-gradient-to-r from-rose-500 to-pink-500",
-    difficulty: "Advanced",
-    popularity: 92,
-    mockQuestions: [
-      {
-        title: "Binary Tree Traversal",
-        difficulty: "Easy",
-        color: "text-emerald-400",
-      },
-      { title: "Graph BFS/DFS", difficulty: "Medium", color: "text-amber-400" },
-      {
-        title: "Dijkstra's Algorithm",
-        difficulty: "Hard",
-        color: "text-rose-400",
-      },
-    ],
-  },
-  {
-    title: "Dynamic Programming",
-    description: "Optimization & memoization",
-    icon: TrendingUp,
-    questions: 28,
-    gradient: "from-orange-500 via-red-500 to-pink-500",
-    badgeColor: "bg-gradient-to-r from-orange-500 to-red-500",
-    difficulty: "Expert",
-    popularity: 78,
-    mockQuestions: [
-      {
-        title: "Fibonacci Sequence",
-        difficulty: "Easy",
-        color: "text-emerald-400",
-      },
-      {
-        title: "Longest Common Subsequence",
-        difficulty: "Medium",
-        color: "text-amber-400",
-      },
-      { title: "Edit Distance", difficulty: "Hard", color: "text-rose-400" },
-    ],
-  },
-  {
-    title: "Algorithms",
-    description: "Sorting, searching & more",
-    icon: Zap,
-    questions: 22,
-    gradient: "from-amber-500 via-yellow-500 to-lime-500",
-    badgeColor: "bg-gradient-to-r from-amber-500 to-yellow-500",
-    difficulty: "Intermediate",
-    popularity: 89,
-    mockQuestions: [
-      { title: "Binary Search", difficulty: "Easy", color: "text-emerald-400" },
-      {
-        title: "Quick Sort Implementation",
-        difficulty: "Medium",
-        color: "text-amber-400",
-      },
-      {
-        title: "Search in Rotated Array",
-        difficulty: "Hard",
-        color: "text-rose-400",
-      },
-    ],
-  },
-  {
-    title: "System Design",
-    description: "Scalable architecture patterns",
-    icon: Cog,
-    questions: 35,
-    gradient: "from-indigo-500 via-blue-500 to-cyan-500",
-    badgeColor: "bg-gradient-to-r from-indigo-500 to-blue-500",
-    difficulty: "Expert",
-    popularity: 84,
-    mockQuestions: [
-      {
-        title: "Design URL Shortener",
-        difficulty: "Medium",
-        color: "text-amber-400",
-      },
-      {
-        title: "Design Chat System",
-        difficulty: "Hard",
-        color: "text-rose-400",
-      },
-      {
-        title: "Design Search Engine",
-        difficulty: "Hard",
-        color: "text-rose-400",
-      },
-    ],
-  },
-];
 
 const companies = [
   {
@@ -366,101 +199,8 @@ const companies = [
   },
 ];
 
-const TopicCard = ({ topic }: { topic: (typeof roadmapTopics)[0] }) => {
-  const IconComponent = topic.icon;
-
-  return (
-    <motion.div
-      variants={itemVariants}
-      whileHover={{ scale: 1.02, y: -4 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    >
-      <Card className="relative overflow-hidden bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-slate-700/50 hover:border-white/20 transition-all duration-500 group backdrop-blur-sm">
-        <div
-          className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500"
-          style={{
-            background: `linear-gradient(135deg, ${topic.gradient
-              .split(" ")
-              .join(", ")})`,
-          }}
-        />
-
-        <CardContent className="p-6 relative z-10">
-          <div className="flex items-start justify-between mb-6">
-            <div className="flex items-start space-x-4">
-              <div
-                className={`w-14 h-14 bg-gradient-to-r ${topic.gradient} rounded-2xl flex items-center justify-center shadow-lg shadow-black/25`}
-              >
-                <IconComponent className="text-white" size={24} />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center space-x-2 mb-1">
-                  <h4 className="text-xl font-bold text-white">
-                    {topic.title}
-                  </h4>
-                  <Badge
-                    variant="outline"
-                    className="text-xs border-slate-600 text-slate-400"
-                  >
-                    {topic.difficulty}
-                  </Badge>
-                </div>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  {topic.description}
-                </p>
-                <div className="flex items-center space-x-4 mt-3">
-                  <div className="flex items-center space-x-1">
-                    <Star className="w-3 h-3 text-amber-400 fill-current" />
-                    <span className="text-slate-400 text-xs">
-                      {topic.popularity}% popularity
-                    </span>
-                  </div>
-                  <div
-                    className={`${topic.badgeColor} text-white px-3 py-1 rounded-full text-xs font-medium shadow-sm`}
-                  >
-                    {topic.questions} Problems
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="space-y-3 blur-[2px] group-hover:blur-[3px] transition-all duration-300">
-              {topic.mockQuestions.map((question, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-between p-4 bg-slate-800/60 rounded-xl border border-slate-700/50"
-                >
-                  <span className="text-slate-300 font-medium">
-                    {question.title}
-                  </span>
-                  <Badge
-                    variant="outline"
-                    className={`${question.color} border-current/20 text-xs`}
-                  >
-                    {question.difficulty}
-                  </Badge>
-                </div>
-              ))}
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent flex items-end justify-center pb-6">
-              <Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                <Zap className="w-4 h-4 mr-2" />
-                Start Learning
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
-  );
-};
-
 const CompanyCard = ({ key, company }: any) => {
   const [expanded, setExpanded] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const { isAuthenticated } = { isAuthenticated: false };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -550,6 +290,7 @@ const CompanyCard = ({ key, company }: any) => {
 };
 
 export default function ProblemPreview() {
+  const { t } = useTranslation();
   return (
     <div className="py-20 bg-black relative overflow-hidden">
       {/* Animated background elements */}
@@ -575,20 +316,19 @@ export default function ProblemPreview() {
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-sm border border-orange-500/30 rounded-full px-4 py-2 mb-2">
               <Flame className="w-4 h-4 text-orange-400" />
               <span className="text-white text-sm font-medium">
-                Practice Platform
+                {t("preview.practicePlatform")}
               </span>
             </div>
-            <h1 className="text-5xl lg:text-5xl text-white mb-0 leading-tight">
-              Master{" "}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-0 leading-tight">
+              {t("preview.master")}{" "}
               <span className="bg-[#ed7519] bg-clip-text text-transparent">
-                Coding Interviews
+                {t("preview.codingInterviews")}
               </span>
             </h1>
-            <p className="text-base max-w-5xl lg:text-xl text-slate-300 leading-relaxed">
-              Practice problems from top tech companies with our structured
-              learning paths and company-specific question sets
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed">
+              {t("preview.practiceDescription")}
             </p>
-            <div className="flex items-center justify-start space-x-8 mt-8">
+            <div className="flex flex-wrap gap-4 sm:gap-8 items-center justify-start mt-6">
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-blue-400" />
                 <span className="text-slate-400">50k+ Developers</span>
@@ -605,28 +345,28 @@ export default function ProblemPreview() {
           </motion.div>
 
           <Tabs defaultValue="roadmap" className="w-full">
-            <div className="flex justify-start mb-12">
+            <div className="flex justify-start mb-5">
               <TabsList className="bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 shadow-2xl rounded-none h-12">
                 <TabsTrigger
                   value="roadmap"
                   className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg px-5 h-full text-slate-400 hover:text-white transition-all duration-300"
                 >
                   <Route className="mr-2" size={18} />
-                  Learning Roadmap
+                  {t("preview.learningRoadmap")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="companies"
                   className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg px-8 py-4 text-slate-400 hover:text-white transition-all duration-300"
                 >
                   <Building className="mr-2" size={18} />
-                  Company Questions
+                  {t("preview.companyQuestions")}
                 </TabsTrigger>
                 <TabsTrigger
                   value="random"
                   className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg px-8 py-4 text-slate-400 hover:text-white transition-all duration-300"
                 >
                   <Shuffle className="mr-2" size={18} />
-                  Random Practice
+                  {t("preview.randomPractice")}
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -651,7 +391,6 @@ export default function ProblemPreview() {
                 viewport={{ once: true }}
                 className="grid grid-cols-1"
               >
-                
                 {companies.map((company, index) => (
                   <CompanyCard
                     key={index}
@@ -666,7 +405,7 @@ export default function ProblemPreview() {
                       <div className="flex items-center space-x-4">
                         <div>
                           <h3 className="text-xl font-bold text-center text-white">
-                            Explore more companies
+                            {t("preview.exploreMoreCompanies")}
                           </h3>
                         </div>
                       </div>
@@ -687,17 +426,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          Daily Challenge
+                          {t("preview.dailyChallenge")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          One new problem every day
+                          {t("preview.dailyChallengeDescription")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 font-medium rounded-md">
-                        Start Today's Challenge
+                        {t("preview.startTodaysChallenge")}
                       </button>
                     </div>
                   </div>
@@ -710,17 +449,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          Random Mix
+                          {t("preview.randomMix")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          Curated selection of problems
+                          {t("preview.randomMix")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="border-orange-600 border hover:bg-orange-700 text-white px-6 py-2 font-medium rounded-md">
-                        Shuffle now
+                        {t("preview.shuffleNow")}
                       </button>
                     </div>
                   </div>
@@ -733,17 +472,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          15-Minute Sprint
+                          {t("preview.minuteSprint")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          Quick easy problems for warm-up
+                          {t("preview.sprintDescription")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="w-full px-5 bg-white border border-white hover:bg-green-700 text-black text-sm font-medium py-2 rounded-md">
-                        Start Sprint
+                        {t("preview.startSprint")}
                       </button>
                     </div>
                   </div>
@@ -756,17 +495,17 @@ export default function ProblemPreview() {
                       </div>
                       <div>
                         <h4 className="text-xl font-semibold text-white">
-                          Random Mix
+                          {t("preview.randomMix")}
                         </h4>
                         <p className="text-slate-400 text-sm">
-                          Curated selection of problems
+                          {t("preview.curatedSelection")}
                         </p>
                       </div>
                     </div>
 
                     <div className="relative">
                       <button className="border-orange-600 border hover:bg-orange-700 text-white px-6 py-2 font-medium rounded-md">
-                        Start Sprint
+                        {t("preview.startSprint")}
                       </button>
                     </div>
                   </div>

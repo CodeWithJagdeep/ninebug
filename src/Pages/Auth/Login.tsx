@@ -54,8 +54,8 @@ function Login() {
       )._handlePostRequest();
 
       // Update application state
-      if (response?.user) {
-        dispatch(setUser(response.user));
+      if (response?.data?.user) {
+        dispatch(setUser(response.data.user));
       } else {
         throw new Error("User data not returned from API");
       }
@@ -63,7 +63,7 @@ function Login() {
       const searchParams = new URLSearchParams(window.location.search);
       const redirectPath = searchParams.get("redirect");
 
-      window.location.href = redirectPath || "/";
+      window.location.href = redirectPath || "/in/dashboard";
     } catch (err: unknown) {
       let errorMessage: string =
         "An unexpected error occurred. Please try again.";
@@ -138,9 +138,9 @@ function Login() {
                 <div className="mt-12">
                   {isLoading ? (
                     <div className="py-3 px-7 cursor-pointer border border-black/70 rounded-lg flex items-center justify-center h-12 text-white/80">
-                      <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1"></div>
-                      <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1 delay-150"></div>
-                      <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1 delay-300"></div>
+                      <div className="w-4 h-4 bg-black animate-bounce rounded-full ml-1"></div>
+                      <div className="w-4 h-4 bg-black animate-bounce rounded-full ml-1 delay-150"></div>
+                      <div className="w-4 h-4 bg-black animate-bounce rounded-full ml-1 delay-300"></div>
                     </div>
                   ) : (
                     <div
@@ -154,10 +154,10 @@ function Login() {
                   )}
                   <div className="w-full items-center mt-3">
                     {isLoading ? (
-                      <div className="py-3 px-7 cursor-pointer border border-white/70 rounded-lg flex items-center justify-center h-12 text-white/80">
-                        <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1"></div>
-                        <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1 delay-150"></div>
-                        <div className="w-4 h-4 bg-white animate-bounce rounded-full ml-1 delay-300"></div>
+                      <div className="py-3 px-7 cursor-pointer border border-black/70 rounded-lg flex items-center justify-center h-12 text-white/80">
+                        <div className="w-4 h-4 bg-black animate-bounce rounded-full ml-1"></div>
+                        <div className="w-4 h-4 bg-black animate-bounce rounded-full ml-1 delay-150"></div>
+                        <div className="w-4 h-4 bg-black animate-bounce rounded-full ml-1 delay-300"></div>
                       </div>
                     ) : (
                       <div
@@ -175,12 +175,15 @@ function Login() {
                   {/* <div className="my-5 w-full h-[1px] bg-white/10"></div> */}
                 </div>
                 <div className="text-black/60 mt-14 text-sm text-center">
-                  By continuing, you agree to MentorsLand&apos;s
+                  By continuing, you agree to Ninebug&apos;s
                   <Link to="/terms" className="text-black underline ml-1">
                     Terms of Service
                   </Link>{" "}
                   and
-                  <Link to="/privacy" className="text-black        underline ml-1">
+                  <Link
+                    to="/privacy"
+                    className="text-black        underline ml-1"
+                  >
                     Privacy Policy
                   </Link>
                   .

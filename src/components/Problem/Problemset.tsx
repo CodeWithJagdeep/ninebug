@@ -1,3 +1,4 @@
+import { selectCurrentUser } from "@/Container/reducer/slicers/userSlicer";
 import {
   Award,
   ChevronUp,
@@ -34,6 +35,7 @@ import {
 } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { useSelector } from "react-redux";
 
 type ProblemDifficulty = "Easy" | "Medium" | "Hard";
 type ProblemStatus = "solved" | "attempted" | "unsolved";
@@ -268,7 +270,8 @@ const problems: Problem[] = [
   },
 ];
 
-const Problemset: React.FC<ProblemsetProps> = ({ isAuthenticated = false }) => {
+const Problemset: React.FC<ProblemsetProps> = () => {
+  const { isAuthenticated } = useSelector(selectCurrentUser);
   const [activeTab, setActiveTab] = useState<string>("algorithms");
   const [sortBy, setSortBy] = useState<keyof Problem>("id");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -280,23 +283,6 @@ const Problemset: React.FC<ProblemsetProps> = ({ isAuthenticated = false }) => {
   const [topicFilter, setTopicFilter] = useState<string>("all");
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
     {}
-  );
-
-  // Get unique values for filters
-  const companies = useMemo(
-    () => [...new Set(problems.flatMap((p) => p.companies))].sort(),
-    []
-  );
-  const topics = useMemo(
-    () => [...new Set(problems.flatMap((p) => p.topics))].sort(),
-    []
-  );
-  const categories = useMemo(
-    () =>
-      [
-        ...new Set(problems.map((p) => p.category).filter(Boolean)),
-      ].sort() as string[],
-    []
   );
 
   // Filter and sort problems
@@ -481,7 +467,7 @@ const Problemset: React.FC<ProblemsetProps> = ({ isAuthenticated = false }) => {
       )}
 
       <div
-        className={`mx-auto px-4 py-8 ${
+        className={`mx-auto px-4 py-2 ${
           !isAuthenticated ? "blur-sm pointer-events-none" : ""
         }`}
       >

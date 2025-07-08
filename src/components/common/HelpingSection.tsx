@@ -12,8 +12,9 @@ import {
   Target,
   Brain,
 } from "lucide-react";
-
+import { useTranslation } from "react-i18next";
 const HowWeHelpSection = () => {
+  const { t } = useTranslation();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -39,9 +40,8 @@ const HowWeHelpSection = () => {
 
   const steps = [
     {
-      title: "AI-Powered Pattern Recognition",
-      description:
-        "Advanced algorithms analyze your coding patterns and identify knowledge gaps with precision, creating a personalized learning roadmap tailored to your unique strengths and areas for improvement.",
+      title: t("helping.steps.step1.title"),
+      description: t("helping.steps.step1.description"),
       icon: Brain,
       accent: "from-blue-500 to-cyan-400",
       iconBg: "bg-blue-500/10",
@@ -118,9 +118,8 @@ const HowWeHelpSection = () => {
       ),
     },
     {
-      title: "Adaptive Learning Engine",
-      description:
-        "Our intelligent system continuously adapts to your progress, delivering personalized problem sets that match your skill level and target company requirements, ensuring optimal learning efficiency.",
+      title: t("helping.steps.step2.title"),
+      description: t("helping.steps.step2.description"),
       icon: Target,
       accent: "from-purple-500 to-pink-400",
       iconBg: "bg-purple-500/10",
@@ -204,9 +203,8 @@ const HowWeHelpSection = () => {
       ),
     },
     {
-      title: "Real-World Interview Simulation",
-      description:
-        "Experience authentic interview scenarios from leading tech companies with real-time feedback, performance analytics, and comprehensive preparation for technical interviews.",
+      title: t("helping.steps.step3.title"),
+      description: t("helping.steps.step3.description"),
       icon: Zap,
       accent: "from-orange-500 to-red-400",
       iconBg: "bg-orange-500/10",
@@ -291,7 +289,7 @@ const HowWeHelpSection = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/5 via-transparent to-transparent"></div>
       <div className="absolute top-0 left-0 w-full h-full opacity-20"></div>
 
-      <div className="px-10 mx-auto relative">
+      <div className="px-4 sm:px-6 md:px-8 lg:px-10 mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -306,21 +304,19 @@ const HowWeHelpSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <span className="px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full text-sm text-white ">
-              How We Accelerate Your Success
+              {t("helping.header.tagline")}
             </span>
           </motion.div>
 
-          <h2 className="text-7xl md:text-7xl mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent leading-tight">
-            Transform Your
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 bg-gradient-to-r from-white via-white to-gray-300 bg-clip-text text-transparent leading-tight">
+            {t("helping.header.title.line1")}
             <span className="block bg-[#f48a1c] bg-clip-text text-transparent">
-              Coding Journey
+              {t("helping.header.title.line2")}
             </span>
           </h2>
 
-          <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
-            Our intelligent platform combines cutting-edge AI with proven
-            methodologies to deliver personalized learning experiences that
-            adapt to your unique pace and goals.
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+            {t("helping.header.subtitle")}
           </p>
         </motion.div>
 
@@ -344,7 +340,7 @@ const HowWeHelpSection = () => {
           >
             {steps.map((step, index) => (
               <motion.div key={index} className="relative">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 sm:gap-24 lg:gap-32 items-center">
                   {/* Content */}
                   <motion.div
                     className={`${
@@ -368,7 +364,9 @@ const HowWeHelpSection = () => {
                         </motion.div>
                         <div>
                           <span className="text-sm font-medium text-gray-400 mb-1 block">
-                            Step {String(index + 1).padStart(2, "0")}
+                            {t("helping.stepNumber", {
+                              number: String(index + 1).padStart(2, "0"),
+                            })}
                           </span>
                           <h3 className="text-2xl font-bold text-white">
                             {step.title}
@@ -376,7 +374,7 @@ const HowWeHelpSection = () => {
                         </div>
                       </div>
 
-                      <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                      <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-8">
                         {step.description}
                       </p>
 
@@ -385,7 +383,7 @@ const HowWeHelpSection = () => {
                         whileTap={{ scale: 0.98 }}
                         className={`group flex cursor-pointer items-center text-transparent bg-gradient-to-r ${step.accent} bg-clip-text font-semibold text-lg`}
                       >
-                        Explore Feature
+                        {t("helping.cta.explore")}
                         <ArrowRight className="ml-3 h-5 w-5 text-blue-400 group-hover:text-purple-400 transition-colors duration-300" />
                       </motion.button>
                     </div>

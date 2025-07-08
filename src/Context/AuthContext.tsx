@@ -1,4 +1,3 @@
-// src/context/AuthContext.tsx
 import { setProgress } from "@/Container/reducer/slicers/ProgressSlicer";
 import {
   selectCurrentUser,
@@ -6,7 +5,6 @@ import {
   clearUser,
 } from "@/Container/reducer/slicers/userSlicer";
 import authServices from "@/Services/authService";
-import { UserProfile } from "@/types/types";
 import {
   createContext,
   useContext,
@@ -19,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 interface AuthContextType {
-  user: UserProfile | null;
+  user: any | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   logout: () => Promise<void>;
@@ -58,13 +56,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       setIsLoading(true);
       const auth: any = await new authServices().verifyToken();
-
+      console.log(auth);
       if (auth?.user) {
+        console.log(auth.user);
         dispatch(setUser(auth.user));
         dispatch(setProgress(auth?.progress ?? []));
         setIsAuthenticated(true);
       } else {
-        dispatch(setUser({} as any));
         setIsAuthenticated(false);
       }
     } catch (error: any) {
@@ -75,8 +73,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (status === 401 || status === 403) {
         await logout(); // Only logout on token expiry or unauth
       } else {
-        // Log but don't force logout
-        dispatch(setUser({} as any));
         setIsAuthenticated(false);
       }
     } finally {
