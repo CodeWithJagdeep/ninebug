@@ -14,6 +14,7 @@ import { Separator } from "../ui/separator"; // Changed import
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox"; // Added Checkbox import
 import { ScrollArea } from "../ui/scroll-area";
+import { useTranslation } from "react-i18next";
 
 // Type definitions
 type Difficulty = "Easy" | "Medium" | "Hard";
@@ -53,6 +54,7 @@ interface SolvedProblems {
 
 // Main component
 const CompanyRoadmap: React.FC = () => {
+  const { t } = useTranslation();
   // Data with proper typing
   const companyData: CompanyRoadmapData = {
     Google: {
@@ -213,7 +215,18 @@ const CompanyRoadmap: React.FC = () => {
       [problemId]: !prev[problemId],
     }));
   };
+  // Translation functions
+  const translateDifficulty = (difficulty: Difficulty) => {
+    return t(`difficultys.${difficulty.toLowerCase()}`);
+  };
 
+  const translateFrequency = (frequency: Frequency) => {
+    return t(`frequencys.${frequency.toLowerCase().replace(" ", "-")}`);
+  };
+
+  const translateTopic = (topic: string) => {
+    return t(`topics.${topic.toLowerCase().replace(" ", "-")}`, topic);
+  };
   // Get all unique topics from selected companies
   const getAllTopics = (): Topic[] => {
     const topics = new Set<Topic>();
@@ -411,9 +424,11 @@ const CompanyRoadmap: React.FC = () => {
       <div className="shadow-md overflow-hidden rounded-lg">
         {/* Header with stats */}
         <div className="bg-black py-4">
-          <h1 className="text-2xl font-bold text-white">Company Roadmap</h1>
+          <h1 className="text-2xl font-bold text-white">
+            {t("companyRoadmap.title")}
+          </h1>
           <p className="mt-1 text-blue-100">
-            Filter and practice questions by company, topic, and difficulty
+            {t("companyRoadmap.description")}
           </p>
         </div>
 
@@ -425,7 +440,9 @@ const CompanyRoadmap: React.FC = () => {
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
                   <Filter className="h-5 w-5 text-white" />
-                  <h2 className="text-xl font-semibold text-white">Filters</h2>
+                  <h2 className="text-xl font-semibold text-white">
+                    {t("filter.title")}
+                  </h2>
                 </div>
                 {hasActiveFilters && (
                   <Badge
@@ -443,7 +460,7 @@ const CompanyRoadmap: React.FC = () => {
               {/* Companies Filter */}
               <div className="space-y-2 ">
                 <Label className="text-sm font-medium text-white">
-                  Companies
+                  {t("filter.companies")}
                 </Label>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -454,10 +471,12 @@ const CompanyRoadmap: React.FC = () => {
                     >
                       <span className="truncate">
                         {selectedCompanies.length === 0
-                          ? "Select companies"
+                          ? t("filter.selectCompanies")
                           : selectedCompanies.length === 1
                           ? selectedCompanies[0]
-                          : `${selectedCompanies.length} companies`}
+                          : `${selectedCompanies.length} ${t(
+                              "filter.companies"
+                            )}`}
                       </span>
                       <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -466,7 +485,7 @@ const CompanyRoadmap: React.FC = () => {
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <h4 className="font-medium leading-none text-white">
-                          Select Companies
+                          {t("filter.selectCompanies")}
                         </h4>
                         {selectedCompanies.length > 0 && (
                           <Button
@@ -475,7 +494,7 @@ const CompanyRoadmap: React.FC = () => {
                             onClick={() => setSelectedCompanies([])}
                             className="h-auto p-1 text-xs text-white"
                           >
-                            Clear
+                            {t("action.clear")}
                           </Button>
                         )}
                       </div>
@@ -660,7 +679,7 @@ const CompanyRoadmap: React.FC = () => {
               {/* Advanced Options */}
               <div className="space-y-2">
                 <Label className="text-sm font-medium text-white">
-                  Options
+                  {t("filter.options")}
                 </Label>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -668,7 +687,7 @@ const CompanyRoadmap: React.FC = () => {
                       variant="outline"
                       className="w-full justify-between h-10 bg-black text-white"
                     >
-                      <span>Advanced</span>
+                      <span>{t("filter.advanced")}</span>
                       <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </PopoverTrigger>
@@ -676,7 +695,7 @@ const CompanyRoadmap: React.FC = () => {
                     <div className="space-y-6">
                       <div className="space-y-3">
                         <h4 className="font-medium leading-none text-white">
-                          Minimum Frequency
+                          {t("filter.minFrequency")}
                         </h4>
                         <Select
                           value={minFrequency}
@@ -701,7 +720,7 @@ const CompanyRoadmap: React.FC = () => {
                                 value={freq}
                                 className="text-sm"
                               >
-                                {freq}
+                                {translateFrequency(freq)}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -727,7 +746,7 @@ const CompanyRoadmap: React.FC = () => {
                                   : "bg-black hover:bg-white hover:text-black"
                               }`}
                             >
-                              {mode.charAt(0).toUpperCase() + mode.slice(1)}
+                              {t(`filter.${mode}`)}
                             </Button>
                           ))}
                         </div>
@@ -742,7 +761,7 @@ const CompanyRoadmap: React.FC = () => {
             {hasActiveFilters && (
               <div className="flex flex-wrap gap-2  rounded-lg">
                 <span className="text-sm text-white block w-full">
-                  Active filters:
+                  {t("filter.activeFilters")}:
                 </span>
                 {selectedCompanies.map((company) => (
                   <Badge
@@ -803,10 +822,10 @@ const CompanyRoadmap: React.FC = () => {
                 />
               </svg>
               <h3 className="mt-2 text-sm font-medium text-white">
-                No questions found
+                {t("companyRoadmap.noQuestionsFound")}
               </h3>
               <p className="mt-1 text-sm text-gray-300">
-                Try adjusting your filters to see more results.
+                {t("companyRoadmap.adjustFilters")}
               </p>
             </div>
           ) : (
@@ -818,43 +837,43 @@ const CompanyRoadmap: React.FC = () => {
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white/80 uppercase tracking-wider"
                     >
-                      Status
+                      {t("table.status")}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white/80 uppercase tracking-wider"
                     >
-                      Title
+                      {t("table.title")}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white/80 uppercase tracking-wider"
                     >
-                      Company
+                      {t("table.company")}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white/80 uppercase tracking-wider"
                     >
-                      Topic
+                      {t("table.topic")}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white/80 uppercase tracking-wider"
                     >
-                      Difficulty
+                      {t("table.difficulty")}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white/80 uppercase tracking-wider"
                     >
-                      Frequency
+                      {t("table.frequency")}
                     </th>
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-white/80 uppercase tracking-wider"
                     >
-                      Action
+                      {t("table.action")}
                     </th>
                   </tr>
                 </thead>
@@ -915,7 +934,7 @@ const CompanyRoadmap: React.FC = () => {
                           className="text-blue-400 hover:text-blue-300 flex items-center"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          Solve
+                          {t("action.solve")}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-4 w-4 ml-1"

@@ -193,5 +193,409 @@
       "cookies": "Política de Cookies"
     },
     "copyright": "© {{year}} Ninebug DSA. Todos los derechos reservados."
-  }
+  },
+  "login": {
+    "logoAlt": "Logo de Mentorsland",
+    "heading": "Programa. Aprende. Destaca.",
+    "subheading": "Tu viaje al dominio de la programación comienza aquí.",
+    "continueGoogle": "Continuar con Google",
+    "continueGithub": "Continuar con Github",
+    "termsText": "Al continuar, aceptas los",
+    "termsLink": "Términos de Servicio",
+    "andText": "y la",
+    "privacyLink": "Política de Privacidad",
+    "errors": {
+      "default": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+      "incompleteData": "Datos de usuario incompletos recibidos del proveedor",
+      "noUserData": "Datos de usuario no devueltos por la API",
+      "accountExists": "Este correo ya está asociado con otro método de inicio de sesión.",
+      "popupClosed": "La ventana emergente de inicio de sesión se cerró antes de completar la autenticación.",
+      "networkError": "Error de red. Por favor, revisa tu conexión a internet.",
+      "accountDisabled": "Esta cuenta ha sido deshabilitada. Contacta al soporte.",
+      "invalidCredentials": "Credenciales inválidas. Por favor, inténtalo de nuevo.",
+      "authFailed": "Autenticación fallida."
+    }
+  },
+  "profile": {
+    "title": "Configuración de Perfil",
+    "subtitle": "Administra tu perfil y preferencias de entrevistas",
+    "overview": "Resumen del Perfil",
+    "personalInfo": "Información Personal",
+    "personalDesc": "Administra los detalles y preferencias de tu perfil",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "emailPending": "Verificación de correo pendiente",
+    "linkedin": "Perfil de LinkedIn",
+    "github": "Perfil de GitHub",
+    "targetCompany": "Empresa Objetivo",
+    "location": "Ubicación",
+    "saveProfile": "Guardar Perfil",
+    "savingProfile": "Guardando Perfil...",
+    "connectedAccounts": "Cuentas Conectadas",
+    "connectedDesc": "Administra tus integraciones de terceros y conexiones OAuth",
+    "githubConnected": "Conectado a {username}",
+    "githubNotConnected": "Conecta tu cuenta de GitHub para funciones mejoradas",
+    "googleConnect": "Conecta tu cuenta de Google para autenticación sin problemas",
+    "comingSoon": "Próximamente",
+    "notificationPrefs": "Preferencias de Notificación",
+    "notificationDesc": "Personaliza cómo recibes actualizaciones y recordatorios sobre tu cuenta",
+    "emailNotifications": "Notificaciones por Correo",
+    "emailDesc": "Recibe actualizaciones importantes y alertas por correo electrónico",
+    "pushNotifications": "Notificaciones Push",
+    "pushDesc": "Recibe notificaciones instantáneas en tu navegador",
+    "weeklyReport": "Reporte Semanal de Progreso",
+    "weeklyDesc": "Recibe un resumen completo de tu progreso semanal",
+    "savePrefs": "Guardar Preferencias",
+    "savingPrefs": "Guardando Preferencias...",
+    "accountSecurity": "Seguridad de la Cuenta",
+    "securityDesc": "Monitorea y administra la configuración de seguridad de tu cuenta y sesiones activas",
+    "accountProtected": "Cuenta Protegida",
+    "verified": "Tu correo está verificado y tu cuenta está completamente segura.",
+    "notVerified": "Por favor verifica tu dirección de correo para mejorar la seguridad de tu cuenta.",
+    "verifyEmail": "Verificar Correo",
+    "activeSessions": "Sesiones Activas",
+    "currentSession": "Sesión Actual",
+    "lastActive": "Última actividad: Ahora mismo",
+    "securityActions": "Acciones de Seguridad",
+    "viewHistory": "Ver Historial de Inicios",
+    "downloadData": "Descargar Datos",
+    "changePassword": "Cambiar Contraseña",
+    "signOutAll": "Cerrar Sesión en Todos los Dispositivos",
+    "dangerZone": "Zona Peligrosa",
+    "dangerDesc": "Estas acciones son irreversibles. Por favor procede con precaución.",
+    "deleteAccount": "Eliminar Cuenta",
+    "deactivateAccount": "Desactivar Cuenta",
+    "levels": {
+      "beginner": "Nivel Principiante",
+      "intermediate": "Nivel Intermedio",
+      "advanced": "Nivel Avanzado"
+    },
+    "coins": "monedas",
+    "trialStatus": "Estado de Prueba:",
+    "remaining": "Restante:",
+    "connected": "Conectado",
+    "disconnect": "Desconectar",
+    "connectGithub": "Conectar GitHub",
+    "profilePictureAlt": "Foto de perfil",
+    "placeholders": {
+      "fullName": "Ingresa tu nombre completo",
+      "targetCompany": "Empresa que buscas para tu próximo rol",
+      "city": "Ciudad",
+      "region": "Estado/Región",
+      "country": "País"
+    },
+    "tabProfile": "Perfil",
+    "tabSecurity": "Seguridad"
+  },
+  "roadmap": {
+    "title": "Practicar Preguntas DSA",
+    "description": "Acelera tu carrera con problemas esenciales de estructuras de datos y algoritmos. Nuestra colección incluye datos de frecuencia e información de empresas para ayudarte a enfocarte en las preguntas más importantes para entrevistas técnicas.",
+    "aboutRoadmap": "Sobre este Plan",
+    "problems": "problemas",
+    "complete": "completado",
+    "askedBy": "Preguntado por:",
+    "difficulty": {
+      "easy": "Fácil",
+      "medium": "Medio",
+      "hard": "Difícil"
+    },
+    "frequency": {
+      "veryHigh": "Muy Alta",
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja",
+      "rare": "Rara"
+    },
+    "markComplete": "Marcar como completo",
+    "markIncomplete": "Marcar como incompleto",
+    "ariaLabels": {
+      "problem": "Problema: {title}",
+      "moduleContent": "módulo-{id}-contenido",
+      "moduleExpanded": "módulo-{id}-expandido"
+    }
+  },
+  "roadmaps": {
+    "title": "Practicar Preguntas DSA",
+    "description": "Acelera tu carrera con problemas esenciales de estructuras de datos y algoritmos. Nuestra colección incluye datos de frecuencia e información de empresas para ayudarte a enfocarte en las preguntas más importantes para entrevistas técnicas.",
+    "aboutRoadmap": "Sobre este Plan"
+  },
+    "common": {
+      "start": "Inicio",
+      "configuration": "Configuración",
+      "complete": "Completo",
+      "back": "Atrás",
+      "selected": "Seleccionado",
+      "processing": "Procesando"
+    },
+    "roadmapCreation": {
+      "title": "Constructor de Ruta de Estructuras de Datos y Algoritmos",
+      "subtitle": "Chatea con Jennie para crear tu ruta de aprendizaje personalizada",
+      "assistantTitle": "Asistente de Ruta DSA",
+      "welcomeMessage": "¡Hola! 👋 Soy Jennie, tu asistente de ruta DSA. ¡Creemos un camino de aprendizaje personalizado para ti!",
+      "aiOption": "Recomendación con IA",
+      "customOption": "Ruta Personalizada",
+      "aiGreeting": "¡Buena elección! Te haré algunas preguntas para generar tu ruta personalizada.",
+      "aiStart": "¡Vamos a ello!",
+      "customGreeting": "¿Prefieres personalizar tu propio camino? ¡Genial! Comencemos seleccionando el tipo de empresa objetivo.",
+      "companyQuestion": "¿Qué tipo de empresa te interesa?",
+      "selectCompany": "Selecciona el tipo de empresa objetivo",
+      "levelQuestion": "¿Cuál es tu nivel actual en DSA?",
+      "timeQuestion": "¿Cuánto tiempo puedes dedicar diariamente?",
+      "selectTopics": "Selecciona tus temas de enfoque",
+      "nextSelectTopics": "Siguiente: Seleccionar Temas",
+      "previewRoadmap": "Vista previa de la ruta",
+      "generateRoadmap": "Generar Ruta",
+      "processing": "Creando Tu Ruta Personalizada",
+      "processingSubtitle": "Analizando tus preferencias y optimizando tu ruta de aprendizaje...",
+      "processingMessage1": "¡Entendido! Espera mientras analizo tu empresa objetivo y nivel de habilidad...",
+      "processingMessage2": "Un poco más... Estoy optimizando tu ruta de aprendizaje según las tendencias de la industria.",
+      "processingMessage3": "¡Casi listo! Finalizando tu ruta personalizada...",
+      "processingSteps": [
+        "Analizando tus preferencias de empresa...",
+        "Evaluando tu nivel actual...",
+        "Optimizando la estructura de aprendizaje...",
+        "Generando problemas de práctica...",
+        "Finalizando tu ruta personalizada..."
+      ],
+      "roadmapReady": "¡Finalmente! Tu ruta está lista 🎉 Puedo ayudarte a dominar tu viaje DSA. ¿Te gustaría comenzar a aprender ahora?",
+      "roadmapCustomReady": "¡Buena selección! Aquí está tu ruta personalizada. ¿Listo para comenzar tu viaje de aprendizaje?",
+      "summaryTitle": "Resumen de la Ruta",
+      "aiGenerated": "Generado por IA",
+      "customBuilt": "Personalizado",
+      "targetLabel": "Objetivo",
+      "targetCompany": "Empresa Objetivo",
+      "levelLabel": "Nivel",
+      "timeLabel": "Tiempo Diario",
+      "selectedTopics": "Temas Seleccionados",
+      "timelineTitle": "Cronograma Estimado",
+      "timelineDescription": "Basado en tus selecciones y el horario de práctica recomendado",
+      "startLearning": "Comenzar Aprendizaje",
+      "makeChanges": "Hacer Cambios",
+      "adjustTopics": "Ajustar Temas",
+      "userResponse": "Estoy apuntando a empresas {company} en nivel {level} con {timeframe} de práctica diaria.",
+      "userCompanyResponse": "Me estoy preparando para empresas {company}.",
+      "userTopicsResponse": "Quiero enfocarme en {count} temas: {topics}."
+    },
+      "pricing": {
+        "trustedBy": "Confiable para más de 10,000 desarrolladores",
+        "heroTitle": "Elige tu camino hacia la",
+        "heroHighlight": "Excelencia",
+        "heroSubtitle": "Ya sea que estés preparándote para tu primera entrevista técnica o apuntando a FAANG, nuestra plataforma con IA se adapta a tus necesidades. Comienza gratis y escala a medida que creces.",
+        "mostPopular": "Más Popular",
+        "readyToStart": "¿Listo para comenzar con {plan}?",
+        "forDuration": "por {duration}",
+        "continueToCheckout": "Continuar al Pago",
+        "featuresTitle1": "Todo lo que necesitas para",
+        "featuresTitle2": "Triunfar",
+        "howItWorksTitle1": "Cómo aceleramos tu",
+        "howItWorksTitle2": "Éxito",
+        "howItWorksSubtitle": "Nuestra plataforma impulsada por IA está diseñada para maximizar tu eficiencia de aprendizaje y rendimiento en entrevistas",
+        "finalCta": {
+          "title": "¿Listo para transformar tus habilidades en entrevistas?",
+          "subtitle": "Únete a miles de desarrolladores que han conseguido sus trabajos soñados con nuestra plataforma.",
+          "button": "Elige tu Plan"
+        },
+        "plans": {
+          "free": {
+            "name": "Plan Gratis",
+            "duration": "Para siempre",
+            "bestFor": "Perfecto para empezar",
+            "cta": "Comenzar Gratis"
+          },
+          "oneDay": {
+            "name": "Acceso AI por 1 Día",
+            "duration": "24 horas",
+            "bestFor": "Sesión rápida con IA",
+            "cta": "Obtener Acceso por 1 Día"
+          },
+          "monthly": {
+            "name": "Pro Mensual",
+            "duration": "30 días",
+            "bestFor": "Preparación completa para entrevistas",
+            "cta": "Comenzar Prueba Pro"
+          }
+        },
+        "features": {
+          "access500": "Acceso a 500+ preguntas de DSA",
+          "companyRoadmap": "Ruta de preguntas por empresa",
+          "frequencySets": "Conjuntos de problemas por frecuencia",
+          "structuredRoadmap": "Ruta estructurada de DSA",
+          "dailyTracker": "Seguimiento diario de XP y aprendizaje",
+          "basicAnalysis": "Análisis básico de código",
+          "unlimitedAI": "Simulaciones ilimitadas de entrevistas con IA",
+          "realTimeFeedback": "Retroalimentación y pistas en tiempo real",
+          "allProblems": "Todos los problemas de práctica incluidos",
+          "codeExecution": "Ejecución y análisis de código",
+          "priorityAccess": "Acceso prioritario al servidor",
+          "performanceInsights": "Información de rendimiento",
+          "allIncluded": "Todo en Planes Gratis y de 1 Día",
+          "unlimitedFeedback": "Retroalimentación y entrevistas ilimitadas con IA",
+          "advancedAnalytics": "Análisis avanzado de rendimiento",
+          "premiumModules": "Módulos de aprendizaje premium",
+          "prioritySupport": "Soporte prioritario",
+          "customPlans": "Planes de estudio personalizados",
+          "mockInterviews": "Grabaciones de entrevistas simuladas"
+        },
+        "allFeatures": {
+          "accessAll": "Acceso a todos los problemas de codificación",
+          "companyBanks": "Bancos de preguntas específicas por empresa",
+          "patternDrills": "Ejercicios de reconocimiento de patrones",
+          "advancedAnalysis": "Análisis avanzado de código",
+          "progressDashboard": "Tablero de seguimiento de progreso",
+          "mobileFriendly": "Interfaz móvil",
+          "contentUpdates": "Actualizaciones regulares de contenido",
+          "communitySupport": "Soporte prioritario de la comunidad"
+        },
+        "aifeatures": {
+          "aiPattern": {
+            "title": "Reconocimiento de Patrones con IA",
+            "description": "Nuestros algoritmos avanzados analizan tus patrones de codificación para identificar brechas de conocimiento y crear rutas de aprendizaje personalizadas adaptadas a tus objetivos."
+          },
+          "adaptiveLearning": {
+            "title": "Motor de Aprendizaje Adaptativo",
+            "description": "El sistema se adapta inteligentemente a tu progreso, entregando conjuntos de problemas que coinciden con tu nivel de habilidad y empresas objetivo para una preparación óptima."
+          },
+          "interviewSimulation": {
+            "title": "Simulación de Entrevista Real",
+            "description": "Experimenta escenarios de entrevista auténticos con retroalimentación en tiempo real, análisis de rendimiento completos y recomendaciones detalladas de mejora."
+          }
+        }
+      },
+        "interview": {
+          "title": "Entrevista Técnica",
+          "status": "Sesión en Vivo",
+          "difficulty": {
+            "Easy": "Fácil",
+            "Medium": "Medio",
+            "Hard": "Difícil"
+          },
+          "instructor": {
+            "name": "Jennie",
+            "role": "Instructora de Entrevistas"
+          },
+          "approach": {
+            "title": "Describe tu Enfoque para Resolver el Problema",
+            "placeholder": "Escribe tu enfoque en detalle...\n\n• ¿Qué estructuras de datos usarás?\n• ¿Cuál es la complejidad temporal?\n• ¿Hay casos límite a considerar?",
+            "submit": "Enviar Enfoque",
+            "voice": {
+              "start": "Iniciar entrada de voz",
+              "stop": "Detener entrada de voz",
+              "listening": "Escuchando..."
+            },
+            "markdown": "Soporta Markdown",
+            "characterLimit": "/2000 caracteres"
+          },
+          "coding": {
+            "language": "Lenguaje:",
+            "viewApproach": "Ver Enfoque",
+            "submit": "Enviar"
+          },
+          "messages": {
+            "hint": "Pista",
+            "feedback": "Retroalimentación"
+          },
+          "time": {
+            "format": "mm:ss"
+          }
+        },
+          "roadmapss": {
+            "title": "Top 75 Preguntas de LeetCode",
+            "description": "Preguntas esenciales de entrevistas técnicas de las principales empresas",
+            "questionsFound": "preguntas encontradas",
+            "completed": "completadas",
+            "questions": "preguntas",
+            "askedBy": "Preguntado por",
+            "noQuestionsFound": "No se encontraron preguntas",
+            "adjustFilters": "Intenta ajustar tus filtros o consulta de búsqueda"
+          },
+          "actions": {
+            "saveProgress": "Guardar Progreso",
+            "clearAllFilters": "Limpiar Todos los Filtros"
+          },
+          "filters": {
+            "title": "Filtros",
+            "advancedFilters": "Filtros Avanzados",
+            "companies": "Empresas",
+            "difficulty": "Dificultad",
+            "frequency": "Frecuencia"
+          },
+          "search": {
+            "placeholder": "Buscar preguntas..."
+          },
+          "difficulty": {
+            "easy": "Fácil",
+            "medium": "Medio",
+            "hard": "Difícil"
+          },
+          "frequency": {
+            "very-high": "Muy Alta",
+            "high": "Alta",
+            "medium": "Media",
+            "low": "Baja",
+            "rare": "Rara"
+          },
+          "companies": {
+            "Google": "Google",
+            "Microsoft": "Microsoft",
+            "Amazon": "Amazon",
+            "Facebook": "Facebook",
+            "Apple": "Apple"
+          },
+            "companyRoadmap": {
+              "title": "Ruta de Empresas",
+              "description": "Filtra y practica preguntas por empresa, tema y dificultad",
+              "noQuestionsFound": "No se encontraron preguntas",
+              "adjustFilters": "Intenta ajustar tus filtros para ver más resultados"
+            },
+            "filter": {
+              "title": "Filtros",
+              "active": "activos",
+              "companies": "Empresas",
+              "selectCompanies": "Seleccionar empresas",
+              "topics": "Temas",
+              "selectTopics": "Seleccionar temas",
+              "difficulty": "Dificultad",
+              "selectDifficulty": "Seleccionar dificultad",
+              "options": "Opciones",
+              "advanced": "Avanzado",
+              "minFrequency": "Frecuencia Mínima",
+              "viewMode": "Modo de Vista",
+              "filtered": "Filtrado",
+              "all": "Todo",
+              "activeFilters": "Filtros activos"
+            },
+            "difficultys": {
+              "easy": "Fácil",
+              "medium": "Medio",
+              "hard": "Difícil"
+            },
+            "frequencys": {
+              "very-high": "Muy Alta",
+              "high": "Alta",
+              "medium": "Media",
+              "low": "Baja"
+            },
+            "topics": {
+              "arrays": "Arreglos",
+              "strings": "Cadenas",
+              "linked-lists": "Listas Enlazadas",
+              "trees": "Árboles",
+              "graphs": "Grafos",
+              "dynamic-programming": "Programación Dinámica",
+              "other": "Otro"
+            },
+            "table": {
+              "status": "Estado",
+              "title": "Título",
+              "company": "Empresa",
+              "topic": "Tema",
+              "difficulty": "Dificultad",
+              "frequency": "Frecuencia",
+              "action": "Acción"
+            },
+            "action": {
+              "clear": "Limpiar",
+              "solve": "Resolver"
+            }
+          
 }

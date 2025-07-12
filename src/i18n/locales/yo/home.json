@@ -197,5 +197,408 @@
       "cookies": "Ìlànà Kuki"
     },
     "copyright": "© {{year}} Ninebug DSA. Gbogbo ẹ̀tọ́ wa ni ipamọ."
-  }
+  },
+  "login": {
+    "logoAlt": "Àmì Ìdánimọ Mentorsland",
+    "heading": "Koodu. Kọ́. Dára jù.",
+    "subheading": "Ìrìn-àjò rẹ si iṣẹ́ koodu bẹ̀rẹ̀ níbí.",
+    "continueGoogle": "Tẹ̀síwájú pẹ̀lú Google",
+    "continueGithub": "Tẹ̀síwájú pẹ̀lú Github",
+    "termsText": "Nípa tẹ̀síwájú, o fọwọ́sowọ́pọ̀ sí",
+    "termsLink": "Àwọn Òfin Iṣẹ́",
+    "andText": "àti",
+    "privacyLink": "Ìlànà Ìpamọ́",
+    "errors": {
+      "default": "Aṣiṣe aláìlérò ṣẹlẹ̀. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kansí.",
+      "incompleteData": "Àwọn data olùlo tí kò tán gba látọ̀dọ̀ olùpèsè",
+      "noUserData": "Àwọn data olùlo kò padà látọ̀dọ̀ API",
+      "accountExists": "Ímeèlì yìí ti sopọ̀ mọ́ ọ̀nà ìwọlé mìíràn tẹ́lẹ̀.",
+      "popupClosed": "Ìwọlé popup ti pa ṣáájú kí o tó parí ìjẹ́rìí.",
+      "networkError": "Aṣiṣe nẹ́tíwọ̀kì. Jọ̀wọ́ ṣàyẹ̀wò ìkanṣíṣe ẹ̀rọ ayélujára rẹ.",
+      "accountDisabled": "Àkóònù yìí ti dènà. Kan sí àtìlẹ́yìn.",
+      "invalidCredentials": "Àwọn ìwé ẹ̀rí àìṣe. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kansí.",
+      "authFailed": "Ìjẹ́rìí kò ṣẹ́."
+    }
+  },
+  "profile": {
+    "title": "Ètò Profaili",
+    "subtitle": "Ṣakoso profaili rẹ ati àwọn ìfẹ́ràn ìbéèrè",
+    "overview": "Àkójọ Profaili",
+    "personalInfo": "Àlàyé Ẹni",
+    "personalDesc": "Ṣakoso àwọn alaye profaili rẹ ati ìfẹ́ràn",
+    "fullName": "Orúkọ Kíkún",
+    "email": "Adirẹsi Ímeèlì",
+    "emailPending": "Ìjẹ́rìí ímeèlì ń dẹ́kun",
+    "linkedin": "Profaili LinkedIn",
+    "github": "Profaili GitHub",
+    "targetCompany": "Ilé-iṣẹ́ Àfojúsùn",
+    "location": "Ibùdó",
+    "saveProfile": "Fi Profaili Pamọ́",
+    "savingProfile": "Ń Fi Profaili Pamọ́...",
+    "connectedAccounts": "Àwọn Àkàǹtì Tí a Sopọ̀",
+    "connectedDesc": "Ṣakoso àwọn ìsopọ̀ ẹlòmíràn àti àwọn ìsopọ̀ OAuth rẹ",
+    "githubConnected": "Ti sopọ̀ sí {username}",
+    "githubNotConnected": "Sopọ àkàǹtì GitHub rẹ fún àwọn ẹ̀rọ àfikún",
+    "googleConnect": "Sopọ àkàǹtì Google rẹ fún ìjẹ́rìí aláìṣeṣe",
+    "comingSoon": "Ń bọ̀ Láìpẹ́",
+    "notificationPrefs": "Àwọn Ìfẹ́ràn Ìkìlọ̀",
+    "notificationDesc": "Ṣe àṣààyàn bí o ṣe ń gba àwọn ìmúdójúwọ́ àti ìrántí nípa àkàǹtì rẹ",
+    "emailNotifications": "Àwọn Ìkìlọ̀ Ímeèlì",
+    "emailDesc": "Gba àwọn ìmúdójúwọ́ pàtàkì àti ìkìlọ̀ nípasẹ̀ ímeèlì",
+    "pushNotifications": "Àwọn Ìkìlọ̀ Push",
+    "pushDesc": "Gba àwọn ìkìlọ̀ lẹ́sẹ̀kẹsẹ̀ nínú ìwọ̀wé wẹ́ẹ̀bù rẹ",
+    "weeklyReport": "Ìjábọ̀ Ìlọsíwájú Ọ̀sẹ̀",
+    "weeklyDesc": "Gba àkójọ kíkún ti ìlọsíwájú rẹ ọ̀sẹ̀ kan",
+    "savePrefs": "Fi Àwọn Ìfẹ́ràn Pamọ́",
+    "savingPrefs": "Ń Fi Àwọn Ìfẹ́ràn Pamọ́...",
+    "accountSecurity": "Ààbò Àkàǹtì",
+    "securityDesc": "Ṣàkíyèsí àti ṣàkoso àwọn ìṣètò ààbò àkàǹtì rẹ àti àwọn ìgbàṣe tí ń ṣiṣẹ́",
+    "accountProtected": "Àkàǹtì Ti ni Ààbò",
+    "verified": "Ímeèlì rẹ ti jẹ́rìí àti àkàǹtì rẹ ti ni ààbò kíkún.",
+    "notVerified": "Jọ̀wọ́ jẹ́rìí adirẹsi ímeèlì rẹ láti mú kí ààbò àkàǹtì rẹ pọ̀ sí i.",
+    "verifyEmail": "Jẹ́rìí Ímeèlì",
+    "activeSessions": "Àwọn Ìgbàṣe Tí ń Ṣiṣẹ́",
+    "currentSession": "Ìgbàṣe Lọ́wọ́lọ́wọ́",
+    "lastActive": "Ìgbàṣe tí o kẹ́hìn: Lọ́wọ́lọ́wọ́",
+    "securityActions": "Àwọn Ìṣe Ààbò",
+    "viewHistory": "Wo Ìtàn Ìwọlé",
+    "downloadData": "Ṣe Ìgbalẹ̀ Dátà",
+    "changePassword": "Yi Òrọ̀ìgbaniwọ́lé Padà",
+    "signOutAll": "Wọ́nú Gbogbo Ẹ̀rọ",
+    "dangerZone": "Agbègbè Ewu",
+    "dangerDesc": "Àwọn ìṣe wọ̀nyí kò ní ìtúnṣe. Jọ̀wọ́ tẹ̀síwájú pẹ̀lú ìṣòro.",
+    "deleteAccount": "Pa Àkàǹtì Rẹ́",
+    "deactivateAccount": "Mu Àkàǹtì Dúró",
+    "levels": {
+      "beginner": "Ipele Abẹrẹ",
+      "intermediate": "Ipele Arin",
+      "advanced": "Ipele Giga"
+    },
+    "coins": "owo",
+    "trialStatus": "Ipo Idanwo:",
+    "remaining": "Ti o ku:",
+    "connected": "Ti sopọ",
+    "disconnect": "Ya sopọ",
+    "connectGithub": "Sopọ GitHub",
+    "profilePictureAlt": "Aworan profaili",
+    "placeholders": {
+      "fullName": "Tẹ orukọ rẹ kikun sii",
+      "targetCompany": "Ile-iṣẹ ti o npa lọ fun ipo rẹ ti o nbọ",
+      "city": "Ilu",
+      "region": "Ipinle/Agbegbe",
+      "country": "Orilẹ-ede"
+    },
+    "tabProfile": "Profaili",
+    "tabSecurity": "Aabo"
+  },
+  "roadmap": {
+    "title": "Ṣe Iṣẹ Awọn Ibeere DSA",
+    "description": "Mu iṣẹ rẹ yara pẹlu awọn iṣoro pataki ti awọn iṣopọ data ati awọn algorithm. Akojọ aṣayan wa ni pẹlu data iṣẹju ati alaye ile-iṣẹ lati ran ọ lọwọ lati ṣe idojukọ lori awọn ibeere pataki julọ fun awọn ibeere imọ-ẹrọ.",
+    "aboutRoadmap": "Nipa Eto yii",
+    "problems": "awọn iṣoro",
+    "complete": "paripa",
+    "askedBy": "Ti a beere nipasẹ:",
+    "difficulty": {
+      "easy": "Rọrun",
+      "medium": "Aarin",
+      "hard": "Lile"
+    },
+    "frequency": {
+      "veryHigh": "Pupọ Pupọ",
+      "high": "Pupọ",
+      "medium": "Aarin",
+      "low": "Kekere",
+      "rare": "Airo"
+    },
+    "markComplete": "Fi ami bi ti ṣe paripa",
+    "markIncomplete": "Fi ami bi ti ko ṣe paripa",
+    "ariaLabels": {
+      "problem": "Iṣoro: {title}",
+      "moduleContent": "modulu-{id}-akoonu",
+      "moduleExpanded": "modulu-{id}-titobi"
+    }
+  },
+  "roadmaps": {
+    "title": "Ṣe Iṣẹ Awọn Ibeere DSA",
+    "description": "Mu iṣẹ rẹ yara pẹlu awọn iṣoro pataki ti awọn iṣopọ data ati awọn algorithm. Akojọ aṣayan wa ni pẹlu data iṣẹju ati alaye ile-iṣẹ lati ran ọ lọwọ lati ṣe idojukọ lori awọn ibeere pataki julọ fun awọn ibeere imọ-ẹrọ.",
+    "aboutRoadmap": "Nipa Eto yii"
+  },
+    "common": {
+      "start": "Bẹ̀rẹ̀",
+      "configuration": "Ìṣètò",
+      "complete": "Parí",
+      "back": "Padà",
+      "selected": "Yàn",
+      "processing": "Ṣíṣẹ̀"
+    },
+    "roadmapCreation": {
+      "title": "Olùdásílẹ̀ Ìlànà fún Data Structures àti Algorithms",
+      "subtitle": "Bá Jennie sọ̀rọ̀ láti ṣẹ̀dá ìlà kíkọ́ni tìẹ",
+      "assistantTitle": "Olùrànlọ́wọ́ Ìlà DSA",
+      "welcomeMessage": "Báwo ni! 👋 Èmi ni Jennie, olùrànlọ́wọ́ ìlà DSA rẹ. Jẹ́ ká ṣẹ̀dá ìlà kíkọ́ni tìẹ!",
+      "aiOption": "Ìmọ̀ràn AI",
+      "customOption": "Ìlà Tìẹ",
+      "aiGreeting": "Yàn tó dára! Mo máa bẹ́ ẹ ní àwọn ìbéèrè díẹ̀ láti ṣẹ̀dá ìlà rẹ.",
+      "aiStart": "Jẹ́ ká bẹ̀rẹ̀!",
+      "customGreeting": "O fẹ́ràn láti ṣàtúnṣe ìlà rẹ fúnra rẹ? O dára! Jẹ́ ká bẹ̀rẹ̀ ní pipaṣẹ́ àwọn ilé iṣẹ́ tìẹ.",
+      "companyQuestion": "Ìrú ilé iṣẹ́ wo ni o ń wá?",
+      "selectCompany": "Yàn ìrú ilé iṣẹ́ tìẹ",
+      "levelQuestion": "Ìpele DSA rẹ báyìí wo?",
+      "timeQuestion": "Àkókò mélòó ni o lè fi sí i lójoojúmọ́?",
+      "selectTopics": "Yàn àwọn kókó tìẹ",
+      "nextSelectTopics": "Tókàn: Yàn Àwọn Kókó",
+      "previewRoadmap": "Àkọ́kọ́ Wo Ìlà",
+      "generateRoadmap": "Ṣẹ̀dá Ìlà",
+      "processing": "Ṣíṣẹ̀dá Ìlà Kíkọ́ni Rẹ",
+      "processingSubtitle": "Ṣíṣàyẹ̀wò àwọn ìfẹ́ rẹ àti ṣíṣàtúnṣe ìlà kíkọ́ni rẹ...",
+      "processingMessage1": "Gbọ́! Dúró tí mo bá ṣàyẹ̀wò ilé iṣẹ́ àti ìpele ìmọ̀ rẹ...",
+      "processingMessage2": "Díẹ̀ sí i... Mo ń ṣàtúnṣe ìlà kíkọ́ni rẹ lórí ìlànà ọ̀nà iṣẹ́.",
+      "processingMessage3": "Sún mọ́ parí! Mo ń ṣàparí ìlà kíkọ́ni rẹ...",
+      "processingSteps": [
+        "Ṣíṣàyẹ̀wò àwọn ìfẹ́ rẹ nípa ilé iṣẹ́...",
+        "Ṣíṣàgbéyẹ̀wò ìpele rẹ báyìí...",
+        "Ṣíṣàtúnṣe àkókò kíkọ́ni...",
+        "Ṣíṣẹ̀dá àwọn ìṣòro ìdánwò...",
+        "Ṣíṣàparí Ìlà Kíkọ́ni Rẹ..."
+      ],
+      "roadmapReady": "Ní ìparí! Ìlà rẹ ti ṣetan 🎉 Mo lè ràn ọ́ lọ́wọ́ láti ṣojú ìrìn àjò DSA rẹ. Ṣé o fẹ́ bẹ̀rẹ̀ kíkọ́ni báyìí?",
+      "roadmapCustomReady": "Yàn tó dára! Èyí ni ìlà rẹ tí a ṣàtúnṣe. Ṣé o ṣetan láti bẹ̀rẹ̀ ìrìn àjò kíkọ́ni rẹ?",
+      "summaryTitle": "Àkójọ Ìlà",
+      "aiGenerated": "AI Ṣẹ̀dá",
+      "customBuilt": "Tí A Ṣàtúnṣe",
+      "targetLabel": "Àfojúsùn",
+      "targetCompany": "Ilé iṣẹ́ Àfojúsùn",
+      "levelLabel": "Ìpele",
+      "timeLabel": "Àkókò Ojoojúmọ́",
+      "selectedTopics": "Àwọn Kókó Tí A Yàn",
+      "timelineTitle": "Àkókò Àníyàn",
+      "timelineDescription": "Dá lórí àwọn ìfẹ́ rẹ àti àkókò ìdánwò tí a gba lọ́nà",
+      "startLearning": "Bẹ̀rẹ̀ Kíkọ́ni",
+      "makeChanges": "Ṣe Àwọn Àtúnṣe",
+      "adjustTopics": "Ṣàtúnṣe Àwọn Kókó",
+      "userResponse": "Mo ń wá ilé iṣẹ́ {company} ní ìpele {level} pẹ̀lú {timeframe} ìdánwò ojoojúmọ́.",
+      "userCompanyResponse": "Mo ń mura sí ilé iṣẹ́ {company}.",
+      "userTopicsResponse": "Mo fẹ́ ṣàkíyèsí {count} kókó: {topics}."
+    },
+      "pricing": {
+        "trustedBy": "A n gbẹkẹle awọn oludagbasoke 10,000+",
+        "heroTitle": "Yan ọna rẹ si",
+        "heroHighlight": "Ipèye",
+        "heroSubtitle": "Boyá o n mura silẹ fun idanwo ẹkọ igbesẹ akọkọ rẹ tabi o n reti FAANG, ẹrọ AI wa yoo ṣe atilẹyin fun ọ. Bẹrẹ ni ọfẹ ki o dide bi o ṣe n dagba.",
+        "mostPopular": "Ti a fẹrẹ jù lọ",
+        "readyToStart": "Ṣetan lati bẹrẹ pẹlu {plan}?",
+        "forDuration": "fun {duration}",
+        "continueToCheckout": "Tẹsiwaju si Ifẹsẹwọnsẹ",
+        "featuresTitle1": "Ohun gbogbo ti o nilo lati",
+        "featuresTitle2": "Lọrọ",
+        "howItWorksTitle1": "Bawo ni a ṣe n mu iyipada rẹ",
+        "howItWorksTitle2": "Ni iyara",
+        "howItWorksSubtitle": "Ẹrọ AI wa ti a ṣe lati mu ipa ẹkọ rẹ ati iṣẹ idanwo rẹ pọ si",
+        "finalCta": {
+          "title": "Ṣetan lati yi iṣẹ idanwo rẹ pada?",
+          "subtitle": "Darapọ mọ ọpọlọpọ awọn oludagbasoke ti o ti gba awọn iṣẹ inu alẹ wọn pẹlu ẹrọ wa.",
+          "button": "Yan Ẹtọ Rẹ"
+        },
+        "plans": {
+          "free": {
+            "name": "Ẹtọ Ọfẹ",
+            "duration": "Lailopin",
+            "bestFor": "Dara lati bẹrẹ",
+            "cta": "Bẹrẹ Ọfẹ"
+          },
+          "oneDay": {
+            "name": "Wiwọle AI Ọjọ 1",
+            "duration": "Wakati 24",
+            "bestFor": "Iṣẹẹkan iṣẹ AI ni kiakia",
+            "cta": "Gba Wiwọle Ọjọ 1"
+          },
+          "monthly": {
+            "name": "Pro Osù",
+            "duration": "Ọjọ 30",
+            "bestFor": "Iṣẹ idanwo pipe",
+            "cta": "Bẹrẹ Idanwo Pro"
+          }
+        },
+        "features": {
+          "access500": "Wiwọle si awọn ibeere 500+ DSA",
+          "companyRoadmap": "Ọna ibeere ti ile-iṣẹ",
+          "frequencySets": "Awọn iṣẹṣiro ibeere lori iṣẹju",
+          "structuredRoadmap": "Ọna DSA ti a ṣeto",
+          "dailyTracker": "Olutọpa XP ati ẹkọ lọjọ",
+          "basicAnalysis": "Atupale koodu ipilẹ",
+          "unlimitedAI": "Awọn iṣiro idanwo AI ailopin",
+          "realTimeFeedback": "Idahun AI ati awọn itọkasi ni gangan",
+          "allProblems": "Gbogbo awọn iṣẹṣiro iṣẹ ti a fi kun",
+          "codeExecution": "Iṣẹ ati atupale koodu",
+          "priorityAccess": "Wiwọle iṣọkan pataki",
+          "performanceInsights": "Awọn ifojusi iṣẹ",
+          "allIncluded": "Ohun gbogbo ninu Awọn Ẹtọ Ọfẹ ati Ọjọ 1",
+          "unlimitedFeedback": "Idahun ati idanwo AI ailopin",
+          "advancedAnalytics": "Awọn atupale iṣẹ ilọsiwaju",
+          "premiumModules": "Awọn modulu ẹkọ pataki",
+          "prioritySupport": "Atilẹyin pataki",
+          "customPlans": "Awọn ẹtọ ẹkọ ara ẹni",
+          "mockInterviews": "Awọn igbasilẹ idanwo apẹẹrẹ"
+        },
+        "allFeatures": {
+          "accessAll": "Wiwọle si gbogbo awọn iṣoro koodu",
+          "companyBanks": "Awọn ibeere ile-iṣẹ pataki",
+          "patternDrills": "Awọn iṣiro iṣapejuwe apẹẹrẹ",
+          "advancedAnalysis": "Atupale koodu ilọsiwaju",
+          "progressDashboard": "Ile-iṣẹ olutọpa ilọsiwaju",
+          "mobileFriendly": "Olumulo olumulo alagbeka",
+          "contentUpdates": "Awọn imudojuiwọn akoonu ni akoko",
+          "communitySupport": "Atilẹyin agbegbe pataki"
+        },
+        "aifeatures": {
+          "aiPattern": {
+            "title": "Atunṣe Apẹẹrẹ AI",
+            "description": "Awọn algofaradim wa ti o ga ṣe atupale awọn apẹẹrẹ koodu rẹ lati ṣe afi awọn aafo ẹkọ ati ṣẹda awọn ọna ẹkọ ti a ṣe ara ẹni ti o bamu pẹlu awọn ibi-afẹde rẹ."
+          },
+          "adaptiveLearning": {
+            "title": "Ẹrọ Ẹkọ Atunṣe",
+            "description": "Ẹrọ naa yoo ṣe atunṣe ni ọgbọn si ilọsiwaju rẹ, n fi awọn iṣeto iṣoro ti o bamu pẹlu ipele iṣẹ rẹ ati awọn ile-iṣẹ ibi-afẹde fun imurasilẹ pipe."
+          },
+          "interviewSimulation": {
+            "title": "Iṣiro Idanwo Gidi",
+            "description": "Ni iriri awọn iṣiro idanwo gidi pẹlu idahun ni gangan, awọn atupale iṣẹ pipe ati awọn imọran ilọsiwaju ti o ni alaye."
+          }
+        }
+      },
+        "interview": {
+          "title": "Ìbéèrè Ìmọ̀ Ẹ̀rọ",
+          "status": "Ìpàdé Láyé",
+          "difficulty": {
+            "Easy": "Rọrùn",
+            "Medium": "Àárín",
+            "Hard": "Lile"
+          },
+          "instructor": {
+            "name": "Jennie",
+            "role": "Olùkọ́ Ìbéèrè"
+          },
+          "approach": {
+            "title": "Ṣàlàyé Ìlànà Rẹ Fún Ìyọ̀njú Ìṣòro",
+            "placeholder": "Kọ ọ̀rọ̀ rẹ ní ṣókí...\n\n• Àwọn ètò data wo ni o máa lò?\n• Kí ni ìṣòro àkókò?\n• Ṣé àwọn ọ̀nà yàtọ̀ sí ni o yẹ kí o ronú?",
+            "submit": "Fìdí Ìlànà Rẹ múlẹ̀",
+            "voice": {
+              "start": "Bẹ̀rẹ̀ ìtẹ̀wọ́gbà ohùn",
+              "stop": "Dẹ́kun ìtẹ̀wọ́gbà ohùn",
+              "listening": "Ń gbọ́..."
+            },
+            "markdown": "Ṣàtẹ̀jáde Markdown",
+            "characterLimit": "/2000 àmì"
+          },
+          "coding": {
+            "language": "Èdè:",
+            "viewApproach": "Wo Ìlànà",
+            "submit": "Fìdí Múlẹ̀"
+          },
+          "messages": {
+            "hint": "Ìtọ́nisọ́nà",
+            "feedback": "Ẹ̀sì"
+          },
+          "time": {
+            "format": "mm:ss"
+          }
+        },
+          "roadmapss": {
+            "title": "Awọn Ibeere 75 LeetCode",
+            "description": "Awọn ibeere pataki fun iṣẹ́ coding lati ọdọ awọn ile-iṣẹ́ tech to gajulo",
+            "questionsFound": "awọn ibeere ti a ri",
+            "completed": "ti pari",
+            "questions": "awọn ibeere",
+            "askedBy": "Ti a beere nipasẹ",
+            "noQuestionsFound": "Ko si ibeere ti a ri",
+            "adjustFilters": "Gbiyanju lati ṣatunṣe awọn asẹ tabi ariyanjiyan wiwa rẹ"
+          },
+          "actions": {
+            "saveProgress": "Fi Ilọsiwaju Pamo",
+            "clearAllFilters": "Pa Gbogbo Asẹ"
+          },
+          "filters": {
+            "title": "Awọn Asẹ",
+            "advancedFilters": "Awọn Asẹ Giga",
+            "companies": "Awọn Ile-iṣẹ́",
+            "difficulty": "Iṣoro",
+            "frequency": "Iye igba"
+          },
+          "search": {
+            "placeholder": "Wa awọn ibeere..."
+          },
+          "difficulty": {
+            "easy": "Rọrun",
+            "medium": "Aarin",
+            "hard": "Lile"
+          },
+          "frequency": {
+            "very-high": "Pupọ Gan",
+            "high": "Pupọ",
+            "medium": "Aarin",
+            "low": "Kekere",
+            "rare": "Oṣuwọn"
+          },
+          "companies": {
+            "Google": "Google",
+            "Microsoft": "Microsoft",
+            "Amazon": "Amazon",
+            "Facebook": "Facebook",
+            "Apple": "Apple"
+          },
+            "companyRoadmap": {
+              "title": "Apẹrẹ Ilana Kampani",
+              "description": "Ṣe àyẹ̀wò àti ṣe àdánwò ìbeèrè nípa kampani, kókó àti ìṣòro",
+              "noQuestionsFound": "Ko si ibeere ti a ri",
+              "adjustFilters": "Gbiyanju lati ṣatunṣe awọn asẹ rẹ lati ri awọn abajade diẹ sii"
+            },
+            "filter": {
+              "title": "Awọn Asẹ",
+              "active": "ṣiṣẹ",
+              "companies": "Awọn Ile-iṣẹ́",
+              "selectCompanies": "Yan awọn ile-iṣẹ́",
+              "topics": "Awọn Kókó",
+              "selectTopics": "Yan awọn kókó",
+              "difficulty": "Iṣoro",
+              "selectDifficulty": "Yan iṣoro",
+              "options": "Awọn Aṣayan",
+              "advanced": "Ti o ga julọ",
+              "minFrequency": "Iye Igba Kere",
+              "viewMode": "Ọna Afihan",
+              "filtered": "Ti ṣe asẹ",
+              "all": "Gbogbo",
+              "activeFilters": "Awọn asẹ ti nṣiṣẹ"
+            },
+            "difficultys": {
+              "easy": "Rọrun",
+              "medium": "Aarin",
+              "hard": "Lile"
+            },
+            "frequencys": {
+              "very-high": "Pupọ Gan",
+              "high": "Pupọ",
+              "medium": "Aarin",
+              "low": "Kekere"
+            },
+            "topics": {
+              "arrays": "Awọn Ẹya",
+              "strings": "Awọn Okun",
+              "linked-lists": "Awọn Akojọ Ti a sopọ",
+              "trees": "Awọn Igi",
+              "graphs": "Awọn Graf",
+              "dynamic-programming": "Ṣiṣe Ṣiṣe Ayipada",
+              "other": "Miiran"
+            },
+            "table": {
+              "status": "Ipo",
+              "title": "Akọle",
+              "company": "Ile-iṣẹ́",
+              "topic": "Kókó",
+              "difficulty": "Iṣoro",
+              "frequency": "Iye igba",
+              "action": "Iṣe"
+            },
+            "action": {
+              "clear": "Paarẹ",
+              "solve": "Yanju"
+            }
 }

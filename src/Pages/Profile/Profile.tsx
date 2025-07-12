@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -83,6 +84,7 @@ interface UserProfile {
 export default function ProfileSettings() {
   const { currentUser } = useSelector(selectCurrentUser);
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   // Form state initialized with user data
   const [profileData, setProfileData] = useState({
@@ -224,12 +226,10 @@ export default function ProfileSettings() {
               <Settings className="h-6 w-6 text-black" />
             </div>
             <h1 className="text-3xl font-bold text-white bg-clip-text">
-              Profile Settings
+              {t("profile.title")}
             </h1>
           </div>
-          <p className="text-white/70">
-            Manage your profile and interview preferences
-          </p>
+          <p className="text-white/70">{t("profile.subtitle")}</p>
         </div>
 
         <Tabs defaultValue="profile" className="space-y-6">
@@ -239,7 +239,7 @@ export default function ProfileSettings() {
               className="flex items-center text-white gap-2 data-[state=active]:text-black px-4 data-[state=active]:bg-white rounded-md data-[state=active]:border data-[state=active]:border-gray-700"
             >
               <User className="h-4 w-4" />
-              Profile
+              {t("profile.tabProfile")}
             </TabsTrigger>
 
             <TabsTrigger
@@ -247,7 +247,7 @@ export default function ProfileSettings() {
               className="flex items-center text-white gap-2 data-[state=active]:text-black px-4 data-[state=active]:bg-white rounded-md data-[state=active]:border data-[state=active]:border-gray-700"
             >
               <Shield className="h-4 w-4" />
-              Security
+              {t("profile.tabSecurity")}
             </TabsTrigger>
           </TabsList>
 
@@ -259,7 +259,7 @@ export default function ProfileSettings() {
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center gap-3 text-white font-medium">
                     <User className="h-5 w-5 text-gray-300" />
-                    Profile Overview
+                    {t("profile.overview")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col items-center space-y-6">
@@ -304,30 +304,34 @@ export default function ProfileSettings() {
                         className="bg-gray-800 text-gray-300 border border-gray-700 font-medium px-3 py-1"
                       >
                         {currentUser.currentBadge === 0
-                          ? "Beginner Level"
+                          ? t("profile.levels.beginner")
                           : currentUser.currentBadge === 1
-                          ? "Intermediate Level"
-                          : "Advanced Level"}
+                          ? t("profile.levels.intermediate")
+                          : t("profile.levels.advanced")}
                       </Badge>
                     </div>
 
                     <div className="flex items-center justify-center gap-2 text-amber-400 bg-gray-900 rounded-lg px-4 py-2 border border-gray-800">
                       <Coins className="h-4 w-4" />
                       <span className="text-sm font-medium">
-                        {currentUser.coins} coins
+                        {currentUser.coins} {t("profile.coins")}
                       </span>
                     </div>
 
                     {currentUser?.trial && !currentUser?.trial.isTrialOver && (
                       <div className="bg-gray-900 rounded-lg p-3 text-sm text-gray-300 border border-gray-800">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-gray-400">Trial Status:</span>
+                          <span className="text-gray-400">
+                            {t("profile.trialStatus")}
+                          </span>
                           <span className="font-medium">
                             {currentUser?.trial.interviewLeft} interviews
                           </span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-400">Remaining:</span>
+                          <span className="text-gray-400">
+                            {t("profile.remaining")}
+                          </span>
                           <span className="font-medium">
                             {currentUser?.trial.answersLeft} answers
                           </span>
@@ -338,14 +342,14 @@ export default function ProfileSettings() {
                 </CardContent>
               </Card>
 
-              {/* Personal Information */}
+              {/* {t("profile.personalInfo")} */}
               <Card className="lg:col-span-2 bg-black border-gray-800 shadow-2xl">
                 <CardHeader className="pb-6">
                   <CardTitle className="text-white font-medium text-lg">
-                    Personal Information
+                    {t("profile.personalInfo")}
                   </CardTitle>
                   <CardDescription className="text-gray-400">
-                    Manage your profile details and preferences
+                    {t("profile.personalDesc")}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -356,7 +360,7 @@ export default function ProfileSettings() {
                           htmlFor="name"
                           className="text-gray-300 font-medium"
                         >
-                          Full Name
+                          {t("profile.fullName")}
                         </Label>
                         <Input
                           id="name"
@@ -367,7 +371,7 @@ export default function ProfileSettings() {
                               name: e.target.value,
                             }))
                           }
-                          placeholder="Enter your full name"
+                          placeholder={t("profile.placeholders.fullName")}
                           className="bg-gray-900 border-gray-700 text-white placeholder-gray-500 focus:border-gray-500 focus:ring-1 focus:ring-gray-500 h-11"
                         />
                       </div>
@@ -377,7 +381,7 @@ export default function ProfileSettings() {
                           className="text-gray-300 font-medium flex items-center gap-2"
                         >
                           <Mail className="h-4 w-4" />
-                          Email Address
+                          {t("profile.email")}
                         </Label>
                         <Input
                           id="email"
@@ -389,7 +393,7 @@ export default function ProfileSettings() {
                         {!currentUser.emailVerified && (
                           <p className="text-xs text-amber-500 flex items-center gap-1">
                             <AlertCircle className="h-3 w-3" />
-                            Email verification pending
+                            {t("profile.emailPending")}
                           </p>
                         )}
                       </div>
@@ -402,7 +406,7 @@ export default function ProfileSettings() {
                           className="text-gray-300 font-medium flex items-center gap-2"
                         >
                           <Linkedin className="h-4 w-4" />
-                          LinkedIn Profile
+                          {t("profile.linkedin")}
                         </Label>
                         <Input
                           id="linkedin"
@@ -423,7 +427,7 @@ export default function ProfileSettings() {
                           className="text-gray-300 font-medium flex items-center gap-2"
                         >
                           <Github className="h-4 w-4" />
-                          GitHub Profile
+                          {t("profile.github")}
                         </Label>
                         <Input
                           id="github"
@@ -446,7 +450,7 @@ export default function ProfileSettings() {
                         className="text-gray-300 font-medium flex items-center gap-2"
                       >
                         <Building2 className="h-4 w-4" />
-                        Target Company
+                        {t("profile.targetCompany")}
                       </Label>
                       <Input
                         id="company"
@@ -465,7 +469,7 @@ export default function ProfileSettings() {
                     <div className="space-y-3">
                       <Label className="text-gray-300 font-medium flex items-center gap-2">
                         <MapPin className="h-4 w-4" />
-                        Location
+                        {t("profile.location")}
                       </Label>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <Input
@@ -524,10 +528,10 @@ export default function ProfileSettings() {
                       {isLoading || updateProfile.isPending ? (
                         <>
                           <div className="animate-spin rounded-full h-4 w-4 border-2 border-black border-t-transparent mr-2" />
-                          Saving Profile...
+                          {t("profile.savingProfile")}
                         </>
                       ) : (
-                        "Save Profile"
+                        t("profile.saveProfile")
                       )}
                     </Button>
                   </form>
@@ -540,10 +544,10 @@ export default function ProfileSettings() {
               <CardHeader className="pb-6">
                 <CardTitle className="flex items-center gap-3 text-white font-medium">
                   <Shield className="h-5 w-5 text-gray-300" />
-                  Connected Accounts
+                  {t("profile.connectedAccounts")}
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  Manage your third-party integrations and OAuth connections
+                  {t("profile.connectedDesc")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -556,8 +560,10 @@ export default function ProfileSettings() {
                       <p className="font-medium text-white">GitHub</p>
                       <p className="text-sm text-gray-400">
                         {currentUser.githubprofile
-                          ? `Connected to ${currentUser.githubprofile}`
-                          : "Connect your GitHub account for enhanced features"}
+                          ? `${t("profile.githubConnected")} ${
+                              currentUser.githubprofile
+                            }`
+                          : t("profile.githubNotConnected")}
                       </p>
                     </div>
                   </div>
@@ -569,7 +575,7 @@ export default function ProfileSettings() {
                           className="bg-emerald-900/30 text-emerald-300 border border-emerald-800/50 font-medium"
                         >
                           <CheckCircle className="h-3 w-3 mr-1" />
-                          Connected
+                          {t("profile.connected")}
                         </Badge>
                         <Button
                           variant="outline"
@@ -578,7 +584,7 @@ export default function ProfileSettings() {
                           className="border-gray-700 hover:bg-gray-800 text-gray-200 hover:text-white transition-colors"
                           disabled={isLoading}
                         >
-                          Disconnect
+                          {t("profile.disconnect")}
                         </Button>
                       </>
                     ) : (
@@ -633,8 +639,28 @@ export default function ProfileSettings() {
               <CardHeader className="pb-6">
                 <CardTitle className="flex items-center gap-3 text-white font-medium">
                   <Bell className="h-5 w-5 text-gray-300" />
-                  Notification Preferences
+                  {t("profile.notificationPrefs")}
                 </CardTitle>
+                <CardDescription className="text-gray-400">
+                  {t("profile.notificationDesc")}
+                </CardDescription>
+                // And for each switch label:
+                <Label className="text-gray-300 font-medium">
+                  {t("profile.emailNotifications")}
+                </Label>
+                <p className="text-sm text-gray-400">
+                  {t("profile.emailDesc")}
+                </p>
+                <Label className="text-gray-300 font-medium">
+                  {t("profile.pushNotifications")}
+                </Label>
+                <p className="text-sm text-gray-400">{t("profile.pushDesc")}</p>
+                <Label className="text-gray-300 font-medium">
+                  {t("profile.weeklyReport")}
+                </Label>
+                <p className="text-sm text-gray-400">
+                  {t("profile.weeklyDesc")}
+                </p>
                 <CardDescription className="text-gray-400">
                   Customize how you receive updates and reminders about your
                   account
@@ -732,11 +758,10 @@ export default function ProfileSettings() {
               <CardHeader className="pb-6">
                 <CardTitle className="flex items-center gap-3 text-white font-medium">
                   <Shield className="h-5 w-5 text-gray-300" />
-                  Account Security
+                  {t("profile.accountSecurity")}
                 </CardTitle>
                 <CardDescription className="text-gray-400">
-                  Monitor and manage your account security settings and active
-                  sessions
+                  {t("profile.securityDesc")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -748,12 +773,12 @@ export default function ProfileSettings() {
                     </div>
                     <div>
                       <h3 className="font-medium text-emerald-300">
-                        Account Protected
+                        {t("profile.accountProtected")}
                       </h3>
                       <p className="text-sm text-emerald-400/80">
                         {currentUser.emailVerified
-                          ? "Your email is verified and your account is fully secured."
-                          : "Please verify your email address to enhance account security."}
+                          ? t("profile.verified")
+                          : t("profile.notVerified")}
                       </p>
                     </div>
                   </div>
@@ -763,7 +788,7 @@ export default function ProfileSettings() {
                       className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium"
                     >
                       <Mail className="h-4 w-4 mr-2" />
-                      Verify Email
+                      {t("profile.verifyEmail")}
                     </Button>
                   )}
                 </div>
@@ -771,7 +796,9 @@ export default function ProfileSettings() {
                 {/* Active Sessions */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h4 className="font-medium text-white">Active Sessions</h4>
+                    <h4 className="font-medium text-white">
+                      {t("profile.activeSessions")}
+                    </h4>
                     <Badge
                       variant="secondary"
                       className="bg-gray-800 text-gray-300 border border-gray-700"
@@ -788,7 +815,7 @@ export default function ProfileSettings() {
                         </div>
                         <div>
                           <p className="font-medium text-white">
-                            Current Session
+                            {t("profile.currentSession")}
                           </p>
                           <p className="text-sm text-gray-400 max-w-md truncate">
                             {navigator.userAgent.split(" ")[0]} •{" "}
@@ -796,7 +823,7 @@ export default function ProfileSettings() {
                             {currentUser.location.country}
                           </p>
                           <p className="text-xs text-gray-500 mt-1">
-                            Last active: Just now
+                            {t("profile.lastActive")}
                           </p>
                         </div>
                       </div>
@@ -815,14 +842,16 @@ export default function ProfileSettings() {
 
                 {/* Security Actions */}
                 <div className="space-y-4">
-                  <h4 className="font-medium text-white">Security Actions</h4>
+                  <h4 className="font-medium text-white">
+                    {t("profile.securityActions")}
+                  </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <Button
                       variant="outline"
                       className="justify-start bg-gray-900/50 border-gray-700 hover:bg-gray-800 text-gray-200 hover:text-white transition-colors h-12"
                     >
                       <Clock className="h-4 w-4 mr-3" />
-                      View Login History
+                      {t("profile.viewHistory")}
                     </Button>
 
                     <Button
@@ -830,7 +859,7 @@ export default function ProfileSettings() {
                       className="justify-start bg-gray-900/50 border-gray-700 hover:bg-gray-800 text-gray-200 hover:text-white transition-colors h-12"
                     >
                       <Download className="h-4 w-4 mr-3" />
-                      Download Data
+                      {t("profile.downloadData")}
                     </Button>
 
                     <Button
@@ -838,7 +867,7 @@ export default function ProfileSettings() {
                       className="justify-start bg-gray-900/50 border-gray-700 hover:bg-gray-800 text-gray-200 hover:text-white transition-colors h-12"
                     >
                       <Key className="h-4 w-4 mr-3" />
-                      Change Password
+                      {t("profile.changePassword")}
                     </Button>
 
                     <Button
@@ -846,7 +875,7 @@ export default function ProfileSettings() {
                       className="justify-start text-red-400 hover:text-red-300 bg-gray-900/50 border-gray-700 hover:bg-red-950/20 transition-colors h-12"
                     >
                       <LogOut className="h-4 w-4 mr-3" />
-                      Sign Out All Devices
+                      {t("profile.signOutAll")}
                     </Button>
                   </div>
                 </div>
@@ -855,10 +884,10 @@ export default function ProfileSettings() {
                 <div className="mt-8 p-6 bg-red-950/20 border border-red-800/50 rounded-xl">
                   <h4 className="font-medium text-red-400 mb-3 flex items-center gap-2">
                     <AlertTriangle className="h-5 w-5" />
-                    Danger Zone
+                    {t("profile.dangerZone")}
                   </h4>
                   <p className="text-sm text-red-400/80 mb-4">
-                    These actions are irreversible. Please proceed with caution.
+                    {t("profile.dangerDesc")}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button
@@ -866,14 +895,14 @@ export default function ProfileSettings() {
                       className="justify-start text-red-400 hover:text-red-300 bg-transparent border-red-800/50 hover:bg-red-950/30 transition-colors"
                     >
                       <Trash2 className="h-4 w-4 mr-2" />
-                      Delete Account
+                      {t("profile.deleteAccount")}
                     </Button>
                     <Button
                       variant="outline"
                       className="justify-start text-red-400 hover:text-red-300 bg-transparent border-red-800/50 hover:bg-red-950/30 transition-colors"
                     >
                       <UserMinus className="h-4 w-4 mr-2" />
-                      Deactivate Account
+                      {t("profile.deactivateAccount")}
                     </Button>
                   </div>
                 </div>

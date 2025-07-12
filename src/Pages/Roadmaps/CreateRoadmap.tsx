@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { useTranslation } from "react-i18next";
 import {
   Brain,
   Settings,
@@ -145,6 +146,7 @@ interface ChatMessage {
 }
 
 export default function RoadmapCreation() {
+  const { t } = useTranslation();
   const [state, setState] = useState<OnboardingState>({
     step: "initial",
     path: null,
@@ -163,15 +165,14 @@ export default function RoadmapCreation() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
       sender: "jennie",
-      content:
-        "Hey there! 👋 I'm Jennie, your DSA roadmap assistant. Let's create a personalized learning path for you!",
+      content: t("roadmapCreation.welcomeMessage"),
       options: [
         {
-          text: "AI-Powered Recommendation",
+          text: t("roadmapCreation.aiOption"),
           action: () => handlePathSelection("ai"),
         },
         {
-          text: "Custom Roadmap",
+          text: t("roadmapCreation.customOption"),
           action: () => handlePathSelection("custom"),
         },
       ],
@@ -228,23 +229,18 @@ export default function RoadmapCreation() {
     }));
 
     if (path === "ai") {
-      addJennieMessage(
-        "Great choice! I'll ask you a few questions to generate your personalized roadmap.",
-        [
-          {
-            text: "Let's do it!",
-            action: () => {},
-          },
-        ]
-      );
+      addJennieMessage(t("roadmapCreation.aiGreeting"), [
+        {
+          text: t("roadmapCreation.aiStart"),
+          action: () => {},
+        },
+      ]);
 
       setTimeout(() => {
-        addJennieMessage("First, what type of company are you targeting?");
+        addJennieMessage(t("roadmapCreation.companyQuestion"));
       }, 2000);
     } else {
-      addJennieMessage(
-        "You prefer to customize your own path? Awesome! Let's start by selecting your target company type."
-      );
+      addJennieMessage(t("roadmapCreation.customGreeting"));
     }
   };
 
@@ -271,23 +267,21 @@ export default function RoadmapCreation() {
       setState((prev) => ({ ...prev, isAIProcessing: true }));
       addMessage({
         sender: "user",
-        content: `I'm targeting ${state.aiAnswers.targetCompany} companies at ${state.aiAnswers.level} level with ${state.aiAnswers.timeframe} daily practice.`,
+        content: t("roadmapCreation.userResponse", {
+          company: state.aiAnswers.targetCompany,
+          level: state.aiAnswers.level,
+          timeframe: state.aiAnswers.timeframe,
+        }),
       });
 
-      addJennieMessage(
-        "Got it! Hold tight while I analyze your target company and skill level..."
-      );
+      addJennieMessage(t("roadmapCreation.processingMessage1"));
 
       setTimeout(() => {
-        addJennieMessage(
-          "Just a bit more... I'm optimizing your learning path based on industry trends."
-        );
+        addJennieMessage(t("roadmapCreation.processingMessage2"));
       }, 2000);
 
       setTimeout(() => {
-        addJennieMessage(
-          "Almost there! Finalizing your personalized roadmap..."
-        );
+        addJennieMessage(t("roadmapCreation.processingMessage3"));
       }, 3500);
 
       // Simulate AI processing time
@@ -297,19 +291,16 @@ export default function RoadmapCreation() {
           isAIProcessing: false,
           step: "preview",
         }));
-        addJennieMessage(
-          "Finally! Your roadmap is ready 🎉 I can help you ace your DSA journey. Would you like to start learning now?",
-          [
-            {
-              text: "Start Learning",
-              action: () => {},
-            },
-            {
-              text: "Make Changes",
-              action: handleBack,
-            },
-          ]
-        );
+        addJennieMessage(t("roadmapCreation.roadmapReady"), [
+          {
+            text: t("roadmapCreation.startLearning"),
+            action: () => {},
+          },
+          {
+            text: t("roadmapCreation.makeChanges"),
+            action: handleBack,
+          },
+        ]);
       }, 5000);
     }
   };
@@ -319,11 +310,11 @@ export default function RoadmapCreation() {
       setState((prev) => ({ ...prev, step: "custom-topics" }));
       addMessage({
         sender: "user",
-        content: `I'm preparing for ${state.customAnswers.company} companies.`,
+        content: t("roadmapCreation.userCompanyResponse", {
+          company: state.customAnswers.company,
+        }),
       });
-      addJennieMessage(
-        "Nice choice! Now, which DSA topics would you like to focus on?"
-      );
+      addJennieMessage(t("roadmapCreation.selectTopicsPrompt"));
     }
   };
 
@@ -332,23 +323,21 @@ export default function RoadmapCreation() {
       setState((prev) => ({ ...prev, step: "preview" }));
       addMessage({
         sender: "user",
-        content: `I want to focus on ${
-          state.customAnswers.topics.length
-        } topics: ${state.customAnswers.topics.join(", ")}.`,
+        content: t("roadmapCreation.userTopicsResponse", {
+          count: state.customAnswers.topics.length,
+          topics: state.customAnswers.topics.join(", "),
+        }),
       });
-      addJennieMessage(
-        "Great selection! Here's your customized roadmap. Ready to begin your learning journey?",
-        [
-          {
-            text: "Let's Start",
-            action: () => {},
-          },
-          {
-            text: "Adjust Topics",
-            action: () => handleBack(),
-          },
-        ]
-      );
+      addJennieMessage(t("roadmapCreation.roadmapCustomReady"), [
+        {
+          text: t("common.start"),
+          action: () => {},
+        },
+        {
+          text: t("roadmapCreation.adjustTopics"),
+          action: () => handleBack(),
+        },
+      ]);
     }
   };
 
@@ -387,10 +376,10 @@ export default function RoadmapCreation() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-3xl md:text-4xl font-bold text-orange-400 mb-2">
-              Data Structures & Algorithms Roadmap Builder
+              {t("roadmapCreation.title")}
             </h1>
             <p className="text-gray-300 text-lg">
-              Chat with Jennie to create your personalized learning path
+              {t("roadmapCreation.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -403,9 +392,9 @@ export default function RoadmapCreation() {
           transition={{ delay: 0.3 }}
         >
           <div className="flex justify-between mb-2 text-sm font-medium text-gray-400">
-            <span>Start</span>
-            <span>Configuration</span>
-            <span>Complete</span>
+            <span>{t("common.start")}</span>
+            <span>{t("common.configuration")}</span>
+            <span>{t("common.complete")}</span>
           </div>
           <Progress
             value={getProgress()}
@@ -423,7 +412,9 @@ export default function RoadmapCreation() {
             </div>
             <div>
               <h3 className="font-semibold text-orange-300">Jennie</h3>
-              <p className="text-xs text-gray-400">DSA Roadmap Assistant</p>
+              <p className="text-xs text-gray-400">
+                {t("roadmapCreation.assistantTitle")}
+              </p>
             </div>
           </div>
 
@@ -511,7 +502,7 @@ export default function RoadmapCreation() {
                 <div>
                   <h3 className="text-lg font-medium mb-4 flex items-center text-orange-300">
                     <Building2 className="w-5 h-5 mr-2 text-orange-400" />
-                    What type of company are you targeting?
+                    {t("roadmapCreation.companyQuestion")}
                   </h3>
                   <div className="grid md:grid-cols-3 gap-4">
                     {companies.map((company) => (
@@ -543,7 +534,7 @@ export default function RoadmapCreation() {
                           {state.aiAnswers.targetCompany === company.id && (
                             <div className="mt-3">
                               <Badge className="bg-orange-900 text-orange-300">
-                                Selected
+                                {t("common.selected")}
                               </Badge>
                             </div>
                           )}
@@ -557,7 +548,7 @@ export default function RoadmapCreation() {
                 <div>
                   <h3 className="text-lg font-medium mb-4 flex items-center text-orange-300">
                     <BarChart2 className="w-5 h-5 mr-2 text-orange-400" />
-                    What's your current DSA skill level?
+                    {t("roadmapCreation.levelQuestion")}
                   </h3>
                   <div className="grid md:grid-cols-3 gap-4">
                     {levels.map((level) => (
@@ -585,7 +576,7 @@ export default function RoadmapCreation() {
                           {state.aiAnswers.level === level.id && (
                             <div className="mt-3">
                               <Badge className="bg-orange-900 text-orange-300">
-                                Selected
+                                {t("common.selected")}
                               </Badge>
                             </div>
                           )}
@@ -599,7 +590,7 @@ export default function RoadmapCreation() {
                 <div>
                   <h3 className="text-lg font-medium mb-4 flex items-center text-orange-300">
                     <Clock className="w-5 h-5 mr-2 text-orange-400" />
-                    How much time can you dedicate daily?
+                    {t("roadmapCreation.timeQuestion")}
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {["30 mins", "1 hour", "2 hours", "3+ hours"].map(
@@ -638,7 +629,7 @@ export default function RoadmapCreation() {
                   className="border-gray-600 text-gray-300 hover:bg-gray-700"
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
-                  Back
+                  {t("common.back")}
                 </Button>
                 <Button
                   onClick={handleAINext}
@@ -647,7 +638,7 @@ export default function RoadmapCreation() {
                   }
                   className="bg-orange-600 hover:bg-orange-700 text-white disabled:bg-gray-700 disabled:text-gray-500"
                 >
-                  Generate Roadmap
+                  {t("roadmapCreation.generateRoadmap")}
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -667,7 +658,7 @@ export default function RoadmapCreation() {
               <div>
                 <h3 className="text-lg font-medium mb-4 flex items-center text-orange-300">
                   <Building2 className="w-5 h-5 mr-2 text-orange-400" />
-                  Select your target company type
+                  {t("roadmapCreation.selectCompany")}
                 </h3>
                 <div className="grid md:grid-cols-3 gap-6">
                   {companies.map((company) => (
@@ -703,7 +694,7 @@ export default function RoadmapCreation() {
                           {state.customAnswers.company === company.id && (
                             <div className="mt-4">
                               <Badge className="bg-orange-900 text-orange-300">
-                                Selected
+                                {t("common.selected")}
                               </Badge>
                             </div>
                           )}
@@ -721,14 +712,14 @@ export default function RoadmapCreation() {
                   className="border-gray-600 text-gray-300 hover:bg-gray-700"
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
-                  Back
+                  {t("common.back")}
                 </Button>
                 <Button
                   onClick={handleCustomCompanyNext}
                   disabled={!state.customAnswers.company}
                   className="bg-orange-600 hover:bg-orange-700 text-white disabled:bg-gray-700 disabled:text-gray-500"
                 >
-                  Next: Select Topics
+                  {t("roadmapCreation.nextSelectTopics")}
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -748,7 +739,7 @@ export default function RoadmapCreation() {
               <div>
                 <h3 className="text-lg font-medium mb-4 flex items-center text-orange-300">
                   <Code className="w-5 h-5 mr-2 text-orange-400" />
-                  Select your focus topics
+                  {t("roadmapCreation.selectTopics")}
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {topics.map((topic) => {
@@ -800,14 +791,14 @@ export default function RoadmapCreation() {
                   className="border-gray-600 text-gray-300 hover:bg-gray-700"
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
-                  Back
+                  {t("common.back")}
                 </Button>
                 <Button
                   onClick={handleCustomTopicsNext}
                   disabled={state.customAnswers.topics.length === 0}
                   className="bg-orange-600 hover:bg-orange-700 text-white disabled:bg-gray-700 disabled:text-gray-500"
                 >
-                  Preview Roadmap
+                  {t("roadmapCreation.previewRoadmap")}
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -825,11 +816,10 @@ export default function RoadmapCreation() {
               <div className="max-w-4xl w-full space-y-8">
                 <div className="text-center">
                   <h2 className="text-3xl font-bold text-orange-400 mb-2">
-                    Creating Your Personalized Roadmap
+                    {t("roadmapCreation.processing")}
                   </h2>
                   <p className="text-gray-300 text-lg">
-                    Analyzing your preferences and optimizing your learning
-                    path...
+                    {t("roadmapCreation.processingSubtitle")}
                   </p>
                 </div>
 
@@ -897,34 +887,15 @@ export default function RoadmapCreation() {
 
                   {/* Processing Steps */}
                   <div className="w-full max-w-2xl space-y-4">
-                    {[
-                      {
-                        text: "Analyzing your target company preferences...",
-                        delay: 0,
-                      },
-                      {
-                        text: "Evaluating your current skill level...",
-                        delay: 800,
-                      },
-                      {
-                        text: "Optimizing learning path structure...",
-                        delay: 1600,
-                      },
-                      {
-                        text: "Generating practice problems...",
-                        delay: 2400,
-                      },
-                      {
-                        text: "Finalizing your personalized roadmap...",
-                        delay: 3200,
-                      },
-                    ].map((step, index) => (
+                    {t("roadmapCreation.processingSteps", {
+                      returnObjects: true,
+                    }).map((step: string, index: number) => (
                       <motion.div
                         key={index}
                         className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg border border-gray-700 shadow-lg"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: step.delay / 1000, duration: 0.5 }}
+                        transition={{ delay: index * 0.8, duration: 0.5 }}
                       >
                         <motion.div
                           className="w-4 h-4 bg-orange-500 rounded-full"
@@ -935,17 +906,15 @@ export default function RoadmapCreation() {
                           transition={{
                             duration: 1.5,
                             repeat: Number.POSITIVE_INFINITY,
-                            delay: step.delay / 1000,
+                            delay: index * 0.8,
                           }}
                         />
-                        <span className="text-gray-300 text-lg">
-                          {step.text}
-                        </span>
+                        <span className="text-gray-300 text-lg">{step}</span>
                         <motion.div
                           className="ml-auto"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
-                          transition={{ delay: (step.delay + 600) / 1000 }}
+                          transition={{ delay: index * 0.8 + 0.6 }}
                         >
                           <CheckCircle className="w-6 h-6 text-orange-400" />
                         </motion.div>
@@ -956,13 +925,13 @@ export default function RoadmapCreation() {
                   {/* Animated Progress Bar */}
                   <div className="w-full max-w-2xl">
                     <div className="flex justify-between text-lg font-medium text-gray-400 mb-3">
-                      <span>Processing...</span>
+                      <span>{t("common.processing")}...</span>
                       <motion.span
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 3.5 }}
                       >
-                        Complete
+                        {t("common.complete")}
                       </motion.span>
                     </div>
                     <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
@@ -993,13 +962,15 @@ export default function RoadmapCreation() {
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold text-orange-300">
-                      Roadmap Summary
+                      {t("roadmapCreation.summaryTitle")}
                     </h3>
                     <Badge
                       variant="secondary"
                       className="bg-orange-900 text-orange-300 border-orange-700"
                     >
-                      {state.path === "ai" ? "AI Generated" : "Custom Built"}
+                      {state.path === "ai"
+                        ? t("roadmapCreation.aiGenerated")
+                        : t("roadmapCreation.customBuilt")}
                     </Badge>
                   </div>
 
@@ -1007,14 +978,18 @@ export default function RoadmapCreation() {
                     <div className="grid md:grid-cols-3 gap-4">
                       <div className="text-center p-4 bg-gray-700 rounded-lg border border-gray-600">
                         <Building2 className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-                        <p className="font-medium text-orange-300">Target</p>
+                        <p className="font-medium text-orange-300">
+                          {t("roadmapCreation.targetLabel")}
+                        </p>
                         <p className="text-sm text-gray-400 capitalize">
                           {state.aiAnswers.targetCompany}
                         </p>
                       </div>
                       <div className="text-center p-4 bg-gray-700 rounded-lg border border-gray-600">
                         <User className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-                        <p className="font-medium text-orange-300">Level</p>
+                        <p className="font-medium text-orange-300">
+                          {t("roadmapCreation.levelLabel")}
+                        </p>
                         <p className="text-sm text-gray-400 capitalize">
                           {state.aiAnswers.level}
                         </p>
@@ -1022,7 +997,7 @@ export default function RoadmapCreation() {
                       <div className="text-center p-4 bg-gray-700 rounded-lg border border-gray-600">
                         <Clock className="w-8 h-8 mx-auto mb-2 text-orange-400" />
                         <p className="font-medium text-orange-300">
-                          Daily Time
+                          {t("roadmapCreation.timeLabel")}
                         </p>
                         <p className="text-sm text-gray-400">
                           {state.aiAnswers.timeframe}
@@ -1034,7 +1009,7 @@ export default function RoadmapCreation() {
                       <div className="flex items-center space-x-3">
                         <Building2 className="w-5 h-5 text-orange-400" />
                         <span className="font-medium text-orange-300">
-                          Target Company:
+                          {t("roadmapCreation.targetCompany")}:
                         </span>
                         <span className="capitalize text-gray-400">
                           {state.customAnswers.company}
@@ -1044,7 +1019,7 @@ export default function RoadmapCreation() {
                         <div className="flex items-center space-x-3 mb-3">
                           <Code className="w-5 h-5 text-orange-400" />
                           <span className="font-medium text-orange-300">
-                            Selected Topics:
+                            {t("roadmapCreation.selectedTopics")}:
                           </span>
                         </div>
                         <div className="flex flex-wrap gap-2">
@@ -1068,7 +1043,7 @@ export default function RoadmapCreation() {
                   <div className="border-t border-gray-700 pt-4">
                     <h4 className="font-medium mb-3 text-orange-300 flex items-center">
                       <Calendar className="w-5 h-5 mr-2 text-orange-400" />
-                      Estimated Timeline
+                      {t("roadmapCreation.timelineTitle")}
                     </h4>
                     <div className="bg-gradient-to-r from-orange-600 to-orange-700 text-white p-4 rounded-lg shadow-sm">
                       <p className="text-lg font-semibold">
@@ -1079,8 +1054,7 @@ export default function RoadmapCreation() {
                             } weeks`}
                       </p>
                       <p className="text-sm opacity-90">
-                        Based on your selections and recommended practice
-                        schedule
+                        {t("roadmapCreation.timelineDescription")}
                       </p>
                     </div>
                   </div>
@@ -1094,10 +1068,10 @@ export default function RoadmapCreation() {
                   className="border-gray-600 text-gray-300 hover:bg-gray-700"
                 >
                   <ChevronLeft className="w-4 h-4 mr-2" />
-                  Back
+                  {t("common.back")}
                 </Button>
                 <Button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white shadow-lg">
-                  Start Learning
+                  {t("roadmapCreation.startLearning")}
                   <Sparkles className="w-4 h-4 ml-2" />
                 </Button>
               </div>

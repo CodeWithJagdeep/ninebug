@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Difficulty, Frequency, modules, Roadmap } from "@/types/roadmap";
 import Footer from "@/components/common/Footer";
-
+import { useTranslation } from "react-i18next";
 interface ITopic {
   title: string;
   companies: string[];
@@ -299,6 +299,7 @@ const ModuleCard: React.FC<IModuleCardProps> = ({
 export const RoadmapsPage: React.FC = () => {
   const { roadmaps } = useSelector(selectRoadmapState);
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+   const { t } = useTranslation();
   const [expandedModules, setExpandedModules] = useState<Set<string>>(
     new Set()
   );
@@ -330,13 +331,10 @@ export const RoadmapsPage: React.FC = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-21">
         <section className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">
-            Practice DSA Questions
+            {t("roadmaps.title")}
           </h1>
           <p className="text-gray-400 text-lg max-w-4xl leading-relaxed">
-            Accelerate your career with essential data structures and algorithms
-            problems. Our curated collection includes frequency data and company
-            information to help you focus on the most important questions for
-            technical interviews.
+            {t("roadmaps.description")}
           </p>
         </section>
 
@@ -364,7 +362,7 @@ export const RoadmapsPage: React.FC = () => {
         {currentRoadmap?.description && (
           <section className="mb-8 bg-white/5 border border-white/10 rounded-lg p-6">
             <h2 className="text-xl font-semibold text-white mb-2">
-              About this Roadmap
+              {t("roadmaps.aboutRoadmap")}
             </h2>
             <p className="text-gray-400 leading-relaxed">
               {currentRoadmap.description}

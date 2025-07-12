@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Difficulty, Frequency, modules, Roadmap } from "@/types/roadmap";
+import { useTranslation } from "react-i18next";
 
 interface ITopic {
   title: string;
@@ -97,6 +98,7 @@ const TopicCard: React.FC<ITopicCardProps> = ({
   onToggleComplete,
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleCardClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -112,14 +114,18 @@ const TopicCard: React.FC<ITopicCardProps> = ({
     <div
       onClick={handleCardClick}
       className="bg-white/5 cursor-pointer border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-all duration-200"
-      aria-label={`Problem: ${topic.title}`}
+      aria-label={t("roadmap.ariaLabels.problem", { title: topic.title })}
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center space-x-3 flex-1">
           <button
             onClick={handleCompletionToggle}
             className="flex-shrink-0 hover:scale-110 transition-transform"
-            aria-label={isCompleted ? "Mark as incomplete" : "Mark as complete"}
+            aria-label={
+              isCompleted
+                ? t("roadmap.markIncomplete")
+                : t("roadmap.markComplete")
+            }
           >
             {isCompleted ? (
               <CheckCircle className="w-5 h-5 text-green-400" />
@@ -165,7 +171,9 @@ const TopicCard: React.FC<ITopicCardProps> = ({
         <div className="mt-3">
           <div className="flex items-center mb-2">
             <Building2 className="w-4 h-4 text-gray-400 mr-2" />
-            <span className="text-sm text-gray-400">Asked by:</span>
+            <span className="text-sm text-gray-400">
+              {t("roadmap.askedBy")}
+            </span>
           </div>
           <div className="flex flex-wrap gap-2">
             {topic.companies.slice(0, 5).map((company) => (
@@ -173,7 +181,7 @@ const TopicCard: React.FC<ITopicCardProps> = ({
             ))}
             {topic.companies.length > 5 && (
               <span className="text-xs text-gray-400 px-2 py-1 bg-gray-500/10 rounded-full">
-                +{topic.companies.length - 5} more
+                +{topic.companies.length - 5} {t("roadmap.more")}
               </span>
             )}
           </div>
@@ -194,6 +202,7 @@ const ModuleCard: React.FC<IModuleCardProps> = ({
     completedTopics.has(topic.slug)
   ).length;
 
+  const { t } = useTranslation();
   const totalCount = module.topics.length;
 
   const progressPercentage =
@@ -205,7 +214,9 @@ const ModuleCard: React.FC<IModuleCardProps> = ({
         onClick={onToggleExpand}
         className="w-full px-6 py-4 hover:bg-white/5 transition-all duration-200 text-left"
         aria-expanded={isExpanded}
-        aria-controls={`module-${module._id}-content`}
+        aria-controls={t("roadmap.ariaLabels.moduleContent", {
+          id: module._id,
+        })}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -226,7 +237,9 @@ const ModuleCard: React.FC<IModuleCardProps> = ({
                 </p>
               )}
               <div className="flex items-center space-x-4 text-sm text-gray-400 flex-wrap gap-2">
-                <span>{totalCount} problems</span>
+                <span>
+                  {totalCount} {t("roadmap.problems")}
+                </span>
                 {/* <span className="text-green-400">
                   {moduleStatistics.easy} Easy
                 </span>
@@ -256,7 +269,7 @@ const ModuleCard: React.FC<IModuleCardProps> = ({
                 {completedCount}/{totalCount}
               </div>
               <div className="text-xs text-gray-400">
-                {progressPercentage}% complete
+                {progressPercentage}% {t("roadmap.complete")}
               </div>
             </div>
             <div className="w-24 bg-gray-700 rounded-full h-2">
@@ -274,7 +287,7 @@ const ModuleCard: React.FC<IModuleCardProps> = ({
 
       {isExpanded && (
         <div
-          id={`module-${module._id}-content`}
+          id={t("roadmap.ariaLabels.moduleContent", { id: module._id })}
           className="border-t border-white/10 bg-black/20"
         >
           <div className="p-6">
@@ -304,7 +317,7 @@ export const DSAQuestionsDashboard: React.FC = () => {
   const [completedTopics, setCompletedTopics] = useState<Set<string>>(
     new Set()
   );
-
+  const { t } = useTranslation();
   const currentRoadmap = roadmaps?.[activeTabIndex] as Roadmap;
 
   const toggleModuleExpansion = useCallback((moduleId: string) => {
@@ -328,13 +341,10 @@ export const DSAQuestionsDashboard: React.FC = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <section className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">
-            Practice DSA Questions
+            {t("roadmap.title")}
           </h1>
           <p className="text-gray-400 text-lg max-w-4xl leading-relaxed">
-            Accelerate your career with essential data structures and algorithms
-            problems. Our curated collection includes frequency data and company
-            information to help you focus on the most important questions for
-            technical interviews.
+            {t("roadmap.description")}
           </p>
         </section>
 
@@ -362,7 +372,7 @@ export const DSAQuestionsDashboard: React.FC = () => {
         {currentRoadmap?.description && (
           <section className="mb-8 bg-white/5 border border-white/10 rounded-lg p-6">
             <h2 className="text-xl font-semibold text-white mb-2">
-              About this Roadmap
+              {t("roadmap.aboutRoadmap")}
             </h2>
             <p className="text-gray-400 leading-relaxed">
               {currentRoadmap.description}

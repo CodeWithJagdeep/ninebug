@@ -197,5 +197,408 @@
       "cookies": "Manufar Cookies"
     },
     "copyright": "© {{year}} Ninebug DSA. Duk haƙƙoƙin ajiye."
-  }
+  },
+  "login": {
+    "logoAlt": "Tambarin Mentorsland",
+    "heading": "Ka'ida. Koya. Fice.",
+    "subheading": "Tafiyar ku zuwa ƙwarewar coding ta fara a nan.",
+    "continueGoogle": "Ci gaba da Google",
+    "continueGithub": "Ci gaba da Github",
+    "termsText": "Ta ci gaba, kun yarda da",
+    "termsLink": "Sharuɗɗan Sabis",
+    "andText": "da",
+    "privacyLink": "Manufar Keɓantawa",
+    "errors": {
+      "default": "An sami kuskure da ba a zata ba. Don Allah a sake gwadawa.",
+      "incompleteData": "Bayanan mai amfani da bai cika ba da aka samu daga mai bayarwa",
+      "noUserData": "Bayanan mai amfani ba a mayar daga API ba",
+      "accountExists": "Wannan imel din an riga an haɗa shi da wata hanyar shiga.",
+      "popupClosed": "Shiga popup ya rufe kafin kammala tantancewa.",
+      "networkError": "Kuskuren hanyar sadarwa. Don Allah a duba haɗin intanet ɗin ku.",
+      "accountDisabled": "An kashe wannan asusun. Tuntuɓi tallafi.",
+      "invalidCredentials": "Takaddun shaida marasa inganci. Don Allah a sake gwadawa.",
+      "authFailed": "Tantancewa ya gaza."
+    }
+  },
+  "profile": {
+    "title": "Saitunan Bayanin Martaba",
+    "subtitle": "Sarrafa bayanin martaba ku da zaɓin tambayoyin aiki",
+    "overview": "Bayanin Martaba",
+    "personalInfo": "Bayanin Sirri",
+    "personalDesc": "Sarrafa cikakkun bayanai da zaɓin martaba ku",
+    "fullName": "Cikakken Suna",
+    "email": "Adireshin Imel",
+    "emailPending": "Tabbatarwar imel tana jiran",
+    "linkedin": "Bayanin LinkedIn",
+    "github": "Bayanin GitHub",
+    "targetCompany": "Kamfanin Da Ake Nufi",
+    "location": "Wuri",
+    "saveProfile": "Ajiye Bayanin Martaba",
+    "savingProfile": "Ana Ajiye Bayanin Martaba...",
+    "connectedAccounts": "Asusun Da Suka Haɗu",
+    "connectedDesc": "Sarrafa haɗin kai na ɓangare na uku da haɗin OAuth",
+    "githubConnected": "An haɗa zuwa {username}",
+    "githubNotConnected": "Haɗa asusun GitHub ku don ingantattun fasali",
+    "googleConnect": "Haɗa asusun Google ku don shaidar shiga cikin sauƙi",
+    "comingSoon": "Ana Zuwa Nan Ba Da Jimawa Ba",
+    "notificationPrefs": "Zaɓin Sanarwa",
+    "notificationDesc": "Keɓance yadda kuke karɓar sabuntawa da tunatarwa game da asusun ku",
+    "emailNotifications": "Sanarwar Imel",
+    "emailDesc": "Karɓi muhimman sabuntawa da faɗakarwa ta imel",
+    "pushNotifications": "Sanarwar Turawa",
+    "pushDesc": "Samu sanarwa nan take a cikin burauzar ku",
+    "weeklyReport": "Rahoton Ci Gaba na Mako",
+    "weeklyDesc": "Karɓi cikakken taƙaitaccen ci gaban ku na mako",
+    "savePrefs": "Ajiye Zaɓin",
+    "savingPrefs": "Ana Ajiye Zaɓin...",
+    "accountSecurity": "Tsaron Asusu",
+    "securityDesc": "Lura da sarrafa saitunan tsaro na asusun ku da ayyukan da suke aiki",
+    "accountProtected": "Asusu Mai Tsaro",
+    "verified": "An tabbatar da imel ɗin ku kuma asusun ku yana da cikakken tsaro.",
+    "notVerified": "Da fatan za a tabbatar da adireshin imel ɗin ku don inganta tsaron asusu.",
+    "verifyEmail": "Tabbatar Da Imel",
+    "activeSessions": "Ayyukan Da Suke Aiki",
+    "currentSession": "Aiki Na Yanzu",
+    "lastActive": "Aiki na ƙarshe: Yanzu",
+    "securityActions": "Ayyukan Tsaro",
+    "viewHistory": "Duba Tarihin Shiga",
+    "downloadData": "Zazzage Bayanai",
+    "changePassword": "Canza Kalmar Sirri",
+    "signOutAll": "Fita Daga Dukkan Na'urori",
+    "dangerZone": "Yankin Hadari",
+    "dangerDesc": "Waɗannan ayyukan ba za a iya juyewa ba. Da fatan za a ci gaba da taka tsantsan.",
+    "deleteAccount": "Share Asusu",
+    "deactivateAccount": "Kashe Asusu",
+    "levels": {
+      "beginner": "Matakin Farawa",
+      "intermediate": "Matakin Matsakaici",
+      "advanced": "Matakin Ƙwararru"
+    },
+    "coins": "tsabar kudi",
+    "trialStatus": "Matsayin Gwaji:",
+    "remaining": "Saura:",
+    "connected": "An haɗa",
+    "disconnect": "Cire haɗin",
+    "connectGithub": "Haɗa GitHub",
+    "profilePictureAlt": "Hoton bayanin martaba",
+    "placeholders": {
+      "fullName": "Shigar da cikakken sunanka",
+      "targetCompany": "Kamfanin da kake nufi don matsayinka na gaba",
+      "city": "Birni",
+      "region": "Jiha/Yanki",
+      "country": "Ƙasa"
+    },
+    "tabProfile": "Bayanin Martaba",
+    "tabSecurity": "Tsaro"
+  },
+  "roadmap": {
+    "title": "Yi Tambayoyin DSA",
+    "description": "Hanzarta aikinku tare da mahimman matsalolin tsarin bayanai da algorithms. Tarin mu ya haɗa da bayanan mita da bayanan kamfani don taimaka muku mayar da hankali kan mafi mahimmancin tambayoyi don tambayoyin fasaha.",
+    "aboutRoadmap": "Game da Wannan Tsarin",
+    "problems": "matasaloli",
+    "complete": "cika",
+    "askedBy": "Tambaya daga:",
+    "difficulty": {
+      "easy": "Mai Sauƙi",
+      "medium": "Matsakaici",
+      "hard": "Mai Wuyar Gaske"
+    },
+    "frequency": {
+      "veryHigh": "Mai Yawa Sosa",
+      "high": "Mai Yawa",
+      "medium": "Matsakaici",
+      "low": "Ƙasa",
+      "rare": "Da Wuyar Samu"
+    },
+    "markComplete": "Yi alama a matsayin cikakke",
+    "markIncomplete": "Yi alama a matsayin bai cika ba",
+    "ariaLabels": {
+      "problem": "Matsala: {title}",
+      "moduleContent": "module-{id}-abun-ciki",
+      "moduleExpanded": "module-{id}-fadada"
+    }
+  },
+  "roadmaps": {
+    "title": "Yi Tambayoyin DSA",
+    "description": "Hanzarta aikinku tare da mahimman matsalolin tsarin bayanai da algorithms. Tarin mu ya haɗa da bayanan mita da bayanan kamfani don taimaka muku mayar da hankali kan mafi mahimmancin tambayoyi don tambayoyin fasaha.",
+    "aboutRoadmap": "Game da Wannan Tsarin"
+  },
+    "common": {
+      "start": "Fara",
+      "configuration": "Saitawa",
+      "complete": "Cikakke",
+      "back": "Komawa",
+      "selected": "Zaɓaɓɓe",
+      "processing": "Aiki"
+    },
+    "roadmapCreation": {
+      "title": "Mai Gina Tsarin Koyon Data Structures da Algorithms",
+      "subtitle": "Yi magana da Jennie don ƙirƙirar hanyar koyo ta keɓaɓɓu",
+      "assistantTitle": "Mataimakin Hanyar DSA",
+      "welcomeMessage": "Sannu! 👋 Ni Jennie ce, mataimakiyar hanyar DSA. Bari mu ƙirƙiri hanyar koyo ta keɓaɓɓu a gare ku!",
+      "aiOption": "Shawarwarin AI",
+      "customOption": "Hanyar Keɓaɓɓu",
+      "aiGreeting": "Zaɓi mai kyau! Zan yi muku wasu tambayoyi don samar da hanyar ku ta koyo.",
+      "aiStart": "Mu fara!",
+      "customGreeting": "Kuna son keɓance hanyar ku? Kyakkyawa! Bari mu fara da zaɓar nau'in kamfani da kuke so.",
+      "companyQuestion": "Wane irin kamfani kuke so?",
+      "selectCompany": "Zaɓi nau'in kamfani da kuke so",
+      "levelQuestion": "Mene ne matakin ku na yanzu na DSA?",
+      "timeQuestion": "Nawa ne lokacin da za ku iya ba da kowace rana?",
+      "selectTopics": "Zaɓi batutuwan da kuke so",
+      "nextSelectTopics": "Na gaba: Zaɓi Batutuwa",
+      "previewRoadmap": "Duba Hanyar",
+      "generateRoadmap": "Ƙirƙiri Hanyar",
+      "processing": "Ƙirƙirar Hanyar Koyo Ta Ku",
+      "processingSubtitle": "Ana nazarin abubuwan da kuka zaɓa da inganta hanyar koyo...",
+      "processingMessage1": "Na gane! Ku jira yayin da nake nazarin kamfanin da kuke so da matakin ku...",
+      "processingMessage2": "Ƙari kaɗan... Ina inganta hanyar koyo bisa ga yanayin masana'antu.",
+      "processingMessage3": "Kusan gama! Ina kammala hanyar ku ta koyo...",
+      "processingSteps": [
+        "Ana nazarin abubuwan da kuka zaɓa na kamfani...",
+        "Ana tantance matakin ku na yanzu...",
+        "Ana inganta tsarin koyo...",
+        "Ana ƙirƙirar matsalolin aiki...",
+        "Ana kammala hanyar koyo ta ku..."
+      ],
+      "roadmapReady": "A ƙarshe! Hanyar ku ta shiryu 🎉 Zan iya taimaka muku cikin tafiyar ku ta DSA. Kuna son fara koyo yanzu?",
+      "roadmapCustomReady": "Zaɓi mai kyau! Ga hanyar ku ta keɓaɓɓu. Kunna shirye don fara tafiyar ku ta koyo?",
+      "summaryTitle": "Taƙaitaccen Hanyar",
+      "aiGenerated": "AI ta ƙirƙira",
+      "customBuilt": "An Keɓance",
+      "targetLabel": "Manufa",
+      "targetCompany": "Kamfanin Da Ake Nufi",
+      "levelLabel": "Mataki",
+      "timeLabel": "Lokacin Yau da Kullun",
+      "selectedTopics": "Batutuwan Da Aka Zaɓa",
+      "timelineTitle": "Kiyasin Lokaci",
+      "timelineDescription": "Dangane da zaɓinku da jadawalin aikin da aka ba da shawara",
+      "startLearning": "Fara Koyo",
+      "makeChanges": "Yi Canje-canje",
+      "adjustTopics": "Daidaitu Batutuwa",
+      "userResponse": "Ina nufin kamfanoni {company} a matakin {level} tare da {timeframe} na aikin yau da kullun.",
+      "userCompanyResponse": "Ina shirye don kamfanoni {company}.",
+      "userTopicsResponse": "Ina so in mai da hankali kan {count} batutuwa: {topics}."
+    },
+      "pricing": {
+        "trustedBy": "Amincewa da masu haɓaka 10,000+",
+        "heroTitle": "Zaɓi Hanyarka zuwa",
+        "heroHighlight": "Kyakkyawan Aiki",
+        "heroSubtitle": "Ko kana shirye don tambayoyin fasaha na farko ko kana nufin FAANG, dandalin mu na AI yana daidaitawa da bukatunka. Fara kyauta kuma ka haɓaka yayin da kake girma.",
+        "mostPopular": "Mafi Shahararri",
+        "readyToStart": "Shirye don fara da {plan}?",
+        "forDuration": "na {duration}",
+        "continueToCheckout": "Ci gaba zuwa Biyan Kuɗi",
+        "featuresTitle1": "Duk Abin da Kake Bukata don",
+        "featuresTitle2": "Nasarar",
+        "howItWorksTitle1": "Yadda Muke Haɓaka",
+        "howItWorksTitle2": "Nasararka",
+        "howItWorksSubtitle": "Dandalin mu na AI an tsara shi don haɓaka ingancin koyo da kuma aikin tambayoyi",
+        "finalCta": {
+          "title": "Shirye don Canza Ƙwarewar Tambayoyinka?",
+          "subtitle": "Haɗa kai da dubban masu haɓaka waɗanda suka sami ayyukansu na mafarki tare da dandalinmu.",
+          "button": "Zaɓi Shirinka"
+        },
+        "plans": {
+          "free": {
+            "name": "Shirin Kyauta",
+            "duration": "Har Abada",
+            "bestFor": "Mafi kyau don farawa",
+            "cta": "Fara Kyauta"
+          },
+          "oneDay": {
+            "name": "Shiga AI na Kwana 1",
+            "duration": "Sa'o'i 24",
+            "bestFor": "Zaman motsa jiki mai sauri na AI",
+            "cta": "Samu Shiga Kwana 1"
+          },
+          "monthly": {
+            "name": "Pro na Wata",
+            "duration": "Kwanaki 30",
+            "bestFor": "Cikakken shirye-shiryen tambayoyi",
+            "cta": "Fara Gwajin Pro"
+          }
+        },
+        "features": {
+          "access500": "Shiga ga tambayoyin DSA 500+",
+          "companyRoadmap": "Hanyar tambayoyi ta kamfani",
+          "frequencySets": "Saitunan matsala bisa mitar",
+          "structuredRoadmap": "Tsarin hanyar DSA",
+          "dailyTracker": "Mai bin diddigin XP da koyo na yau da kullun",
+          "basicAnalysis": "Nazarin code na asali",
+          "unlimitedAI": "Simulations na tambayoyin AI marasa iyaka",
+          "realTimeFeedback": "Feedback da alamun AI na ainihi",
+          "allProblems": "Duk matsalolin motsa jiki sun haɗa",
+          "codeExecution": "Aikin code da nazari",
+          "priorityAccess": "Shiga fifiko na uwar garken",
+          "performanceInsights": "Hasashen aiki",
+          "allIncluded": "Duk abin da ke cikin Shirye-shiryen Kyauta & Kwana 1",
+          "unlimitedFeedback": "Feedback da tambayoyin AI marasa iyaka",
+          "advancedAnalytics": "Nazarin aiki na ci gaba",
+          "premiumModules": "Modules na koyo na musamman",
+          "prioritySupport": "Taimako na fifiko",
+          "customPlans": "Shirye-shiryen koyo na musamman",
+          "mockInterviews": "Rikodin tambayoyin ƙwaƙwalwa"
+        },
+        "allFeatures": {
+          "accessAll": "Shiga ga duk matsalolin code",
+          "companyBanks": "Bankunan tambayoyi na musamman na kamfani",
+          "patternDrills": "Atisayen gano tsari",
+          "advancedAnalysis": "Nazarin code na ci gaba",
+          "progressDashboard": "Dashboard na bin diddigin ci gaba",
+          "mobileFriendly": "Mai dacewa da wayar hannu",
+          "contentUpdates": "Sabuntawar abun ciki na yau da kullun",
+          "communitySupport": "Taimakon al'umma na fifiko"
+        },
+        "aifeatures": {
+          "aiPattern": {
+            "title": "Gano Tsarin AI",
+            "description": "Algorithms ɗinmu na ci gaba suna nazarin tsarin code ɗinka don gano gibin ilimi da ƙirƙirar hanyoyin koyo na musamman waɗanda suka dace da burin ku."
+          },
+          "adaptiveLearning": {
+            "title": "Injin Koyo Mai Daidaitawa",
+            "description": "Tsarin yana daidaitawa da hankali ga ci gaban ku, yana ba da saitunan matsala waɗanda suka dace da matakin ƙwarewar ku da kamfanonin da aka yi niyya don shirye-shirye mafi kyau."
+          },
+          "interviewSimulation": {
+            "title": "Simulation na Tambayoyi na Ainihi",
+            "description": "Shawo halayen tambayoyi na ainihi tare da feedback na ainihi, cikakken nazarin aiki da cikakkun shawarwari na haɓakawa."
+          }
+        }
+      },
+        "interview": {
+          "title": "Hirar Fasaha",
+          "status": "Zama Kai tsaye",
+          "difficulty": {
+            "Easy": "Sauki",
+            "Medium": "Matsakaici",
+            "Hard": "Wuyarwa"
+          },
+          "instructor": {
+            "name": "Jennie",
+            "role": "Malamin Tambayoyi"
+          },
+          "approach": {
+            "title": "Bayyana Hanyar Ka ta Magance Matsala",
+            "placeholder": "Rubuta hanyar ka cikin dalla-dalla...\n\n• Wadanne tsarin bayanai za ka yi amfani da su?\n• Menene tsawon lokacin da zai dauka?\n• Akwai wasu yanayin da za a yi la'akari da su?",
+            "submit": "Aika Hanyar",
+            "voice": {
+              "start": "Fara shigar murya",
+              "stop": "Tsaya shigar murya",
+              "listening": "Ana saurare..."
+            },
+            "markdown": "Yana goyan bayan Markdown",
+            "characterLimit": "/2000 haruffa"
+          },
+          "coding": {
+            "language": "Harshe:",
+            "viewApproach": "Dubi Hanyar",
+            "submit": "Aika"
+          },
+          "messages": {
+            "hint": "Bayani",
+            "feedback": "Amsa"
+          },
+          "time": {
+            "format": "mm:ss"
+          }
+        },
+          "roadmapss": {
+            "title": "Manyan Tambayoyi 75 na LeetCode",
+            "description": "Muhimman tambayoyin coding daga manyan kamfanonin fasaha",
+            "questionsFound": "tambayoyin da aka samu",
+            "completed": "an kammala",
+            "questions": "tambayoyi",
+            "askedBy": "Tambayar da",
+            "noQuestionsFound": "Babu tambayoyin da aka samu",
+            "adjustFilters": "Yi kokarin daidaita tacewa ko binciken ku"
+          },
+          "actions": {
+            "saveProgress": "Ajiye Ci gaba",
+            "clearAllFilters": "Share Duk Tacewa"
+          },
+          "filters": {
+            "title": "Tacewa",
+            "advancedFilters": "Tacewa Mai Zurfi",
+            "companies": "Kamfanoni",
+            "difficulty": "Wahala",
+            "frequency": "Yawan faruwa"
+          },
+          "search": {
+            "placeholder": "Nemo tambayoyi..."
+          },
+          "difficulty": {
+            "easy": "Mai Sauki",
+            "medium": "Matsakaici",
+            "hard": "Mai Wuyarwa"
+          },
+          "frequency": {
+            "very-high": "Sosai Yawa",
+            "high": "Yawa",
+            "medium": "Matsakaici",
+            "low": "Kadan",
+            "rare": "Da Wuyarwa"
+          },
+          "companies": {
+            "Google": "Google",
+            "Microsoft": "Microsoft",
+            "Amazon": "Amazon",
+            "Facebook": "Facebook",
+            "Apple": "Apple"
+          },
+            "companyRoadmap": {
+              "title": "Taswirar Kamfani",
+              "description": "Tace da kuma aiwatar da tambayoyi ta kamfani, batu da wahala",
+              "noQuestionsFound": "Babu tambayoyin da aka samu",
+              "adjustFilters": "Yi kokarin daidaita tacewa don ganin ƙarin sakamako"
+            },
+            "filter": {
+              "title": "Tacewa",
+              "active": "mai aiki",
+              "companies": "Kamfanoni",
+              "selectCompanies": "Zaɓi kamfanoni",
+              "topics": "Batutuwa",
+              "selectTopics": "Zaɓi batutuwa",
+              "difficulty": "Wahala",
+              "selectDifficulty": "Zaɓi wahala",
+              "options": "Zaɓuɓɓuka",
+              "advanced": "Na Ci gaba",
+              "minFrequency": "Matsakaicin Sauyin",
+              "viewMode": "Yanayin Dubawa",
+              "filtered": "An tace",
+              "all": "Duka",
+              "activeFilters": "Tacewa mai aiki"
+            },
+            "difficultys": {
+              "easy": "Mai Sauki",
+              "medium": "Matsakaici",
+              "hard": "Mai Wuyarwa"
+            },
+            "frequencys": {
+              "very-high": "Sosai Yawa",
+              "high": "Yawa",
+              "medium": "Matsakaici",
+              "low": "Kadan"
+            },
+            "topics": {
+              "arrays": "Tsararraki",
+              "strings": "Kirtani",
+              "linked-lists": "Jerin Sunayen da aka Haɗa",
+              "trees": "Bishiyoyi",
+              "graphs": "Zane-zane",
+              "dynamic-programming": "Shirye-shiryen motsi",
+              "other": "Sauran"
+            },
+            "table": {
+              "status": "Matsayi",
+              "title": "Take",
+              "company": "Kamfani",
+              "topic": "Batu",
+              "difficulty": "Wahala",
+              "frequency": "Sauyin",
+              "action": "Aiki"
+            },
+            "action": {
+              "clear": "Share",
+              "solve": "Warware"
+            }
 }

@@ -60,134 +60,541 @@
   "infiniteScroll": {
     "getHiredText": "Pata kazi katika kampuni bora zaidi"
   },
-    "preview": {
-      "practicePlatform": "Jukwaa la Mazoezi",
-      "master": "Jifunze",
-      "codingInterviews": "Mahojiano ya Coding",
-      "practiceDescription": "Fanya mazoezi ya matatizo kutoka kwa kampuni bora za teknolojia kwa njia zilizopangwa na seti za maswali maalum ya kampuni",
-      "developersCount": "Wasanidi 50k+",
-      "successRate": "Kiwango cha mafanikio 95%",
-      "industryApproved": "Imethibitishwa na Sekta",
-      "learningRoadmap": "Ramani ya Kujifunza",
-      "companyQuestions": "Maswali ya Kampuni",
-      "randomPractice": "Mazoezi ya Nasibu",
-      "exploreMoreCompanies": "Gundua kampuni zaidi",
-      "dailyChallenge": "Changamoto ya Kila Siku",
-      "dailyChallengeDescription": "Tatizo moja jipya kila siku",
-      "randomMix": "Mchanganyiko wa Nasibu",
-      "randomMixDescription": "Uchaguzi wa matatizo yaliyochaguliwa",
-      "minuteSprint": "Harakati za Dakika 15",
-      "sprintDescription": "Matatizo rahisi ya kujipasha joto",
-      "startTodaysChallenge": "Anza Changamoto ya Leo",
-      "shuffleNow": "Changanya sasa",
-      "startSprint": "Anza Harakati",
-      "signInRequired": "Inahitajika Kuingia",
-      "signInMessage": "Tafadhali ingia kufikia seti ya matatizo na kuanza kufanya mazoezi ya maswali ya mahojiano ya coding.",
-      "continueWithGoogle": "Endelea na Google"
+  "preview": {
+    "practicePlatform": "Jukwaa la Mazoezi",
+    "master": "Jifunze",
+    "codingInterviews": "Mahojiano ya Coding",
+    "practiceDescription": "Fanya mazoezi ya matatizo kutoka kwa kampuni bora za teknolojia kwa njia zilizopangwa na seti za maswali maalum ya kampuni",
+    "developersCount": "Wasanidi 50k+",
+    "successRate": "Kiwango cha mafanikio 95%",
+    "industryApproved": "Imethibitishwa na Sekta",
+    "learningRoadmap": "Ramani ya Kujifunza",
+    "companyQuestions": "Maswali ya Kampuni",
+    "randomPractice": "Mazoezi ya Nasibu",
+    "exploreMoreCompanies": "Gundua kampuni zaidi",
+    "dailyChallenge": "Changamoto ya Kila Siku",
+    "dailyChallengeDescription": "Tatizo moja jipya kila siku",
+    "randomMix": "Mchanganyiko wa Nasibu",
+    "randomMixDescription": "Uchaguzi wa matatizo yaliyochaguliwa",
+    "minuteSprint": "Harakati za Dakika 15",
+    "sprintDescription": "Matatizo rahisi ya kujipasha joto",
+    "startTodaysChallenge": "Anza Changamoto ya Leo",
+    "shuffleNow": "Changanya sasa",
+    "startSprint": "Anza Harakati",
+    "signInRequired": "Inahitajika Kuingia",
+    "signInMessage": "Tafadhali ingia kufikia seti ya matatizo na kuanza kufanya mazoezi ya maswali ya mahojiano ya coding.",
+    "continueWithGoogle": "Endelea na Google"
+  },
+  "journey": {
+    "header": {
+      "title": "Safari Yako ya",
+      "journey": "Coding",
+      "subtitle": "Kutoka tatizo hadi suluhisho, kwa mwongozo wa AI katika kila hatua"
     },
-      "journey": {
-        "header": {
-          "title": "Safari Yako ya",
-          "journey": "Coding",
-          "subtitle": "Kutoka tatizo hadi suluhisho, kwa mwongozo wa AI katika kila hatua"
-        },
-        "section1": {
-          "title": "Anza Safari Yako ya Coding",
-          "description": "Anza kwa kuelewa tatizo. Soma kwa makini, chambua mahitaji, na panga mbinu yako. Kila suluhisho zuri huanza na ufahamu wazi."
-        },
-        "section2": {
-          "title": "Andika Msimbo Wako",
-          "description": "Badilisha mawazo yako kuwa msimbo. Tumia mhariri kutekeleza suluhisho lako hatua kwa hatua. Usijali ukamilifu - kazia kwanza kupata mantiki yako sawa."
-        },
-        "section3": {
-          "title": "Wakati Mambo Hayafanyi Kazi",
-          "description": "Umesimama? Majaribio yameshindwa? Usijali! Hii ni sehemu ya mchakato wa kujifunza. Kila msanidi hukumbana na changamoto - ndivyo tunavyokua na kuboresha ujuzi wetu."
-        },
-        "section4": {
-          "title": "Msaada wa AI",
-          "description": "Pata msaada wa kibinafsi unapohitaji. AI yetu inachambua msimbo wako, inaelewa makosa yako, na inatoa mapendekezo yaliyoboreshwa kukuelekeza."
-        },
-        "editor": {
-          "ready": "Tayari kuanza coding?"
-        },
-        "testFailed": "Mtihani Umefaulu",
-        "dontWorry": "Usijali! Hii ni sehemu ya kujifunza.",
-        "ai": {
-          "title": "Msaidizi wa AI",
-          "suggestion1": "💡 Niligundua hauna taarifa ya kurudi katika chaguo lako.",
-          "suggestion2": "🔍 Jaribu kuongeza udhibiti wa makosa kwa hali ya mipaka.",
-          "suggestion3": "⚡ Fikiria kutumia ramani ya hash kwa wakati O(n).",
-          "applyButton": "Tumia Mapendekezo"
-        }
+    "section1": {
+      "title": "Anza Safari Yako ya Coding",
+      "description": "Anza kwa kuelewa tatizo. Soma kwa makini, chambua mahitaji, na panga mbinu yako. Kila suluhisho zuri huanza na ufahamu wazi."
+    },
+    "section2": {
+      "title": "Andika Msimbo Wako",
+      "description": "Badilisha mawazo yako kuwa msimbo. Tumia mhariri kutekeleza suluhisho lako hatua kwa hatua. Usijali ukamilifu - kazia kwanza kupata mantiki yako sawa."
+    },
+    "section3": {
+      "title": "Wakati Mambo Hayafanyi Kazi",
+      "description": "Umesimama? Majaribio yameshindwa? Usijali! Hii ni sehemu ya mchakato wa kujifunza. Kila msanidi hukumbana na changamoto - ndivyo tunavyokua na kuboresha ujuzi wetu."
+    },
+    "section4": {
+      "title": "Msaada wa AI",
+      "description": "Pata msaada wa kibinafsi unapohitaji. AI yetu inachambua msimbo wako, inaelewa makosa yako, na inatoa mapendekezo yaliyoboreshwa kukuelekeza."
+    },
+    "editor": {
+      "ready": "Tayari kuanza coding?"
+    },
+    "testFailed": "Mtihani Umefaulu",
+    "dontWorry": "Usijali! Hii ni sehemu ya kujifunza.",
+    "ai": {
+      "title": "Msaidizi wa AI",
+      "suggestion1": "💡 Niligundua hauna taarifa ya kurudi katika chaguo lako.",
+      "suggestion2": "🔍 Jaribu kuongeza udhibiti wa makosa kwa hali ya mipaka.",
+      "suggestion3": "⚡ Fikiria kutumia ramani ya hash kwa wakati O(n).",
+      "applyButton": "Tumia Mapendekezo"
+    }
+  },
+  "helping": {
+    "header": {
+      "tagline": "Jinsi Tunavyoharakisha Mafanikio Yako",
+      "title": {
+        "line1": "Badilisha Safari Yako ya",
+        "line2": "Coding"
       },
-        "helping": {
-          "header": {
-            "tagline": "Jinsi Tunavyoharakisha Mafanikio Yako",
-            "title": {
-              "line1": "Badilisha Safari Yako ya",
-              "line2": "Coding"
-            },
-            "subtitle": "Jukwaa letu la akili linaunganisha AI ya kisasa na mbinu zilizothibitishwa kutoa uzoefu wa kujifunza unaofaa ambayo inalingana na kasi yako na malengo yako ya kipekee."
+      "subtitle": "Jukwaa letu la akili linaunganisha AI ya kisasa na mbinu zilizothibitishwa kutoa uzoefu wa kujifunza unaofaa ambayo inalingana na kasi yako na malengo yako ya kipekee."
+    },
+    "steps": {
+      "step1": {
+        "title": "Utambuzi wa Muundo wa AI",
+        "description": "Algorithms za hali ya juu zinachambua mifumo yako ya coding na kutambua mapungufu ya ujuzi kwa usahihi, kuunda ramani ya kujifunza iliyobinafsishwa inayolingana na ujuzi wako na maeneo ya uboreshaji."
+      },
+      "step2": {
+        "title": "Injini ya Kujifunza Inayobadilika",
+        "description": "Mfumo wetu wa akili unaendelea kukabiliana na maendeleo yako, ukitoa seti za shida zilizobinafsishwa zinazolingana na kiwango chako cha ujuzi na mahitaji ya kampuni lengwa, kuhakikisha ufanisi bora wa kujifunza."
+      },
+      "step3": {
+        "title": "Uigaji wa Mahojiano ya Ulimwengu Halisi",
+        "description": "Pata uzoefu wa hali halisi za mahojiano kutoka kwa kampuni zinazoongoza za teknolojia na maoni ya papo hapo, uchambuzi wa utendaji, na maandalizi kamili ya mahojiano ya kiufundi."
+      }
+    },
+    "cta": {
+      "explore": "Chunguza Kipengele"
+    }
+  },
+  "testimonials": {
+    "trusted": "Kuaminika na Wasanidi Ulimwenguni Pote",
+    "title": "Kujenga Mustakabali wa Elimu ya Teknolojia",
+    "subtitle": "Jiunge na mamia ya wasanidi wanaokamilisha kujifunza kwao kwa kutumia jukwaa letu. Tunabuni kizazi kipya cha elimu ya teknolojia - kuwa sehemu ya safari hii.",
+    "items": [
+      {
+        "quote": "Inahisi kama kuwa na msanidi mwenye uzoefu anayeniongoza kila wakati.",
+        "text": "Ninatatua matatizo magumu katika nusu ya muda. Maoni ya kibinafsi yamebadilisha mchezo.",
+        "author": "Mtumiaji wa Mapema wa Beta",
+        "role": "Msanidi wa Full-stack"
+      },
+      {
+        "quote": "Njia za kujifunza zimepangwa vizuri sana",
+        "text": "Mwishowe nimepata jukwaa linalovunja dhana za hali ya juu bila kuzifanya ziwe rahisi kupita kiasi.",
+        "author": "Mwanachama wa Jumuiya ya Discord",
+        "role": "Mhandisi wa Frontend"
+      },
+      {
+        "quote": "Maoni ya papo hapo yalibadilisha mtindo wangu wa kazi",
+        "text": "Kuwasilisha msimbo na kupata uchambuzi wa AI ndani ya sekunde umeboresha ujuzi wangu kwa kiasi kikubwa.",
+        "author": "Mjaribu wa Alpha wa Kibinafsi",
+        "role": "Msanidi wa Backend"
+      }
+    ]
+  },
+  "footer": {
+    "description": "Jifunze Miundo ya Data na Algoriti kwa mwongozo wa AI na matatizo halisi ya kampuni.",
+    "sections": {
+      "platform": "Jukwaa",
+      "resources": "Rasilimali",
+      "legal": "Kisheria"
+    },
+    "links": {
+      "platform": [
+        "Mazoezi",
+        "Bei",
+        "Changamoto ya Kila Siku",
+        "Maandalizi ya Mahojiano"
+      ],
+      "resources": ["Nyaraka", "Blogu", "Jumuiya", "Semina za Mtandaoni"],
+      "legal": ["Faragha", "Masharti", "Usalama", "Vidakuzi"],
+      "privacy": "Sera ya Faragha",
+      "terms": "Masharti ya Huduma",
+      "cookies": "Sera ya Vidakuzi"
+    },
+    "copyright": "© {{year}} Ninebug DSA. Haki zote zimehifadhiwa."
+  },
+  "login": {
+    "logoAlt": "Nembo ya Mentorsland",
+    "heading": "Tengeneza. Jifunze. Bora.",
+    "subheading": "Safari yako ya ujuzi wa kuandika kodi huanza hapa.",
+    "continueGoogle": "Endelea na Google",
+    "continueGithub": "Endelea na Github",
+    "termsText": "Kwa kuendelea, unakubaliana na",
+    "termsLink": "Sheria za Huduma",
+    "andText": "na",
+    "privacyLink": "Sera ya Faragha",
+    "errors": {
+      "default": "Hitilafu isiyotarajiwa imetokea. Tafadhali jaribu tena.",
+      "incompleteData": "Taarifa za mtumiaji ambazo hazijakamilika zimepokelewa kutoka kwa mtoa huduma",
+      "noUserData": "Taarifa za mtumiaji hazikurudi kutoka kwa API",
+      "accountExists": "Barua pepe hii tayari inahusishwa na njia nyingine ya kuingia.",
+      "popupClosed": "Dirisha la kuingia lilifungwa kabla ya kukamilisha uthibitisho.",
+      "networkError": "Hitilafu ya mtandao. Tafadhali angalia uunganisho wako wa intaneti.",
+      "accountDisabled": "Akaunti hii imezimwa. Wasiliana na msaada.",
+      "invalidCredentials": "Vitambulisho batili. Tafadhali jaribu tena.",
+      "authFailed": "Uthibitishaji umeshindwa."
+    }
+  },
+  "profile": {
+    "title": "Mipangilio ya Wasifu",
+    "subtitle": "Dhibiti wasifu wako na mapendeleo ya mahojiano",
+    "overview": "Muhtasari wa Wasifu",
+    "personalInfo": "Taarifa ya Kibinafsi",
+    "personalDesc": "Dhibiti maelezo ya wasifu wako na mapendeleo",
+    "fullName": "Jina Kamili",
+    "email": "Anwani ya Barua Pepe",
+    "emailPending": "Uthibitishaji wa barua pepe unasubiri",
+    "linkedin": "Wasifu wa LinkedIn",
+    "github": "Wasifu wa GitHub",
+    "targetCompany": "Kampuni ya Lengo",
+    "location": "Eneo",
+    "saveProfile": "Hifadhi Wasifu",
+    "savingProfile": "Inahifadhi Wasifu...",
+    "connectedAccounts": "Akaunti Zilizounganishwa",
+    "connectedDesc": "Dhibiti ujumuishaji wako wa wahusika wa tatu na miunganisho ya OAuth",
+    "githubConnected": "Imeunganishwa na {username}",
+    "githubNotConnected": "Unganisha akaunti yako ya GitHub kwa vipengele vilivyoimarishwa",
+    "googleConnect": "Unganisha akaunti yako ya Google kwa uthibitishaji bila shida",
+    "comingSoon": "Inakuja Hivi Karibuni",
+    "notificationPrefs": "Mapendeleo ya Arifa",
+    "notificationDesc": "Binafsisha jinsi unapokea sasisho na ukumbusho kuhusu akaunti yako",
+    "emailNotifications": "Arifa za Barua Pepe",
+    "emailDesc": "Pokea sasisho muhimu na tahadhari kupitia barua pepe",
+    "pushNotifications": "Arifa za Kushinikiza",
+    "pushDesc": "Pata arifa za papo hapo kwenye kivinjari chako",
+    "weeklyReport": "Ripoti ya Maendeleo ya Wiki",
+    "weeklyDesc": "Pokea muhtasari kamili wa maendeleo yako ya wiki",
+    "savePrefs": "Hifadhi Mapendeleo",
+    "savingPrefs": "Inahifadhi Mapendeleo...",
+    "accountSecurity": "Usalama wa Akaunti",
+    "securityDesc": "Fuatilia na udhibiti mipangilio ya usalama wa akaunti yako na vitendo vilivyoamilifu",
+    "accountProtected": "Akaunti Imelindwa",
+    "verified": "Barua pepe yako imethibitishwa na akaunti yako iko salama kabisa.",
+    "notVerified": "Tafadhali thibitisha anwani yako ya barua pepe ili kuboresha usalama wa akaunti.",
+    "verifyEmail": "Thibitisha Barua Pepe",
+    "activeSessions": "Vitendo Vilivyoamilifu",
+    "currentSession": "Kitendo cha Sasa",
+    "lastActive": "Kitendo cha mwisho: Sasa hivi",
+    "securityActions": "Vitendo vya Usalama",
+    "viewHistory": "Tazamia Historia ya Kuingia",
+    "downloadData": "Pakua Data",
+    "changePassword": "Badilisha Nenosiri",
+    "signOutAll": "Toka Katika Vifaa Vyote",
+    "dangerZone": "Eneo la Hatari",
+    "dangerDesc": "Vitendo hivi havina urejeshaji. Tafadhali endesha kwa uangalifu.",
+    "deleteAccount": "Futa Akaunti",
+    "deactivateAccount": "Zima Akaunti",
+    "levels": {
+      "beginner": "Kiwango cha Mwanzo",
+      "intermediate": "Kiwango cha Kati",
+      "advanced": "Kiwango cha Juu"
+    },
+    "coins": "sarafu",
+    "trialStatus": "Hali ya Jaribio:",
+    "remaining": "Inabaki:",
+    "connected": "Imeunganishwa",
+    "disconnect": "Kata Unganisho",
+    "connectGithub": "Unganisha GitHub",
+    "profilePictureAlt": "Picha ya wasifu",
+    "placeholders": {
+      "fullName": "Weka jina lako kamili",
+      "targetCompany": "Kampuni unayolenga kwa nafasi yako ijayo",
+      "city": "Jiji",
+      "region": "Mkoa",
+      "country": "Nchi"
+    },
+    "tabProfile": "Wasifu",
+    "tabSecurity": "Usalama"
+  },
+  "roadmap": {
+    "title": "Mazoezi ya Maswali ya DSA",
+    "description": "Harakisha kazi yako kwa kutumia shida muhimu za muundo wa data na algoriti. Mkusanyiko wetu una pamoja na data ya marudio na taarifa za kampuni kukusaidia kulenga maswali muhimu zaidi kwa mahojiano ya kiufundi.",
+    "aboutRoadmap": "Kuhusu Mradi Huu",
+    "problems": "shida",
+    "complete": "kamilisha",
+    "askedBy": "Yaliyoombwa na:",
+    "difficulty": {
+      "easy": "Rahisi",
+      "medium": "Wastani",
+      "hard": "Ngumu"
+    },
+    "frequency": {
+      "veryHigh": "Mara Nyingi Sana",
+      "high": "Mara Nyingi",
+      "medium": "Wastani",
+      "low": "Mara Chache",
+      "rare": "Mara Chache Sana"
+    },
+    "markComplete": "Weka alama kama imekamilika",
+    "markIncomplete": "Weka alama kama haijakamilika",
+    "ariaLabels": {
+      "problem": "Shida: {title}",
+      "moduleContent": "moduli-{id}-yaliyomo",
+      "moduleExpanded": "moduli-{id}-kupanuliwa"
+    }
+  },
+  "roadmaps": {
+    "title": "Mazoezi ya Maswali ya DSA",
+    "description": "Harakisha kazi yako kwa kutumia shida muhimu za muundo wa data na algoriti. Mkusanyiko wetu una pamoja na data ya marudio na taarifa za kampuni kukusaidia kulenga maswali muhimu zaidi kwa mahojiano ya kiufundi.",
+    "aboutRoadmap": "Kuhusu Mradi Huu"
+  },
+    "common": {
+      "start": "Anza",
+      "configuration": "Usanidi",
+      "complete": "Kamili",
+      "back": "Rudi",
+      "selected": "Imechaguliwa",
+      "processing": "Inachakata"
+    },
+    "roadmapCreation": {
+      "title": "Mjenzi wa Mradi wa Miundo ya Data na Algoriti",
+      "subtitle": "Zungumza na Jennie kuunda njia yako ya kujifunza",
+      "assistantTitle": "Msaidizi wa Mradi DSA",
+      "welcomeMessage": "Hujambo! 👋 Mimi ni Jennie, msaidizi wako wa mradi DSA. Tuunde njia ya kujifunza iliyobinafsishwa kwako!",
+      "aiOption": "Mapendekezo ya AI",
+      "customOption": "Mradi Maalum",
+      "aiGreeting": "Chaguo nzuri! Nitakuuliza maswali machache kuunda mradi wako.",
+      "aiStart": "Tuanze!",
+      "customGreeting": "Unapendelea kubinafsisha njia yako mwenyewe? Vizuri! Tuanze kwa kuchagua aina ya kampuni unayolenga.",
+      "companyQuestion": "Unataka kufanya kazi kwa kampuni ya aina gani?",
+      "selectCompany": "Chagua aina ya kampuni unayolenga",
+      "levelQuestion": "Uko katika kiwango gani cha DSA?",
+      "timeQuestion": "Unaweza kutoa muda gani kila siku?",
+      "selectTopics": "Chagua mada unayozingatia",
+      "nextSelectTopics": "Inayofuata: Chagua Mada",
+      "previewRoadmap": "Hakiki Mradi",
+      "generateRoadmap": "Tengeneza Mradi",
+      "processing": "Kukuunda Mradi Wako",
+      "processingSubtitle": "Kuchambua mapendekezo yako na kuboresha njia ya kujifunza...",
+      "processingMessage1": "Nimeelewa! Subiri nikichambua kampuni unayolenga na kiwango chako cha ujuzi...",
+      "processingMessage2": "Kidogo zaidi... Ninaboresha njia yako ya kujifunza kulingana na mienendo ya sekta.",
+      "processingMessage3": "Karibu kukamilika! Nikimaliza mradi wako wa kujifunza...",
+      "processingSteps": [
+        "Kuchambua mapendekezo yako ya kampuni...",
+        "Kukadiria kiwango chako cha sasa...",
+        "Kuboresha muundo wa kujifunza...",
+        "Kutengeneza matatizo ya mazoezi...",
+        "Kumaliza mradi wako wa kujifunza..."
+      ],
+      "roadmapReady": "Mwishowe! Mradi wako uko tayari 🎉 Ninaweza kukusaidia kufanikiwa kwenye safari yako ya DSA. Ungependa kuanza kujifunza sasa?",
+      "roadmapCustomReady": "Uchaguzi mzuri! Hapa kuna mradi wako uliobinafsishwa. Uko tayari kuanza safari yako ya kujifunza?",
+      "summaryTitle": "Muhtasari wa Mradi",
+      "aiGenerated": "Imetengenezwa na AI",
+      "customBuilt": "Iliyobinafsishwa",
+      "targetLabel": "Lengo",
+      "targetCompany": "Kampuni Lengwa",
+      "levelLabel": "Kiwango",
+      "timeLabel": "Muda wa Kilio Siku",
+      "selectedTopics": "Mada Zilizochaguliwa",
+      "timelineTitle": "Mpango wa Muda",
+      "timelineDescription": "Kulingana na uchaguzi wako na ratiba ya mazoezi iliyopendekezwa",
+      "startLearning": "Anza Kujifunza",
+      "makeChanges": "Fanya Mabadiliko",
+      "adjustTopics": "Rekebisha Mada",
+      "userResponse": "Ninalenga kampuni za {company} katika kiwango cha {level} na {timeframe} ya mazoezi ya kila siku.",
+      "userCompanyResponse": "Ninajitayarisha kwa kampuni za {company}.",
+      "userTopicsResponse": "Nataka kuzingatia mada {count}: {topics}."
+    },
+      "pricing": {
+        "trustedBy": "Inaaminika na wasanidi programu zaidi ya 10,000",
+        "heroTitle": "Chagua Njia Yako ya Kufikia",
+        "heroHighlight": "Utaalamu",
+        "heroSubtitle": "Iwe unajiandaa kwa mahojiano yako ya kwanza ya teknolojia au unalenga FAANG, jukwaa letu la AI linakujali. Anza bure na kuongezeka kadri unavyokua.",
+        "mostPopular": "Inayopendwa Zaidi",
+        "readyToStart": "Uko tayari kuanza na {plan}?",
+        "forDuration": "kwa {duration}",
+        "continueToCheckout": "Endelea kwa Malipo",
+        "featuresTitle1": "Kila Unachohitaji kwa",
+        "featuresTitle2": "Mafanikio",
+        "howItWorksTitle1": "Jinsi Tunavyoharakisha",
+        "howItWorksTitle2": "Mafanikio Yako",
+        "howItWorksSubtitle": "Jukwaa letu linaloendeshwa na AI limeundwa kuongeza ufanisi wako wa kujifunza na utendaji katika mahojiano",
+        "finalCta": {
+          "title": "Uko Tayari Kubadilisha Ujuzi Wako wa Mahojiano?",
+          "subtitle": "Jiunge na maelfu ya wasanidi programu ambao wamepata kazi zao za ndoto kwa kutumia jukwaa letu.",
+          "button": "Chagua Mpango Wako"
+        },
+        "plans": {
+          "free": {
+            "name": "Mpango wa Bure",
+            "duration": "Milele",
+            "bestFor": "Bora kuanza",
+            "cta": "Anza Bure"
           },
-          "steps": {
-            "step1": {
-              "title": "Utambuzi wa Muundo wa AI",
-              "description": "Algorithms za hali ya juu zinachambua mifumo yako ya coding na kutambua mapungufu ya ujuzi kwa usahihi, kuunda ramani ya kujifunza iliyobinafsishwa inayolingana na ujuzi wako na maeneo ya uboreshaji."
-            },
-            "step2": {
-              "title": "Injini ya Kujifunza Inayobadilika",
-              "description": "Mfumo wetu wa akili unaendelea kukabiliana na maendeleo yako, ukitoa seti za shida zilizobinafsishwa zinazolingana na kiwango chako cha ujuzi na mahitaji ya kampuni lengwa, kuhakikisha ufanisi bora wa kujifunza."
-            },
-            "step3": {
-              "title": "Uigaji wa Mahojiano ya Ulimwengu Halisi",
-              "description": "Pata uzoefu wa hali halisi za mahojiano kutoka kwa kampuni zinazoongoza za teknolojia na maoni ya papo hapo, uchambuzi wa utendaji, na maandalizi kamili ya mahojiano ya kiufundi."
-            }
+          "oneDay": {
+            "name": "Ufikiaji wa AI kwa Siku 1",
+            "duration": "Saa 24",
+            "bestFor": "Kipindi cha mazoezi ya haraka na AI",
+            "cta": "Pata Ufikiaji wa Siku 1"
           },
-          "cta": {
-            "explore": "Chunguza Kipengele"
+          "monthly": {
+            "name": "Pro ya Mwezi",
+            "duration": "Siku 30",
+            "bestFor": "Maandalizi kamili ya mahojiano",
+            "cta": "Anza Jaribio la Pro"
           }
         },
-          "testimonials": {
-            "trusted": "Kuaminika na Wasanidi Ulimwenguni Pote",
-            "title": "Kujenga Mustakabali wa Elimu ya Teknolojia",
-            "subtitle": "Jiunge na mamia ya wasanidi wanaokamilisha kujifunza kwao kwa kutumia jukwaa letu. Tunabuni kizazi kipya cha elimu ya teknolojia - kuwa sehemu ya safari hii.",
-            "items": [
-              {
-                "quote": "Inahisi kama kuwa na msanidi mwenye uzoefu anayeniongoza kila wakati.",
-                "text": "Ninatatua matatizo magumu katika nusu ya muda. Maoni ya kibinafsi yamebadilisha mchezo.",
-                "author": "Mtumiaji wa Mapema wa Beta",
-                "role": "Msanidi wa Full-stack"
-              },
-              {
-                "quote": "Njia za kujifunza zimepangwa vizuri sana",
-                "text": "Mwishowe nimepata jukwaa linalovunja dhana za hali ya juu bila kuzifanya ziwe rahisi kupita kiasi.",
-                "author": "Mwanachama wa Jumuiya ya Discord",
-                "role": "Mhandisi wa Frontend"
-              },
-              {
-                "quote": "Maoni ya papo hapo yalibadilisha mtindo wangu wa kazi",
-                "text": "Kuwasilisha msimbo na kupata uchambuzi wa AI ndani ya sekunde umeboresha ujuzi wangu kwa kiasi kikubwa.",
-                "author": "Mjaribu wa Alpha wa Kibinafsi",
-                "role": "Msanidi wa Backend"
-              }
-            ]
+        "features": {
+          "access500": "Ufikiaji wa maswali 500+ ya DSA",
+          "companyRoadmap": "Njia ya maswali kwa kampuni",
+          "frequencySets": "Seti za matatizo kulingana na mzunguko",
+          "structuredRoadmap": "Njia ya DSA iliyopangwa",
+          "dailyTracker": "Kifuatiliaji cha XP na kujifunza kila siku",
+          "basicAnalysis": "Uchambuzi wa msingi wa kificho",
+          "unlimitedAI": "Uigizaji wa mahojiano ya AI bila kikomo",
+          "realTimeFeedback": "Maoni na vidokezo vya AI kwa wakati halisi",
+          "allProblems": "Matatizo yote ya mazoezi yamejumuishwa",
+          "codeExecution": "Utendaji na uchambuzi wa kificho",
+          "priorityAccess": "Ufikiaji wa kipaumbele kwa seva",
+          "performanceInsights": "Ufahamu wa utendaji",
+          "allIncluded": "Kila kitu katika Mipango ya Bure na ya Siku 1",
+          "unlimitedFeedback": "Maoni na mahojiano ya AI bila kikomo",
+          "advancedAnalytics": "Uchambuzi wa hali ya juu wa utendaji",
+          "premiumModules": "Moduli za kujifunza za hali ya juu",
+          "prioritySupport": "Msaada wa kipaumbele",
+          "customPlans": "Mipango ya kujifunza maalum",
+          "mockInterviews": "Rekodi za mahojiano ya mfano"
+        },
+        "allFeatures": {
+          "accessAll": "Ufikiaji wa matatizo yote ya uandishi wa kificho",
+          "companyBanks": "Benki za maswali maalum za kampuni",
+          "patternDrills": "Mazoezi ya kutambua mifumo",
+          "advancedAnalysis": "Uchambuzi wa hali ya juu wa kificho",
+          "progressDashboard": "Dashibodi ya kufuatilia maendeleo",
+          "mobileFriendly": "Kiolesura kinachofaa kwa simu",
+          "contentUpdates": "Sasisho za mara kwa mara za yaliyomo",
+          "communitySupport": "Msaada wa kipaumbele wa jamii"
+        },
+        "aifeatures": {
+          "aiPattern": {
+            "title": "Utambuzi wa Muundo wa AI",
+            "description": "Algorithms zetu za hali ya juu zinachambua mifumo yako ya uandishi wa kificho kutambua mapengo ya ujuzi na kuunda njia za kujifunza zilizobinafsishwa kulingana na malengo yako."
           },
-            "footer": {
-              "description": "Jifunze Miundo ya Data na Algoriti kwa mwongozo wa AI na matatizo halisi ya kampuni.",
-              "sections": {
-                "platform": "Jukwaa",
-                "resources": "Rasilimali",
-                "legal": "Kisheria"
-              },
-              "links": {
-                "platform": ["Mazoezi", "Bei", "Changamoto ya Kila Siku", "Maandalizi ya Mahojiano"],
-                "resources": ["Nyaraka", "Blogu", "Jumuiya", "Semina za Mtandaoni"],
-                "legal": ["Faragha", "Masharti", "Usalama", "Vidakuzi"],
-                "privacy": "Sera ya Faragha",
-                "terms": "Masharti ya Huduma",
-                "cookies": "Sera ya Vidakuzi"
-              },
-              "copyright": "© {{year}} Ninebug DSA. Haki zote zimehifadhiwa."
+          "adaptiveLearning": {
+            "title": "Injini ya Kujifunza Inayojipanga",
+            "description": "Mfumo unajipanga kwa busara kulingana na maendeleo yako, ukitoa seti za matatizo zinazolingana na kiwango chako cha ujuzi na kampuni lengwa kwa maandalizi bora."
+          },
+          "interviewSimulation": {
+            "title": "Uigizaji wa Mahojiano Halisi",
+            "description": "Jione katika hali halisi za mahojiano na maoni ya wakati halisi, uchambuzi kamili wa utendaji na mapendekezo ya kina ya uboreshaji."
+          }
+        }
+      },
+        "interview": {
+          "title": "Mahojiano ya Kiufundi",
+          "status": "Kikao cha Moja kwa Moja",
+          "difficulty": {
+            "Easy": "Rahisi",
+            "Medium": "Wastani",
+            "Hard": "Ngumu"
+          },
+          "instructor": {
+            "name": "Jennie",
+            "role": "Mwalimu wa Mahojiano"
+          },
+          "approach": {
+            "title": "Eleza Mbinu Yako ya Kutatua Tatizo",
+            "placeholder": "Andika mbinu yako kwa undani...\n\n• Miundo gani ya data utatumia?\n• Je, ni ugumu gani wa wakati?\n• Kuna kesi zipi za mipaka ya kuzingatia?",
+            "submit": "Wasilisha Mbinu",
+            "voice": {
+              "start": "Anza uingizaji wa sauti",
+              "stop": "Simama uingizaji wa sauti",
+              "listening": "Inasikiliza..."
+            },
+            "markdown": "Inasaidia Markdown",
+            "characterLimit": "/2000 herufi"
+          },
+          "coding": {
+            "language": "Lugha:",
+            "viewApproach": "Tazama Mbinu",
+            "submit": "Wasilisha"
+          },
+          "messages": {
+            "hint": "Kidokezo",
+            "feedback": "Maoni"
+          },
+          "time": {
+            "format": "mm:ss"
+          }
+        },
+          "roadmapss": {
+            "title": "Maswali 75 Bora ya LeetCode",
+            "description": "Maswali muhimu ya mahojiano ya coding kutoka kwa kampuni bora za teknolojia",
+            "questionsFound": "maswali yaliyopatikana",
+            "completed": "yamekamilika",
+            "questions": "maswali",
+            "askedBy": "Yaliyoombwa na",
+            "noQuestionsFound": "Hakuna maswali yaliyopatikana",
+            "adjustFilters": "Jaribu kurekebisha vichujio au utafutaji wako"
+          },
+          "actions": {
+            "saveProgress": "Hifadhi Maendeleo",
+            "clearAllFilters": "Futa Vichujio Vyote"
+          },
+          "filters": {
+            "title": "Vichujio",
+            "advancedFilters": "Vichujio vya Juu",
+            "companies": "Kampuni",
+            "difficulty": "Ugumu",
+            "frequency": "Mara ngapi"
+          },
+          "search": {
+            "placeholder": "Tafuta maswali..."
+          },
+          "difficulty": {
+            "easy": "Rahisi",
+            "medium": "Wastani",
+            "hard": "Ngumu"
+          },
+          "frequency": {
+            "very-high": "Nyingi Sana",
+            "high": "Nyingi",
+            "medium": "Wastani",
+            "low": "Chache",
+            "rare": "Mara Chache"
+          },
+          "companies": {
+            "Google": "Google",
+            "Microsoft": "Microsoft",
+            "Amazon": "Amazon",
+            "Facebook": "Facebook",
+            "Apple": "Apple"
+          },
+            "companyRoadmap": {
+              "title": "Ramani ya Kampuni",
+              "description": "Chuja na zoezi maswali kwa kampuni, mada na ugumu",
+              "noQuestionsFound": "Hakuna maswali yaliyopatikana",
+              "adjustFilters": "Jaribu kurekebisha vichujio vyako kuona matokeo zaidi"
+            },
+            "filter": {
+              "title": "Vichujio",
+              "active": "aktivu",
+              "companies": "Kampuni",
+              "selectCompanies": "Chagua kampuni",
+              "topics": "Mada",
+              "selectTopics": "Chagua mada",
+              "difficulty": "Ugumu",
+              "selectDifficulty": "Chagua ugumu",
+              "options": "Chaguo",
+              "advanced": "Ya Juu",
+              "minFrequency": "Mara Ndogo",
+              "viewMode": "Hali ya Kuona",
+              "filtered": "Imechujwa",
+              "all": "Yote",
+              "activeFilters": "Vichujio aktivu"
+            },
+            "difficultys": {
+              "easy": "Rahisi",
+              "medium": "Wastani",
+              "hard": "Ngumu"
+            },
+            "frequencys": {
+              "very-high": "Nyingi Sana",
+              "high": "Nyingi",
+              "medium": "Wastani",
+              "low": "Chache"
+            },
+            "topics": {
+              "arrays": "Safu",
+              "strings": "Masharti",
+              "linked-lists": "Orodha Zilizounganishwa",
+              "trees": "Miti",
+              "graphs": "Grafu",
+              "dynamic-programming": "Programu ya Mienendo",
+              "other": "Nyingine"
+            },
+            "table": {
+              "status": "Hali",
+              "title": "Kichwa",
+              "company": "Kampuni",
+              "topic": "Mada",
+              "difficulty": "Ugumu",
+              "frequency": "Mara ngapi",
+              "action": "Hatua"
+            },
+            "action": {
+              "clear": "Futa",
+              "solve": "Suluhisha"
             }
-  
 }

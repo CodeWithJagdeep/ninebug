@@ -9,6 +9,7 @@ import { Alert, AlertTitle } from "@/components/ui/alert";
 import authServices from "@/Services/authService";
 import _ApiServices from "@/Services/apiServices";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { setUser } from "@/Container/reducer/slicers/userSlicer";
 
 interface Error {
@@ -17,6 +18,7 @@ interface Error {
 }
 
 function Login() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>({
@@ -34,12 +36,10 @@ function Login() {
           : authService.GithubAutherzation;
 
       const { user } = await authMethod();
-      // Validate required user data
       if (!user.uid || !user.email) {
-        throw new Error("Incomplete user data received from provider");
+        throw new Error(t("login.errors.incompleteData"));
       }
 
-      // Prepare user data payload
       const userData = {
         oauthId: user.uid,
         name: user.displayName || "",
@@ -53,45 +53,39 @@ function Login() {
         userData
       )._handlePostRequest();
 
-      // Update application state
       if (response?.data?.user) {
         dispatch(setUser(response.data.user));
       } else {
-        throw new Error("User data not returned from API");
+        throw new Error(t("login.errors.noUserData"));
       }
-      // Handle redirect logic
+
       const searchParams = new URLSearchParams(window.location.search);
       const redirectPath = searchParams.get("redirect");
-
       window.location.href = redirectPath || "/in/dashboard";
     } catch (err: unknown) {
-      let errorMessage: string =
-        "An unexpected error occurred. Please try again.";
+      let errorMessage: string = t("login.errors.default");
       if (typeof err === "object" && err)
         if ("code" in err && "message" in err) {
           if (err.code) {
             switch (err.code) {
               case "auth/account-exists-with-different-credential":
-                errorMessage =
-                  "This email is already associated with a different sign-in method.";
+                errorMessage = t("login.errors.accountExists");
                 break;
               case "auth/popup-closed-by-user":
-                errorMessage =
-                  "Sign-in popup closed before completing authentication.";
+                errorMessage = t("login.errors.popupClosed");
                 break;
               case "auth/network-request-failed":
-                errorMessage =
-                  "Network error. Please check your internet connection.";
+                errorMessage = t("login.errors.networkError");
                 break;
               case "auth/user-disabled":
-                errorMessage =
-                  "This account has been disabled. Contact support.";
+                errorMessage = t("login.errors.accountDisabled");
                 break;
               case "auth/invalid-credential":
-                errorMessage = "Invalid credentials. Please try again.";
+                errorMessage = t("login.errors.invalidCredentials");
                 break;
               default:
-                errorMessage = String(err.message) || "Authentication failed.";
+                errorMessage =
+                  String(err.message) || t("login.errors.authFailed");
             }
           }
         }
@@ -113,14 +107,14 @@ function Login() {
           <AlertTitle>{error.errorMessage}</AlertTitle>
         </Alert>
       )}
-      <div className=" backdrop-blur-md sticky top-0 z-50 bg-white min-h-screen px-6">
-        <div className=" mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="backdrop-blur-md sticky top-0 z-50 bg-white min-h-screen px-6">
+        <div className="mx-auto px-6 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img
               src={Logo}
               width={120}
               height={20}
-              alt="Mentorsland Logo"
+              alt={t("login.logoAlt")}
               className="object-contain"
             />
           </Link>
@@ -129,11 +123,11 @@ function Login() {
           <div className="w-full flex flex-col items-center">
             <div className="flex items-center justify-center w-full">
               <div className="w-[500px]">
-                <div className={`text-black text-center  text-5xl`}>
-                  Code. Learn. Excel.
+                <div className={`text-black text-center text-5xl`}>
+                  {t("login.heading")}
                 </div>
                 <div className="text-black/90 text-xl mt-2 text-center">
-                  Your journey to coding mastery starts here.
+                  {t("login.subheading")}
                 </div>
                 <div className="mt-12">
                   {isLoading ? (
@@ -148,7 +142,9 @@ function Login() {
                       className="py-3 px-7 cursor-pointer border border-black/70 rounded-lg flex items-center justify-between text-black"
                     >
                       <FcGoogle size={23} />
-                      <span className="ml-3 text-lg">Continue with Google</span>
+                      <span className="ml-3 text-lg">
+                        {t("login.continueGoogle")}
+                      </span>
                       <div></div>
                     </div>
                   )}
@@ -166,27 +162,22 @@ function Login() {
                       >
                         <FaGithub size={23} />
                         <span className="ml-3 text-base">
-                          Continue with Github
+                          {t("login.continueGithub")}
                         </span>
                         <div></div>
                       </div>
                     )}
                   </div>
-                  {/* <div className="my-5 w-full h-[1px] bg-white/10"></div> */}
                 </div>
                 <div className="text-black/60 mt-14 text-sm text-center">
-                  By continuing, you agree to Ninebug&apos;s
+                  {t("login.termsText")}
                   <Link to="/terms" className="text-black underline ml-1">
-                    Terms of Service
+                    {t("login.termsLink")}
                   </Link>{" "}
-                  and
-                  <Link
-                    to="/privacy"
-                    className="text-black        underline ml-1"
-                  >
-                    Privacy Policy
+                  {t("login.andText")}
+                  <Link to="/privacy" className="text-black underline ml-1">
+                    {t("login.privacyLink")}
                   </Link>
-                  .
                 </div>
               </div>
             </div>

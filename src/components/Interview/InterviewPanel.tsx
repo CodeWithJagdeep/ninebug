@@ -31,6 +31,8 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "../ui/resizable";
+import { useTranslation } from "react-i18next";
+
 
 const isFirefox =
   typeof window !== "undefined" &&
@@ -135,6 +137,7 @@ interface SpeechRecognitionErrorEvent extends Event {
 }
 
 export default function InterviewPanel() {
+  const { t } = useTranslation();
   const currentQuestion = useMemo(() => {
     return DEMO_QUESTIONS[Math.floor(Math.random() * DEMO_QUESTIONS.length)];
   }, []);
@@ -326,8 +329,8 @@ export default function InterviewPanel() {
         <div className="flex items-center gap-4">
           <img src={Logo} alt="" className="h-8" />
           <div className="text-sm ml-4">
-            <p className="font-medium text-black/90">Technical Interview</p>
-            <p className="text-xs text-black/60">Live Session</p>
+            <p className="font-medium text-black/90">{t("interview.title")}</p>
+            <p className="text-xs text-black/60">{t("interview.status")}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -337,7 +340,7 @@ export default function InterviewPanel() {
               getDifficultyColor(currentQuestion.difficulty)
             )}
           >
-            {currentQuestion.difficulty}
+            {t(`interview.difficulty.${currentQuestion.difficulty}`)}
           </Badge>
           <div className="flex items-center gap-2 px-4 py-2 text-sm bg-black/20 rounded-full text-black">
             <Clock className="w-4 h-4 text-green-300" />
@@ -370,7 +373,7 @@ export default function InterviewPanel() {
                     <div className="text-sm">
                       <p className="font-medium text-white/90">Jennie</p>
                       <p className="text-xs text-white/60 tracking-wide">
-                        Interview Instructor
+                        {t("interview.instructor.role")}
                       </p>
                     </div>
                   </div>
@@ -424,9 +427,17 @@ export default function InterviewPanel() {
                           : "bg-white/5 border border-white/20 text-white/80"
                       )}
                     >
+                      {/* Feedback Label */}
+                      {message.type === "feedback" && (
+                        <div className="text-xs text-emerald-400 mb-1">
+                          {t("interview.messages.feedback")}
+                        </div>
+                      )}
                       {/* Optional Label */}
                       {message.type === "hint" && (
-                        <div className="text-xs text-amber-600 mb-1">Hint</div>
+                        <div className="text-xs text-amber-600 mb-1">
+                          {t("interview.messages.hint")}
+                        </div>
                       )}
 
                       {/* Message Content */}
@@ -474,7 +485,7 @@ export default function InterviewPanel() {
                         <div>
                           <div className="flex items-center gap-2">
                             <label className="text-sm font-medium text-slate-300">
-                              Language:
+                              {t("interview.coding.language")}
                             </label>
                             <select
                               value={code.language}
@@ -504,10 +515,10 @@ export default function InterviewPanel() {
                       </div>
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2 text-sm bg-black border border-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white">
-                          View Approach
+                          {t("interview.coding.viewApproach")}
                         </div>
                         <div className="flex items-center gap-2 text-sm  text-black bg-[#f58b1d] border border-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                          Submit
+                          {t("interview.coding.submit")}
                         </div>
                       </div>
                     </div>
@@ -571,7 +582,7 @@ export default function InterviewPanel() {
                   {/* Header with clear action buttons */}
                   <div className="flex items-center justify-between border-b border-b-white/20 h-18 px-6">
                     <h3 className="text-gray-100 text-base font-medium tracking-tight">
-                      Describe Your Problem-Solving Approach
+                      {t("interview.approach.title")}
                     </h3>
 
                     <div className="flex items-center gap-3">
@@ -591,8 +602,8 @@ export default function InterviewPanel() {
                               )}
                               aria-label={
                                 isListening
-                                  ? "Stop voice input"
-                                  : "Start voice input"
+                                  ? t("interview.approach.voice.stop")
+                                  : t("interview.approach.voice.start")
                               }
                             >
                               {isListening ? (
@@ -604,8 +615,8 @@ export default function InterviewPanel() {
                           </TooltipTrigger>
                           <TooltipContent>
                             {isListening
-                              ? "Stop voice input"
-                              : "Start voice input"}
+                              ? t("interview.approach.voice.stop")
+                              : t("interview.approach.voice.start")}
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
@@ -617,7 +628,7 @@ export default function InterviewPanel() {
                         className="gap-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-medium shadow-lg"
                       >
                         <Send className="h-4 w-4" />
-                        Submit Approach
+                        {t("interview.approach.submit")}
                       </Button>
                     </div>
                   </div>
@@ -627,7 +638,7 @@ export default function InterviewPanel() {
                     <textarea
                       value={approachText}
                       onChange={(e) => setApproachText(e.target.value)}
-                      placeholder="Write your approach in detail...\n\n• What data structures will you use?\n• What's the time complexity?\n• Any edge cases to consider?"
+                      placeholder={t("interview.approach.placeholder")}
                       className={cn(
                         "w-full h-full border-none p-3  text-gray-100 outline-none rounded-none",
                         "placeholder:text-gray-400/60 ",
@@ -642,7 +653,7 @@ export default function InterviewPanel() {
                           <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                         </span>
                         <span className="text-xs text-gray-400">
-                          Listening...
+                          {t("interview.approach.voice.listening")}
                         </span>
                       </div>
                     )}
@@ -651,7 +662,7 @@ export default function InterviewPanel() {
                   {/* Formatting Help (optional) */}
                   <div className="flex items-center justify-between text-xs text-gray-500 px-6 border-t border-t-white/20 py-4">
                     <div className="flex items-center gap-2">
-                      <span>Supports Markdown</span>
+                      <span>{t("interview.approach.markdown")}</span>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger>
@@ -666,7 +677,10 @@ export default function InterviewPanel() {
                         </Tooltip>
                       </TooltipProvider>
                     </div>
-                    <span>{approachText.length}/2000 characters</span>
+                    <span>
+                      {approachText.length}
+                      {t("interview.approach.characterLimit")}
+                    </span>
                   </div>
                 </div>
               )}

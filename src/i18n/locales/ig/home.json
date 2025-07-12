@@ -198,5 +198,408 @@
       "cookies": "Iwu Kuki"
     },
     "copyright": "© {{year}} Ninebug DSA. Ikike niile echekwara."
-  }
+  },
+  "login": {
+    "logoAlt": "Akara ngosi Mentorsland",
+    "heading": "Koodu. Mụta. Kacha mma.",
+    "subheading": "Njem gị n'ịmụta koodu na-amalite ebe a.",
+    "continueGoogle": "Gaa n'ihu na Google",
+    "continueGithub": "Gaa n'ihu na Github",
+    "termsText": "Site n'ịga n'ihu, ị kwenyere na",
+    "termsLink": "Usoro Ọrụ",
+    "andText": "na",
+    "privacyLink": "Amụma Nzuzo",
+    "errors": {
+      "default": "Enwere mperi na-atụghị anya ya. Biko nwaa ọzọ.",
+      "incompleteData": "Ozi onye ọrụ ezughị ezu enwetara site n'aka onye na-eweta ya",
+      "noUserData": "Ozi onye ọrụ esiteghị na API",
+      "accountExists": "Email a ejikọtalarị na ụzọ nbanye ọzọ.",
+      "popupClosed": "Nbanye popup mechiri tupu ịmechaa nyocha.",
+      "networkError": "Njehie netwọk. Biko lelee njikọ ịntanetị gị.",
+      "accountDisabled": "Akwụkwọ ndekọ a akwụsịla. Kpọtụrụ nkwado.",
+      "invalidCredentials": "Nkwenye na-ezighi ezi. Biko nwaa ọzọ.",
+      "authFailed": "Nyocha akwụkwọ ikike dara."
+    }
+  },
+  "profile": {
+    "title": "Ntọala Profaịlụ",
+    "subtitle": "Jikwaa profaịlụ gị na mmasị ajụjụ ọnụ",
+    "overview": "Nchịkọta Profaịlụ",
+    "personalInfo": "Ozi Nkeonwe",
+    "personalDesc": "Jikwaa nkọwa profaịlụ gị na mmasị",
+    "fullName": "Aha Zuruezu",
+    "email": "Adreesị Ozi-e",
+    "emailPending": "Nkwenye ozi-e na-echere",
+    "linkedin": "Profaịlụ LinkedIn",
+    "github": "Profaịlụ GitHub",
+    "targetCompany": "Ụlọ Ọrụ Ebumnuche",
+    "location": "Ebe",
+    "saveProfile": "Chekwaa Profaịlụ",
+    "savingProfile": "Na-echekwa Profaịlụ...",
+    "connectedAccounts": "Akaụntụ Ejikọrọ",
+    "connectedDesc": "Jikwaa njikọ ndị ọzọ gị na njikọ OAuth",
+    "githubConnected": "Ejikọrọ na {username}",
+    "githubNotConnected": "Jikọọ akaụntụ GitHub gị maka atụmatụ ndị ka mma",
+    "googleConnect": "Jikọọ akaụntụ Google gị maka njirimara na-enweghị nsogbu",
+    "comingSoon": "Na-abịa n'oge na-adịghị anya",
+    "notificationPrefs": "Mmasị Ịkwa Ozi",
+    "notificationDesc": "Hazie otu ị si enweta mmelite na ncheta gbasara akaụntụ gị",
+    "emailNotifications": "Ịkwa Ozi Ozi-e",
+    "emailDesc": "Nata mmelite dị mkpa na ịdọ aka ná ntị site na ozi-e",
+    "pushNotifications": "Ịkwa Ozi Push",
+    "pushDesc": "Nata ọkwa ozugbo na ihe nchọgharị gị",
+    "weeklyReport": "Akụkọ Ọganihu Kwa Izu",
+    "weeklyDesc": "Nata nchịkọta zuru ezu nke ọganihu gị kwa izu",
+    "savePrefs": "Chekwaa Mmasị",
+    "savingPrefs": "Na-echekwa Mmasị...",
+    "accountSecurity": "Nchekwa Akaụntụ",
+    "securityDesc": "Nyochaa ma jikwaa ntọala nchekwa akaụntụ gị na nnọkọ ndị na-arụ ọrụ",
+    "accountProtected": "Akaụntụ Echekwara",
+    "verified": "Ekwenyela ozi-e gị ma chekwaa akaụntụ gị nke ọma.",
+    "notVerified": "Biko kwado adreesị ozi-e gị iji kwalite nchekwa akaụntụ.",
+    "verifyEmail": "Kwenye Ozi-e",
+    "activeSessions": "Nnọkọ Na-arụ Ọrụ",
+    "currentSession": "Nnọkọ Ugbu a",
+    "lastActive": "Ikpeazụ na-arụ ọrụ: Ugbu a",
+    "securityActions": "Omume Nchekwa",
+    "viewHistory": "Lelee Akụkọ Nbanye",
+    "downloadData": "Budata Data",
+    "changePassword": "Gbanwee Okwuntughe",
+    "signOutAll": "Banye Pụọ Na Ngwaọrụ Niile",
+    "dangerZone": "Mpaghara Ihe Ize Ndụ",
+    "dangerDesc": "Omume ndị a enweghị ike ịgbanwe. Biko jiri nlezianya gaa n'ihu.",
+    "deleteAccount": "Hichapụ Akaụntụ",
+    "deactivateAccount": "Gbanyụọ Akaụntụ",
+    "levels": {
+      "beginner": "Ọkwa Mbido",
+      "intermediate": "Ọkwa Etiti",
+      "advanced": "Ọkwa Ọkachamara"
+    },
+    "coins": "mkpụrụ ego",
+    "trialStatus": "Ọnọdụ nnwale:",
+    "remaining": "Fọdụrụ:",
+    "connected": "Ejikọrọ",
+    "disconnect": "Kwụpụ",
+    "connectGithub": "Jikọọ GitHub",
+    "profilePictureAlt": "Foto profaịlụ",
+    "placeholders": {
+      "fullName": "Tinye aha gị zuru ezu",
+      "targetCompany": "Ụlọ ọrụ ị na-achọ maka ọrụ gị ọzọ",
+      "city": "Obodo",
+      "region": "Steeti/Mpaghara",
+      "country": "Obodo"
+    },
+    "tabProfile": "Profaịlụ",
+    "tabSecurity": "Nchekwa"
+  },
+  "roadmap": {
+    "title": "Mee Ajụjụ DSA",
+    "description": "Mee ka ọrụ gị dị ngwa site na nsogbu dị mkpa nke nhazi data na algọridim. Nchịkọta anyị gụnyere data ugboro na ozi ụlọ ọrụ iji nyere gị aka ilekwasị anya na ajụjụ kachasị mkpa maka ajụjụ ọnụ nka na ụzụ.",
+    "aboutRoadmap": "Banyere Usoro a",
+    "problems": "nsogbu",
+    "complete": "mezue",
+    "askedBy": "Ajụọ site na:",
+    "difficulty": {
+      "easy": "Dị Mfe",
+      "medium": "Ọkara",
+      "hard": "Siri Ike"
+    },
+    "frequency": {
+      "veryHigh": "Dị Elu Nke Ukwuu",
+      "high": "Dị Elu",
+      "medium": "Ọkara",
+      "low": "Dị Ala",
+      "rare": "Adịghị Ahụkebe"
+    },
+    "markComplete": "Kaa akara dị ka emechara",
+    "markIncomplete": "Kaa akara dị ka emechabeghị",
+    "ariaLabels": {
+      "problem": "Nsogbu: {title}",
+      "moduleContent": "modul-{id}-ọdịnaya",
+      "moduleExpanded": "modul-{id}-gbasaa"
+    }
+  },
+  "roadmaps": {
+    "title": "Mee Ajụjụ DSA",
+    "description": "Mee ka ọrụ gị dị ngwa site na nsogbu dị mkpa nke nhazi data na algọridim. Nchịkọta anyị gụnyere data ugboro na ozi ụlọ ọrụ iji nyere gị aka ilekwasị anya na ajụjụ kachasị mkpa maka ajụjụ ọnụ nka na ụzụ.",
+    "aboutRoadmap": "Banyere Usoro a"
+  },
+    "common": {
+      "start": "Malite",
+      "configuration": "Nhazi",
+      "complete": "Emechaala",
+      "back": "Lagha azụ",
+      "selected": "Ahọpụtara",
+      "processing": "Na-arụ ọrụ"
+    },
+    "roadmapCreation": {
+      "title": "Onye Nrụpụta Usoro Data na Algọridim",
+      "subtitle": "Gwa Jennie okwu iji mepụta ụzọ mmụta gị",
+      "assistantTitle": "Onye Enyemaka Ụzọ DSA",
+      "welcomeMessage": "Nnọọ! 👋 Abụ m Jennie, onye enyemaka ụzọ DSA gị. Ka anyị mepụta ụzọ mmụta nke gị!",
+      "aiOption": "Nkwado AI",
+      "customOption": "Nhazi Onwe Gị",
+      "aiGreeting": "Nhọrọ dị mma! Aga m ajụ gị ajụjụ ole na ole iji mepụta ụzọ gị.",
+      "aiStart": "Ka anyị bido!",
+      "customGreeting": "Ị họọrọ ịhazi ụzọ gị? Ọ dị mma! Bido site n'ịhọrọ ụdị ụlọ ọrụ ị chọrọ.",
+      "companyQuestion": "Kedu ụdị ụlọ ọrụ ị chọrọ?",
+      "selectCompany": "Họrọ ụdị ụlọ ọrụ ị chọrọ",
+      "levelQuestion": "Kedu ọkwa DSA gị ugbu a?",
+      "timeQuestion": "Ole oge ị nwere ike itinye kwa ụbọchị?",
+      "selectTopics": "Họrọ isiokwu ị chọrọ",
+      "nextSelectTopics": "Na-esote: Họrọ Isiokwu",
+      "previewRoadmap": "Lelee Ụzọ",
+      "generateRoadmap": "Mepụta Ụzọ",
+      "processing": "Ịmepụta Ụzọ Mmụta Gị",
+      "processingSubtitle": "Na-enyocha mmasị gị na imezi ụzọ mmụta gị...",
+      "processingMessage1": "Aghọtara m! Chere ka m nyochaa ụlọ ọrụ na ọkwa gị...",
+      "processingMessage2": "Obere oge... Ana m emezi ụzọ mmụta gị dabere na usoro ụlọ ọrụ.",
+      "processingMessage3": "Ọ fọrọ nke nta ka ọ bụrụ! Ana m emecha ụzọ mmụta gị...",
+      "processingSteps": [
+        "Na-enyocha mmasị gị maka ụlọ ọrụ...",
+        "Na-atụle ọkwa gị ugbu a...",
+        "Na-emezi usoro mmụta...",
+        "Na-emepụta nsogbu mmega ahụ...",
+        "Na-emecha ụzọ mmụta gị..."
+      ],
+      "roadmapReady": "N'ikpeazụ! Ụzọ gị dị njikere 🎉 Enwere m ike inyere gị aka n'ime njem DSA gị. Ịchọrọ ịmalite ịmụ ihe ugbu a?",
+      "roadmapCustomReady": "Nhọrọ dị mma! Lee ụzọ gị ahaziri. Dị njikere ịmalite njem mmụta gị?",
+      "summaryTitle": "Nchịkọta Ụzọ",
+      "aiGenerated": "AI mepụtara",
+      "customBuilt": "Ahaziri",
+      "targetLabel": "Ebumnuche",
+      "targetCompany": "Ụlọ Ọrụ Ebumnuche",
+      "levelLabel": "Ọkwa",
+      "timeLabel": "Oge Kwa Ubochi",
+      "selectedTopics": "Isiokwu Ahọpụtara",
+      "timelineTitle": "Oge Echere",
+      "timelineDescription": "Dabere na nhọrọ gị na usoro mmega ahụ akwadoro",
+      "startLearning": "Malite Ịmụ",
+      "makeChanges": "Mee Mgbanwe",
+      "adjustTopics": "Hazigharịa Isiokwu",
+      "userResponse": "Ana m echere ụlọ ọrụ {company} na ọkwa {level} na {timeframe} nke mmega ahụ kwa ụbọchị.",
+      "userCompanyResponse": "Ana m akwado maka ụlọ ọrụ {company}.",
+      "userTopicsResponse": "Achọrọ m ilekwasị anya na isiokwu {count}: {topics}."
+    },
+      "pricing": {
+        "trustedBy": "Ndị nrụpụta 10,000+ tụkwasịrị obi",
+        "heroTitle": "Họrọ Ụzọ Gị Iji Ruo",
+        "heroHighlight": "Ọkachamara",
+        "heroSubtitle": "Ma ị na-akwadebe maka ajụjụ ọnụ teknụzụ mbụ gị ma ọ bụ na-achọ FAANG, ikpo okwu AI anyị na-emegharị maka mkpa gị. Malite n'efu ma na-eto ka ị na-eto.",
+        "mostPopular": "Kacha Ewu Ewu",
+        "readyToStart": "Dị njikere ịmalite na {plan}?",
+        "forDuration": "maka {duration}",
+        "continueToCheckout": "Gaa n'ihu na Nlele",
+        "featuresTitle1": "Ihe niile ịchọrọ iji",
+        "featuresTitle2": "Nwee Ihe Ịga Nke Ọma",
+        "howItWorksTitle1": "Otu Anyị Si Eme Ka",
+        "howItWorksTitle2": "Ihe Ịga Nke Ọma Gị",
+        "howItWorksSubtitle": "Emebere ikpo okwu anyị nke AI iji bulie arụmọrụ mmụta gị na arụmọrụ ajụjụ ọnụ",
+        "finalCta": {
+          "title": "Dị njikere ịgbanwe nkà ajụjụ ọnụ gị?",
+          "subtitle": "Sonye na puku kwuru puku ndị nrụpụta bụ ndị nwetara ọrụ nrọ ha site na ikpo okwu anyị.",
+          "button": "Họrọ Atụmatụ Gị"
+        },
+        "plans": {
+          "free": {
+            "name": "Atụmatụ Efu",
+            "duration": "Ruo Mgbe Ebighị Ebi",
+            "bestFor": "Kacha mma maka ịmalite",
+            "cta": "Malite n'efu"
+          },
+          "oneDay": {
+            "name": "Ịnweta AI ụbọchị 1",
+            "duration": "Awa 24",
+            "bestFor": "Oge mmega AI ngwa ngwa",
+            "cta": "Nweta Ịnweta ụbọchị 1"
+          },
+          "monthly": {
+            "name": "Pro kwa ọnwa",
+            "duration": "Ụbọchị 30",
+            "bestFor": "Nkwadebe ajụjụ ọnụ zuru oke",
+            "cta": "Malite Ule Pro"
+          }
+        },
+        "features": {
+          "access500": "Ịnweta ajụjụ DSA 500+",
+          "companyRoadmap": "Ụzọ ajụjụ nke ụlọ ọrụ",
+          "frequencySets": "Nhazi nsogbu dabere na ugboro ole",
+          "structuredRoadmap": "Nhazi usoro DSA",
+          "dailyTracker": "Ihe nleba anya XP na mmụta kwa ụbọchị",
+          "basicAnalysis": "Nyocha koodu bụ isi",
+          "unlimitedAI": "Simulations ajụjụ ọnụ AI na-akparaghị ókè",
+          "realTimeFeedback": "Nzaghachi AI na ndụmọdụ ozugbo",
+          "allProblems": "Agụnyere nsogbu mmega niile",
+          "codeExecution": "Mmezu na nyocha koodu",
+          "priorityAccess": "Ịnweta sava mbụ",
+          "performanceInsights": "Nghọta arụmọrụ",
+          "allIncluded": "Ihe niile dị na Atụmatụ Efu & Ụbọchị 1",
+          "unlimitedFeedback": "Nzaghachi na ajụjụ ọnụ AI na-akparaghị ókè",
+          "advancedAnalytics": "Nyocha arụmọrụ dị elu",
+          "premiumModules": "Modul mmụta adịchaghị",
+          "prioritySupport": "Nkwado mbụ",
+          "customPlans": "Atụmatụ ọmụmụ ahaziri iche",
+          "mockInterviews": "Ndekọ ajụjụ ọnụ mock"
+        },
+        "allFeatures": {
+          "accessAll": "Ịnweta nsogbu koodu niile",
+          "companyBanks": "Akụ ajụjụ nke ụlọ ọrụ",
+          "patternDrills": "Mmega mmụta ụkpụrụ",
+          "advancedAnalysis": "Nyocha koodu dị elu",
+          "progressDashboard": "Dashboard nleba anya ọganihu",
+          "mobileFriendly": "Interface enyi na enyo",
+          "contentUpdates": "Mmelite ọdịnaya oge niile",
+          "communitySupport": "Nkwado obodo mbụ"
+        },
+        "aifeatures": {
+          "aiPattern": {
+            "title": "Nchọpụta Ụkpụrụ AI",
+            "description": "Algorith anyị dị elu na-enyocha usoro koodu gị iji chọpụta oghere ihe ọmụma wee mepụta ụzọ mmụta ahaziri iche dabere na ebumnuche gị."
+          },
+          "adaptiveLearning": {
+            "title": "Igwe Mmụta Na-agbanwe agbanwe",
+            "description": "Sistemu ahụ na-emegharị onwe ya n'amamihe na ọganihu gị, na-ewepụta nhazi nsogbu dabara na ọkwa nka gị na ụlọ ọrụ ebumnuche maka nkwadebe kacha mma."
+          },
+          "interviewSimulation": {
+            "title": "Simulation Ajụjụ Ọnụ Ezi",
+            "description": "Nweta ahụmịhe ajụjụ ọnụ ezi na nzaghachi ozugbo, nyocha arụmọrụ zuru oke na ndụmọdụ nkwalite zuru ezu."
+          }
+        }
+      },
+        "interview": {
+          "title": "Ajụjụ ọnụ Nkà na ụzụ",
+          "status": "Nnọkọ Ndụ",
+          "difficulty": {
+            "Easy": "Dị mfe",
+            "Medium": "Ọkara",
+            "Hard": "Siri ike"
+          },
+          "instructor": {
+            "name": "Jennie",
+            "role": "Onye nkụzi ajụjụ ọnụ"
+          },
+          "approach": {
+            "title": "Kọwaa Usoro Gị Idozi Nsogbu",
+            "placeholder": "Dee usoro gị n'ụzọ zuru ezu...\n\n• Kedu usoro data ị ga-eji?\n• Kedu oge ọ ga-ewe?\n• Enwere ọnọdụ ọ bụla ị kwesịrị ịtụle?",
+            "submit": "Nyefee Usoro",
+            "voice": {
+              "start": "Malite ntinye olu",
+              "stop": "Kwụsị ntinye olu",
+              "listening": "Na-ege ntị..."
+            },
+            "markdown": "Na-akwado Markdown",
+            "characterLimit": "/2000 mkpụrụedemede"
+          },
+          "coding": {
+            "language": "Asụsụ:",
+            "viewApproach": "Lelee Usoro",
+            "submit": "Nyefee"
+          },
+          "messages": {
+            "hint": "Ntụziaka",
+            "feedback": "Nzaghachi"
+          },
+          "time": {
+            "format": "mm:ss"
+          }
+        },
+          "roadmapss": {
+            "title": "Ajụjụ 75 LeetCode Kasị Mma",
+            "description": "Ajụjụ dị mkpa maka ajụjụ ọnụ coding sitere na ụlọ ọrụ teknụzụ kacha elu",
+            "questionsFound": "ajụjụ achọtara",
+            "completed": "emechaala",
+            "questions": "ajụjụ",
+            "askedBy": "Ajụjụ sitere n'aka",
+            "noQuestionsFound": "Ọ dịghị ajụjụ achọtara",
+            "adjustFilters": "Gbalịa imezi ihe nzacha ma ọ bụ ajụjụ ịchọrọ"
+          },
+          "actions": {
+            "saveProgress": "Chekwaa Ọganihu",
+            "clearAllFilters": "Kpochapụ Ihe Nzacha Niile"
+          },
+          "filters": {
+            "title": "Ihe Nzacha",
+            "advancedFilters": "Ihe Nzacha Dị Elu",
+            "companies": "Ụlọ Ọrụ",
+            "difficulty": "Ihe Isi Ike",
+            "frequency": "Ugboro"
+          },
+          "search": {
+            "placeholder": "Chọọ ajụjụ..."
+          },
+          "difficulty": {
+            "easy": "Dị Mfe",
+            "medium": "Ọkara",
+            "hard": "Siri Ike"
+          },
+          "frequency": {
+            "very-high": "Dị Elu Nke Ukwuu",
+            "high": "Dị Elu",
+            "medium": "Ọkara",
+            "low": "Dị Ala",
+            "rare": "Adịghị Ahụkebe"
+          },
+          "companies": {
+            "Google": "Google",
+            "Microsoft": "Microsoft",
+            "Amazon": "Amazon",
+            "Facebook": "Facebook",
+            "Apple": "Apple"
+          },
+            "companyRoadmap": {
+              "title": "Atụmatụ Ụlọ Ọrụ",
+              "description": "Nyochaa ma mee ajụjụ site na ụlọ ọrụ, isiokwu na ihe isi ike",
+              "noQuestionsFound": "Ọ dịghị ajụjụ achọtara",
+              "adjustFilters": "Gbalịa imezi ihe nzacha iji hụ ihe ndị ọzọ"
+            },
+            "filter": {
+              "title": "Ihe Nzacha",
+              "active": "na-arụ ọrụ",
+              "companies": "Ụlọ Ọrụ",
+              "selectCompanies": "Họrọ ụlọ ọrụ",
+              "topics": "Isiokwu",
+              "selectTopics": "Họrọ isiokwu",
+              "difficulty": "Ihe Isi Ike",
+              "selectDifficulty": "Họrọ ihe isi ike",
+              "options": "Nhọrọ",
+              "advanced": "Ọkachamara",
+              "minFrequency": "Obere Ugboro",
+              "viewMode": "Ụdị Nlele",
+              "filtered": "A chọpụtara",
+              "all": "Ha niile",
+              "activeFilters": "Ihe nzacha na-arụ ọrụ"
+            },
+            "difficultys": {
+              "easy": "Dị Mfe",
+              "medium": "Ọkara",
+              "hard": "Siri Ike"
+            },
+            "frequencys": {
+              "very-high": "Dị Elu Nke Ukwuu",
+              "high": "Dị Elu",
+              "medium": "Ọkara",
+              "low": "Dị Ala"
+            },
+            "topics": {
+              "arrays": "Usoro",
+              "strings": "Eriri",
+              "linked-lists": "Ndepụta Ejikọtara",
+              "trees": "Osisi",
+              "graphs": "Eserese",
+              "dynamic-programming": "Mmemme Na-agbanwe agbanwe",
+              "other": "Ndị ọzọ"
+            },
+            "table": {
+              "status": "Ọnọdụ",
+              "title": "Aha",
+              "company": "Ụlọ ọrụ",
+              "topic": "Isiokwu",
+              "difficulty": "Ihe isi ike",
+              "frequency": "Ugboro",
+              "action": "Omume"
+            },
+            "action ": {
+              "clear": "Kpochapụ",
+              "solve": "Idozi"
+            }
 }

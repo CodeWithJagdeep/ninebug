@@ -193,5 +193,410 @@
       "cookies": "Cookie Policy"
     },
     "copyright": "© {{year}} Ninebug DSA. All rights reserved."
+  },
+  "login": {
+    "logoAlt": "Mentorsland Logo",
+    "heading": "Code. Learn. Excel.",
+    "subheading": "Your journey to coding mastery starts here.",
+    "continueGoogle": "Continue with Google",
+    "continueGithub": "Continue with Github",
+    "termsText": "By continuing, you agree to Ninebug's",
+    "termsLink": "Terms of Service",
+    "andText": "and",
+    "privacyLink": "Privacy Policy",
+    "errors": {
+      "default": "An unexpected error occurred. Please try again.",
+      "incompleteData": "Incomplete user data received from provider",
+      "noUserData": "User data not returned from API",
+      "accountExists": "This email is already associated with a different sign-in method.",
+      "popupClosed": "Sign-in popup closed before completing authentication.",
+      "networkError": "Network error. Please check your internet connection.",
+      "accountDisabled": "This account has been disabled. Contact support.",
+      "invalidCredentials": "Invalid credentials. Please try again.",
+      "authFailed": "Authentication failed."
+    }
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "subtitle": "Manage your profile and interview preferences",
+    "overview": "Profile Overview",
+    "personalInfo": "Personal Information",
+    "personalDesc": "Manage your profile details and preferences",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "emailPending": "Email verification pending",
+    "linkedin": "LinkedIn Profile",
+    "github": "GitHub Profile",
+    "targetCompany": "Target Company",
+    "location": "Location",
+    "saveProfile": "Save Profile",
+    "savingProfile": "Saving Profile...",
+    "connectedAccounts": "Connected Accounts",
+    "connectedDesc": "Manage your third-party integrations and OAuth connections",
+    "githubConnected": "Connected to {username}",
+    "githubNotConnected": "Connect your GitHub account for enhanced features",
+    "googleConnect": "Connect your Google account for seamless authentication",
+    "comingSoon": "Coming Soon",
+    "notificationPrefs": "Notification Preferences",
+    "notificationDesc": "Customize how you receive updates and reminders about your account",
+    "emailNotifications": "Email Notifications",
+    "emailDesc": "Receive important updates and alerts via email",
+    "pushNotifications": "Push Notifications",
+    "pushDesc": "Get instant notifications in your browser",
+    "weeklyReport": "Weekly Progress Report",
+    "weeklyDesc": "Receive a comprehensive summary of your weekly progress",
+    "savePrefs": "Save Preferences",
+    "savingPrefs": "Saving Preferences...",
+    "accountSecurity": "Account Security",
+    "securityDesc": "Monitor and manage your account security settings and active sessions",
+    "accountProtected": "Account Protected",
+    "verified": "Your email is verified and your account is fully secured.",
+    "notVerified": "Please verify your email address to enhance account security.",
+    "verifyEmail": "Verify Email",
+    "activeSessions": "Active Sessions",
+    "currentSession": "Current Session",
+    "lastActive": "Last active: Just now",
+    "securityActions": "Security Actions",
+    "viewHistory": "View Login History",
+    "downloadData": "Download Data",
+    "changePassword": "Change Password",
+    "signOutAll": "Sign Out All Devices",
+    "dangerZone": "Danger Zone",
+    "dangerDesc": "These actions are irreversible. Please proceed with caution.",
+    "deleteAccount": "Delete Account",
+    "deactivateAccount": "Deactivate Account",
+    "levels": {
+      "beginner": "Beginner Level",
+      "intermediate": "Intermediate Level",
+      "advanced": "Advanced Level"
+    },
+    "coins": "coins",
+    "trialStatus": "Trial Status:",
+    "remaining": "Remaining:",
+    "connected": "Connected",
+    "disconnect": "Disconnect",
+    "connectGithub": "Connect GitHub",
+    "profilePictureAlt": "Profile picture",
+    "placeholders": {
+      "fullName": "Enter your full name",
+      "targetCompany": "Company you're targeting for your next role",
+      "city": "City",
+      "region": "State/Region",
+      "country": "Country"
+    },
+
+    "tabProfile": "Profile",
+    "tabSecurity": "Security"
+  },
+  "roadmap": {
+    "title": "Practice DSA Questions",
+    "description": "Accelerate your career with essential data structures and algorithms problems. Our curated collection includes frequency data and company information to help you focus on the most important questions for technical interviews.",
+    "aboutRoadmap": "About this Roadmap",
+    "problems": "problems",
+    "complete": "complete",
+    "askedBy": "Asked by:",
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "frequency": {
+      "veryHigh": "Very High",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "rare": "Rare"
+    },
+    "markComplete": "Mark as complete",
+    "markIncomplete": "Mark as incomplete",
+    "ariaLabels": {
+      "problem": "Problem: {title}",
+      "moduleContent": "module-{id}-content",
+      "moduleExpanded": "module-{id}-expanded"
+    }
+  },
+  "roadmaps": {
+    "title": "Practice DSA Questions",
+    "description": "Accelerate your career with essential data structures and algorithms problems. Our curated collection includes frequency data and company information to help you focus on the most important questions for technical interviews.",
+    "aboutRoadmap": "About this Roadmap"
+  },
+    "common": {
+      "start": "Start",
+      "configuration": "Configuration",
+      "complete": "Complete",
+      "back": "Back",
+      "selected": "Selected",
+      "processing": "Processing"
+    },
+    "roadmapCreation": {
+      "title": "Data Structures & Algorithms Roadmap Builder",
+      "subtitle": "Chat with Jennie to create your personalized learning path",
+      "assistantTitle": "DSA Roadmap Assistant",
+      "welcomeMessage": "Hey there! 👋 I'm Jennie, your DSA roadmap assistant. Let's create a personalized learning path for you!",
+      "aiOption": "AI-Powered Recommendation",
+      "customOption": "Custom Roadmap",
+      "aiGreeting": "Great choice! I'll ask you a few questions to generate your personalized roadmap.",
+      "aiStart": "Let's do it!",
+      "customGreeting": "You prefer to customize your own path? Awesome! Let's start by selecting your target company type.",
+      "companyQuestion": "What type of company are you targeting?",
+      "selectCompany": "Select your target company type",
+      "levelQuestion": "What's your current DSA skill level?",
+      "timeQuestion": "How much time can you dedicate daily?",
+      "selectTopics": "Select your focus topics",
+      "nextSelectTopics": "Next: Select Topics",
+      "previewRoadmap": "Preview Roadmap",
+      "generateRoadmap": "Generate Roadmap",
+      "processing": "Creating Your Personalized Roadmap",
+      "processingSubtitle": "Analyzing your preferences and optimizing your learning path...",
+      "processingMessage1": "Got it! Hold tight while I analyze your target company and skill level...",
+      "processingMessage2": "Just a bit more... I'm optimizing your learning path based on industry trends.",
+      "processingMessage3": "Almost there! Finalizing your personalized roadmap...",
+      "processingSteps": [
+        "Analyzing your target company preferences...",
+        "Evaluating your current skill level...",
+        "Optimizing learning path structure...",
+        "Generating practice problems...",
+        "Finalizing your personalized roadmap..."
+      ],
+      "roadmapReady": "Finally! Your roadmap is ready 🎉 I can help you ace your DSA journey. Would you like to start learning now?",
+      "roadmapCustomReady": "Great selection! Here's your customized roadmap. Ready to begin your learning journey?",
+      "summaryTitle": "Roadmap Summary",
+      "aiGenerated": "AI Generated",
+      "customBuilt": "Custom Built",
+      "targetLabel": "Target",
+      "targetCompany": "Target Company",
+      "levelLabel": "Level",
+      "timeLabel": "Daily Time",
+      "selectedTopics": "Selected Topics",
+      "timelineTitle": "Estimated Timeline",
+      "timelineDescription": "Based on your selections and recommended practice schedule",
+      "startLearning": "Start Learning",
+      "makeChanges": "Make Changes",
+      "adjustTopics": "Adjust Topics",
+      "userResponse": "I'm targeting {company} companies at {level} level with {timeframe} daily practice.",
+      "userCompanyResponse": "I'm preparing for {company} companies.",
+      "userTopicsResponse": "I want to focus on {count} topics: {topics}."
+    },
+      "pricing": {
+        "trustedBy": "Trusted by 10,000+ developers",
+        "heroTitle": "Choose Your Path to",
+        "heroHighlight": "Excellence",
+        "heroSubtitle": "Whether you're preparing for your first tech interview or aiming for FAANG, our AI-powered platform adapts to your needs. Start free and scale as you grow.",
+        "mostPopular": "Most Popular",
+        "readyToStart": "Ready to get started with {plan}?",
+        "forDuration": "for {duration}",
+        "continueToCheckout": "Continue to Checkout",
+        "featuresTitle1": "Everything You Need to",
+        "featuresTitle2": "Succeed",
+        "howItWorksTitle1": "How We Accelerate Your",
+        "howItWorksTitle2": "Success",
+        "howItWorksSubtitle": "Our AI-powered platform is designed to maximize your learning efficiency and interview performance",
+        "finalCta": {
+          "title": "Ready to Transform Your Interview Skills?",
+          "subtitle": "Join thousands of developers who've landed their dream jobs with our platform.",
+          "button": "Choose Your Plan"
+        },
+        "plans": {
+          "free": {
+            "name": "Free Plan",
+            "duration": "Forever",
+            "bestFor": "Perfect for getting started",
+            "cta": "Start Free"
+          },
+          "oneDay": {
+            "name": "1-Day AI Access",
+            "duration": "24 hours",
+            "bestFor": "Quick AI-powered practice session",
+            "cta": "Get 1-Day Access"
+          },
+          "monthly": {
+            "name": "Monthly Pro",
+            "duration": "30 days",
+            "bestFor": "Complete interview preparation",
+            "cta": "Start Pro Trial"
+          }
+        },
+        "features": {
+          "access500": "Access to 500+ DSA questions",
+          "companyRoadmap": "Company-wise question roadmap",
+          "frequencySets": "Frequency-based problem sets",
+          "structuredRoadmap": "Structured DSA roadmap",
+          "dailyTracker": "Daily XP and learning tracker",
+          "basicAnalysis": "Basic code analysis",
+          "unlimitedAI": "Unlimited AI interview simulations",
+          "realTimeFeedback": "Real-time AI feedback & hints",
+          "allProblems": "All practice problems included",
+          "codeExecution": "Code execution and analysis",
+          "priorityAccess": "Priority server access",
+          "performanceInsights": "Performance insights",
+          "allIncluded": "Everything in Free & 1-Day Plans",
+          "unlimitedFeedback": "Unlimited AI feedback & interviews",
+          "advancedAnalytics": "Advanced performance analytics",
+          "premiumModules": "Premium learning modules",
+          "prioritySupport": "Priority support",
+          "customPlans": "Custom study plans",
+          "mockInterviews": "Mock interview recordings"
+        },
+        "allFeatures": {
+          "accessAll": "Access to all coding problems",
+          "companyBanks": "Company-specific question banks",
+          "patternDrills": "Pattern recognition drills",
+          "advancedAnalysis": "Advanced code analysis",
+          "progressDashboard": "Progress tracking dashboard",
+          "mobileFriendly": "Mobile-friendly interface",
+          "contentUpdates": "Regular content updates",
+          "communitySupport": "Priority community support"
+        },
+        "aifeatures": {
+          "aiPattern": {
+            "title": "AI-Powered Pattern Recognition",
+            "description": "Our advanced algorithms analyze your coding patterns to identify knowledge gaps and create personalized learning roadmaps tailored to your goals."
+          },
+          "adaptiveLearning": {
+            "title": "Adaptive Learning Engine",
+            "description": "The system intelligently adapts to your progress, delivering problem sets that match your skill level and target companies for optimal preparation."
+          },
+          "interviewSimulation": {
+            "title": "Real Interview Simulation",
+            "description": "Experience authentic interview scenarios with real-time feedback, comprehensive performance analytics, and detailed improvement recommendations."
+          }
+        }
+      },
+        "interview": {
+          "title": "Technical Interview",
+          "status": "Live Session",
+          "difficulty": {
+            "Easy": "Easy",
+            "Medium": "Medium",
+            "Hard": "Hard"
+          },
+          "instructor": {
+            "name": "Jennie",
+            "role": "Interview Instructor"
+          },
+          "approach": {
+            "title": "Describe Your Problem-Solving Approach",
+            "placeholder": "Write your approach in detail...\n\n• What data structures will you use?\n• What's the time complexity?\n• Any edge cases to consider?",
+            "submit": "Submit Approach",
+            "voice": {
+              "start": "Start voice input",
+              "stop": "Stop voice input",
+              "listening": "Listening..."
+            },
+            "markdown": "Supports Markdown",
+            "characterLimit": "/2000 characters"
+          },
+          "coding": {
+            "language": "Language:",
+            "viewApproach": "View Approach",
+            "submit": "Submit"
+          },
+          "messages": {
+            "hint": "Hint",
+            "feedback": "Feedback"
+          },
+          "time": {
+            "format": "mm:ss"
+          }
+        },
+          "roadmapss": {
+            "title": "Top 75 LeetCode Questions",
+            "description": "Essential coding interview questions from top tech companies",
+            "questionsFound": "questions found",
+            "completed": "completed",
+            "questions": "questions",
+            "askedBy": "Asked by",
+            "noQuestionsFound": "No questions found",
+            "adjustFilters": "Try adjusting your filters or search query"
+          },
+          "actions": {
+            "saveProgress": "Save Progress",
+            "clearAllFilters": "Clear All Filters"
+          },
+          "filters": {
+            "title": "Filters",
+            "advancedFilters": "Advanced Filters",
+            "companies": "Companies",
+            "difficulty": "Difficulty",
+            "frequency": "Frequency"
+          },
+          "search": {
+            "placeholder": "Search questions..."
+          },
+          "difficulty": {
+            "easy": "Easy",
+            "medium": "Medium",
+            "hard": "Hard"
+          },
+          "frequency": {
+            "very-high": "Very High",
+            "high": "High",
+            "medium": "Medium",
+            "low": "Low",
+            "rare": "Rare"
+          },
+          "companies": {
+            "Google": "Google",
+            "Microsoft": "Microsoft",
+            "Amazon": "Amazon",
+            "Facebook": "Facebook",
+            "Apple": "Apple"
+          },
+            "companyRoadmap": {
+              "title": "Company Roadmap",
+              "description": "Filter and practice questions by company, topic, and difficulty",
+              "noQuestionsFound": "No questions found",
+              "adjustFilters": "Try adjusting your filters to see more results"
+            },
+            "filter": {
+              "title": "Filters",
+              "active": "active",
+              "companies": "Companies",
+              "selectCompanies": "Select companies",
+              "topics": "Topics",
+              "selectTopics": "Select topics",
+              "difficulty": "Difficulty",
+              "selectDifficulty": "Select difficulty",
+              "options": "Options",
+              "advanced": "Advanced",
+              "minFrequency": "Minimum Frequency",
+              "viewMode": "View Mode",
+              "filtered": "Filtered",
+              "all": "All",
+              "activeFilters": "Active filters"
+            },
+            "difficultys": {
+              "easy": "Easy",
+              "medium": "Medium",
+              "hard": "Hard"
+            },
+            "frequencys": {
+              "very-high": "Very High",
+              "high": "High",
+              "medium": "Medium",
+              "low": "Low"
+            },
+            "topics": {
+              "arrays": "Arrays",
+              "strings": "Strings",
+              "linked-lists": "Linked Lists",
+              "trees": "Trees",
+              "graphs": "Graphs",
+              "dynamic-programming": "Dynamic Programming",
+              "other": "Other"
+            },
+            "table": {
+              "status": "Status",
+              "title": "Title",
+              "company": "Company",
+              "topic": "Topic",
+              "difficulty": "Difficulty",
+              "frequency": "Frequency",
+              "action": "Action"
+            },
+            "action": {
+              "clear": "Clear",
+              "solve": "Solve"
+            }
   }
-}
+
