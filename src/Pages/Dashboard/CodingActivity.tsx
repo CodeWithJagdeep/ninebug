@@ -1,12 +1,6 @@
-import { ChevronLeft, ChevronRight, Flame, Calendar } from "lucide-react";
-import React, { useState, useMemo, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-type ActivityDay = {
-  date: string;
-  count: number;
-  level: number;
-};
+"use client";
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ContributionData {
   [date: string]: number;
@@ -17,16 +11,20 @@ interface CalendarDay {
   count: number;
   level: number;
   isCurrentMonth: boolean;
+  dayOfMonth: number;
+}
+
+interface CalendarWeek {
+  days: CalendarDay[];
+}
+
+interface CalendarMonth {
+  name: string;
+  shortName: string;
+  weeks: CalendarWeek[];
 }
 
 const StreakCalendar = () => {
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [hoveredDay, setHoveredDay] = useState<{
-    date: string;
-    count: number;
-    position: { x: number; y: number };
-  } | null>(null);
-
   const [selectedYear, setSelectedYear] = useState<number>(
     new Date().getFullYear()
   );
@@ -34,12 +32,8 @@ const StreakCalendar = () => {
   const [contributionData, setContributionData] = useState<ContributionData>(
     {}
   );
-  const [mousePosition, setMousePosition] = useState<{
-    x: number;
-    y: number;
-  } | null>(null);
 
-  // Generate GitHub-like contribution data
+  // Generate contribution data
   const generateContributionData = (year: number): ContributionData => {
     const data: ContributionData = {};
     const startDate = new Date(year, 0, 1);
@@ -51,16 +45,11 @@ const StreakCalendar = () => {
       d.setDate(d.getDate() + 1)
     ) {
       const dateStr = d.toISOString().split("T")[0];
-      const dayOfWeek = d.getDay();
-      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-
-      let rand = Math.random();
-      if (isWeekend) rand = rand * 0.7;
-
+      const rand = Math.random();
       let count = 0;
-      if (rand > 0.7) count = Math.floor(Math.random() * 3) + 1;
-      if (rand > 0.85) count = Math.floor(Math.random() * 5) + 3;
-      if (rand > 0.95) count = Math.floor(Math.random() * 10) + 8;
+      if (rand > 0.65) count = Math.floor(Math.random() * 5) + 1;
+      if (rand > 0.85) count = Math.floor(Math.random() * 10) + 6;
+      if (rand > 0.95) count = Math.floor(Math.random() * 20) + 15;
 
       data[dateStr] = count;
     }
@@ -71,75 +60,89 @@ const StreakCalendar = () => {
     setContributionData(generateContributionData(selectedYear));
   }, [selectedYear]);
 
-  // GitHub's green color scheme - enhanced
-  const getActivityColor = (level: number): string => {
-    const colors = [
-      "#1a1a1a", // 0 - Dark gray for black theme
-      "#0d4429", // 1 - Dark green
-      "#006d32", // 2 - Medium green
-      "#26a641", // 3 - Light green
-      "#39d353", // 4 - Bright green
-    ];
-    return colors[level] || colors[0];
-  };
-
   const getActivityLevel = (count: number): number => {
     if (count === 0) return 0;
-    if (count <= 2) return 1;
-    if (count <= 5) return 2;
-    if (count <= 10) return 3;
+    if (count <= 3) return 1;
+    if (count <= 7) return 2;
+    if (count <= 12) return 3;
     return 4;
   };
 
-  // Create GitHub-style calendar layout (weeks as columns)
-  const createCalendar = (year: number) => {
-    const weeks: CalendarDay[][] = Array(53)
-      .fill(null)
-      .map(() => []);
-    const firstDay = new Date(year, 0, 1);
-
-    // Adjust to start on Sunday
-    const startDate = new Date(firstDay);
-    startDate.setDate(firstDay.getDate() - firstDay.getDay());
-
-    // Fill all 53 weeks
-    for (let week = 0; week < 53; week++) {
-      for (let day = 0; day < 7; day++) {
-        const currentDate = new Date(startDate);
-        currentDate.setDate(startDate.getDate() + week * 7 + day);
-
-        const dateStr = currentDate.toISOString().split("T")[0];
-        const count = contributionData[dateStr] || 0;
-        const isCurrentMonth = currentDate.getFullYear() === year;
-
-        weeks[week][day] = {
-          date: new Date(currentDate),
-          count,
-          level: isCurrentMonth ? getActivityLevel(count) : 0,
-          isCurrentMonth,
-        };
-      }
-    }
-
-    return weeks;
+  const getActivityColor = (level: number): string => {
+    const colors: Record<number, string> = {
+      0: "#f0f0f0",
+      1: "#c6e48b",
+      2: "#7bc96f",
+      3: "#239a3b",
+      4: "#196127",
+    };
+    return colors[level] || "#f0f0f0";
   };
 
-  const weeks = createCalendar(selectedYear);
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  // Create calendar structure by months
+  const createCalendar = (year: number): CalendarMonth[] => {
+    const months: CalendarMonth[] = [];
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    for (let month = 0; month < 12; month++) {
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDate = new Date(firstDay);
+      startDate.setDate(firstDay.getDate() - firstDay.getDay()); // Start from Sunday
+
+      const endDate = new Date(lastDay);
+      endDate.setDate(lastDay.getDate() + (6 - lastDay.getDay())); // End on Saturday
+
+      const weeks: CalendarWeek[] = [];
+      for (
+        let d = new Date(startDate);
+        d <= endDate;
+        d.setDate(d.getDate() + 7)
+      ) {
+        const week: CalendarWeek = { days: [] };
+        for (let i = 0; i < 7; i++) {
+          const day = new Date(d);
+          day.setDate(d.getDate() + i);
+          const dateStr = day.toISOString().split("T")[0];
+          const count = contributionData[dateStr] || 0;
+          const isCurrentMonth = day.getMonth() === month;
+
+          week.days.push({
+            date: new Date(day),
+            count: isCurrentMonth ? count : 0,
+            level: isCurrentMonth ? getActivityLevel(count) : 0,
+            isCurrentMonth,
+            dayOfMonth: day.getDate(),
+          });
+        }
+        weeks.push(week);
+      }
+
+      months.push({
+        name: monthNames[month],
+        shortName: monthNames[month].slice(0, 3),
+        weeks,
+      });
+    }
+
+    return months;
+  };
+
+  const months = createCalendar(selectedYear);
+  const dayHeaders = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   // Calculate statistics
   const totalContributions = Object.values(contributionData).reduce(
@@ -149,6 +152,8 @@ const StreakCalendar = () => {
   const activeDays = Object.values(contributionData).filter(
     (count) => count > 0
   ).length;
+  const averageDaily = Math.round((totalContributions / 365) * 10) / 10;
+  const maxDay = Math.max(...Object.values(contributionData));
 
   const formatDate = (date: Date): string => {
     return date.toLocaleDateString("en-US", {
@@ -164,481 +169,193 @@ const StreakCalendar = () => {
     (_, i) => new Date().getFullYear() - i
   );
 
-  const renderMonthLabels = () => {
-    const months = [];
-    let currentMonth = -1;
-
-    for (let week = 0; week < Math.min(weeks.length, 53); week++) {
-      const firstDay = weeks[week][0]?.date;
-      if (!firstDay) continue;
-
-      const month = firstDay.getMonth();
-
-      if (month !== currentMonth && week > 0) {
-        months.push(
-          <div
-            key={`month-${week}`}
-            className="text-xs font-medium text-white/60 h-5 flex items-center"
-            style={{
-              gridColumn: `${week + 2} / span 4`,
-            }}
-          >
-            {monthNames[month]}
-          </div>
-        );
-        currentMonth = month;
-      }
-    }
-
-    return months;
-  };
-
-  // Generate realistic activity data for multiple years
-  const generateStreakData = useMemo(() => {
-    const data: ActivityDay[] = [];
-    const today = new Date();
-    const startDate = new Date();
-    startDate.setFullYear(today.getFullYear() - 2); // 3 years of data
-    startDate.setMonth(5, 1); // Start from June 1st
-
-    // Create realistic activity pattern with seasonal variations
-    const activityPattern = [
-      // Current year
-      { year: today.getFullYear(), month: 5, days: [5, 12, 19], count: 2 }, // Jun
-      { year: today.getFullYear(), month: 6, days: [2, 9, 16, 23], count: 1 }, // Jul
-      {
-        year: today.getFullYear(),
-        month: 7,
-        days: [1, 8, 15, 22, 29],
-        count: 3,
-      }, // Aug
-      { year: today.getFullYear(), month: 8, days: [5, 12, 19, 26], count: 2 }, // Sep
-      {
-        year: today.getFullYear(),
-        month: 9,
-        days: [3, 10, 17, 24, 31],
-        count: 4,
-      }, // Oct
-      { year: today.getFullYear(), month: 10, days: [7, 14, 21, 28], count: 1 }, // Nov
-      { year: today.getFullYear(), month: 11, days: [5, 12, 19, 26], count: 3 }, // Dec
-      {
-        year: today.getFullYear(),
-        month: 0,
-        days: [2, 9, 16, 23, 30],
-        count: 2,
-      }, // Jan
-      { year: today.getFullYear(), month: 1, days: [6, 13, 20, 27], count: 1 }, // Feb
-      { year: today.getFullYear(), month: 2, days: [6, 13, 20, 27], count: 4 }, // Mar
-      { year: today.getFullYear(), month: 3, days: [3, 10, 17, 24], count: 2 }, // Apr
-      {
-        year: today.getFullYear(),
-        month: 4,
-        days: [1, 8, 15, 22, 29],
-        count: 1,
-      }, // May
-      // Previous year
-      {
-        year: today.getFullYear() - 1,
-        month: 5,
-        days: [7, 14, 21, 28],
-        count: 1,
-      }, // Jun
-      {
-        year: today.getFullYear() - 1,
-        month: 6,
-        days: [4, 11, 18, 25],
-        count: 2,
-      }, // Jul
-      {
-        year: today.getFullYear() - 1,
-        month: 7,
-        days: [4, 11, 18, 25],
-        count: 3,
-      }, // Aug
-      {
-        year: today.getFullYear() - 1,
-        month: 8,
-        days: [1, 8, 15, 22, 29],
-        count: 1,
-      }, // Sep
-      {
-        year: today.getFullYear() - 1,
-        month: 9,
-        days: [6, 13, 20, 27],
-        count: 4,
-      }, // Oct
-      {
-        year: today.getFullYear() - 1,
-        month: 10,
-        days: [3, 10, 17, 24],
-        count: 2,
-      }, // Nov
-      {
-        year: today.getFullYear() - 1,
-        month: 11,
-        days: [1, 8, 15, 22, 29],
-        count: 1,
-      }, // Dec
-      {
-        year: today.getFullYear() - 1,
-        month: 0,
-        days: [5, 12, 19, 26],
-        count: 3,
-      }, // Jan
-      {
-        year: today.getFullYear() - 1,
-        month: 1,
-        days: [2, 9, 16, 23, 30],
-        count: 2,
-      }, // Feb
-      {
-        year: today.getFullYear() - 1,
-        month: 2,
-        days: [7, 14, 21, 28],
-        count: 1,
-      }, // Mar
-      {
-        year: today.getFullYear() - 1,
-        month: 3,
-        days: [4, 11, 18, 25],
-        count: 4,
-      }, // Apr
-      {
-        year: today.getFullYear() - 1,
-        month: 4,
-        days: [2, 9, 16, 23, 30],
-        count: 2,
-      }, // May
-    ];
-
-    for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
-      const dateStr = d.toISOString().split("T")[0];
-      const dayOfMonth = d.getDate();
-      const month = d.getMonth();
-      const year = d.getFullYear();
-
-      const matchingPattern = activityPattern.find(
-        (pattern) =>
-          pattern.year === year &&
-          pattern.month === month &&
-          pattern.days.includes(dayOfMonth)
-      );
-
-      const count = matchingPattern?.count || 0;
-      data.push({
-        date: dateStr,
-        count,
-        level: count ? Math.min(Math.floor(count / 2) + 1, 4) : 0,
-      });
-    }
-
-    return data;
-  }, []);
-
-  // Filter data for the current year (June to June)
-  const yearData = useMemo(() => {
-    return generateStreakData.filter((day) => {
-      const date = new Date(day.date);
-      const month = date.getMonth();
-
-      // For current year, include all months up to current month
-      if (date.getFullYear() === currentYear) {
-        if (currentYear === new Date().getFullYear()) {
-          return month >= 5 || month <= new Date().getMonth(); // June to current month
-        }
-        return true; // For past years, include all months
-      }
-
-      // For previous year, include June to May
-      if (date.getFullYear() === currentYear - 1) {
-        return month >= 5; // June to December
-      }
-
-      // For next year, include January to May
-      if (date.getFullYear() === currentYear + 1) {
-        return month <= 4; // January to May
-      }
-
-      return false;
-    });
-  }, [generateStreakData, currentYear]);
-
-  const getIntensityColor = (level: number) => {
-    switch (level) {
-      case 0:
-        return "bg-white/10 border-white/10 border";
-      case 1:
-        return "bg-green-100 dark:bg-green-900";
-      case 2:
-        return "bg-green-300 dark:bg-green-700";
-      case 3:
-        return "bg-green-500 dark:bg-green-600";
-      case 4:
-        return "bg-green-700 dark:bg-green-500";
-      default:
-        return "bg-gray-100 dark:bg-gray-800";
-    }
-  };
-
-  // Calculate streaks across all years
-  const { currentStreak, maxStreak, totalSubmissions } = useMemo(() => {
-    let currentStreak = 0;
-    let maxStreak = 0;
-    let tempStreak = 0;
-    let total = 0;
-
-    generateStreakData.forEach((day) => {
-      total += day.count;
-      if (day.count > 0) {
-        tempStreak++;
-        if (day.date === new Date().toISOString().split("T")[0]) {
-          currentStreak = tempStreak;
-        }
-        maxStreak = Math.max(maxStreak, tempStreak);
-      } else {
-        tempStreak = 0;
-      }
-    });
-
-    return { currentStreak, maxStreak, totalSubmissions: total };
-  }, [generateStreakData]);
-
-
-
-  const handlePrevYear = () => {
-    const currentIndex = availableYears.indexOf(currentYear);
-    if (currentIndex < availableYears.length - 1) {
-      setCurrentYear(availableYears[currentIndex + 1]);
-    }
-  };
-
-  const handleNextYear = () => {
-    const currentIndex = availableYears.indexOf(currentYear);
-    if (currentIndex > 0) {
-      setCurrentYear(availableYears[currentIndex - 1]);
-    }
-  };
-
-  // Calculate the range of years to display
-  const getYearRange = () => {
-    if (availableYears.length === 0) return "";
-    const minYear = Math.min(...availableYears);
-    const maxYear = Math.max(...availableYears);
-    return `${minYear} - ${maxYear}`;
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="bg-black rounded-xl border border-white/40 p-6 shadow-sm"
-    >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+    <div className="max-w-7xl mx-auto p-6 bg-black">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold text-white dark:text-gray-100 flex items-center">
-            <Flame className="w-5 h-5 mr-2 text-orange-500" />
-            Coding Activity
-          </h3>
-          <p className="text-sm text-white/90 mt-1">
-            {getYearRange()} • {totalSubmissions} total submissions
+          <h1 className="text-3xl font-bold text-white mb-2">
+            Activity Calendar {selectedYear}
+          </h1>
+          <p className="text-white">
+            Track your daily activities throughout the year
           </p>
         </div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setSelectedYear(selectedYear - 1)}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors bg-white"
+            disabled={selectedYear <= 2019}
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <select
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+          >
+            {availableYears.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={() => setSelectedYear(selectedYear + 1)}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors  bg-white"
+            disabled={selectedYear >= new Date().getFullYear()}
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      </div>
 
-        <div className="flex items-center space-x-4">
-          <div className="hidden md:flex items-center space-x-2 text-sm text-white/70">
-            <span>Less</span>
-            <div className="flex space-x-1">
+      {/* Statistics */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-4 border border-green-200">
+          <div className="text-2xl font-bold text-green-700">
+            {totalContributions}
+          </div>
+          <div className="text-sm text-green-600">Total Activities</div>
+        </div>
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4 border border-blue-200">
+          <div className="text-2xl font-bold text-blue-700">{activeDays}</div>
+          <div className="text-sm text-blue-600">Active Days</div>
+        </div>
+        <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl p-4 border border-purple-200">
+          <div className="text-2xl font-bold text-purple-700">
+            {averageDaily}
+          </div>
+          <div className="text-sm text-purple-600">Daily Average</div>
+        </div>
+        <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-4 border border-orange-200">
+          <div className="text-2xl font-bold text-orange-700">{maxDay}</div>
+          <div className="text-sm text-orange-600">Best Single Day</div>
+        </div>
+      </div>
+
+      {/* Calendar Grid - Single Row */}
+      <div className="overflow-x-auto">
+        <div className="flex gap-4 pb-4" style={{ minWidth: "max-content" }}>
+          {months.map((month, monthIndex) => (
+            <div
+              key={monthIndex}
+              className="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex-shrink-0"
+              style={{ minWidth: "200px" }}
+            >
+              {/* Month Header */}
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-3 py-2 rounded-t-lg border-b border-gray-200">
+                <h3 className="font-semibold text-gray-800 text-center text-sm">
+                  {month.shortName}
+                </h3>
+              </div>
+
+              {/* Month Calendar */}
+              <div className="p-3">
+                {/* Day Headers */}
+                <div className="grid grid-cols-7 gap-0.5 mb-1">
+                  {dayHeaders.map((day) => (
+                    <div
+                      key={day}
+                      className="text-xs font-medium text-gray-500 text-center py-1"
+                    >
+                      {day.charAt(0)}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Calendar Days */}
+                {month.weeks.map((week, weekIndex) => (
+                  <div
+                    key={weekIndex}
+                    className="grid grid-cols-7 gap-0.5 mb-0.5"
+                  >
+                    {week.days.map((day, dayIndex) => (
+                      <div
+                        key={`${monthIndex}-${weekIndex}-${dayIndex}`}
+                        className={`
+                          w-6 h-6 rounded cursor-pointer transition-all duration-200 flex items-center justify-center text-xs font-medium
+                          ${
+                            day.isCurrentMonth
+                              ? "hover:ring-1 hover:ring-blue-400 hover:scale-110"
+                              : "opacity-30"
+                          }
+                        `}
+                        style={{
+                          backgroundColor: day.isCurrentMonth
+                            ? getActivityColor(day.level)
+                            : "#f9f9f9",
+                          color: day.level > 2 ? "white" : "#374151",
+                          fontSize: "10px",
+                        }}
+                        onMouseEnter={() =>
+                          day.isCurrentMonth && setHoveredCell(day)
+                        }
+                        onMouseLeave={() => setHoveredCell(null)}
+                        title={
+                          day.isCurrentMonth
+                            ? `${day.count} activities on ${formatDate(
+                                day.date
+                              )}`
+                            : ""
+                        }
+                      >
+                        {day.dayOfMonth}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Legend */}
+      <div className="mt-8 flex items-center justify-center">
+        <div className="bg-gray-50 rounded-xl p-4 border border-gray-200">
+          <div className="flex items-center gap-4">
+            <span className="text-sm font-medium text-gray-700">
+              Activity Level:
+            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Less</span>
               {[0, 1, 2, 3, 4].map((level) => (
                 <div
                   key={level}
-                  className={`w-3 h-3 rounded-sm ${getIntensityColor(level)}`}
+                  className="w-4 h-4 rounded-md border border-gray-300"
+                  style={{ backgroundColor: getActivityColor(level) }}
+                  title={`Level ${level}`}
                 />
               ))}
-            </div>
-            <span className="text-white">More</span>
-          </div>
-
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={handlePrevYear}
-              disabled={
-                availableYears.indexOf(currentYear) ===
-                availableYears.length - 1
-              }
-              className={`p-1.5 rounded-md ${
-                availableYears.indexOf(currentYear) ===
-                availableYears.length - 1
-                  ? "text-white/80"
-                  : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
-              }`}
-            >
-              <ChevronLeft className="w-4 h-4" color="white" />
-            </button>
-
-            <span className="text-sm font-medium text-white min-w-[60px] text-center">
-              {currentYear}
-            </span>
-
-            <button
-              onClick={handleNextYear}
-              disabled={availableYears.indexOf(currentYear) === 0}
-              className={`p-1.5 rounded-md ${
-                availableYears.indexOf(currentYear) === 0
-                  ? "text-white"
-                  : "text-white  hover:bg-gray-100 dark:hover:bg-gray-800"
-              }`}
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {hoveredDay && (
-          <motion.div
-            key="tooltip"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            className="fixed bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md p-3 shadow-lg z-10 pointer-events-none"
-            style={{
-              left: `${hoveredDay.position.x}px`,
-              top: `${hoveredDay.position.y}px`,
-            }}
-          >
-            <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-              {new Date(hoveredDay.date).toLocaleDateString("en-US", {
-                weekday: "long",
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              {hoveredDay.count} problem{hoveredDay.count !== 1 ? "s" : ""}{" "}
-              solved
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className="overflow-x-auto">
-        <div className="flex space-x-2">
-          {/* Day labels */}
-          <div className="flex flex-col">
-            <div className="h-6"></div>
-            {/* {days.map((day, index) => (
-              <div
-                key={index}
-                className="h-4 flex items-center text-xs text-gray-500 dark:text-gray-400 pr-2"
-              >
-                {day[0]}
-              </div>
-            ))} */}
-          </div>
-
-          {/* Calendar grid */}
-          <div className="p-4 sm:p-6 lg:p-8">
-            <div className="w-full overflow-x-auto">
-              <div
-                className="grid gap-0.5 sm:gap-1"
-                style={{
-                  gridTemplateColumns: "auto repeat(53, minmax(10px, 16px))",
-                  gridTemplateRows: "auto repeat(7, minmax(10px, 16px))",
-                  minWidth: "700px",
-                }}
-              >
-                {/* Month labels row */}
-                <div className="col-start-2 col-span-full grid grid-cols-53 gap-0.5 sm:gap-1 mb-2">
-                  {renderMonthLabels()}
-                </div>
-
-                {/* Day labels */}
-                {dayNames.map((day, i) => (
-                  <div
-                    key={i}
-                    className="text-xs font-medium text-white/50 flex items-center justify-end pr-1 sm:pr-2 w-6 sm:w-8"
-                    style={{ gridRow: i + 2 }}
-                  >
-                    <span className="hidden sm:inline">{day}</span>
-                    <span className="sm:hidden">{day.charAt(0)}</span>
-                  </div>
-                ))}
-
-                {/* Contribution squares */}
-                {dayNames.map((_, dayIndex) => (
-                  <React.Fragment key={dayIndex}>
-                    {weeks.map((week, weekIndex) => {
-                      const day = week[dayIndex];
-                      if (!day) return null;
-
-                      return (
-                        <div
-                          key={`${weekIndex}-${dayIndex}`}
-                          className={`w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-4 lg:h-4 rounded-sm transition-all duration-200 ${
-                            day.isCurrentMonth
-                              ? "cursor-pointer hover:ring-1 hover:ring-green-400 hover:ring-opacity-60"
-                              : "opacity-30"
-                          }`}
-                          style={{
-                            backgroundColor: getActivityColor(day.level),
-                            gridColumn: weekIndex + 2,
-                            gridRow: dayIndex + 2,
-                          }}
-                          onMouseEnter={() =>
-                            day.isCurrentMonth && setHoveredCell(day)
-                          }
-                          onMouseLeave={() => {
-                            setHoveredCell(null);
-                            setMousePosition(null);
-                          }}
-                          onMouseMove={(e) => {
-                            setMousePosition({ x: e.clientX, y: e.clientY });
-                          }}
-                        />
-                      );
-                    })}
-                  </React.Fragment>
-                ))}
-              </div>
+              <span className="text-xs text-gray-500">More</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-white/30 flex flex-col md:flex-row items-start md:items-center justify-between text-sm text-white/70">
-        <div className="mb-3 md:mb-0">
-          <span className="font-medium text-white">
-            {yearData.reduce((sum, day) => sum + day.count, 0)} submissions
-          </span>{" "}
-          in {currentYear}
-        </div>
-
-        <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-6">
-          <div className="flex items-center">
-            <Flame className="w-4 h-4 mr-1.5 text-orange-500" />
-            <span>
-              Current streak:{" "}
-              <span className="font-medium text-white">
-                {currentStreak} day{currentStreak !== 1 ? "s" : ""}
-              </span>
-            </span>
+      {/* Tooltip */}
+      {hoveredCell && (
+        <div
+          className="fixed z-50 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg pointer-events-none transform -translate-x-1/2 -translate-y-full"
+          style={{
+            left: "50%",
+            top: "20px",
+          }}
+        >
+          <div className="font-medium">
+            {hoveredCell.count === 0
+              ? "No activities"
+              : hoveredCell.count === 1
+              ? "1 activity"
+              : `${hoveredCell.count} activities`}
           </div>
-
-          <div className="flex items-center">
-            <Calendar className="w-4 h-4 mr-1.5 text-blue-500" />
-            <span>
-              Max streak:{" "}
-              <span className="font-medium text-white">
-                {maxStreak} day{maxStreak !== 1 ? "s" : ""}
-              </span>
-            </span>
+          <div className="text-gray-300 text-xs">
+            {formatDate(hoveredCell.date)}
           </div>
         </div>
-      </div>
-    </motion.div>
+      )}
+    </div>
   );
 };
 
